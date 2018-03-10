@@ -59,6 +59,7 @@ Full featured and widely used GCS.
 .. image:: ../../../images/MP-FP-Screen.jpg
     :target: ../_images/MP-FP-Screen.jpg
 
+-  `Download <http://firmware.ardupilot.org/Tools/MissionPlanner/MissionPlanner-latest.msi>`__
 -  :ref:`Wiki <planner:home>`
 -  `Support Forum <http://ardupilot.com/forum/viewforum.php?f=12>`__
 -  `Issues List <https://github.com/ArduPilot/MissionPlanner/issues>`__
@@ -255,7 +256,6 @@ For Android devices, you will need:
    and
    `Amazon <http://www.amazon.com/T-Flash-Adapter-Samsung-GT-i9100-GT-N7000/dp/B005FUNYSA/ref=sr_1_5?ie=UTF8&qid=1376262351&sr=8-5&keywords=android+otg+cable>`__).
 
-   |AndroidGCS_USB_dongle|
    
 iOS
 -------
