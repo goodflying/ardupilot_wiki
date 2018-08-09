@@ -45,10 +45,14 @@ Listing DFU Devices
 
 Run the following:
 
+.. code-block:: bash
+                
   dfu-util --list
 
-You should get a result like this::
+You should get a result like this:
 
+.. code-block:: bash
+                
   dfu-util --list
   dfu-util 0.8
 
@@ -69,14 +73,18 @@ Loading a bootloader
 
 The current bootloaders suitable for ArduPilot on STM32 are here:
 
-  `https://github.com/ArduPilot/ardupilot/tree/master/mk/PX4/bootloader <https://github.com/ArduPilot/ardupilot/tree/master/mk/PX4/bootloader>`__
+  `http://firmware.ardupilot.org/Tools/Bootloaders <http://firmware.ardupilot.org/Tools/Bootloaders>`__
 
 download the px4fmuv2_bl.bin and run this:
 
+.. code-block:: bash
+                
   dfu-util -a 0 --dfuse-address 0x08000000 -D px4fmuv2_bl.bin
   
 with some versions of dfu-util you may need this instead:
 
+.. code-block:: bash
+                
   dfu-util -a 0 -s 0x08000000 --dfuse-address 0x08000000 -D px4fmuv2_bl.bin
 
 it should say "Downloading" and show a progress bar. On completion the board is ready to test the bootloader.

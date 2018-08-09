@@ -17,6 +17,7 @@ tuning options for the vehicle.
 [/site]
 [site wiki="rover"]
     Auxiliary Functions <rover-auxiliary-functions>
+    Boats with Vectored Thrust <rover-vectored-thrust>
 [/site]
     CAN Bus Setup <common-canbus-setup-advanced>
     Compass Setup (Advanced) <common-compass-setup-advanced>
@@ -57,9 +58,10 @@ tuning options for the vehicle.
     Tuning <common-tuning>
 [/site]
     UAVCAN Setup <common-uavcan-setup-advanced>
-[site wiki="copter,planner"]
+[site wiki="copter,plane,rover,planner"]
     UBlox GPS Configuration <common-ublox-gps>
 [/site]
 [site wiki="plane,planner,rover"]
     Vibration Damping <common-vibration-damping>
 [/site]
+    Transmitter Based Tuning <common-transmitter-tuning>

@@ -10,17 +10,14 @@ This article shows how to get the Received Signal Strength Indication
 .. image:: ../../../images/mp_hud_rssi.jpg
     :target: ../_images/mp_hud_rssi.jpg
 
-How to visualize RSSI value in the artificial horizon of Mission Planner
-========================================================================
+Viewing RSSI value in the Mission Planner HUD
+=============================================
 
-If the RSSI reading is not displayed in your artificial horizon yet,
-  - Open Mission Planner Software.
-  - Goto "FLIGHT DATA" menu [1].
-  - "Right click" within artificial horizon window [2].
-  - Choose "User Items".
-  - Check "rxrssi" checkbox [3] and close "Display This" window [4].
-  - "rxrssi" should be displayed in your artificial horizon now [2].
-  
+If the RSSI reading is not displayed in your artificial horizon yet:
+  - Open Mission Planner and connect to the flight controller
+  - On the Flight Data screen, right-mouse-button click on the HUD and select "User Items"
+  - On the "Display this" window that appears, check "rxrssi"
+
 .. image:: ../../../images/MissionPlanner_RSSI_DisplayRxRSSI.JPG
     :target: ../_images/MissionPlanner_RSSI_DisplayRxRSSI.JPG
 
@@ -55,7 +52,7 @@ To setup the RSSI parameter in your flight controller,
   - Connect your flight controller using the "CONNECT" button [1].
   - Goto "CONFIG/TUNING" menu [2].
   - Goto "Full Parameter List" tab [3].
-  - Goto "Search" input field and enter "rssi_" [4].
+  - Goto "Search" input field and enter "rssi\_" [4].
   - Choose an input pin on your flight controller where you want to input the analog voltage output of your converter [5.1]. In this example we set "RSSI_ANA_PIN" to "103". This means, analog DC voltage output of the converter must be connected to "SBUS" input pins of the flight controller as shown in the image above.
   - Enter your calibration voltages for "RSSI_PIN_HIGH" [5.2] and "RSSI_PIN_LOW" [5.3] according to the Note shown below. 
   - Set "RSSI_TYPE" to "1" [5.4]. This means, your flight controller is set to accept an analog voltage on the input pin you set in step [5.1].
@@ -68,12 +65,13 @@ To setup the RSSI parameter in your flight controller,
 .. note::
 
    The converter is designed to provide a max. voltage output of 3.3 V DC when 100% of the frames are good, and appr. 0.4 V DC when connection is lost or receiver is in failsafe. To get best results, it is best practice to calibrate the output voltages of the converter at "full reception" and "Tx off" using a voltmeter. In general the converter should output the following DC voltage:
+
   - **Rx in failsafe** --> 12 % of max. **VDC out ~ 0.4 V DC**
   - Rx received <= 25 % good frames --> 34 % of max. VDC out ~ 1.1 V DC
   - Rx received <= 50 % good frames --> 56 % of max. VDC out ~ 1.85 V DC
   - Rx received <= 75 % good frames --> 78 % of max. VDC out ~ 2.6 V DC
   - **Rx received <= 100 % good frames** --> 100 % of max. **VDC out ~ 3.3 V DC**
-  
+
 How to setup RSSI Feedback to your Futaba FASSTest Telemetry capable transmitter
 --------------------------------------------------------------------------------
 
@@ -156,8 +154,8 @@ RSSI Connections
     :target: ../_images/rssi_connections_3.jpg
 
 
-RSSI embedded in PWM from UHF systems (Pixhawk)
-===============================================
+RSSI embedded in PWM from UHF systems (Pixhawk & Cube)
+======================================================
 
 Both EZ-UHF and OpenLRS have the option of embedding RSSI into a PWM channel, saving you from having to add filters, etc.
 You can use any channel from channel 5 and up, but keeping the on channel 9 or above will keep your regular servo channels free.

@@ -41,12 +41,12 @@ An example of the top function being used can be found in `Compass_learn.cpp <ht
 - the remaining arguments are the actual values that will be logged.
   You may notice in the example above, some fields have a format of float ("f") but are cast to ``(double)`` this is correct and necessary to avoid a compiler warning.
 
-The 2nd Log_Write function is the same as the first except that it accepts two additonal string arguments,
+The 2nd Log_Write function is the same as the first except that it accepts two additional string arguments,
 `"units" <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/LogStructure.h#L74>`__ and
 `"mults" <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/LogStructure.h#L115>`__.
 Similar to the "format" argument, each character in these arguments specifies the
 `units <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/LogStructure.h#L74>`__ (i.e. "d" for degrees) or
-`multiplier <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/LogStructure.h#L115>`__ (i.e. "2" for *100, "B" for *0.01) for the following fields.
+`multiplier <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/LogStructure.h#L115>`__ (i.e. "2" for \*100, "B" for \*0.01) for the following fields.
 These help the graphing tools scale the output correctly when displaying to the user.
 
 For example, below is a "TEST" log message which outputs the current system time and altitude.
@@ -83,8 +83,8 @@ For commonly used messages, especially those which are output at a relatively hi
            float a_value;
        }
 
-- add the log message's name, `units <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/LogStructure.h#L74>`__, 
-`multiplier <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/LogStructure.h#L115>`__ and `format <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/LogStructure.h#L1144>`__ strings into the `vehicle's LogStructure array <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Log.cpp#L578>`__ or `DataFlash/LogStructure.h's LOG_EXTRA_STRUCTURES array <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/LogStructure.h#L1243>`__
+- add the log message's name, `units <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/LogStructure.h#L74>`__,
+  `multiplier <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/LogStructure.h#L115>`__ and `format <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/LogStructure.h#L1144>`__ strings into the `vehicle's LogStructure array <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Log.cpp#L578>`__ or `DataFlash/LogStructure.h's LOG_EXTRA_STRUCTURES array <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/LogStructure.h#L1243>`__
 - add a new method to the vehicle code or DataFlash library called Log_Write_<something-or-other> which fills in the structure and then calls `DataFlash/WriteBlock() <https://github.com/ArduPilot/ardupilot/blob/master/libraries/DataFlash/DataFlash.h#L78>`__
 
    .. code-block:: python
@@ -98,4 +98,5 @@ For commonly used messages, especially those which are output at a relatively hi
            };
            DataFlash.WriteBlock(&pkt, sizeof(pkt));
        }
+
 - call this new function from the :ref:`scheduler <code-overview-scheduling-your-new-code-to-run-intermittently>` or from some other place in the code at the moment you wish to log the values

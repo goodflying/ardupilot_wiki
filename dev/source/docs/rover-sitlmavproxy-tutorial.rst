@@ -43,7 +43,7 @@ using the ``--map`` and ``--console`` options:
 ::
 
     cd ~/ardupilot/APMrover2
-    sim_vehicle.py -j4 --map --console
+    sim_vehicle.py --map --console
 
 Arrange the *MAVProxy Command Prompt*, *Console* and *Map* conveniently
 so you can observe the status and send commands at the same time.
@@ -53,6 +53,10 @@ so you can observe the status and send commands at the same time.
 
 Starting
 ========
+Arm the rover by entering the following on the mavproxy console
+::
+
+    arm throttle
 
 **Right-click** on the map at your target destination, select **Fly
 to**, and enter an altitude (which is ignored). Rover will change to

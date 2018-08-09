@@ -100,10 +100,37 @@ that allow us to rebuild ArduPilot on Windows.
    | procps         | System \| procps-ng: System and process monitoring utilities (required for pkill)|
    +----------------+----------------------------------------------------------------------------------+
 
+#. If you want to compile the firmware as well then you should also install these packages:
+
+   +----------------+----------------------------------------------------------------------------------+
+   | Name           | Category / Name / Description                                                    |
+   +================+==================================================================================+
+   | patch          | Devel \| patch: Applies diff files                                               |
+   +----------------+----------------------------------------------------------------------------------+
+   | cmake          | Devel \| cmake: Cross-platform makefile generation system                        |
+   +----------------+----------------------------------------------------------------------------------+
+   | flex           | Devel \| flex: A fast lexical analizer generator                                 |
+   +----------------+----------------------------------------------------------------------------------+
+   | bison          | Devel \| bison: GNU yacc-compatible parser generator                             |
+   +----------------+----------------------------------------------------------------------------------+
+   | zip            | Devel \| zip: Info-ZIP compression utility                                       |
+   +----------------+----------------------------------------------------------------------------------+
+   | unzip          | Devel \| unzip: Info-ZIP decompression utility                                   |
+   +----------------+----------------------------------------------------------------------------------+
+   | python2-pip    | Python \| python2-pip: Python package instalation tool                           |
+   +----------------+----------------------------------------------------------------------------------+
+
 #. When all the packages are selected, click through the rest of the
    prompts and accept all other default options (including
    the additional dependencies).
 #. Select **Finish** to start downloading the files.
+
+#. If you want to compile the firmware as well then you also need to issue these commands on the cygwin prompt:
+
+   ::
+
+       pip2 install argparse
+       pip2 install empy
 
 Set up directories/paths in Cygwin
 ----------------------------------
@@ -122,11 +149,13 @@ helpful to set up the path to the **Tools/autotest** directory.
 
 #. Navigate the file system to the home directory and open the
    **.bashrc** files (e.g. **C:\\cygwin\\home\\user_name\\.bashrc**.
-#. Add the following line to the end of **.bashrc**
+#. Add the path to your Ardupilot source to cygwin by adding the following line to the end of **.bashrc**. Note, that your source may not be in $HOME but in some other fixed path that starts with /cygdrive/c/Users/ 
 
    ::
 
        export PATH=$PATH:$HOME/ardupilot/Tools/autotest
+       
+       
 
 The file will be loaded next time you open the *Cygwin terminal*.
 
@@ -134,7 +163,7 @@ The file will be loaded next time you open the *Cygwin terminal*.
 
    Cygwin will not be able to find **sim_vehicle.py** if you omit
    this step. This will be reported as a "command not found" error when you
-   try and build: ``sim_vehicle.py -j4 --map``
+   try and build: ``sim_vehicle.py --map``
 
 Install required Python packages
 --------------------------------
@@ -224,7 +253,7 @@ The main steps are:
 
    ::
 
-       sim_vehicle.py -j4 -L KSFO
+       sim_vehicle.py -L KSFO
 
    .. note::
 
@@ -268,7 +297,7 @@ build and start SITL for a 4-core CPU and then launch a *MAVProxy map*:
    ::
 
        cd ~/ardupilot/ArduCopter
-       sim_vehicle.py -j4 --map --console
+       sim_vehicle.py --map --console
 
    If you get a windows security alert for the the firewall, allow the
    connection.

@@ -28,4 +28,8 @@ These additional mavlink messages are supported in Guided mode.  These are liste
 -  `SET_ATTITUDE_TARGET <http://mavlink.org/messages/common#SET_ATTITUDE_TARGET>`__
 -  `SET_POSITION_TARGET_LOCAL_NED <http://mavlink.org/messages/common#SET_POSITION_TARGET_LOCAL_NED>`__
 -  `SET_POSITION_TARGET_GLOBAL_INT <http://mavlink.org/messages/common#SET_POSITION_TARGET_GLOBAL_INT>`__
--  MAV_CMD_NAV_SET_YAW_SPEED comands within a `COMMAND_LONG <http://mavlink.org/messages/common#COMMAND_LONG>`__
+-  ``MAV_CMD_NAV_SET_YAW_SPEED`` commands within a `COMMAND_LONG <http://mavlink.org/messages/common#COMMAND_LONG>`__
+
+
+
+

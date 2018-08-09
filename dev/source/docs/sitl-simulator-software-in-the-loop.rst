@@ -30,6 +30,7 @@ example, SITL can simulate:
 -  multi-rotor aircraft
 -  fixed wing aircraft
 -  ground vehicles
+-  underwater vehicles
 -  camera gimbals
 -  antenna trackers
 -  a wide variety of optional sensors, such as Lidars and optical flow
@@ -63,14 +64,14 @@ port numbers depending on your environment.
 .. toctree::
     :maxdepth: 1
 
-    SITL on Linux <setting-up-sitl-on-linux>
-    SITL on Windows <sitl-native-on-windows>
-    SITL on Windows in a VM <setting-up-sitl-on-windows>
-    SITL using Vagrant <setting-up-sitl-using-vagrant>
+    SITL setup on Linux <setting-up-sitl-on-linux>
+    SITL setup on Windows <sitl-native-on-windows>
+    SITL setup on Windows in a VM <setting-up-sitl-on-windows>
+    SITL setup using Vagrant <setting-up-sitl-using-vagrant>
     Copter SITL/MAVProxy Tutorial <copter-sitl-mavproxy-tutorial>
     Plane SITL/MAVProxy Tutorial <plane-sitlmavproxy-tutorial>
     Rover SITL/MAVProxy Tutorial <rover-sitlmavproxy-tutorial>
-    ArduPilot Testing using SITL <using-sitl-for-ardupilot-testing>
+    SITL Advanced Testing <using-sitl-for-ardupilot-testing>
     Using Gazebo Simulator with SITL <using-gazebo-simulator-with-sitl>
     Using Last_letter Simulator with SITL <using-last_letter-as-an-external-sitl-simulator>
     Using the CRRCSim simulator <simulation-2sitl-simulator-software-in-the-loopusing-using-the-crrcsim-simulator>

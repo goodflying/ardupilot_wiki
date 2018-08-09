@@ -19,6 +19,7 @@ components, including those required for the operation of the autopilot.
 
     Mandatory Hardware Configuration <first-time-apm-setup>
     Configuration Values for Common Airframes <configuration-files-for-common-airframes>
+    Choosing Servo Functions <servo-functions>
     ESC Calibration <guide-esc-calibration>
     Four Channel Planes <guide-four-channel-plane>
     Elevon Planes <guide-elevon-plane>
@@ -26,6 +27,7 @@ components, including those required for the operation of the autopilot.
     Quadplanes <quadplane-support>
     Tailsitters <guide-tailsitter>
     Tilt-Rotors <guide-tilt-rotor>
+    Normal/Elevon/VTail Mode & Reversing Servos <reversing-servos-and-setting-normalelevon-mode>
     Differential Spoilers <differential-spoilers>
     Flaperons <flaperons-on-plane>
     Automatic Flaps <automatic-flaps>

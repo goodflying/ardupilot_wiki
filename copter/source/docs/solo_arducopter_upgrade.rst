@@ -23,13 +23,14 @@ Since the Solo uses a Pixhawk flight controller, it is capable of running variat
     :width: 45 %
 .. image:: ../images/solo_nightraptor.jpg
     :width: 45 %
+
 *Photos by Andrew Emmett, Matt Lawrence, Stephan Schindewolf, & Paul Dinardi*
 
 |
 
 Hardware Requirements
 ^^^^^^^^^^^^^^^^^^^^^
-The Pixhawk 2.1 Green Cube (or a traditional Pixhawk 2.1 with the internal jumper set for 5 volts) is currently required for safe and reliable use of ArduCopter 3.5.0 and higher on a 3DR Solo. You can purchase the Green Cube from `Jesters Drones <http://www.jestersdrones.org/store/index.php?rt=product/category&path=68>`_ or directly from  `ProfiCNC <http://www.proficnc.com/3dr-solo-accessories/79-the-cube.html>`_.  The Pixhawk 2.1 has significantly more advanced components.  This includes 3 temperature controlled IMUs and the 5 volt signalling the Solo needs to operate safely. If you already have a Pixhawk 2.1 cube, you can set an internal solder jumper to 5 volt signalling and use it in your Solo.  The Green Cube comes with this jumper pre-set for 5 volts.
+The Pixhawk 2.1 Green Cube (or a traditional Cube with the internal jumper set for 5 volts) is currently required for safe and reliable use of ArduCopter 3.5.0 and higher on a 3DR Solo. You can purchase the Green Cube from `Jesters Drones <http://www.jestersdrones.org/store/index.php?rt=product/category&path=68>`_ or directly from  `ProfiCNC <http://www.proficnc.com/3dr-solo-accessories/79-the-cube.html>`_.  The Cube has significantly more advanced components.  This includes 3 temperature controlled IMUs and the 5 volt signalling the Solo needs to operate safely. If you already have a Cube, you can set an internal solder jumper to 5 volt signalling and use it in your Solo.  The Green Cube comes with this jumper pre-set for 5 volts.
 
 .. image:: ../images/solo_greencube.jpg
     :width: 45 %
@@ -38,9 +39,9 @@ The Pixhawk 2.1 Green Cube (or a traditional Pixhawk 2.1 with the internal jumpe
 
 You *can* install ArduCopter master on the stock Pixhawk 2.0, but it is highly discouraged. It will install, and it will fly.  But you are at fairly high risk for motors shutting down in flight, leading to a serious crash. This is because of an electrical hardware flaw in the Solo's motor pods.  The old stock firmware has a software patch to *mostly* mitigate this flaw. This is what you may hear referred to as "slew rate protection". You can view the code for the slew rate protection in the stock 3DR firmware `here on their GitHub site <https://github.com/3drobotics/ardupilot-solo/blob/master/libraries/AP_Motors/AP_MotorsMatrix.cpp#L388>`_.  The production versions of ArduCopter, including ArduCopter 3.5 do not have this slew rate protection. It is severely handicapping and difficult to manage for a world of vehicles that use ArduCopter besides the Solo.  The 5 volt signalling used in the Pixhawk 2.1 Green Cube effectively solves the electrical problem on the motor pods.
 
-There are other potential ways to mitigate the electrical problem with the motor pods without buying a new Pixhawk 2.1.  You could use conventional DIY ESCs and bypass the ones built into the motor pods.  Or you could build a level converter that steps the signalling voltage up from 3v to 5v.  None of these solutions are commercially available as a kit, but can be done on a DIY basis if you are creative. You would not have the benefit of enhanced hardware in the Pixhawk 2.1, but it would be just as safe and reliable to fly.
+There are other potential ways to mitigate the electrical problem with the motor pods without buying a new Cube.  You could use conventional DIY ESCs and bypass the ones built into the motor pods.  Or you could build a level converter that steps the signalling voltage up from 3v to 5v.  None of these solutions are commercially available as a kit, but can be done on a DIY basis if you are creative. You would not have the benefit of enhanced hardware in The Cube, but it would be just as safe and reliable to fly.
 
-You cannot use the old stock 3DR Solo firmware on the Pixhawk 2.1. It is entirely incompatible. This also means you cannot do a factory reset on the Solo with the Pixhawk 2.1 still in the Solo. The factory reset tries to reload the old Solo firmware, which is incompatible.  If you need to Factory Reset, you will need to put the old stock Pixhawk 2.0 back in, run the full factory reset and update, then put the Green Cube back in. This is annoying, but there is no way around it now or in the foreseeable future. In short, do not need to factory reset. Which also means do not lose your WiFi password!  Do not throw away your old stock cube!
+You cannot use the old stock 3DR Solo firmware on the Cube. It is entirely incompatible. This also means you cannot do a factory reset on the Solo with The Cube still in the Solo. The factory reset tries to reload the old Solo firmware, which is incompatible.  If you need to Factory Reset, you will need to put the old stock Pixhawk 2.0 back in, run the full factory reset and update, then put the Green Cube back in. This is annoying, but there is no way around it now or in the foreseeable future. In short, do not need to factory reset. Which also means do not lose your WiFi password!  Do not throw away your old stock cube!
 
 |
 
@@ -54,7 +55,7 @@ There are several great resources online for modification ideas,vendors, beta te
 -  `ArduPilot Discuss Forums <https://discuss.ardupilot.org/c/arducopter/copter-3-5>`_
 -  `ArduPilot copter Wiki <http://ardupilot.org/copter/docs/common-advanced-configuration.html>`_
 -  `3DR Pilots Forum <https://3drpilots.com/>`_ 
--  `Solo Battery Calibration Process <solo_battery_calibration>`
+-  :ref:`Solo Battery Calibration Process <solo_battery_calibration>`
 
 
 
@@ -86,11 +87,10 @@ There are two ways to do the upgrade that have detailed instructions published h
 -  :ref:`Initial installation using the Solex app <solo_arducopter_solex_install>`. This is by far the most straight forward and highly recommended method.  Solex has the means to load and reset firmware and parameters, and has access to all the necessary files online directly.
 -  :ref:`Initial installation using Mission Planner and WinSCP <solo_arducopter_other_install>`. This method is a little more involved but is just as successful. You will need to download zip files, use Mission Planner to change settings, and use WinSCP to transfer files.  If you do not have the Solex app, this is the method you will need to follow.
 
-.. _solo_arducopter_first_flight:
 
-|
-|
-|
+
+
+.. _solo_arducopter_first_flight:
 
 FIRST FLIGHT
 ------------
@@ -216,10 +216,21 @@ Value   Meaning
 =====   =======
 
 =====   =======
-:ref:`LOG_DISARMED <LOG_DISARMED>` enables and disables dataflash (*.bin) logging when the Solo is disarmed.  It is currently enabled by default since it can be very useful for testing and troubleshooting. But it does result in large and often unneccessary logs.  If you are comfortable and confident in your Solo, you disable logging while disarmed.  The dataflash logs be much cleaner and volumnous.
+:ref:`LOG_DISARMED <LOG_DISARMED>` enables and disables dataflash (\*.bin) logging when the Solo is disarmed.  It is currently enabled by default since it can be very useful for testing and troubleshooting. But it does result in large and often unneccessary logs.  If you are comfortable and confident in your Solo, you disable logging while disarmed.  The dataflash logs be much cleaner and volumnous.
 ---------------
 Value   Meaning
 =====   =======
 0       Disabled / No dataflash logging while disarmed
 1       Enabled / Dataflash logging while disarmed and armed.
 =====   =======
+
+
+Further Information
+-------------------
+
+.. toctree::
+    :maxdepth: 1
+
+    solo_arducopter_other_install
+    solo_arducopter_solex_install
+    solo_battery_calibration

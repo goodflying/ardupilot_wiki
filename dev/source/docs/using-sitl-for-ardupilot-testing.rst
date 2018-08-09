@@ -1,39 +1,13 @@
 .. _using-sitl-for-ardupilot-testing:
 
-================================
-Using SITL for ArduPilot Testing
-================================
+=====================
+SITL Advanced Testing
+=====================
 
-This article describes how to preform a number of common ArduPilot
-testing tasks in :ref:`SITL <sitl-simulator-software-in-the-loop>` using
-:ref:`MAVProxy <mavproxy-developer-gcs>`.
-
-Overview
-========
-
-The :ref:`SITL (Software In The Loop) <sitl-simulator-software-in-the-loop>` simulator is a build of
-the ArduPilot code which allows you to run
-:ref:`Plane <plane:home>`,
-:ref:`Copter <copter:home>` or
-:ref:`Rover <copter:home>` without any hardware. It can be
-built and run on :ref:`Windows <sitl-native-on-windows>` or
-:ref:`Linux <setting-up-sitl-on-linux>`, and can be run on Mac OSX (or the
-other platforms) in a virtual machine with Linux installed.
-
-Using SITL is just like using a real vehicle: you can connect to the
-(simulated) vehicle using the Ground Control Station (GCS) of your
-choice (or even multiple ground stations), take off, change flight
-modes, make guided or automatic missions, and land. The main difference
-is that in addition to being able to configure the vehicle,
-*simulator-specific* parameters allow you to configure the *physical
-environment* (for example wind speed and direction) and also to simulate
-failure of different components. This means that SITL is the perfect
-environment to test bug fixes and other changes to the autopilot,
-failure modes, and DroneKit-Python apps.
-
-This article explains some of the more important parameters that you can
-set to change the environment, simulate failure modes, and configure the
-vehicle with optional components. It also explains how to :ref:`connect to different GSCs <using-sitl-for-ardupilot-testing_connecting_otheradditional_ground_stations>`.
+This article describes how :ref:`SITL <sitl-simulator-software-in-the-loop>`
+and :ref:`MAVProxy <mavproxy-developer-gcs>` can be used to change the environment,
+simulate failure modes, and configure the vehicle with optional components.
+It also explains how to :ref:`connect to different GSCs <using-sitl-for-ardupilot-testing_connecting_otheradditional_ground_stations>`.
 
 .. tip::
 
@@ -47,9 +21,8 @@ vehicle with optional components. It also explains how to :ref:`connect to diffe
    :ref:`MAVProxy <mavproxy-developer-gcs>` to
    describe operations (e.g. setting parameters) because it presents a
    simple and consistent command-line interface (removing the need to
-   describe a GSC-specific UI layout). There is no reason the same
-   operations cannot be performed in *Mission Planner* (through the *Full
-   Parameters List*) or any other GSC.
+   describe a GSC-specific UI layout). Many of these operations can also
+   be performed in *Mission Planner* (through the *Full Parameters List*) or any other GSC.
 
 Setting vehicle start location
 ==============================
@@ -66,7 +39,7 @@ For example, to start Copter in *Ballarat* (a named location in
 ::
 
     cd ArduCopter 
-    sim_vehicle.py -j4 -L Ballarat --console --map
+    sim_vehicle.py -L Ballarat --console --map
 
 .. note::
 
@@ -402,7 +375,7 @@ Testing Compass Calibration
 A quick way to test compass calibration in SITL is with the
 "calibration" vehicle model. To use this with plane do this:
 
-   sim_vehicle.py -j4 -D -f plane --model calibration --console --map
+   sim_vehicle.py -D -f plane --model calibration --console --map
 
 then do:
 
@@ -587,3 +560,84 @@ Choose the yougest, then:
 ::
 
    mavlogdump --type PL logs/<youngest>
+
+
+
+Testing Visual Positioning
+--------------------------
+
+Start SITL, wiping parameters:
+
+::
+
+   ./Tools/autotest/sim_vehicle.py -v ArduCopter --gdb --debug -w
+
+Disable GPS, indicate to ArduPilot that instead of a GPS on SERIAL3 it should expect MAVLink (e.g. simulating a 900MHz radio):
+
+::
+
+   param set GPS_TYPE 0
+   param set EK2_GPS_TYPE 3
+   param set SERIAL3_PROTOCOL 1
+   param set DISARM_DELAY 60
+
+Restart the simulation, attaching a simulated VICON system to uartB (which corresponds to ``SERIAL3``:
+
+::
+
+   ./Tools/autotest/sim_vehicle.py -v ArduCopter --gdb --debug -A "--uartB=sim:vicon:" --map --console
+
+The console should indicate no GPS is present:
+
+::
+
+   GPS: 0 (0)
+
+Vision position estimates should now be being fed into ArduCopter:
+
+::
+
+   STABILIZE> status VICON_POSITION_ESTIMATE
+   STABILIZE> 43371: VICON_POSITION_ESTIMATE {usec : 38380000, x : 0.0, y : 0.0, z : -0.0999755859375, roll : 0.0, pitch : 0.0, yaw : -0.122173137963}
+
+
+You should also receive a startup message from the EKF:
+
+::
+
+   APM: EKF2 IMU0 is using external nav data
+   APM: EKF2 IMU0 initial pos NED = 0.0,0.0,-0.1 (m)
+   APM: EKF2 IMU1 is using external nav data
+   APM: EKF2 IMU1 initial pos NED = 0.0,0.0,-0.1 (m)
+
+Use MAVProxy's right-click context menu item to ``Set Origin (with alt)``
+
+Use MAVProxy's right-click context menu item to ``Set Home (with alt)``
+
+Arm in stabilize, switch to loiter:
+
+::
+
+   mode stabilize
+   arm throttle
+   mode loiter
+
+Take off, then fly somewhere:
+
+::
+
+   rc 3 1800
+   rc 2 1400
+
+
+Wait a while, note vehicle moving on map.
+
+Now RTL:
+
+::
+
+   rc 3 1500
+   rc 2 1500
+   mode rtl
+
+Note vehicle returning to home

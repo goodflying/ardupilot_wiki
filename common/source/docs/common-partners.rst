@@ -18,6 +18,10 @@ Corporate Partners
     :width: 250px
     :target:  http://www.jDrones.com/home/
 
+.. image:: ../../../images/supporters/supporters_logo_proficnc.png
+    :width: 250px
+    :target:  http://www.proficnc.com/stores
+    
 .. image:: ../../../images/supporters/supporters_logo_mrobotics.png
     :width: 250px
     :target:  http://mrobotics.io/
@@ -30,21 +34,9 @@ Corporate Partners
     :width: 250px
     :target:  http://www.cuav.net/
 
-.. image:: ../../../images/supporters/supporters_logo_falconunmanned.gif
-    :width: 250px
-    :target:  http://www.falconunmanned.com/
-
-.. image:: ../../../images/supporters/supporters_logo_livelink.png
-    :width: 250px
-    :target:  http://www.livelinktechnology.net/
-
 .. image:: ../../../images/supporters/supporters_logo_craftandtheory.png
     :width: 250px
     :target:  http://craftandtheoryllc.com
-
-.. image:: ../../../images/supporters/supporters_logo_proficnc.png
-    :width: 250px
-    :target:  http://www.proficnc.com/stores
 
 .. image:: ../../../images/supporters/supporters_logo_LaserNavigation.png
     :width: 250px
@@ -57,10 +49,6 @@ Corporate Partners
 .. image:: ../../../images/supporters/supporters_logo_spektreworks.png
     :width: 250px
     :target:  http://www.spektreworks.com/
-
-.. image:: ../../../images/supporters/supporters_logo_uavionix.png
-    :width: 250px
-    :target:  http://www.uavionix.com/
 
 .. image:: ../../../images/supporters/supporters_logo_hex.png
     :width: 250px
@@ -94,17 +82,9 @@ Corporate Partners
     :width: 250px
     :target:  http://www.drotek.com/
 
-.. image:: ../../../images/supporters/supporters_logo_dslrpros.jpg
-    :width: 250px
-    :target:  http://www.dslrpros.com/
-
 .. image:: ../../../images/supporters/supporters_logo_harrisaerial.jpg
     :width: 250px
     :target:  http://www.harrisaerial.com/
-
-.. image:: ../../../images/supporters/supporters_logo_bubblefly.png
-    :width: 250px
-    :target:  http://www.bubblefly.in/
 
 .. image:: ../../../images/supporters/supporters_logo_altigator.png
     :width: 250px
@@ -154,13 +134,53 @@ Corporate Partners
     :width: 250px
     :target:  http://ttrobotix.com/
 
+.. image:: ../../../images/supporters/supporters_logo_novaerial.png
+    :width: 250px
+    :target:  https://novaerial.com/
+
+.. image:: ../../../images/supporters/supporters_logo_airsupplyaerial.png
+    :width: 250px
+    :target:  https://www.airsupplyaerial.net/
+
 .. image:: ../../../images/supporters/supporters_logo_terraplane.png
     :width: 250px
     :target:  https://www.terraplanellc.com/
 
+.. image:: ../../../images/supporters/supporters_logo_irlock.jpg
+    :width: 250px
+    :target:  https://irlock.com/
+
+.. image:: ../../../images/supporters/supporters_logo_benewake.png
+    :width: 250px
+    :target:  http://www.benewake.com/en/index.html
+
+.. image:: ../../../images/supporters/supporters_logo_foxtech.jpg
+    :width: 250px   
+    :target:  https://www.foxtechfpv.com
+
+.. image:: ../../../images/supporters/supporters_logo_skywalker.png
+    :width: 250px   
+    :target:  http://sky-walker.co.jp/english/index.html
+
+.. image:: ../../../images/supporters/supporters_logo_bfd.jpg
+    :width: 250px   
+    :target:  https://www.bfdsystems.com
+
+.. image:: ../../../images/supporters/supporters_logo_unmannedtech.jpg
+    :width: 250px   
+    :target:  https://www.unmannedtechshop.co.uk/
+
+.. image:: ../../../images/supporters/supporters_logo_Rubidium.jpg
+    :width: 250px   
+    :target:  https://rubidiumlight.com.au/rubidium-rover/
+    
+.. image:: ../../../images/supporters/supporters_logo_makeflyeasy.jpg
+    :width: 250px   
+    :target:  http://makeflyeasy.com/
+
 How does my company become a partner?
-===============================================
-We ask for a donation of at least `$1000 US through PayPal <https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BBF28AFAD58B2>`__ per year.  If this is your first time, please email partners@ardupilot.org to express your desire to become a partner and include your company logo if you would like it to appear on this page.  We will send you a reminder in a year and if all goes well, you may choose to extend for another year.
+=====================================
+We ask for an annual donation of at least `$1000 USD through PayPal <https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BBF28AFAD58B2>`__  per year. For large companies or those who rely on ArduPilot as part of their core business, annual donations of `$5,000 <https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BBF28AFAD58B2>`__ , `$10,000 <https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BBF28AFAD58B2>`__  or more are greatly appreciated. If this is your first time, please email partners@ardupilot.org to express your desire to become a partner and include your company logo if you would like it to appear on this page.  We will send you a reminder in a year and if all goes well, you may choose to extend for another year.
 
 In some countries it is not possible to donate through PayPal in which case you can donate by Credit Card using `ClickAndPledge <https://co.clickandpledge.com/advanced/default.aspx?wid=34115>`__.  Be sure to enter the amount in the ArduPilot section, other sections are for other `SPI projects <http://www.spi-inc.org/>`__.  Other methods can be found on the `SPI donations page <http://www.spi-inc.org/donations/>`__.
 

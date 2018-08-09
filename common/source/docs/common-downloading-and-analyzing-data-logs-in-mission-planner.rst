@@ -65,7 +65,22 @@ Manually review a log
 For more detailed analysis, click on "Review a Log" and select a log
 that you've already saved to the MissionPlanner/logs directory.  Once
 again, they will be in folders named after the vehicle type, such as
-QUADCOPTER or ROVER. Once you pick the log you want, you will get charts
+QUADCOPTER or ROVER.
+
+Steps to review a log downloaded from the internet, or your vehicle
+-------------------------------------------------------------------
+For DataFlash logs, with a .bin extension:
+#. Download the log file. Note the place on your computer to which it is downloaded. (For example, it might be C:\Downloads)
+#. Open Mission Planner
+#. Navigate to the “Flight Data” page (top left)
+#. Select the “Dataflash Logs” tab (mid-screen, left side)
+#. Select the “Review a Log” button.
+#. A standard Windows “select a file” box will let you go find the .bin file that you downloaded, at the place that you downloaded it. (Per the example above, it is in C:\Downloads) Choose that file.
+#. After reading the log, a Manual Log Review window will be open, which allows you to plot data from the log for inspection. (see below)
+
+Reviewing the log data
+----------------------
+Once you pick the log you want, you will get charts
 such as the below. The basic format of the dataflash is:
 
 -  Line numbers appear on the very left side of the viewer
@@ -102,14 +117,14 @@ Setting what data you want recorded
 ===================================
 
 The LOG_BITMASK parameter controls what message types are recorded in
-the dataflash.  Recent versions of the mission planner and ardupilot
+the dataflash.  Recent versions of the mission planner and ArduPilot
 allow individual messages to be enabled/disabled from the MP's
 Config/Tuning, Standard Params screen.
 
 .. image:: ../../../images/mp_dataflash_log_bitmask.png
     :target: ../_images/mp_dataflash_log_bitmask.png
 
-Earlier versions of MP/ardupilot allow selecting the message using a
+Earlier versions of MP/ArduPilot allow selecting the message using a
 drop-down as shown below. 
 
 .. image:: ../../../images/mp_log_bitmask.png
@@ -501,7 +516,7 @@ esc/motor/RC output
 Viewing KMZ FILES
 =================
 
-When you download the dataflash log files from the APM/PX4 it will
+When you download the dataflash log files from the flight controller it will
 automatically create a KMZ file (file with extension .kmz). This file
 can be opened with Google Earth (just double click the file) to view
 your flight in Google Earth. Please see the instructions on the

@@ -7,11 +7,8 @@ Traditional Helicopter – Suggested Parts List
 Electronics including flight controller
 =======================================
 
--  :ref:`Pixhawk2 <common-pixhawk2-overview>`
+-  :ref:`An ArduPilot supported board <common-autopilots>`
    with :ref:`GPS and external compass <common-positioning-landing-page>`.
--  Extra long GPS cable
--  Extra long compass (i2c) cable
--  Flight controller mounting plate
 
 RC helicopter frame
 ===================
@@ -32,7 +29,7 @@ aileron, collective pitch, rudder, flight mode, tuning knob, auxiliary
 function switch, throttle hold).
 
 Use of electric and engine governors
-=====================================
+====================================
 
 If you intend to use any Copter flight control modes other than Acro and
 Stabilize, it is recommended that the speed controller you purchase for an

@@ -4,8 +4,7 @@
 Introduction to Rover
 =====================
 
-This article describes the main components of a Rover system, including
-the ground vehicle, autopilot hardware, and the software/firmware.
+This article describes the main components of a Rover system, including the ground vehicle, autopilot hardware, and the software/firmware.
 
 .. image:: ../images/APMrover7.jpg
     :target: ../_images/APMrover7.jpg
@@ -42,16 +41,9 @@ needed for autopilot mode control and learning.
 Autopilot Hardware
 ------------------
 
-:ref:`Pixhawk <common-pixhawk-overview>` is highly recommended for general
-use.
+The list of supported autopilots is on the :ref:`Choosing a Flight Controller <common-choosing-a-flight-controller>` wiki page.  The :ref:`Pixhawk <common-pixhawk-overview>` family is the most common choice.
 
-Developers creating robot vision applications should consider using a
-separate Companion Computer, or a Linux based autopilot board (e.g.
-:ref:`NAVIO+ <common-navio-overview>` or
-:ref:`Erle-Brain <common-erle-brain-linux-autopilot>`) which is capable of
-running both Rover and the image processing code.
-
-For more options, see the topic :ref:`Choosing a Flight Controller <common-choosing-a-flight-controller>`.
+Developers creating robot vision applications should consider a Linux based autopilot board (e.g. :ref:`Emlid Edge <common-emlid-edge>`) or adding a separate `Companion Computer <http://ardupilot.org/dev/docs/companion-computers.html>`__.
 
 .. note::
 
@@ -75,12 +67,12 @@ it will have at least two toggles switches, and one of those switches
 will have three positions. If you're on a budget, the `Turnigy 9x <http://hobbyking.com/hobbyking/store/__8992__Turnigy_9X_9Ch_Transmitter_w_Module_8ch_Receiver_Mode_2_v2_Firmware_.html>`__ ($54)
 is a popular choice. If you'd like better quality, we like the :ref:`Taranis FrSky Reciever <common-pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems_frsky_taranis_ppm-sum_compatible_transmitter>`.
 
-Some other options are discussed in the topic :ref:`Compatible RC Transmitter and Receiver Systems (Pixhawk/PX4) <common-pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems>`.
+Some other options are discussed in the topic :ref:`Compatible RC Transmitter and Receiver Systems (Pixhawk) <common-pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems>`.
 
 GPS module
 ----------
 
-Your Rover will *require* a GPS module. The recommended module is :ref:`3DR UBlox GPS + Compass Module <common-installing-3dr-ublox-gps-compass-module>` which also
+Your Rover will *require* a GPS module. The recommended module is :ref:`UBlox GPS + Compass Module <common-installing-3dr-ublox-gps-compass-module>` which also
 includes a compass. You can check out :ref:`other GPS solutions here <common-positioning-landing-page>`.
 
 .. image:: ../../../images/GPS_TopAndSide.jpg
@@ -120,49 +112,22 @@ are recommended for obstacle avoidance.
 Ready to Use Rovers
 ===================
 
-At time of writing, the only Ready-to-Run (RTR) Rover is
-`Erle-Rover <https://erlerobotics.com/blog/product/erle-rover/>`__.
-
-.. figure:: ../images/Erle-Rover_IMG_6946.jpg
-   :target: ../_images/Erle-Rover_IMG_6946.jpg
-
-   Erle-Rover: Ready to Use Rover from Erle-Robotics
-
-This RTR Rover contains all the needed components for getting started:
-the frame, `Erle-Brain <http://erlerobotics.com/blog/erle-brain-2/>`__
-Linux autopilot, 4 Channels 2.4Ghz RC, Power Module (to power up the
-autopilot), NIMH battery and charger.
-
-.. note::
-
-   This Rover uses a powerful Linux autopilot that can run more
-   computationally intensive operations than a traditional autopilot (like
-   Pixhawk). 
+A list of ready-to-use vehicles is on the :ref:`RTF wiki page <common-rtf>`.
 
 Ground Control Station
 ======================
 
-The (free and open source) :ref:`Mission Planner <planner:home>` is required if you're going
-to be loading new versions of Rover onto the autopilot controller, and
-for first-time tuning and calibration. It runs on a PC and can also be
-used for planning missions.
-
-.. image:: ../../../images/groundstation-with-MP.jpg
-    :target: ../_images/groundstation-with-MP.jpg
-
-Once your Rover is configured, you may find it more convenient to choose
-a different ground station - running on the tablet, phone or computer of
-your choice. The main options are discussed in the topic :ref:`Choosing a Ground Station <common-choosing-a-ground-station>`.
+The list of supported ground stations is on the :ref:`Choosing a Ground Station <common-choosing-a-ground-station>` wiki page
+and we explain how to install a number of them in :ref:`Installing Ground Station (GCS) software <common-install-gcs>`.
 
 .. note::
 
-   This wiki exclusively uses Mission Planner as the reference
-   GCS.
+   This wiki uses :ref:`Mission Planner <planner:home>` as the reference GCS for most instructions.
 
 .. toctree::
     :maxdepth: 1
 
-    Project News <project-news>
     Video Demos <rover-video-demonstrations>
     Choosing a Ground Station <common-choosing-a-ground-station>
     Choosing an Autopilot Board <common-choosing-a-flight-controller>
+    All Supported Vehicle Types <common-all-vehicle-types>

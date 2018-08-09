@@ -71,17 +71,17 @@ APM Planner 2.0
 The best autopilot for use on MAC and Linux platforms. It has a smaller
 user base and a reduced feature set when compared with Mission Planner.
 
--  **Platform**: Windows, Mac OS X, Linux
--  **Licence**: `Open source <https://github.com/ArduPilot/apm_planner/blob/master/license.txt>`__
+- **Platform**: Windows, Mac OS X, Linux
+- **Licence**: `Open source <https://github.com/ArduPilot/apm_planner/blob/master/license.txt>`__
    (GPLv3)
 
-.. image:: ../../../images/planner2_choose_agcs.jpg
+   .. image:: ../../../images/planner2_choose_agcs.jpg
     :target: ../_images/planner2_choose_agcs.jpg
 
--  :ref:`Wiki <planner2:home>`
--  `Support Forum <http://ardupilot.com/forum/viewforum.php?f=82>`__
--  `Issues List <https://github.com/ArduPilot/apm_planner/issues>`__
--  `Source Code <https://github.com/ArduPilot/apm_planner>`__
+- :ref:`Wiki <planner2:home>`
+- `Support Forum <http://ardupilot.com/forum/viewforum.php?f=82>`__
+- `Issues List <https://github.com/ArduPilot/apm_planner/issues>`__
+- `Source Code <https://github.com/ArduPilot/apm_planner>`__
 
 MAVProxy
 --------
@@ -104,9 +104,9 @@ Python, and extensible via python modules.
 QGroundControl
 --------------
 
-QGroundControl work with MAVLink capable autopilots. It's main focus orginally has been PX4 Flight Stack,
-but it now also comes with complete support for ArduPilot based autopilots. It's unique among the GCS offerings
-as it runs on all platforms desktop and mobile.
+QGroundControl work with MAVLink capable autopilots. 
+It's main focus was originally the PX4 Flight Stack, but it now also comes with complete support for ArduPilot based autopilots. 
+It's unique among the GCS offerings as it runs on all platforms desktop and mobile.
 
 -  **Platform**: Windows, Mac OS X, Linux, Android and iOS
 -  **Licence**: `Open Source <http://www.qgroundcontrol.org/license>`__
@@ -115,14 +115,15 @@ as it runs on all platforms desktop and mobile.
 .. image:: ../../../images/QGroundControlTabletImage.jpg
     :target: ../_images/QGroundControlTabletImage.jpg
 
--  `Website <http://www.qgroundcontrol.org/>`__
+-  `Website <http://qgroundcontrol.com/>`__
 -  `Support Forum <https://groups.google.com/forum/#!forum/qgroundcontrol>`__
 -  `Gitter <https://gitter.im/mavlink/qgroundcontrol>`__
 
 UgCS - Universal Ground Control Station
 ---------------------------------------
 
-Universal and easy to use ground control station with a 3D interface. Supports APM, Pixhawk as well as drones from other manufacturers such as DJI, Mikrokopter and more.
+Universal and easy to use ground control station with a 3D interface. 
+Supports APM, Pixhawk as well as drones from other manufacturers such as DJI, Mikrokopter and more.
 Intended for enthusiasts as well as professional users.
 
 It is capable of communicating with and controlling multiple drones simultaneously. 
@@ -144,7 +145,7 @@ Supports multi-node installation, meaning that it is possible to connect multipl
 -  `UgCS Github Repository <https://github.com/ugcs>`__
 
 Comparison Mobile
-==================
+=================
 
 Tower
 -----
@@ -198,7 +199,8 @@ See website for how-to on how connect it to your autopilot
 SidePilot
 ---------
 
-ArduPilot compatible GCS that runs on iPhone/iPad. Also supports PX4 and 3DR Solo.
+ArduPilot compatible GCS that runs on iPhone/iPad. 
+Also supports PX4 and 3DR Solo.
 
 See website for how-to on how connect it to your autopilot
 
@@ -258,7 +260,7 @@ For Android devices, you will need:
 
    
 iOS
--------
+---
 
 For iOS devices, you will need:
 

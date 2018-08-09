@@ -12,8 +12,8 @@ value to users with old hardware.
 .. toctree::
     :maxdepth: 1
 
+    NAVIO+ Overview <common-navio-overview>
     APM 2.x <common-apm25-and-26-overview>
-    Buzzer <nav-leds>
     PX4FMU <common-px4fmu-overview>
     Open Camera Control Board <common-camera-control-board>
     VR Gimbal Controller (3-Axis Open Source) <common-vrgimbal>
@@ -29,6 +29,7 @@ value to users with old hardware.
     Traditional Helicopter Simulator – TradHeliHIL <tradhelihil>
     Archived: Installing the PX4FMU on a QuadCopter <px4fmu-only-wiring>
     GPS Failsafe <archived-gps-failsafe>
+    traditional-helicopter-archived-tuning
 [/site]
 
 [site wiki="dev"]

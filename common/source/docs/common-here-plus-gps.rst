@@ -25,11 +25,11 @@ Connecting the vehicle and base station GPSs
 
 The Here+ GPS kit comes with a larger round GPS (also knows as the "Rover") that should be mounted on the vehicle so that the round button is on the top and the faint arrow is pointing forwards.
 
-This GPS is connected to the flight controller using the supplied 8-pin clickmate connector (if using a Pixhawk2) or an optional 4pin+6pin DF13 connector (if using Pixhawk1).
+This GPS is connected to the flight controller using the supplied 8-pin clickmate connector (if using a Cube) or an optional 4pin+6pin DF13 connector (if using Pixhawk).
 
 A smaller GPS (also known as the "base station") labelled "here+" is also included along with it's external antenna.  This GPS is connected to the ground station PC using the supplied USB cable.
 
-Below is a diagram showing how to connect the Here+ to a Pixhawk1.
+Below is a diagram showing how to connect the Here+ to a Pixhawk.
 
 .. image:: ../../../images/here-plus-pixhawk.png
 	:target: ../_images/here-plus-pixhawk.png
@@ -116,11 +116,11 @@ When base/rover is already connected to U-center, click View, go to Message View
 	
 As shown in the figure, the current firmware version is FWVER = HPG 1.30 REF, indicating that the current firmware version is 1.30 for base module. 
 
-Basic opperating manual
-=======================
-This part of the tutorial uses Mission Planner ground control software and Arducopter-3.5 flight control firmware for operating instructions. If you are using PX4 firmware and QGroundControl ground station software, please refer to `this link <https://docs.px4.io/en/advanced_features/rtk-gps.html>`__.
+Basic operating manual
+======================
+This part of the tutorial uses Mission Planner ground control software and Arducopter-3.5 flight control firmware for operating instructions. 
 
-Preperation before operation.
+Preparation before operation.
 -----------------------------
 To use HERE+ on a UAV, you need the following hardware:
 
@@ -138,9 +138,9 @@ To use HERE+ on a UAV, you need the following hardware:
 .. image:: ../../../images/HERE+_sufficient_sky_coverage.png
 	:target: ../_images/HERE+_sufficient_sky_coverage.png
 
-- Connect to the vehicle's flight controller (i.e. Pixhawk, Pixhawk2, etc) using Mission Planner
+- Connect to the vehicle's flight controller (i.e. Pixhawk, Cube, etc) using Mission Planner
 - Open the Initial Setup >> Optional Hardware >> RTK GPS Inject screen
-- For first time setup in a new location, click the Enter Base Position button, make sure the dialogue box shows empty location information, as shown below:
+- For first time setup in a new location, click the Enter Base Position button, make sure the dialog box shows empty location information, as shown below:
 
 .. image:: ../../../images/Here_Plus_MP1.png
 	:target: ../_images/Here_Plus_MP1.png
@@ -196,7 +196,7 @@ After the base station is set up, you can turn on the UAV. Using the same Missio
 - The satellite information will be visualized as green bars as shown in the screen shot below.
 
 .. image:: ../../../images/Here_Plus_MP3.png
-	:target: ../_images/Here_Plus_MP3.png		
+	:target: ../_images/Here_Plus_MP3.png
 
 A line of text will indicate the current status of the surveying:
 SurveyIn indicates whether the survey has achieved the desired accuracy of base station, it will show ‘true’ when the survey has been completed.
@@ -210,15 +210,15 @@ Obs: number of observations used for the survey
 Acc: current accuracy in meters
 
 - When the survey is completed as indicated by the SurveyIn: True message, you may click the ‘Save current pos’ button and enter a name for the saved position.
-- The RTK messages from base station is sent to vehicle by Mavlink message. In the main HUD of Mission Planer, the GPS status should display RTK Fix or RTK Float
+- The RTK messages from base station is sent to vehicle by MAVLink message. In the main HUD of Mission Planer, the GPS status should display RTK Fix or RTK Float
 
 .. image:: ../../../images/Here_Plus_MP4.png
-	:target: ../_images/Here_Plus_MP4.png		
+	:target: ../_images/Here_Plus_MP4.png
 	
 - The information of the saved position will be displayed in the table as shown in the screen shot below. 
 
 .. image:: ../../../images/Here_Plus_MP5.png
-	:target: ../_images/Here_Plus_MP5.png	
+	:target: ../_images/Here_Plus_MP5.png
 	
 - The saved position can be used the next time you set up the base station in the exact same location. However, if you change to another location for surveying, please ensure you clear the position information in the dialogue box that pops up when you click ‘Enter Base Position’. Otherwise, the previously saved point will be taken every time you connect to the base module.
 

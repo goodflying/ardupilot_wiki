@@ -28,10 +28,10 @@ Now you should be able to build with waf as described in `BUILD.md <https://gith
 Setup for other Distributions
 =============================
 
-To build for a Pixhawk2/Pixhawk target on Linux you need the
+To build for a Cube/Pixhawk target on Linux you need the
 following tools and git repositories:
 
--  The gcc-arm cross-compiler from `here <http://firmware.ardupilot.org/Tools/PX4-tools/>`__
+-  The gcc-arm cross-compiler from `here <http://firmware.ardupilot.org/Tools/STM32-tools/>`__
 -  gnu make, gawk and associated standard Linux build tools
 -  On a 64 bit system you will also need to have installed libc6-i386.
 

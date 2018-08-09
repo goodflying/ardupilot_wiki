@@ -8,11 +8,11 @@ APSync is a project sponsored by `eLab <http://elab.co.jp/>`__ which simplifies 
 
 The current release automatically creates a Wifi Access Point on startup, allows DataFlash logging to the companion copmuter and "simple" real-time video streaming from a camera on the drone to the ground station.
 
-The supported companion computers are the :ref:`RPi3 <raspberry-pi-via-mavlink>`, :ref:`NVidia TX1 <companion-computer-nvidia-tx1>` and :ref:`Intel Edison <intel-edison>`.
+The supported companion computers are the :ref:`RPi3 <raspberry-pi-via-mavlink>`, :ref:`NVidia TX1 <companion-computer-nvidia-tx1>`, :ref:`NVidia TX2 <companion-computer-nvidia-tx2>` and :ref:`Intel Edison <intel-edison>`.
 
 .. note::
 
-   Video streaming from the Intel Edison is not supported (yet).
+   Video streaming from the Intel Edison is not supported.
 
 :ref:`Installation instructions <apsync-intro-installing-apsync>` are at the bottom of this page.
 
@@ -27,7 +27,7 @@ Wifi Access Point & DataFlash logging
 .. image:: ../images/apsync-wifiap-dflogger.png
     :target: ../_images/apsync-wifiap-dflogger.png
 
-On start-up an access point is created with name "ardupilot".  The password is "ardupilot" on TX1, Intel Edison and RPi.
+On start-up an access point is created with name "ardupilot".  The default password is also "ardupilot".
 
 The user can connect to this access point and then easily connect to ardupilot running on the flight controller by setting their ground station (including Mission Planner) to connect using "UDP", port 14550.
 
@@ -63,7 +63,7 @@ The user can connect to the drone using a known URL (`http://10.0.1.128:8000 <ht
 
 .. warning::
 
-   This Simple Configuration portion is only partially implemented and currently only allows starting and stopping the simple video stream.
+   This Simple Configuration portion is partially implemented allows starting and stopping the simple video stream.
 
 Flexible Video
 ==============
@@ -89,7 +89,7 @@ Please follow the instructions for installing these images on the wiki page for 
 
 The flight controller (i.e. Pixhawk or similar) should be configured to communicate with the companion computer by setting the following parameters and then reboot the board:
 
-- :ref:`SERIAL2_BAUD <copter:SERIAL2_BAUD>` 921
+- :ref:`SERIAL2_BAUD <copter:SERIAL2_BAUD>` 921 (for RPi3, TX1 and Edison) or 1500 (for TX2)
 - :ref:`SERIAL2_PROTOCOL <copter:SERIAL2_PROTOCOL>` 1
 - :ref:`LOG_BACKEND_TYPE <copter:LOG_BACKEND_TYPE>` 3
 
@@ -97,3 +97,26 @@ Connecting with SSH
 ===================
 
 You can connect to the companion computer with a terminal emulator such as `Putty <http://www.putty.org/>`__ by connecting to the board's wifi access point and then ssh to 10.0.1.128 username: apsync, password: apsync
+
+How flight controller data is routed to various programs
+========================================================
+
+By default APsync uses "mavlink-router" to allow multiple programs running on the companion computer to talk to the flight controller.  This programs configuration can is held in ~/start_mavlink-router/mavlink-router.conf and defines the following connections:
+
+- /dev/ttyTHS1 at baud 1500000 to communicate with the flight controller (on TX1/TX2)
+- UDP 127.0.0.1:14655 for MavProxy running on the companion computer
+- UDP 127.0.0.1:14556 for dflogger (writes dataflash logs to companion computer)
+- UDP 127.0.0.1:14755 for APweb (small configuration web service)
+- UDP 127.0.0.1:14765 for OpenKai (vision processing program, similar to ROS)
+- UDP 10.0.1.255:14765 for telemetry to Ground Station via wifi
+
+If additional programs are run on the companion computer that also need data from the flight controller, new ports can be opened by adding new lines at the bottom of ~/start_mavlink-router/mavlink-router.conf and then reboot the board.
+
+For example the following lines could be added to open up port 14855 for use by ROS running locally on the companion computer:
+
+::
+
+    [UdpEndpoint to_ros]
+    Mode = Normal
+    Address = 127.0.0.1
+    Port = 14855
