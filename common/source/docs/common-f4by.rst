@@ -11,7 +11,7 @@ F4BY FMU
 
 .. note::
 
-   Support for this board will be released with Copter-3.6.  More info available from `Swift-Flyer.com <http://swift-flyer.com/?page_id=83>`__
+   Support for this board is available with Copter-3.6.0 (and higher).  More info available from `Swift-Flyer.com <http://swift-flyer.com/?page_id=83>`__
 
 Specifications
 ==============
@@ -35,7 +35,7 @@ Specifications
 
 -  **Interfaces**
 
-   -  5x UART serial ports, 1 with inverter for frsky telemertry
+   -  5x UART serial ports, 1 with inverter for frsky telemetry
    -  Up to 12x PWM outputs
    -  Spektrum DSM/DSM2/DSM-X Satellite input
    -  Futaba S.BUS input support (with external inverter)
@@ -52,6 +52,8 @@ Specifications
 
    -  micro SD card (for logs)
    -  Fram memory for parameters
+
+`Schematics <https://github.com/ArduPilot/Schematics/tree/master/F4BY>`__
 
 Where to Buy
 ============

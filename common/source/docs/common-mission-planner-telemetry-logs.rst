@@ -1,15 +1,13 @@
 .. _common-mission-planner-telemetry-logs:
 
-==============================
-Mission Planner Telemetry Logs
-==============================
+==============
+Telemetry Logs
+==============
 
-Telemetry logs (also known as "tlogs") are recorded by the *Mission
-Planner* (or other ground station) when you connect ArduPilot to your
-computer via a :ref:`telemetry link <common-telemetry-landingpage>`. This
-topic explains how to configure and access tlogs.
+Telemetry logs (also known as "tlogs") are recorded by the ground station when you connect ArduPilot to your
+computer via a :ref:`telemetry link <common-telemetry-landingpage>`. This topic explains how to configure and access tlogs.
 
-[copywiki destination="copter,plane,rover,planner"]
+[copywiki destination="copter,plane,rover,dev,planner"]
 
 .. note::
 
@@ -20,8 +18,10 @@ When and where tlogs are created
 ================================
 
 Tlogs are recordings of the MAVLink telemetry messages sent between the
-APM/PX and the groundstation and are automatically created the moment
-you press the connect button on the mission planner.  Files of the
+autopilot and the ground station and are automatically created the moment
+you press the connect button on the ground station.
+
+If using the Mission Planner, files of the
 format YYYY-MM-DD hh-mm-ss.tlog appear in the "logs" subfolder in your
 Mission Planner installation folder or to the location you select in the
 Planner options [Config/Tuning] [Planner].
@@ -35,15 +35,9 @@ planner.  but cannot be parsed or played back so they should be ignored.
 Setting the datarate
 ====================
 
-The desired rate at which data is sent from the APM/PX to the ground
-station can be controlled through the mission planner's Software >
-Planner screen's Telemetry drop-downs.  Because all data sent over the
-telemetry link is also recorded in the tlog, this also controls the rate
-of data saved to the tlogs.
+The desired rate at which data is sent from the autopilot to the ground station can be controlled through the mission planner's Config/Tuning > Planner screen's Telemetry drop-downs.  Because all data sent over the telemetry link is also recorded in the tlog, this also controls the rate of data saved to the tlogs.
 
-Note that especially on Copter, due to CPU resource limitations, the
-actual rate of the data sent and saved may be lower than the rate
-requested.
+Note that due to bandwidth limitations, the actual rate of the data sent and saved may be lower than the rate requested.
 
 .. image:: ../../../images/mp_telemetry_rate.png
     :target: ../_images/mp_telemetry_rate.png
@@ -51,9 +45,7 @@ requested.
 Playing back missions
 =====================
 
-If you are using wireless telemetry and have connected to to APM via the
-Mission Planner, your flight data will automatically recorded.  You can
-play back these logs by doing the following:
+It is possible to play back a tlog by doing the following:
 
 -  Open the mission planner's Flight Data screen
 -  click on the Telemetry Logs tab
@@ -127,7 +119,7 @@ tlog.  This file is tab separated and contains a full list of parameters
 during the flight.  This can be opened in excel or a text editor.
 
 Extract WPs will create one or more .txt files containing any missions
-uploaded to the flight controller.  These files can be opened in the Mission
+uploaded to the autopilot.  These files can be opened in the Mission
 Planner by switching to the Flight Plan screen, right-mouse-button
 clicking on the map and selecting "File Load/Save", "Load WP File".
 

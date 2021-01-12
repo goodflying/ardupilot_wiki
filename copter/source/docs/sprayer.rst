@@ -4,20 +4,22 @@
 Crop Sprayer
 ============
 
-Copter 3.4 (and higher) include support for a crop sprayer.  This feature allows a flight controller connected to a PWM operated pump and (optionally) spinner to control the rate of flow of liquid fertilizer based on the vehicle speed.
+Copter includes support for a crop sprayer.  This feature allows a autopilot connected to a PWM operated pump and (optionally) spinner to control the rate of flow of liquid fertilizer based on the vehicle speed.
 
 ..  youtube:: O8ZnxkXMv6A
     :width: 100%
 
 Slightly out-of-date video showing a copter using the Sprayer feature (jump to 2:25 to see the sprayer in action).
 
+.. note:: Many boards with only 1MB of flash do not have this feature. See :ref:`Firmware Limitations <common-limited_firmware>` for a list of boards without this capability.
+
 Required Hardware
 =================
 
    .. image:: ../images/sprayer_EnRoute_AC940D.jpg
-       :target: http://enroute1.com/portfolio-posts/zion-ac-940-d/
+       :target: https://enroute.co.jp/products/ac940d/
 
-A multicopter such as the `EnRoute AC 940-D <http://enroute1.com/portfolio-posts/zion-ac-940-d/>`_ with a PWM controlled pump and optionally a PWM controlled spinning mechanism (EnRoute vehicle does not require this secondary spinner control).
+A multicopter such as the `EnRoute AC 940-D <https://enroute.co.jp/products/ac940d/>`_ with a PWM controlled pump and optionally a PWM controlled spinning mechanism (EnRoute vehicle does not require this secondary spinner control).
 
 The pump controls the rate of flow of the fertilizer.
 
@@ -26,11 +28,11 @@ The optional spinner should be attached to the end of the spraying nozzles and d
 Enabling the Sprayer
 ====================
 
--  Connect your Flight controller to the ground station (i.e. Mission Planner)
+-  Connect your autopilot to the ground station (i.e. Mission Planner)
 -  Set the :ref:`SPRAY_ENABLE <SPRAY_ENABLE>` parameter to 1 and refresh parameters (the sprayer is not a commonly used feature so its other parameters are initially hidden)
--  Connect the pump to one of the flight controller's auxiliary PWM outputs (like Pixhawk AUX1) and set the appropriate SERVO*_FUNCTION  or RC*_FUNCTION to 22 (where "*" is the RC output number, i.e. if the pump is connected to a Pixhawk's AUX1, set :ref:`SERVO9_FUNCTION <SERVO9_FUNCTION>` to 22).
+-  Connect the pump to one of the autopilot's auxiliary PWM outputs (like Pixhawk AUX1) and set the appropriate SERVO*_FUNCTION  or RC*_FUNCTION to 22 (where "*" is the RC output number, i.e. if the pump is connected to a Pixhawk's AUX1, set :ref:`SERVO9_FUNCTION <SERVO9_FUNCTION>` to 22).
 -  Connect the optional spinner to another auxiliary output port and set SERVO*_FUNCTION or RC*_FUNCTION to 23 (i.e. if using a Pixhawk's AUX2, set :ref:`SERVO10_FUNCTION <SERVO10_FUNCTION>` to 23)
--  To allow the pilot to turn on/off the sprayer set an auxiliary switch (i.e. :ref:`CH7_OPT <CH7_OPT>`) to "15"
+-  To allow the pilot to turn on/off the sprayer set an auxiliary switch (i.e. CH7_OPT in versions prior to Copter-4.0 or an ``RCx_OPTIONS`` in Copter-4.0 or higher) to "15"
 
 .. note::
 

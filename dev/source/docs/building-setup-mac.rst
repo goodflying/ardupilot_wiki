@@ -10,7 +10,7 @@ This article shows how to manually setup a minimal build environment on MacOS (v
     :width: 100%
 
 
-There is a pre-built script at /ardupilot/Tools/scripts/install-prereqs-mac.sh that will install these pre-requisites.
+There is a pre-built script at /ardupilot/Tools/environment_install/install-prereqs-mac.sh that will install these pre-requisites.
 
 Setup steps
 -----------
@@ -49,8 +49,15 @@ Setup steps
 
        sudo easy_install pip
        sudo pip install pyserial future empy
+       
+   ::
+   
+       ** Starting with MacOS Mojave (10.14.x) you might want to install the SDK headers
+       
+       open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
 
-#. Follow the `MAVProxy's install instructions <https://ardupilot.github.io/MAVProxy/html/getting_started/download_and_installation.html#mac>`__ if you plan to use the simulator.
+
+#. Follow the :ref:`MAVProxy documentation <mavproxy:mavproxy-downloadinstallmac>` if you plan to use the simulator.
 
 Now you should be able to build with waf as described in `BUILD.md <https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md>`__.
 

@@ -15,13 +15,13 @@ be used to create 3d maps.
 
 The image above is
 `Sylvain <http://www.diydrones.com/profile/Sylvain793>`__'s `"the fallen
-blockhouse" <http://www.diydrones.com/profiles/blogs/the-fallen-blockhouse-t3-entry>`__ and `the winner <http://www.diydrones.com/profiles/blogs/announcing-the-winner-of-the-13th-t3-competition>`__\ of
+blockhouse" <https://www.diydrones.com/profiles/blogs/the-fallen-blockhouse-t3-entry>`__ and `the winner <https://www.diydrones.com/profiles/blogs/announcing-the-winner-of-the-13th-t3-competition>`__\ of
 the Feb 2014 T3 competition.
 
 Equipment you will need
 =======================
 
-:ref:`Plane <plane:home>` or
+`Plane <https://ardupilot.org/plane/index.html>`_ or
 :ref:`Multicopter <copter:home>`
 
 A digital still camera:
@@ -89,11 +89,7 @@ triggered continuously until the vehicle is switched out of AUTO mode.
 vehicles returns home.
 
 **DO_SET_ROI** can be used to point the nose of the vehicle and gimbal
-at a specific point on the map.  Note: in AC3.1.2, as the vehicle passes
-a waypoint it will point to the next waypoint, this means that in order
-to point at a single point throughout the mission, the do-set-roi
-command must appear over and over again after each waypoint.  In AC3.2
-this behaviour has been modified so that this is not necessary.
+at a specific point on the map.
 
 .. image:: ../../../images/3dMapping_MPFlightPlanExample.jpg
     :target: ../_images/3dMapping_MPFlightPlanExample.jpg
@@ -102,7 +98,7 @@ Recommended Desktop 3d mapping software
 =======================================
 
 MicMac based toolchain together with
-(`ImageJ/Fiji <http://fiji.sc/>`__, `QGIS <http://qgis.org/en/site/>`__,
+(`ImageJ/Fiji <http://fiji.sc/>`__, `QGIS <https://qgis.org/en/site/>`__,
 `SAGA GIS <https://sourceforge.net/projects/saga-gis/>`__): open source
 and free!
 
@@ -149,14 +145,13 @@ raw images.
 Additional resources and Examples
 =================================
 
--  `T3 season 2 - "the model" blog post <http://www.diydrones.com/profiles/blogs/t3-season-2-the-model>`__
-   and `winner announcement <http://www.diydrones.com/profiles/blogs/announcing-the-winner-of-the-13th-t3-competition>`__
--  `Sylvain's "fallen blockhouse" T3 entry blog post <http://diydrones.com/profiles/blogs/the-fallen-blockhouse-t3-entry>`__
--  `Thorsten's "resconstruction of largest hallstatt tumulus grave" T3 entry blog post <http://diydrones.com/profiles/blogs/3d-reconstruction-of-largest-hallstatt-tumulus-grave-in-central>`__
--  `Stephen Gienow's "Octocopter scan of UMBC" T3 entry blog post <http://diydrones.com/profiles/blogs/apm-octocopter-build-and-mission>`__
--  `Krasiczyn Castle 3D model, Poland <http://diydrones.com/profiles/blogs/krasiczyn-castle-3d-model-poland>`__
+-  `T3 season 2 - "the model" blog post <https://www.diydrones.com/profiles/blogs/t3-season-2-the-model>`__
+   and `winner announcement <https://www.diydrones.com/profiles/blogs/announcing-the-winner-of-the-13th-t3-competition>`__
+-  `Sylvain's "fallen blockhouse" T3 entry blog post <https://diydrones.com/profiles/blogs/the-fallen-blockhouse-t3-entry>`__
+-  `Thorsten's "resconstruction of largest hallstatt tumulus grave" T3 entry blog post <https://diydrones.com/profiles/blogs/3d-reconstruction-of-largest-hallstatt-tumulus-grave-in-central>`__
+-  `Stephen Gienow's "Octocopter scan of UMBC" T3 entry blog post <https://diydrones.com/profiles/blogs/apm-octocopter-build-and-mission>`__
+-  `Krasiczyn Castle 3D model, Poland <https://diydrones.com/profiles/blogs/krasiczyn-castle-3d-model-poland>`__
 -  `MyDrone's "Buisante Chapel" T3 entry <http://prebut.free.fr/>`__
 -  `Creating Maps from Drone Imagery - 3DRobotics and Aero drone <https://www.mapbox.com/blog/processing-drone-imagery/>`__
 -  `Ecosynth wiki - a suite of tools used to map vegetation in 3d using
    off-the-shelf digital cameras and open-source computer vision software <http://wiki.ecosynth.org/index.php?title=Main_Page>`__ 
-- :ref:`Triggering non-CHDK cameras from Pixhawk <common-pixhawk-auto-camera-trigger-without-chdk>`

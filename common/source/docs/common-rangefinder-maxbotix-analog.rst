@@ -1,26 +1,21 @@
 .. _common-rangefinder-maxbotix-analog:
 
-=================================
-Maxbotic Analog Sonar - Copter3.2
-=================================
+=====================
+Maxbotix Analog Sonar
+=====================
 
-`XL-Maxbotic-EZ <http://www.maxbotix.com/Ultrasonic_Sensors/People_Sensors.htm>`__
+`XL-Maxbotix-EZ <https://www.maxbotix.com/product-category/xl-maxsonar-ez-products/>`__
 line of analog sonars (XL-MaxSonar-EZ0, EZ4 and EZL0) are relatively
 inexpensive, short range (7m to 10m) range finder primarily designed for
 indoor use but which has been successfully used outdoors on Copter and
 Rover.  These are the predecessors to :ref:`I2C sonar <common-rangefinder-maxbotixi2c>`.
 
-[site wiki="copter"]
-These instructions are for Copter 3.2 and later
-versions of Plane, Rover.  Setup instructions for Copter-3.1.5 (and
-earlier) :ref:`can be found here <copter:sonar>`.
-[/site]
 
-The `EZ4 <http://www.maxbotix.com/Ultrasonic_Sensors/MB1240.htm>`__
+The `EZ4 <https://www.maxbotix.com/Ultrasonic_Sensors/MB1240.htm>`__
 (recommended) has the narrowest beam providing the best noise resistance
-while the `EZ0 <http://www.maxbotix.com/Ultrasonic_Sensors/MB1200.htm>`__ has the
+while the `EZ0 <https://www.maxbotix.com/Ultrasonic_Sensors/MB1200.htm>`__ has the
 widest beam and higher sensitivity.  The long range
-`EZL0 <http://www.maxbotix.com/Ultrasonic_Sensors/MB1260.htm>`__ has the
+`EZL0 <https://www.maxbotix.com/Ultrasonic_Sensors/MB1260.htm>`__ has the
 same sensitivity as the EZ0 but a 10m range (as opposed to 7m).
 
 Connecting to the Pixhawk
@@ -33,29 +28,19 @@ requires.
 .. image:: ../../../images/RangeFinder_MaxbotixAnalog_Pixhawk.jpg
     :target: ../_images/RangeFinder_MaxbotixAnalog_Pixhawk.jpg
 
-Connecting to the APM2.x
-========================
-
-The sonar should be connected to the APM's A0 port as shown below. The
-APM will provide the regulated 5V power supply the sonar requires.
-
-.. image:: ../../../images/RangeFinder_MaxbotixAnalog_APM2.jpg
-    :target: ../_images/RangeFinder_MaxbotixAnalog_APM2.jpg
-
 Setup through the mission planner
 =================================
 
 please first connect with the Mission Planner and then open the
 Config/Tuning >> Full Parameter List page and set the following
-parameters:
+parameters (example shown if first rangefinder:
 
--  RNGFND_PIN = "14" for Pixhawk's ADC 3.3v pin #2 **OR** "0" for
-   APM2.x
--  RNGFND_MAX_CM = "700" (i.e. 7m max range) if using EZ0 or EZ4,
+-  :ref:`RNGFND1_PIN<RNGFND1_PIN>` = "14" for Pixhawk's ADC 3.3v pin #2
+-  :ref:`RNGFND1_MAX_CM<RNGFND1_MAX_CM>` = "700" (i.e. 7m max range) if using EZ0 or EZ4,
    "1000" if using EZL0
--  RNGFND_SCALING = "2.04" (i.e. 7m / 5v) if using EZ0 or EZ4, "4.08"
+-  :ref:`RNGFND1_SCALING<RNGFND1_SCALING>` = "2.04" (i.e. 7m / 5v) if using EZ0 or EZ4, "4.08"
    (i.e. 10m / 5v) if using EZL0
--  RNGFND_TYPE = “1" (Analog)
+-  :ref:`RNGFND1_TYPE<RNGFND1_TYPE>` = “1" (Analog)
 
 .. note::
 

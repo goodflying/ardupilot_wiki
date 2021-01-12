@@ -36,7 +36,7 @@ Flaperon setup
       the flaps. You can configure any unused input channel for this
       however we are going to use servo output channel 5.  Configure your transmitter to
       use Channel 5 for flaps (either a switch or a rotary button) and
-      set :ref:`FLAP_IN_CHANNEL <FLAP_IN_CHANNEL>` to 5.
+      set ``FLAP_IN_CHANNEL`` to 5.
    -  Move your ailerons to 2 spare output channels on the autopilot
       that you aren't using.  In this example we are using channels 5
       and 6.
@@ -56,14 +56,14 @@ Flaperon setup
 -  Switch to FBWA or CRUISE.  Roll your plane back and forth and make
    sure the ailerons move in the correct direction (aileron goes down on
    the wing that you roll down). If they don't then use
-   SERVO5_REVERSED and SERVO6_REVERSED to reverse channels as needed.
+   :ref:`SERVO5_REVERSED<SERVO5_REVERSED>` and :ref:`SERVO6_REVERSED<SERVO6_REVERSED>` to reverse channels as needed.
 -  Once this works, try your flaps control on your transmitter and make
    sure flaps go down and not up. If they go the wrong way you will
    need to swap the two output channels and correct the reversals.
 -  Confirm that when in FBWA and your roll the plane the ailerons move
    in the correct direction, and that your flaps go down.
 -  Now try the ailerons stick on your transmitter. If they go the wrong
-   way, you can use RC1_REVERSED to change the direction of the input channel. If you
+   way, you can use :ref:`RC1_REVERSED<RC1_REVERSED>` to change the direction of the input channel. If you
    put your stick left, the left aileron should go up.
 
 Tuning
@@ -71,13 +71,13 @@ Tuning
 
 -  Go to failsafe setup in *APM Planner 2* or *Mission Planner*, and
    make sure the max/min values match ``SERVO5_MIN``/``SERVO5_MAX`` (or adjust
-   them) so that your flaps move all the way (`:ref:`SERVO1_TRIM`` should also be set to 1500). - Setting the :ref:`FLAP_SLEWRATE <FLAP_SLEWRATE>`
+   them) so that your flaps move all the way ( :ref:`SERVO1_TRIM <SERVO1_TRIM>` should also be set to 1500). - Setting the :ref:`FLAP_SLEWRATE <FLAP_SLEWRATE>`
    to 100 allows moving flaps from 0 to 100% in one second.  Lower this
    to make your flaps move more slowly.
--  Adjust `FLAP_x_PERCNT|SPEED` as desired for auto modes - see `Automatic Flaps <automatic-flaps>`. Note you can ignore the
+-  Adjust `FLAP_x_PERCNT|SPEED` as desired for auto modes - see `automatic-flaps`. Note you can ignore the
    comment on that page saying "parameter for the channel function for
    the channel you are using for flaps to a value of 3".
-   :ref:`FLAP_IN_CHANNEL <FLAP_IN_CHANNEL>` is already set for this. - Have a look at :ref:`TKOFF_FLAP_PCNT <TKOFF_FLAP_PCNT>`
+   ``FLAP_IN_CHANNEL`` is already set for this. - Have a look at :ref:`TKOFF_FLAP_PCNT <TKOFF_FLAP_PCNT>`
    and :ref:`LAND_FLAP_PERCNT <LAND_FLAP_PERCNT>` if they are relevant to you.
 -  When you are flying in manual mode, it can be helpful to setup an
    elevator down mix on your TX when you set flaps i.e. the more flaps
@@ -100,9 +100,6 @@ Crow flaperons
 You can also setup crow flaps (where the ailerons go up, not down) by
 swapping the two output channels and setting the channel reversal as
 needed.
-
-See :ref:`How would I setup crow flaps? <fixed-wing-faq_how_would_i_setup_crow_flaps>` (Fixed Wing
-FAQ) for more information.
 
 Notes
 =====

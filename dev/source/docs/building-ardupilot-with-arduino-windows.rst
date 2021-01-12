@@ -1,8 +1,14 @@
 .. _building-ardupilot-with-arduino-windows:
 
-=====================================================
-Building ArduPilot for APM2.x on Windows with Arduino
-=====================================================
+===============================================================
+Archived: Building ArduPilot for APM2.x on Windows with Arduino
+===============================================================
+
+.. warning::
+
+   **ARCHIVED ARTICLE**
+
+   ArduPilot no longer supports Arduino or AVR.
 
 This article shows how to build ArduPilot for APM2.x targets on Windows,
 using the Arduino toolchain.
@@ -18,7 +24,7 @@ using the Arduino toolchain.
    installed at time of writing but you can no longer build APM2.x off the
    master branch (you will need to build off a supported release branch).
 
-   The last Copter firmware that can be built on APM 2.x `can be downloaded from here <http://firmware.ardupilot.org/downloads/wiki/firmware/ArduCopter_APM_2.0_Firmware_3.2.1.zip>`__.
+   The last Copter firmware that can be built on APM 2.x `can be downloaded from here <https://github.com/ArduPilot/ardupilot/archive/master-AVR.zip>`__.
 
    In addition to the above restrictions, this article covers:
 
@@ -30,7 +36,7 @@ Install Git-SCM
 ===============
 
 #. Download and run the install file from:
-   http://git-scm.com/download/win
+   https://git-scm.com/download/win
 #. Follow the screenshots below to make your selections during install.
 
    .. image:: ../images/git_setup_wizard_welcome.jpg
@@ -113,7 +119,7 @@ Install MHV_AVR_Tools to its default location
 =============================================
 
 #. Download and install the MHV_AVR Tools:
-   `http://firmware.ardupilot.org/Tools/Arduino/MHV_AVR_Tools_20121007.exe <http://firmware.ardupilot.org/Tools/Arduino/MHV_AVR_Tools_20131101.exe>`__
+   `https://firmware.ardupilot.org/Tools/Arduino/MHV_AVR_Tools_20121007.exe <https://firmware.ardupilot.org/Tools/Arduino/MHV_AVR_Tools_20131101.exe>`__
 
    .. image:: ../images/mhv_avr_tools_installer_welcome.jpg
        :target: ../_images/mhv_avr_tools_installer_welcome.jpg
@@ -143,7 +149,7 @@ Install ArduPilot-Arduino
 =========================
 
 Download and unzip the ArduPilot Arduino package:
-http://firmware.ardupilot.org/Tools/Arduino/ArduPilot-Arduino-1.0.3-gcc-4.8.2-windows.zip
+https://firmware.ardupilot.org/Tools/Arduino/ArduPilot-Arduino-1.0.3-gcc-4.8.2-windows.zip
 
 This can be unzipped directly to the **C:** drive or **C:\\Program
 Files\\**

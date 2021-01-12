@@ -8,7 +8,7 @@ There are several ways of donating to ArduPilot and all donations large and smal
 
 - Direct `PayPal Donation <https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BBF28AFAD58B2>`__
 - By Credit Card using `ClickAndPledge <https://co.clickandpledge.com/advanced/default.aspx?wid=34115>`__.  Be sure to enter the amount in the ArduPilot section, other sections are for other `SPI projects <http://www.spi-inc.org/>`__.  Other methods can be found on the `SPI donations page <http://www.spi-inc.org/donations/>`__.
-- Become a `Corporate Partner <http://ardupilot.org/about/Partners>`__
+- Become a :doc:`Corporate Partner <common-partners>`
  
 Support Merchandise
 ===================  
@@ -23,7 +23,7 @@ You may also indirectly support ArduPilot by:
 
 You can follow merchandise development on our discussion forums. New ideas are always welcome.
 
-- ArduPilot discussion forum: `merchandise thread <http://discuss.ardupilot.org/t/ardupilot-t-shirts-keychains-and-other-merchandise/9750/33>`__ 
+- ArduPilot discussion forum: `merchandise thread <https://discuss.ardupilot.org/t/ardupilot-t-shirts-keychains-and-other-merchandise/9750>`__ 
 - ArduPilot discussion forum: `marketing category <https://discuss.ardupilot.org/c/marketing>`__ 
 
-[copywiki destination="copter,plane,rover,planner,planner2,dev,antennatracker"]
+[copywiki destination="copter,plane,rover,planner,planner2,antennatracker,dev,ardupilot,mavproxy"]

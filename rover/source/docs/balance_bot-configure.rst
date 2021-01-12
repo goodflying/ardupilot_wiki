@@ -4,50 +4,76 @@
 Configuration and Setup
 =======================
 
-We have assumed that the radio, accelerometer and compass calibrations have been completed prior to this step. If not, follow the instructions :ref:`here<rover-code-configuration>` to do that before proceeding.
+1) Connections, Firmware and Calibration
+========================================
 
-Leveling the accelerometer
---------------------------
-Changes in cabling or crashes can displace the flight controller slightly on your balancebot. This can cause it to report an incorrect pitch which can completely upset the balancing mechanism. Make sure you repeat this step, every time you make any major change to the balance bot hardware.
+#. Refer to :ref:`autopilot system assembly instructions <rover-autopilot-assembly-instructions>` for making connections between the autopilot board and each of these components:
 
-Remove both the wheels and place your balance bot level on the ground. Open the accelerometer calibration window in mission planner and press the calibrate level button. The leveling should complete in a few seconds.
+    - Power Module
+    - ESC/Motor Drive
+    - Motors
+    - Wheel Encoders
+    - RC Receiver
+    - GPS(optional)
+    - Telemetry(optional)
 
-Motor and ESC configuration
----------------------------
-Balance Bots use **skid steering** by default. The motor drive/ESC configuration have to done based on the components you have used. Follow the instructions :ref:`here<rover-motor-and-servo-configuration-skid>` to configure it.
+#. :ref:`Install GCS<common-install-gcs>` (Mission Planner recommended) and :ref:`upload rover firmware<common-loading-firmware-onto-pixhawk>`, if ArduPilot firmware already is installed, or :ref:`Loading Firmware onto boards without existing ArduPilot firmware (first time only) <common-loading-firmware-onto-chibios-only-boards>`
+#. Perform all the :ref:`hardware calibration<rover-code-configuration>` steps for:
 
-Minimum Throttle
-----------------
-Many motors and ESCs have a dead zone. That is the zone between the zero throttle value and the throttle value where the motor actually starts rotating. A large dead zone can bring down balancing performance. Another issue could be that both motors respond differently to the same throttle, causing the vehicle to yaw continuosly.
+    - :ref:`Accelerometer<common-accelerometer-calibration>`
+    - :ref:`Compass<common-compass-calibration-in-mission-planner>`
+    - :ref:`Radio<common-radio-control-calibration>` 
+    - :ref:`RC Mode Setup<common-rc-transmitter-flight-mode-configuration>` (Add Manual and Acro Modes)
+
+2) Motor, ESC, Wheel Encoder Configuration
+==========================================
+
+#. Follow the :ref:`instructions<rover-motor-and-servo-configuration-skid>` to setup skid steering drive
+#. Configure motor drive/ESC type for :ref:`brushed motors<common-brushed-motors>` or :ref:`brushless motors<rover-motor-and-servo-configuration>`
+#. Verify connections and settings using the :ref:`motor test<rover-motor-and-servo-configuration-testing>` tool
+#. Configure :ref:`wheel encoders<wheel-encoder>` 
+
+3) Additional Parameter Configuration
+=====================================
+The following parameters must be set to these specified values:
+
+- :ref:`FRAME_CLASS<FRAME_CLASS>` = 3 (For firmware to recognize vehicle as Balance Bot)
+- :ref:`MOT_SLEWRATE<MOT_SLEWRATE>` = 0 (Do not account for motor slew)
+- :ref:`FS_CRASH_CHECK<FS_CRASH_CHECK>` = 1 (Enable Crash Check)
+
+.. _balance_bot-configure-throttle:
+
+4) Minimum Throttle
+===================
+Many motors and ESCs have a dead zone. This is the zone between the zero throttle value and the throttle value at which the motor starts to move. This can be compensated by setting minimum throttle in the firwamre.
 
 .. tip:: Remove wheels before proceeding
 
-To fix the dead zone, open the motor test window in Mission Planner, as mentioned :ref:`here<rover-motor-and-servo-configuration-testing>`.  Set the parameter MOT_THR_MIN to that value. Follow the intructions in the next step for changing parameters. Now your motors should start at 1% throttle.
+To fix the dead zone, open the motor test window in Mission Planner, as mentioned :ref:`here<rover-motor-and-servo-configuration-testing>`.  Find the minimum throttle value at which the motor turns on and set the parameter :ref:`MOT_THR_MIN<MOT_THR_MIN>` to that value. Now the motor should start at 1% throttle.
 
-Parameter Configuration
------------------------
-The following parameters need to be set correctly for your balance bot to function properly. The parameters can be accessed from Mission planner -> Config/Tuning-> Full Parameter List. After making the changes click on 'Write Params' to save your changes.
+5) Arming
+=========
+The vehicle must be armed for the wheels to start moving. Check the :ref:`rover arming page<arming-your-rover>` for more details. 
 
-* SERVO1_FUNCTION =  73 (Throttle left)
-* SERVO3_FUNCTION =  74 (Throttle right)
-* FRAME_CLASS     =   3 (Balance Bot)
-* SCHED_LOOP_RATE = 200 (Scheduler loop frequency)
-* MOT_SLEWRATE    =   0 (Do not account for motor slew)
-* FS_CRASH_CHECK  =   1 (Enable Crash Checks)
+.. warning:: This is simply an arming test. The vehicle will have to be tuned before it is ready to run.
 
-We have assumed you have already set MOT_THR_MIN as mentioned in the previous step.
+.. tip:: Remove wheels before proceeding. 
 
-PID configuration
------------------
-These parameters are the most crucial for the balance bot. If you are using SITL, the default parameters should do fine. If you are trying on a real balance bot, the default params are certain to crash it! So change them as mentioned below.
+#. Set a :ref:`transmitter switch<common-auxiliary-functions>` for arming. Ensure the channel used for the switch has been :ref:`calibrated<common-radio-control-calibration>`. To configure a channel for arming, for example channel 7, then set the parameter:
 
-.. hint:: The right PID values for your vehicle will have to be determined through trial and error. We recommend you do a fresh PID tuning and use these values only as reference. 
+    - :ref:`RC7_OPTION<RC7_OPTION>` =41 (Sets function of channel 7 as arming/disarming)
 
-These are the P, I and D we used and the increment factor for tuning:
+#. Connect the battery. Connect the autopilot board to GCS via USB or telemetry.
 
-* ATC_BAL_P = 1.6  (increment by 0.01)
-* ATC_BAL_I = 1.4  (increment by 0.01)
-* ATC_BAL_D = 0.04 (increment by 0.001)
+#. Keep the vehicle upright and then arm it. If arming is not successful check the error message on the GCS and identify the problem from the :ref:`rover arming page<arming-your-rover>` .
+
+#. After the vehicle arms, pitch it forward and back manually(Use hands, not the RC transmitter). The motors must turn in the direction of pitch. 
+
+#. Proceed to the :ref:`Control Modes<balance_bot-modes>` and :ref:`tuning<balance_bot-tuning>` section if the above steps were successful.
+
+
+
+
 
 
 

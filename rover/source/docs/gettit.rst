@@ -43,7 +43,7 @@ Autopilot Hardware
 
 The list of supported autopilots is on the :ref:`Choosing a Flight Controller <common-choosing-a-flight-controller>` wiki page.  The :ref:`Pixhawk <common-pixhawk-overview>` family is the most common choice.
 
-Developers creating robot vision applications should consider a Linux based autopilot board (e.g. :ref:`Emlid Edge <common-emlid-edge>`) or adding a separate `Companion Computer <http://ardupilot.org/dev/docs/companion-computers.html>`__.
+Developers creating robot vision applications should consider a Linux based autopilot board (e.g. :ref:`Emlid Edge <common-emlid-edge>`) or adding a separate `Companion Computer <https://ardupilot.org/dev/docs/companion-computers.html>`__.
 
 .. note::
 
@@ -65,9 +65,9 @@ Don't get one designed for cars (with a steering wheel and throttle
 trigger); we won't be driving the Rover manually much at all.  Ideally,
 it will have at least two toggles switches, and one of those switches
 will have three positions. If you're on a budget, the `Turnigy 9x <http://hobbyking.com/hobbyking/store/__8992__Turnigy_9X_9Ch_Transmitter_w_Module_8ch_Receiver_Mode_2_v2_Firmware_.html>`__ ($54)
-is a popular choice. If you'd like better quality, we like the :ref:`Taranis FrSky Reciever <common-pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems_frsky_taranis_ppm-sum_compatible_transmitter>`.
+is a popular choice. If you'd like better quality, we like the OpenTX/FrSky systems
 
-Some other options are discussed in the topic :ref:`Compatible RC Transmitter and Receiver Systems (Pixhawk) <common-pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems>`.
+Some other options are discussed in the topic :ref:`Compatible RC Transmitter and Receiver Systems <common-rc-systems>`.
 
 GPS module
 ----------

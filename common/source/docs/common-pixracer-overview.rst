@@ -1,13 +1,11 @@
 .. _common-pixracer-overview:
 
-=================
-Pixracer Overview
-=================
+========
+Pixracer
+========
 
 The `Pixracer <https://store.mrobotics.io/mRo-PixRacer-R14-Official-p/auav-pxrcr-r14-mr.htm>`__ is the first
-autopilot of the new FMUv4 Pixhawk generation. It comes with a small
-Wifi extension board, upgraded sensors, more flash and better connectors
-than the original Pixhawk.
+autopilot of the FMUv4 Pixhawk generation. It comes with a small Wifi extension board.
 
 .. figure:: ../../../images/pixracer_top.jpg
    :target: ../_images/pixracer_top.jpg
@@ -25,7 +23,7 @@ Overview
 ========
 
 The `Pixracer <https://store.mrobotics.io/mRo-PixRacer-R14-Official-p/auav-pxrcr-r14-mr.htm>`__ is the
-common name for the FMUv4 generation of Pixhawk flight controllers. It has been
+common name for the FMUv4 generation of Pixhawk autopilots. It has been
 designed primarily for the demanding requirements of small multicopters, but of course can be used on planes and other
 vehicles which require no more than 6 pwm outputs for controlling escs
 and motors. Pixracer is available from the `mRobotics <https://store.mrobotics.io/mRo-PixRacer-R14-Official-p/auav-pxrcr-r14-mr.htm>`__
@@ -74,7 +72,7 @@ Specifications
    -  GPS (serial + I2C)
    -  TELEM1/TELEM2
    -  Wifi serial
-   -  FrSky Telemetry serial
+   -  FrSky Telemetry serial(see note)
    -  Debug connector (serial + SWD)
    -  Connectors: GPS+I2C, RC-IN, PPM-IN, RSSI, SBus-IN, Spektrum-IN,
       USART3 (TxD, RxD, CTS, RTS), USART2 (TxD, RxD, CTS, RTS),
@@ -82,10 +80,15 @@ Specifications
       SERVO1-SERVO6, USART7 (TxD, RxD), JTAG (SWDIO, SWCLK), POWER-BRICK
       (VDD, Voltage, Current, GND), BUZZER-LED_BUTTON.
 
+
 -  **Dimensions**
 
    -  Weight ?
    -  36 x 36mm with 30.5 x 30.5mm hole grid with 3.2mm holes
+
+
+.. note:: The FrSky telemetry port is implemented using a 74LVC2G86 NOR gate as a programmable inverter to both the RX and TX lines. See below for use information.
+
 
 Connector pin assignments
 =========================
@@ -216,6 +219,10 @@ FrSky Telemetry / SERIAL4
    </tr>
    </tbody>
    </table>
+
+This port has built in inverters on the TX and RX lines and shunt resistors which allow them to be tied together and connected to an FrSky receiver's SPort input for telemetry. It is on by default, and only :ref:`SERIAL4_PROTOCOL<SERIAL4_PROTOCOL>` needs to be set to "10" for FrSky passthrough telemetry to be sent to the receiver. See :ref:`common-frsky-telemetry` for more information.
+
+The operation of the TX/RX path inverter can be disabled by setting the :ref:`SERIAL4_OPTIONS<SERIAL4_OPTIONS>` parameter to "2" to "invert" the TX , which will turn off the inversion for both the TX and RX pins. This will allow normal UART operation, if desired.
 
 RC Input (accepts PPM / S.BUS / Spektrum / SUMD / ST24)
 -------------------------------------------------------
@@ -425,7 +432,7 @@ Where to Buy
 ============
 
 - We suggest buying directly from `mRobotics <https://store.mrobotics.io/mRo-PixRacer-R14-Official-p/auav-pxrcr-r14-mr.htm>`__.
-- Whilst PixRacer can be sourced from other retailers, the specific design may differ and not have been tested by the Development Team.  Known retailers of 3rd party PixRacer boards are `HobbyKing <https://hobbyking.com/en_us/new-pixracer-xracer-autopollot-v1-0-fmuv4-generation.html>`__, and `Banggood <https://www.banggood.com/Pixracer-Autopilot-Xracer-V1-0-Flight-Controller-Mini-PX4-Built-in-Wifi-For-FPV-Racing-RC-Multirotor-p-1056428.html?>`__, ...
+- Whilst PixRacer can be sourced from other retailers, the specific design may differ and not have been tested by the Development Team.  Known retailers of 3rd party PixRacer boards are `HobbyKing <https://hobbyking.com/en_us/new-pixracer-xracer-autopollot-v1-0-fmuv4-generation.html?___store=en_us>`__, and `Banggood <https://www.banggood.com/Pixracer-Autopilot-Xracer-V1-0-Flight-Controller-Mini-PX4-Built-in-Wifi-For-FPV-Racing-RC-Multirotor-p-1056428.html?>`__, ...
 
 
 See also
@@ -442,4 +449,5 @@ See also
    `pixhawk.org <https://pixhawk.org/>`__,
    `docs.px4.io <https://docs.px4.io/en/flight_controller/pixracer.html>`__ and the
    `mRobotics shop <https://store.mrobotics.io/mRo-PixRacer-R14-Official-p/auav-pxrcr-r14-mr.htm>`__
-   
+
+`Schematics <https://github.com/ArduPilot/Schematics/tree/master/mRobotics>`__

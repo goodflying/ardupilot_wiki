@@ -12,14 +12,14 @@ Before the rover's motors will move it must be armed.  Arming is required for tw
 How to Arm
 ==========
 
-Before arming you should normally wait for the LED on the flight controller to become flashing blue
+Before arming you should normally wait for the LED on the autopilot to become flashing blue
 (if you only intend to use :ref:`Manual <manual-mode>`) or flashing green (for all other modes).
 If the LEDs never become blue or green please see the "Pre-Arm Checks" section below.
 
 There are three ways to arm the vehicle:
 
 -  **From the transmitter sticks**.  Ensure the vehicle is in :ref:`Hold <hold-mode>`, :ref:`Manual <manual-mode>`, :ref:`Acro <acro-mode>` or :ref:`Steering <steering-mode>` mode, then center the throttle stick and hold the steering stick fully to the right for 2 seconds
--  **From a transmitter switch**.  Raise the auxiliary switch to the high position (see :ref:`how to configure aux functions here <rover-auxiliary-functions>`)
+-  **From a transmitter switch**.  Raise the auxiliary switch to the high position (see :ref:`how to configure aux functions here <common-auxiliary-functions>`)
 -  **From the Ground Station**.  Press the arm/disarm button on your ground station.  If using the Mission Planner this can be found on the Flight Data screen's action tab on the bottom left
 
 .. image:: ../../../images/armingButtonMissPlan.jpg
@@ -30,7 +30,7 @@ How to Disarm
 =============
 
 -  **From the transmitter sticks**.  Ensure the vehicle is in :ref:`Hold <hold-mode>`, :ref:`Manual <manual-mode>`, :ref:`Acro <acro-mode>` or :ref:`Steering <steering-mode>` mode, then hold the steering stick fully left for 2 seconds
--  **From a transmitter switch**.  Lower the auxiliary switch to the low position (see :ref:`how to configure aux functions here <rover-auxiliary-functions>`)
+-  **From a transmitter switch**.  Lower the auxiliary switch to the low position (see :ref:`how to configure aux functions here <common-auxiliary-functions>`)
 -  **From the Ground Station**.  Press the arm/disarm button on your ground station.  If using the Mission Planner this can be found on the Flight Data screen's action tab on the bottom left
 
 .. note::
@@ -47,17 +47,16 @@ calibration, configuration or bad sensor data.  These checks help prevent sudden
 motor startups and drive-aways but they can also be disabled by setting the
 :ref:`ARMING_CHECK <ARMING_CHECK>` parameter if necessary.
 
-The reason for the failure can be seen by connecting the flight controller to
+The reason for the failure can be seen by connecting the autopilot to
 a ground station (using telemetry or a USB cable), after attempting to arm
 the reason should be displayed on the HUD in red letters.
 
-A more complete list of failures can be found on the `Copter wiki <http://ardupilot.org/copter/docs/prearm_safety_check.html>`__
-but some common of the Rover specific checks are listed below:
+A more complete list of failures can be found on the :ref:`Pre-Arm Safety Checks<common-prearm-safety-checks>` but some common of the Rover specific checks are listed below:
 
 -  Safety switch. The safety switch must be set to the off
    state before arming is allowed. This is either done by pressing the
    safety switch for 2 seconds until it stops flashing, or you can
-   disable the use of the safety switch by setting :ref:`BRD_SAFETY_ENABLE <BRD_SAFETY_ENABLE>` to 0.
+   disable the use of the safety switch by setting :ref:`BRD_SAFETYENABLE <BRD_SAFETYENABLE>` to 0.
 -  Inertial Sensor Checks. The accelerometers and gyroscopes must all be
    healthy and all be calibrated. If you have more than one accel or
    gyro then they need to be consistent with each other.
@@ -122,5 +121,5 @@ The PWM value output to the servos and motors while the vehicle is disarmed can 
 -  if :ref:`MOT_SAFE_DISARM <MOT_SAFE_DISARM>` is 1 no PWM pulses will be sent while disarmed.
    Note that some ESCs beep to complain that they are powered on without a control signal
 
-Note that if the flight controller is a Pixhawk and a safety switch is enabled,
+Note that if the autopilot is a Pixhawk and a safety switch is enabled,
 no PWM output will be sent until the safety switch is put in the ON position.

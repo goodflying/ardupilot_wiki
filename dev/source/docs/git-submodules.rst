@@ -23,7 +23,7 @@ Submodule approach
 ArduPilot uses a single level of *git submodules*, with all modules stored in the `modules <https://github.com/ArduPilot/ardupilot/tree/master/modules>`__
 directory. This approach was chosen as it makes for diagnosis of issues with submodules simpler.  This means that if an external project (i.e. PX4Firmware) has submodules of its own, those submodule appear directly in the `ArduPilot modules directory <https://github.com/ArduPilot/ardupilot/tree/master/modules>`__.
 
-ArduPilot maintains local forks of each external project's repo in order to shielf itself from unexpected changes.
+ArduPilot maintains local forks of each external project's repo in order to shield itself from unexpected changes.
 
 You may also note that the URLs used for the submodules use the old
 ``git://`` protocol. This was done to make it less likely we will get
@@ -59,7 +59,7 @@ If you have an existing config.mk you may get an error like this:
 
 ::
 
-    ../mk/px4_targets.mk:8: *** NUTTX_SRC found in config.mk - Please see http://dev.ardupilot.com/wiki/git-submodules/. Stop.
+    ../mk/px4_targets.mk:8: *** NUTTX_SRC found in config.mk - Please see https://ardupilot.org/dev/docs/git-submodules.html. Stop.
 
 That happens because you have previously built with an external
 PX4Firmware and PX4NuttX tree, and you need to convert to using
@@ -105,9 +105,9 @@ You may get warnings like these in your build:
 
 ::
 
-    ../mk/px4_targets.mk:23: *** You have an old PX4Firmware tree - see http://dev.ardupilot.com/wiki/git-submodules/
-    ../mk/px4_targets.mk:26: *** You have an old PX4NuttX tree - see http://dev.ardupilot.com/wiki/git-submodules/
-    ../mk/px4_targets.mk:29: *** You have an old uavcan tree - see http://dev.ardupilot.com/wiki/git-submodules/
+    ../mk/px4_targets.mk:23: *** You have an old PX4Firmware tree - see https://ardupilot.org/dev/docs/git-submodules.html
+    ../mk/px4_targets.mk:26: *** You have an old PX4NuttX tree - see https://ardupilot.org/dev/docs/git-submodules.html
+    ../mk/px4_targets.mk:29: *** You have an old uavcan tree - see https://ardupilot.org/dev/docs/git-submodules.html
 
 This indicates that you have old PX4Firmware or PX4NuttX directories in
 ../PX4Firmware or ../PX4NuttX. The warning is harmless and won't prevent

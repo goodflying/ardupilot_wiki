@@ -1,16 +1,16 @@
 .. _common-mounting-the-flight-controller:
 
 ==============================
-Mounting the Flight Controller
+Mounting the Autopilot
 ==============================
 
-This article explains how to mount the flight controller in standard and
+This article explains how to mount the autopilot in standard and
 alternative orientations.
 
 Standard orientation
 ====================
 
-The :ref:`flight controller <common-autopilots>` (Pixhawk etc.) should be
+The :ref:`autopilot <common-autopilots>` (Pixhawk etc.) should be
 housed within a case (which includes foam over the barometer) and should
 be mounted with the white arrow pointing directly towards the front of
 the vehicle.
@@ -43,7 +43,7 @@ dampening foam approximately 3/4 inch square (3M foam can be purchased from `mRo
 Alternative orientations
 ========================
 
-If the standard orientation of the Flight Controller is not convenient, it
+If the standard orientation of the Autopilot is not convenient, it
 can be mounted in over 30 other possible orientations.  The full list of
 possible orientations can be seen and set through the Mission Planner
 **Config/Tuning \| Advanced Params** screen, look for the
@@ -51,7 +51,7 @@ possible orientations can be seen and set through the Mission Planner
 
 For Roll values, positive means roll right (i.e. "Roll90" means board is
 rolled right 90 degrees so the white arrow still points forward but the
-board is standing on it's right edge).
+board is standing on its right edge).
 
 For Pitch values, positive numbers indicate pitch back (i.e. "Pitch90"
 means the board's nose is pitched up 90 degrees so the arrow points
@@ -63,3 +63,6 @@ points off to the right).
 
 .. image:: ../../../images/MountingToFrame_MPBoardOrientation.png
     :target: ../_images/MountingToFrame_MPBoardOrientation.png
+
+.. warning:: If the board is mounted in a non-standard orientation (i.e. arrow is not pointing forward) then please ensure the :ref:`AHRS_ORIENTATION<AHRS_ORIENTATION>`  is properly set before doing the accelerometer calibration.
+

@@ -89,13 +89,13 @@ Vehicle Code and Front-End Example
 ==================================
 
 The example below shows how the Copter vehicle code pulls data from range finder (aka sonar, lidar) drivers.
-The Copter code's `scheduler <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/ArduCopter.cpp#L83>`__ calls the vehicle's read_rangefinder() method at 20Hz.
+The Copter code's `scheduler <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Copter.cpp#L107>`__ calls the vehicle's read_rangefinder() method at 20Hz.
 Below is a picture of this method, the latest version can be seen in the `sensors.cpp <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/sensors.cpp>`__ file.
-The rangefinder.update() and rangefinder.distance_cm() methods are calls into the driver's front-end.
+The rangefinder.update() method is a call into the driver's front-end.
 
 .. image:: ../images/code-overview-sensor-driver1.png
 
-Below is the range finder driver's front-end `update method <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/RangeFinder.cpp#L547>`__.
+Below is the range finder driver's front-end `update method <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/AP_RangeFinder.cpp#L289>`__.
 This gives the driver a chance to do any general processing it might want to within the main thread.
 Each back-end's update method is called in turn.
 
@@ -105,17 +105,17 @@ UART/Serial Back-End Example
 ============================
 
 Next is the update method of the `LightWare back-end <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/AP_RangeFinder_LightWareSerial.cpp>`__ using the serial protocol.
-As described on the `user wiki <http://ardupilot.org/copter/docs/common-lightware-sf10-lidar.html#serial-connection>`__ the serial range finder can be connected to any of the flight controller's serial ports but the user must specify which serial port, and what baud rate is used by setting the SERIALX_BAUD and SERIALX_PROTOCOL parameters.
+As described on the `user wiki <https://ardupilot.org/copter/docs/common-lightware-sf10-lidar.html#serial-connection>`__ the serial range finder can be connected to any of the flight controller's serial ports but the user must specify which serial port, and what baud rate is used by setting the SERIALX_BAUD and SERIALX_PROTOCOL parameters.
 
 .. image:: ../images/code-overview-sensor-driver-uart1.png
 
-Within the LightWare serial driver's startup code, it first finds which UART the user would like to use via the serial_manager class which looks for the parameters settings described above.
+Within the serial driver's `backend code <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/AP_RangeFinder_Backend_Serial.cpp>`__, it first finds which UART the user would like to use via the serial_manager class which looks for the parameters settings described above.
 
 .. image:: ../images/code-overview-sensor-driver8.png
 
 Each time the driver's back-end update() method is called it calls the get_reading method which checks if new characters have arrived from the sensor and then decodes them.
 
-As mentioned above, because the serial protocol implements it's own buffering, the processing of any data (see get_reading method) from the sensor is run here in the main thread.
+As mentioned above, because the serial protocol implements its own buffering, the processing of any data (see get_reading method) from the sensor is run here in the main thread.
 I.e. there is no "register_periodic_callback" like you will see in I2C and SPI drivers.
 
 .. image:: ../images/code-overview-sensor-driver3.png
@@ -129,7 +129,7 @@ In this case, the front-end gets the I2C bus and passes it to the back-end durin
 
 .. image:: ../images/code-overview-sensor-driver5.png
 
-The back-end's init method then registers it's "timer" method to be called at 20hz.  Within the timer method (not shown) the get_reading() method is called which reads bytes from the sensor and converts the distance to centimeters.
+The back-end's init method then registers its "timer" method to be called at 20hz.  Within the timer method (not shown) the get_reading() method is called which reads bytes from the sensor and converts the distance to centimeters.
 
 SPI Back-End Example
 ====================
@@ -153,4 +153,4 @@ Additional Advice
 
 When writing a sensor driver, never include any wait or sleep code because this will either delay the main thread or the background thread associated with the bus being used.
 
-If a new library is written, it must be added to the make.inc and wscript files in the vehicle directory (i.e. the ardupilot/ArduCopter/make.inc and /ardupilot/ArduCopter/wscript) in order for it to be linked into the final binary
+If a new library is written, it must be added to the wscript file in the vehicle directory (i.e. /ardupilot/ArduCopter/wscript) in order for it to be linked into the final binary

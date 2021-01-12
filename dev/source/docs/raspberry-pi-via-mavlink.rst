@@ -5,159 +5,48 @@ Communicating with Raspberry Pi via MAVLink
 ===========================================
 
 This page explains how to connect and configure a Raspberry Pi (RPi) so
-that it is able to communicate with a Pixhawk flight controller using
+that it is able to communicate with a flight controller using
 the MAVLink protocol over a serial connection. This can be used to
 perform additional tasks such as image recognition which simply cannot
-be done by the Pixhawk due to the memory requirements for storing
+be done by the flight controller due to the memory requirements for storing
 images.
 
-Connecting the Pixhawk and RPi
-==============================
+Connecting the Flight controller and RPi Hardware
+=================================================
 
 .. image:: ../images/RaspberryPi_Pixhawk_wiring1.jpg
     :target: ../_images/RaspberryPi_Pixhawk_wiring1.jpg
 
-Connect the Pixhawk's TELEM2 port to the RPi's Ground, TX and RX pins as
+Connect the flight controller's TELEM2 port to the RPi's Ground, TX and RX pins as
 shown in the image above. More details on the individual RPi's pin
 functions can be found
 `here <http://elinux.org/RPi_Low-level_peripherals>`__.
 
-The RPi can be powered by connecting the red V+ cable to the +5V pin (as
-shown above) **or** from USB in (for example, using a separate 5V BEC
-hooked up to the USB power).
+The RPi can be powered by connecting +5V source to the +5V pin  **or** from USB in.
+
+Addon boards such as the `Pi-Connect <https://www.rpanion.com/product/pi-connect-lite/>`__
+can simplify the connection of the RPi by providing a power supply and telemetry port. 
 
 .. tip::
 
-   Powering via USB is recommended as it is typically safer - because
-   the input is regulated. If powering via USB, do not also connect the +5V
-   pin as shown (still connect common ground).
+   Depending on the model of RPi used and internal/external peripherals used, +5V power requirements can vary from 80mA to close to 2.5A. The power budget for the particular system configuration should be assessed to determine the requirements for the +5V supply current. It is usually not recommended that +5v be supplied via the flight controller's TELEM port connector.
 
 .. _raspberry-pi-via-mavlink_setup_the_rpi:
 
-Setup the RPi
-=============
+Setting up the flight controller
+================================
 
-The easiest way to setup the RPi is to flash one of the existing :ref:`APSync <apsync-intro>` images:
+Connect to the flight controller with a ground station (i.e. Mission Planner) and set the following parameters:
 
-- purchase a formatted 8GB or 16GB SD card (16GB is better because some 8GB cards will not be quite large enough to fit the image) and insert into your laptop/desktop computer's SD card slot
-- download the latest `image from firmware.ardupilot.org <http://firmware.ap.ardupilot.org/Companion/apsync>`__.  Look for the file starting with "apsync-rpi".
-- extract the image.  On Windows you may use `7-zip <http://www.7-zip.org/>`__.
-- For Windows download and install Win32DiskImager and follow the `instructions here <https://www.raspberrypi.org/documentation/installation/installing-images/windows.md>`__.
-- For `Linux follow these instructions <https://www.raspberrypi.org/documentation/installation/installing-images/linux.md>`__.
-- For `Mac follow these instructions <https://www.raspberrypi.org/documentation/installation/installing-images/mac.md>`__.
-
-.. note::
-
-   When extracting the contents of the compressed file on Mac you may get into an infinite loop of extraction (.xz to .cpgz and vice versa) using the default Archiver. In order to correctly extract the .img file you will need to use the Unarchiver (http://unarchiver.c3.cx/unarchiver).
-
-Setting up the Pixhawk
-======================
-
-Connect to the Pixhawk with a ground station (i.e. Mission Planner) and set the following parameters:
-
--  :ref:`SERIAL2_PROTOCOL <copter:SERIAL2_PROTOCOL>` = 1 (the default) to enable MAVLink on the serial port.
--  :ref:`SERIAL2_BAUD <copter:SERIAL2_BAUD>` = 921 so the Pixhawk can communicate with the RPi at 921600 baud.
+-  :ref:`SERIAL2_PROTOCOL <copter:SERIAL2_PROTOCOL>` = 2 (the default) to enable MAVLink 2 on the serial port.
+-  :ref:`SERIAL2_BAUD <copter:SERIAL2_BAUD>` = 921 so the flight controller can communicate with the RPi at 921600 baud.
 -  :ref:`LOG_BACKEND_TYPE <copter:LOG_BACKEND_TYPE>` = 3 if you are using APSync to stream the dataflash log files to the RPi
 
-.. _raspberry-pi-via-mavlink_connecting_to_rpi_with_an_sshtelnet_client:
+Configure the serial port (UART)
+================================
 
-Connecting to RPi with an SSH/Telnet client
-===========================================
-
-.. note::
-
-   These steps assume that you have `set-up your RPi <http://www.raspberrypi.org/downloads>`__ so that it is running Raspbian.  These instructions are not required if you are using APSync as described above.
-
-   To avoid the requirement to plug a keyboard, mouse and HDMI screen into
-   your RPi it is convenient to be able to connect from your Desktop/Laptop
-   computer to your RPi using an SSH/Telnet client such as
-   `PuTTY <http://www.putty.org/>`__.
-
-#. Connect the RPi to your local network by one of the following
-   methods:
-
-   -  Connecting an Ethernet LAN cable from the RPi board to your
-      Ethernet router, or
-   -  `Use a USB dongle to connect your RPi to the local wireless network <http://pingbin.com/2012/12/setup-wifi-raspberry-pi/>`__,
-      or
-   -  Connect the Ethernet LAN cable between the RPi and your
-      desktop/laptop computer. Open the control panel's Network and
-      Sharing Center, click on the network connection through which your
-      desktop/laptop is connected to the internet, select properties and
-      then in the sharing tab, select "Allow other networks to connect
-      through this computer's Internet connection"
-
-      .. image:: ../images/RaspberryPi_EthernetBridge.png
-          :target: ../_images/RaspberryPi_EthernetBridge.png
-
-#. Determine the RPi's IP address:
-
-   -  If you have access to the RPi's terminal screen (i.e.you have a
-      screen, keyboard, mouse connected) you can use the /sbin/ifconfig
-      command.
-   -  If your Ethernet router has a web interface it may show you the IP
-      address of all connected devices
-
-#. Connect with `Putty <http://www.putty.org/>`__:
-
-   .. image:: ../images/RaspberryPi_Putty.png
-       :target: ../_images/RaspberryPi_Putty.png
-
-   If all goes well you should be presented with the regular login
-   prompt to which you can enter the username/password which defaults to
-   pi/raspberry
-
-.. _raspberry-pi-via-mavlink_install_the_required_packages_on_the_raspberry_pi:
-
-Install the required packages on the Raspberry Pi
-=================================================
-
-Log into the RPi board (default username password is pi/raspberry) and
-check that its connection to the internet is working:
-
-::
-
-    ping google.com
-
-OR
-
-::
-
-    ping 173.194.126.196
-
-If the first fails but the second succeeds then there is a problem with
-the DNS server that your RPi is attempting to use.  Please edit the
-/etc/resolv.conf file and add the IP address of a nearby DNS server. 
-During the creation of this wiki, the first two parts of the desktop
-machine's IP address plus ".1.1" worked.  To stop other processes from
-later updating this file you may wish to run the
-``chattr +i /etc/resolv.conf`` command (this can be undone later with
-``chattr -i /etc/resolv.conf``). That sets the "immutable" bit on
-resolv.conf to prevent other software from updating it.
-
-.. image:: ../images/RaspberryPi_DNS.png
-    :target: ../_images/RaspberryPi_DNS.png
-
-After the internet connection is confirmed to be working install these
-packages:
-
-::
-
-    sudo apt-get update    #Update the list of packages in the software center
-    sudo apt-get install screen python-wxgtk2.8 python-matplotlib python-opencv python-pip python-numpy python-dev libxml2-dev libxslt-dev python-lxml
-    sudo pip install future
-    sudo pip install pymavlink
-    sudo pip install mavproxy
-
-.. note::
-
-   The packages are :ref:`mostly the same as when setting up SITL <setting-up-sitl-on-windows>`. Reply Reply 'y' when
-   prompted re additional disk space.
-
-Disable the OS control of the serial port
-=========================================
-
-Use the Raspberry Pi configuration utility for this.
+If not already configured, the Raspberry Pi's serial port (UART)
+will need to be enabled. Use the Raspberry Pi configuration utility for this.
 
 Type:
 
@@ -165,37 +54,81 @@ Type:
 
     sudo raspi-config
 
-And in the utility, select "Advanced Options":
+And in the utility, select "Interfacing Options":
 
-.. figure:: ../images/dev_RasPi_Config_Utility_SerialSetting_AdvancedOptions.png
-   :target: ../_images/dev_RasPi_Config_Utility_SerialSetting_AdvancedOptions.png
+.. figure:: ../images/RaspberryPi_Serial1.png
+   :target: ../_images/RaspberryPi_Serial1.png
 
-   RasPiConfiguration Utility: Serial Settings: Advanced Options
+   RasPiConfiguration Utility
 
-And then "Serial" to disable OS use of the serial connection:
+And then "Serial":
 
-.. image:: ../images/dev_RasPi_Config_Utility_SerialSetting_Capture2-300x78.png
-    :target: ../_images/dev_RasPi_Config_Utility_SerialSetting_Capture2-300x78.png
+.. figure:: ../images/RaspberryPi_Serial2.png
+    :target: ../_images/RaspberryPi_Serial2.png
+
+When prompted, select ``no`` to "Would you like a login shell to be accessible over serial?".
+
+When prompted, select ``yes`` to "Would you like the serial port hardware to be enabled?".
 
 Reboot the Raspberry Pi when you are done.
 
-Testing the connection
+The Raspberry Pi's serial port will now be usable on ``/dev/serial0``.
+
+Configure the Wifi
+==================
+
+If desired, the Raspberry Pi's Wifi can be configured to create a 
+Wifi access point. This will allow other clients to connect to
+the RPi and stream telemetry. See the `official RPi documention
+<https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md>`__
+for details.
+
+.. tip::
+
+   The built-in Wifi on the Raspberry Pi does not have a large range. If range is an
+   issue, consider a USB Wifi adapter with external antenna.
+
+Setup the RPi Software
 ======================
 
-To test the RPi and Pixhawk are able to communicate with each other
-first ensure the RPi and Pixhawk are powered, then in a console on the
+There are a few different software options for communicating with the flight controller. All use the MAVLink
+protocol for communication.
+
+APSync
+------
+
+The easiest way to setup the RPi is to flash one of the existing :ref:`APSync <apsync-intro>` images:
+
+- Purchase a formatted 8GB or 16GB SD card (16GB is better because some 8GB cards will not be quite large enough to fit the image) and insert into your laptop/desktop computer's SD card slot
+- Download the latest `image from firmware.ardupilot.org <https://firmware.ardupilot.org/Companion/apsync>`__.  Look for the file starting with "apsync-rpi".
+- Use the `Etcher <https://www.balena.io/etcher/>`__ software to load the image onto the micro SD card.
+- Insert the micro SD card into into the Pi's micro SD card slot
+
+   .. note::
+
+    There is a more recent APSync build for the RPi in the `forums <https://discuss.ardupilot.org/t/new-apsync-build-for-raspberry-pi/49528>`__.
+
+The APSync image will have the serial port (UART) already enabled.
+
+MAVProxy
+--------
+
+MAVProxy can be used to to send commands to the flight controller from the Pi. 
+It can also be used to route telemetry to other network endpoints.
+
+This assumes you have a SSH connection to the Pi. If not, see see the 
+the `RPi Documentation <https://www.raspberrypi.org/documentation/remote-access/ssh/>`__.
+
+See the :ref:`MAVProxy Documentation<mavproxy:mavproxy-downloadinstalllinux>` for install instructions
+
+To test the RPi and flight controller are able to communicate with each other
+first ensure the RPi and flight controller are powered, then in a console on the
 RPi type:
 
 ::
 
-    sudo -s
-    mavproxy.py --master=/dev/ttyAMA0 --baudrate 57600 --aircraft MyCopter
+    python3 mavproxy.py --master=/dev/serial0 --baudrate 921600 --aircraft MyCopter
     
-.. note::
-
-    On newer versions of Raspberry Pi 3 the uart serial connection may be disable by default. In order to enable serial
-    connection on the Raspberry Pi edit **/boot/config.txt** and ``set enable_uart=1``.
-    the build-in serial port is ``/dev/ttyS0``.
 
 Once MAVProxy has started you should be able to type in the following
 command to display the ``ARMING_CHECK`` parameters value
@@ -206,7 +139,7 @@ command to display the ``ARMING_CHECK`` parameters value
     param set ARMING_CHECK 0
     arm throttle
 
-.. image:: ../images/RaspberryPi_ArmTestThroughPutty.png
+.. figure:: ../images/RaspberryPi_ArmTestThroughPutty.png
     :target: ../_images/RaspberryPi_ArmTestThroughPutty.png
 
 .. note::
@@ -216,102 +149,61 @@ command to display the ``ARMING_CHECK`` parameters value
    accidentally assigned these files to another username, such as
    Root.
 
-Entering the following at the Linux command line will ensure that all
-files belong to the standard Pi login account:
+Mavlink-router
+--------------
+
+Mavlink-router is used to route telemetry between the RPi's serial port
+and any network endpoints. See the `documentation <https://github.com/intel/mavlink-router>`__
+for install and running instructions.
+
+After installing, edit the mavlink-router config file's ``/etc/mavlink-router/main.conf``
+UART section to:
 
 ::
 
-    sudo chown -R pi /home/pi
+    [UartEndpoint to_fc]
+    Device = /dev/serial0
+    Baud = 921600
 
-Configure MAVProxy to always run
-================================
-
-To setup MAVProxy to start whenever the RPi is restarted open a terminal
-window and edit the **/etc/rc.local** file, adding the following lines
-just before the final "exit 0" line:
-
-::
-
-    (
-    date
-    echo $PATH
-    PATH=$PATH:/bin:/sbin:/usr/bin:/usr/local/bin
-    export PATH
-    cd /home/pi
-    screen -d -m -s /bin/bash mavproxy.py --master=/dev/ttyAMA0 --baudrate 57600 --aircraft MyCopter
-    ) > /tmp/rc.log 2>&1
-    exit 0
-
-Whenever the RPi connects to the Pixhawk, three files will be created in
-the /home/pi/MyCopter/logs/YYYY-MM-DD directory:
-
--  **mav.parm** : a text file with all the parameter values from the
-   Pixhawk
--  **flight.tlog** : a telemetry log including the vehicles altitude,
-   attitude, etc which can be opened using the mission planner (and a
-   number of other tools)
--  **flight.tlog.raw** : all the data in the .tlog mentioned above plus
-   any other serial data received from the Pixhawk which might include
-   non-MAVLink formatted messages like startup strings or debug output
-
-If you wish to connect to the MAVProxy application that has been
-automatically started you can log into the RPi and type:
+You will also need to add an additional UDP endpoint allow other ground stations on the same
+network to connect to the Pi. Edit the mavlink-router config file ``/etc/mavlink-router/main.conf``
+to include:
 
 ::
 
-    sudo screen -x
+    [UdpEndpoint to_14550_external]
+    Mode = eavesdropping
+    Address = 0.0.0.0
+    Port = 14550
+    PortLock = 0
 
-To learn more about using MAVProxy please read the `MAVProxy documentation <http://ardupilot.github.io/MAVProxy/>`__.
+DroneKit
+--------
 
-It is also worth noting that MAVProxy can do a lot more than just
-provide access to your Pixhawk. By writing python extension modules for
-MAVProxy you can add sophisticated autonomous behaviour to your vehicle.
-A MAVProxy module has access to all of the sensor information that your
-Pixhawk has, and can control all aspects of the flight. To get started
-with MAVProxy modules please have a look at the `existing modules <https://github.com/tridge/MAVProxy/tree/master/MAVProxy/modules>`__
-in the MAVProxy source code.
+The most up-to-date instructions for `Installing DroneKit <https://dronekit-python.readthedocs.io/en/latest/guide/quick_start.html>`__ on Linux are in the DroneKit-Python documentation.
 
-Installing DroneKit on RPi
-==========================
+Rpanion-server
+--------------
 
-.. tip::
+`Rpanion-server <https://www.docs.rpanion.com/software/rpanion-server>`__ is
+a web-based GUI for configuring flight controller telemetry, logging,
+video streaming and network configuration.
 
-   The most up-to-date instructions for `Installing DroneKit <http://python.dronekit.io/guide/quick_start.html#installation>`__
-   on Linux are in the DroneKit-Python documentation. This information is a
-   summary, and might go out of date.
+Installation is via a disk image:
 
-To install DroneKit-Python dependencies (most of which will already be
-present from when you installed MAVProxy) and set DroneKit to load when
-MAVProxy starts:
+- Purchase a formatted 8GB (or larger) micro SD card and insert into your laptop/desktop computer's SD card slot
+- Download the latest `image <https://www.docs.rpanion.com/software/rpanion-server>`__.
+- Use the `Etcher <https://www.balena.io/etcher/>`__ software to load the image onto the micro SD card.
+- Insert the micro SD card into into the Pi's micro SD card slot
 
-::
-
-    sudo apt-get install python-pip python-dev python-numpy python-opencv python-serial python-pyparsing python-wxgtk2.8 libxml2-dev libxslt-dev
-    sudo pip install droneapi
-    echo "module load droneapi.module.api" >> ~/.mavinit.scr
-
-Then open the MAVProxy terminal in the location where your DroneKit
-script is located and start an example:
-
-::
-
-    MANUAL> api start vehicle_state.py
-
-.. note::
-
-   If you get a warning that droneapi module has not loaded, you can
-   do so manually in MAVProxy:
-
-   ::
-
-       MANUAL> module load droneapi.module.api
+The Rpanion-server image will have the serial port (UART) already enabled.
 
 .. _raspberry-pi-via-mavlink_connecting_with_the_mission_planner:
 
 Connecting with the Mission Planner
 ===================================
 
-The Pixhawk will respond to MAVLink commands received through Telemetry
+The flight controller will respond to MAVLink commands received through Telemetry
 1 and Telemetry 2 ports (see image at top of this page) meaning that
 both the RPi and the regular ground station (i.e. Mission planner, etc)
 can be connected. In addition it is possible to connect the Mission
@@ -335,11 +227,7 @@ Connecting with the mission planner is shown below:
 Example projects
 ================
 
-`FPV with raspberry Pi <http://diydrones.com/profiles/blogs/fpv-setup-with-raspberry-pi>`__
+`FPV with raspberry Pi <https://diydrones.com/profiles/blogs/fpv-setup-with-raspberry-pi>`__
 
-Can't get it to work? Try posting your question in the `APM Forum's APM Code section <http://ardupilot.com/forum/viewforum.php?f=69>`__.
+Can't get it to work? Try posting your question in the `Companion Computer discussion board <https://discuss.ardupilot.org/c/apsync-companion-computers>`__.
 
-.. toctree::
-    :maxdepth: 1
-
-    Making a Mavlink WiFi bridge using the Raspberry Pi <making-a-mavlink-wifi-bridge-using-the-raspberry-pi>

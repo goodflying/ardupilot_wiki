@@ -1,8 +1,15 @@
 .. _hoverthings-flip-sport-quadcopter:
 
-=================================
-Hoverthings Flip Sport Quadcopter
-=================================
+===========================================
+Archived: Hoverthings Flip Sport Quadcopter
+===========================================
+
+.. warning::
+
+   **ARCHIVED ARTICLE**
+
+   The frame is no longer in production/available for purchase.
+   Some of the instructions cover PX4FMU/PX4IO, which is no longer supported.
 
 The Hoverthings FLIP Sport is very easy to build resulting in a
 remarkably sturdy and very high performance little quadcopter. The FLIP
@@ -44,34 +51,29 @@ Why a FLIP Sport?
 What to get
 ===========
 
-#. A `Hoverthings Flip Sport Frame <http://www.hoverthings.com/the-flip-black>`__ for $89.00.
+#. A `Hoverthings Flip Sport Frame <https://www.amazon.com/HoverThings-Flip-Frame-Black-Orange/dp/B00HZTN6GO/>`__ (approx $89.00 USD).
 
    .. image:: ../../../images/3281_dimg2.jpg
        :target: ../_images/3281_dimg2.jpg
    
-#. `Two tabbed center sections <hhttp://www.hoverthings.com/flip4tabblack>`__ and `eight 7/8" standoffs <http://www.hoverthings.com/spcr0875qty8>`__.
-#. Four DJI motors for Flamewheel from `Amain Hobby <http://www.amainhobbies.com/rc-drones/dji-multirotor-replacement-brushless-motor-dji-motor01/p235238>`__
+#. `Two tabbed center sections <hhttp://www.hoverthings.com/flip4tabblack>`__ and *eight 7/8" standoffs* (e.g. `similar to these <http://hoverthings.com/standoff-nylon-f-f/>`__).
+#. Four DJI motors for Flamewheel from `Amain Hobby <https://www.amainhobbies.com/dji-multirotor-replacement-brushless-motor-dji-motor01/p235238>`__
    for $24.00 each.
 #. A 20 or 25 Amp four in one ESC from `Off the Grid Water <http://mymobilemms.com/OFFTHEGRIDWATER.CA/ESC/4-in-1-Speed-Control-Quad-HOBBYWING-Quattro-Skywalker-25A-X-41?cPath=2_4>`__
    for $40.00.
-#. A `Pixhawk <https://store.3dr.com/products/3dr-pixhawk>`__
-   Flight controller from 3DR.
-#. A :ref:`GPS and Compass Module <common-positioning-landing-page>`
-   module.
-#. Two
-   `normal <http://www.rcdude.com/servlet/the-2600/GemFan-DJI-Hub-/Detail>`__
-   and two
-   `reverse <http://www.rcdude.com/servlet/the-2499/GemFan-DJI-Hub-10x4.5/Detail>`__
-   rotation DJI compatible Gemfan 10" carbon filled propellers from RC
-   Dude.
+#. A :ref:`Pixhawk <common-pixhawk-overview>` compatible autopilot.
+#. A :ref:`GPS and Compass Module <common-positioning-landing-page>` module.
+#. Two `normal <https://www.rcdude.com/product-p/gf-1045-c.htm>`__
+   and two `reverse <https://www.rcdude.com/product-p/gf-1045r-blk.htm>`__
+   rotation DJI compatible Gemfan 10" carbon filled propellers from RC Dude.
 
-#. A 2600 to `4000mah LiPo battery <http://www.hobbyking.com/hobbyking/store/__11927__Turnigy_nano_tech_4000mah_3S_25_50C_Lipo_Pack.html>`__
+#. A 2600 to `4000mah LiPo battery <https://hobbyking.com/en_us/turnigy-battery-nano-tech-4000mah-3s-25-50c-lipo-pack-xt-60.html?___store=en_us>`__
    that fits between the 2 bottom plates.
 #. PPM-Sum compatible receiver that works with your RC transmitter:
    `FRSky <http://www.valuehobby.com/radio-systems-servos/receivers/frsky-receiver-telemetry.html>`__\ `(Delta
    8) <http://www.valuehobby.com/frysky-delta-8.html>`__, Futaba SBus or
    Spektrum satellite recommended.
-#. For a PX4 system: A `Pad of Kyousho Zeal Antivibration gel <http://www.amainhobbies.com/rc-cars-trucks/kyosho-zeal-vibration-absorption-gyro-reciever-mounting-gel-1-sheet-kyoz8006/p19713>`__
+#. For a PX4 system: A `Pad of Kyousho Zeal Antivibration gel <https://www.amainhobbies.com/kyosho-zeal-vibration-absorption-gyro-reciever-mounting-gel-1-sheet-kyoz8006/p19713>`__
    and four nylon or aluminum 1 1/2" threaded standoffs.
 
 .. image:: ../images/FlipTop.jpg
@@ -115,7 +117,7 @@ Assembling the frame
 .. image:: ../images/FlipSportMotProp.jpg
     :target: ../_images/FlipSportMotProp.jpg
 
-Installing the Pixhawk flight controller
+Installing the Pixhawk autopilot
 ========================================
 
 #. If you are using a Pixhawk, mount the 4 remaining 7/8" long
@@ -153,7 +155,7 @@ Installing the Pixhawk flight controller
 #. Mount the GPS module to the top center of the top frame plate using
    double sided tape.
 
-Installing the PX4FMU/PX4IO flight controller
+Installing the PX4FMU/PX4IO autopilot
 =============================================
 
 #. If you are using a PX4 we can't use the top frame plate but can
@@ -252,7 +254,7 @@ Setup and additions
 
    #. An FPV camera may easily be mounted in front of the battery
       between the 2 front tabs.
-   #. If you use FPV keep it's transmitter and antenna well away from
+   #. If you use FPV keep its transmitter and antenna well away from
       the GPS.
 
 #. The Flip has more than adequate power to support a GoPro camera with

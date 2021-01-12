@@ -72,7 +72,7 @@ Step #2 - Start the VM for the first time
 #. Enter your password when the login screen appears
 #. Say "no" to any options to upgrade versions
 #. Open firefox and make sure it can access some web page like
-   www.ardupilot.org
+   ardupilot.org
 
    .. |Ubuntu_TestNetworkWithFirefox| image:: ../images/ubuntu_test_network_with_firefox.jpg
        :target: ../_images/ubuntu_test_network_with_firefox.jpg
@@ -91,7 +91,7 @@ Step #2 - Start the VM for the first time
 Step #3 - Setting up shared partition with Windows & Ubuntu Virtual Machine
 ===========================================================================
 
-1. Ensure the VM is powered down by select it's name, then select the
+1. Ensure the VM is powered down by selecting its name, then select the
 drop-down beside the green play button and select "Power Off" if it's
 not greyed
 
@@ -138,8 +138,7 @@ additional disk space used)
 
 ::
 
-    sudo apt-get install python-dev dos2unix python-wxgtk2.8 python-matplotlib python-opencv python-pip g++ g++-4.7 gawk git ccache
-
+    sudo apt-get install python-dev dos2unix python-wxgtk3.0 python-matplotlib python-opencv python-pip g++ gawk git ccache
     sudo pip install pymavlink
     sudo pip install mavproxy
 
@@ -147,7 +146,7 @@ If you wish to run Plane you will also need to install these packages:
 
 ::
 
-    sudo apt-get install libexpat1-dev auto.conf libtool automake
+    sudo apt-get install libexpat1-dev autoconf libtool automake
 
 Step #5 - Follow the Linux instructions
 =======================================
@@ -200,7 +199,7 @@ file extension to ".log" before opening in Mission Planner.
 Next steps
 ==========
 
-To get the most out of SITL we recommend you `Learn MavProxy <http://ardupilot.github.io/MAVProxy/>`__.
+To get the most out of SITL we recommend you read the :ref:`MAVProxy documentation <mavproxy:home>`.
 
 The topic :ref:`Using SITL for ArduPilot Testing <using-sitl-for-ardupilot-testing>` explains how to use the
 simulator, and covers topics like how to use SITL with Ground Stations

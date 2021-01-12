@@ -6,7 +6,8 @@ Automatic Takeoff
 
 Plane can automatically launch a wide range of aircraft types. The
 instructions below will teach you how to setup your mission to support
-automatic takeoff.
+automatic takeoff. Automatic takeoff can also be accomplished by the :ref:`takeoff-mode` supported in 
+ArduPlane 4.0 and later versions.
 
 Basic Instructions
 ==================
@@ -32,9 +33,9 @@ Note that the takeoff direction is set from the direction the plane is
 pointing when the automatic takeoff command is started. So you need to
 point the plane in the right direction, then switch to AUTO mode. During
 the first stage of the takeoff the autopilot will use the gyroscope as
-the principal mechanism for keeping the aircraft flying straight. After
-sufficient speed for a good GPS heading is reached the aircraft will
-switch to using the GPS ground track which allows it to account for a
+the principal mechanism for keeping the aircraft flying straight, or the compass if
+equipped. After sufficient speed for a good GPS heading is reached the aircraft will
+switch to using the GPS ground track (and compass if so equipped) which allows it to account for a
 cross-wind.
 
 You should try to launch into the wind whenever possible.
@@ -138,7 +139,8 @@ The final class of takeoff is runway takeoff, also known as wheeled
 takeoff or CTOL (Conventional Takeoff and Landing). Setting up for a
 good automatic takeoff from a runway is a bit more complex than the
 other types of launches with more parameters to set and more tuning
-required.
+required. This type of launch greatly benefits from the use of a compass
+onboard since initial heading is critical.
 
 One key consideration with runway takeoffs is whether you have a tail
 dragger (tail wheel steering) or tricycle undercarriage (nose wheel
@@ -212,7 +214,7 @@ mode. The way you do this is to set the :ref:`FBWA_TDRAG_CHAN <FBWA_TDRAG_CHAN>`
 an RC input channel on your transmitter for a switch (usually a
 momentary switch, such as the trainer switch). When this RC channel goes
 high while you are on the runway waiting for takeoff in FBWA mode the
-autpilot will check if you have configured the :ref:`TKOFF_TDRAG_ELEV <TKOFF_TDRAG_ELEV>` and
+autopilot will check if you have configured the :ref:`TKOFF_TDRAG_ELEV <TKOFF_TDRAG_ELEV>` and
 :ref:`TKOFF_TDRAG_SPD1 <TKOFF_TDRAG_SPD1>` parameters. If they have been set to non-zero
 values then the elevator will be controlled in FBWA in an identical
 manner to how it is controller for an AUTO takeoff. The elevator will go

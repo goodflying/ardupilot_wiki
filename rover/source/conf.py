@@ -19,6 +19,9 @@ import os
 sys.path.insert(0,'../..')
 import common_conf
 
+# 2019-dec: Parameter multi-versioning needs at least 3000. Setting 5000 to make room for the next versions.
+# 2020-jun: Increasing to 15000
+sys.setrecursionlimit(15000)
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -37,7 +40,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
-    'sphinx.ext.pngmath',
+    'sphinx.ext.imgmath',
     'sphinx.ext.ifconfig',
     'sphinxcontrib.youtube', #For youtube embedding
     'sphinxcontrib.vimeo', #For vimeo embedding
@@ -59,7 +62,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Rover'
-copyright = u'2016, ArduPilot Dev Team'
+copyright = u'2020, ArduPilot Dev Team'
 author = u'ArduPilot Dev Team'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -149,7 +152,7 @@ html_short_title = 'rover'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-#html_logo = None
+html_logo = '../../images/ardupilot_logo.png'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -160,6 +163,8 @@ html_favicon = '../../images/favicon_rover.ico'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+html_js_files = ['./useralerts.js']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -380,3 +385,6 @@ epub_exclude_files = ['search.html']
 
 #Intersphinx mapping config (done globally)
 intersphinx_mapping = common_conf.intersphinx_mapping
+
+def setup(app):
+   common_conf.setup(app)

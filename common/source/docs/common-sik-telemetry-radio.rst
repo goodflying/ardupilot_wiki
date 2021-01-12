@@ -5,7 +5,7 @@ SiK Telemetry Radio
 ===================
 
 A *SiK Telemetry Radio* is one of the easiest ways to setup a telemetry
-connection between your Flight Controller and a ground station. This article
+connection between your Autopilot and a ground station. This article
 provides a basic user guide for how to connect and configure your radio.
 
 .. figure:: ../../../images/3dr_radio_v2.jpg
@@ -39,7 +39,6 @@ many different sources, including ArduPilot Partners:
 
 -  `jD-SiK Telemetry Set <http://store.jdrones.com/jD_SiK_Radio_Telemetry_radio_p/rfsik20set900.htm>`__ (jDrones)
 -  `mRo SiK Telemetry Radio <https://store.mrobotics.io/ProductDetails.asp?ProductCode=mRo-sikv2>`__ (mRobotics)
--  `CUAV Transceiver Telemetry Radio Set (433Mhz) <https://store.cuav.net/index.php?id_product=34&id_product_attribute=0&rewrite=500mw-433mhz-3dr-wireless-tx-rx-dual-ttl-telemetry-for-mini-pixhawk-apm-pro-flight-control&controller=product&id_lang=3>`__ (CUAV)
 -  `VirtualRobotix Telemetry Set <http://www.virtualrobotix.it/index.php/en/shop/telemetria>`__ (VirtualRobotix)
 
 .. tip::
@@ -97,7 +96,7 @@ use them as a pair but it does not matter which one goes on the vehicle
 and which remains on the ground.
 
 The radio has a micro-USB port, and a DF13 six-position port. The
-following sections explain how to connect these to flight controllers
+following sections explain how to connect these to autopilots
 and ground stations.
 
 .. image:: ../../../images/3dr_radio_v2.jpg
@@ -145,7 +144,7 @@ To connect the radios:
    between the COM port and Connect buttons) to 57600.
 -  Press the **Connect** button and if the two radios connect
    successfully you should be able to lean your vehicle left and right
-   and see it's attitude update on the MP's Flight Data screen's
+   and see its attitude update on the MP's Flight Data screen's
    artificial horizon.
 
 Connecting to an Android tablet
@@ -198,8 +197,7 @@ Improving the range
 
 The range can be improved by:
 
--  Using a small "patch antenna" on the ground like `this flat patch antenna <http://www.readymaderc.com/store/index.php?main_page=product_info&cPath=11_45_47&products_id=51>`__
-   perhaps mounted on an :ref:`Antenna Tracker <antennatracker:home>`
+-  Using an inexpensive 900Mhz yagi antenna on the ground like `these <https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR1.TRC0.A0.H0.X900mhz+yagi.TRS2&_nkw=900mhz+yagi&_sacat=0>`__  perhaps mounted on an :ref:`Antenna Tracker <antennatracker:home>`
 -  Replace at least one of the two radios with a higher powered
    :ref:`RFD900 <common-rfd900>`
 -  Reduce the ``AirRate`` parameter which will increase range but at the
@@ -234,5 +232,5 @@ settings, see
 ==========================
 
 The best place to get involved with the development or tuning of these
-radios is the `SiK Radios forum <http://discuss.ardupilot.org/c/hardware-discussion/radios-hardware>`__. Join in on the
+radios is the `SiK Radios forum <https://discuss.ardupilot.org/c/hardware-discussion/radios-hardware>`__. Join in on the
 forum to help make these radios even better!

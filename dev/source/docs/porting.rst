@@ -6,7 +6,7 @@ Porting to a new flight controller board
 
 ArduPilot :ref:`supports a wide variety of flight controllers <common-autopilots>` with new controllers being added all the time.  This page spells out the steps to port ArduPilot to a new board with an emphasis on porting to STM32 based boards (the most common type) using `ChibiOS <http://www.chibios.org/dokuwiki/doku.php>`__.
 
-Consider joining the `ArduPilot/ChibiOS gitter channel <https://gitter.im/ArduPilot/ChibiOS>`__ to speak with other developers about this topic.
+Consider joining the `ArduPilot Discord Chat <https://ardupilot.org/discord>`__ to speak with other developers about this topic.
 
 ..  youtube:: y2KCB0a3xMg
     :width: 100%
@@ -14,7 +14,7 @@ Consider joining the `ArduPilot/ChibiOS gitter channel <https://gitter.im/ArduPi
 Step 1 - getting started
 ------------------------
 
-- determine which microcontroller the new flight controllers uses.  if it is a CPU we already support (STM32F42x, STM32F40x STM32F41x, STM32F745, STM32F765 or STM32F777 where “x” can be any number), then the port should be relatively straight forward.  If it is another CPU, ping us on the `ArduPilot/ChibiOS gitter channel <https://gitter.im/ArduPilot/ChibiOS>`__ for advice on how to proceed.
+- determine which microcontroller the new flight controllers uses.  if it is a CPU we already support (STM32F42x, STM32F40x STM32F41x, STM32F745, STM32F765 or STM32F777 where “x” can be any number), then the port should be relatively straight forward.  If it is another CPU, ping us on the `ArduPilot Discord Chat <https://ardupilot.org/discord>`__ for advice on how to proceed.
 - determine the crystal frequency (normally 8Mhz or 24Mhz).  refer to the schematic or read the writing on the crystal which is normally a small silver square.
 
 Step 2 - create a hwdef.dat file for the board
@@ -22,6 +22,8 @@ Step 2 - create a hwdef.dat file for the board
 
 - make a subdir in `libraries/AP_HAL_ChibiOS/hwdef <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef>`__ for your board (i.e. “new-board”).  This directory name will eventually be used during the build process (i.e. “waf configure --board new-board”) so keep the name relatively short.
 - copy/rename an existing template hwdef.dat that is similar to the CPU for your board into the directory created above.  For example, if the board has a STMF40x chip copy the `f405-min/hwdef.dat <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/f405-min>`__ file into the new directory.
+
+.. tip:: The `FMUV3 board <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_HAL_ChibiOS/hwdef/fmuv3/hwdef.dat>`__ is commented heavily and contains most of the HAL directives used in hardware definition files. Also, the `scripts directory <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS/hwdef/scripts>`__ contains pin function assignments for the supported microprocessors for reference.
 
 Step 3 - configure and build a minimal firmware for the board
 -------------------------------------------------------------
@@ -42,8 +44,8 @@ Some boards come with a bootloader pre-installed while others rely on the board 
 The source code for the bootloaders can be found in `AP_Bootloader
 <https://github.com/ArduPilot/ardupilot/tree/master/Tools/AP_Bootloader>`__
 but pre-compiled binaries are available for many boards in the
-`Tools/Tootloaders
-<http://firmware.ardupilot.org/Tools/Bootloaders>`__ directory on our
+`Tools/Bootloaders
+<https://firmware.ardupilot.org/Tools/Bootloaders>`__ directory on our
 firmware server.  Please refer to the `README.txt <https://github.com/ArduPilot/ardupilot/blob/master/Tools/bootloaders/README.txt>`__ to see if one of the existing bootloaders is compatible for the new board.
 
 .. note::
@@ -69,7 +71,7 @@ If using Mission Planner to load the firmware to the board:
 
      Any time you make a change to the board definition file, you must clean up the build, and reconfigure WAF before re-compiling:
 - ``./waf distclean``
-- ``./waf config --board new-board``
+- ``./waf configure --board new-board``
 
 .. note::
 
@@ -141,7 +143,7 @@ The key things you must have in your hwdef-bl.dat are:
 
 - You must set FLASH_BOOTLOADER_LOAD_KB to the location in kilobytes where the main code will start. This should be the same as FLASH_RESERVE_START_KB from your main hwdef.dat.
 - you must set FLASH_RESERVE_START_KB to zero (so the bootloader is placed at the start of flash)
-- Your UART_ORDER will control what ports the bootloader will be active on. Just having OTG1 for USB is fine, or you can list some serial UARTs.
+- Your SERIAL_ORDER will control what ports the bootloader will be active on. Just having OTG1 for USB is fine, or you can list some serial UARTs.
 
 To build the bootloader you do the following:
 
@@ -153,6 +155,6 @@ To build the bootloader you do the following:
 Next Steps
 ----------
 
-If you have gotten this far, congratulations you have ported ArduPilot to a new board!  Please reach out to the other developers on the `ArduPilot/ChibiOS gitter channel <https://gitter.im/ArduPilot/ChibiOS>`__ to announce your success.
+If you have gotten this far, congratulations you have ported ArduPilot to a new board!  Please reach out to the other developers on the `ArduPilot Discord Chat <https://ardupilot.org/discord>`__ to announce your success.
 
 For widely available boards it is very likely we will help you get the board on the official list of supported boards including automatic firmware builds, easy uploading through the ground stations and onto our wiki!  In any case, we welcome new ports so please contact us.

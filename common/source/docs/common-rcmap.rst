@@ -7,11 +7,6 @@ RC Input Channel Mapping (RCMAP)
 This article shows how to set up a non-standard RC input channel mapping
 using the RCMAP feature.
 
-.. note::
-
-   This feature is available in AC3.2.1 and higher (and equivalent
-   Plane and Rover versions).
-
 Configuration
 =============
 
@@ -27,7 +22,7 @@ These can be changed by setting the :ref:`RCMAP_ROLL <RCMAP_ROLL>`, :ref:`RCMAP_
 .. image:: ../../../images/RCMAP_MPSetup.png
     :target: ../_images/RCMAP_MPSetup.png
 
-After changing any of these parameters the flight controller should be
+After changing any of these parameters the autopilot should be
 rebooted.
 
 [site wiki="copter"]
@@ -52,10 +47,7 @@ elevator (throttle) is on channel 2, then the settings should be:
 ``RCMAP_PITCH`` and ``RCMAP_YAW`` can be whatever channels you want to
 make them as long as they are not channels 1 and 2.
 
-For Rover you should also select the receiver channels that will be used
-to control the Waypoint select (:ref:`LEARN_CH <rover:LEARN_CH>`)
-and the Mode select (:ref:`MODE_CH <rover:MODE_CH>`).
-As an example, the Gear switch (2-way) is on channel 5 and can be
-assigned to the ``LEARN_CH`` while the Flap switch (3-way) is on channel
-6 and can be assigned to the ``MODE_CH``.
+For Rover you should also select the receiver channel that will be used
+to control the Mode select (:ref:`MODE_CH <rover:MODE_CH>`).
+
 [/site]

@@ -8,9 +8,21 @@ This page shows how to setup ROS and `Hector SLAM <http://wiki.ros.org/hector_sl
 
 These instructions were tested on an :ref:`NVidia TX2 <companion-computer-nvidia-tx2>` flashed with :ref:`APSync <apsync-intro>` and then ROS and MAVROS were :ref:`installed as described here <ros-install>`.
 
+They were also tested on an :ref:`RaspberryPi 3 B+ <raspberry-pi-via-mavlink>` with ROS and MAVROS installed :ref:`installed as described here <ros-install>`.
+
 .. note::
 
     these pages are a work-in-progress
+
+Mounting the RPLidar and Pixhawk
+--------------------------------
+
+.. image:: ../images/ros-pixhawk-rplidara2-orientation.png
+    :target: ../_images/ros-pixhawk-rplidara2-orientation.png
+
+The RPLidar shoulid be oriented so that its USB cable wire is pointing forward in the same direction as the arrow on the flight controller.
+
+The USB cable should be plugged into a USB port on the companion computer running ROS.
 
 Check the RPLidar's serial port
 -------------------------------
@@ -27,13 +39,12 @@ Check the RPLidar's serial port
 
 ::
 
-    sudo chmod 666 /dev/ttyUSB0
-    sudo chmod 666 /dev/ttyACM0
+    sudo usermod -a -G dialout $USER
 
 Install more packages
 ---------------------
 
-- install the ROS dektop full:
+- install the ROS desktop full:
 
 ::
 
@@ -44,9 +55,9 @@ Install more packages
 ::
 
     sudo apt-get install ros-kinetic-tf ros-kinetic-tf-conversions ros-kinetic-laser-geometry
-    sudo apt-get install ros-kinetic-cv-bridge install ros-kinetic-image-transport
+    sudo apt-get install ros-kinetic-cv-bridge ros-kinetic-image-transport
     sudo apt-get install qt4-qmake qt4-dev-tools
-    sudo apt-get install protobus-compiler
+    sudo apt-get install protobuf-compiler
 
 Create a Catkin WorkSpace
 -------------------------
@@ -80,11 +91,30 @@ Using your favourite editor open Hector SLAM's launch file which can be found at
 
     <node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="0 0 0 0 0 0 base_link laser 100" />
 
+Edit Hector SLAM's `hector_imu_attitude_to_tf/launch/example.launch <https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_imu_attitude_to_tf/launch/example.launch>`__ file which can be found at `$HOME/catkin_ws/src/hector_slam/hector_imu_attitude_to_tf/launch/example.launch <https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_imu_attitude_to_tf/launch/example.launch>`__ and change it to consume IMU data from the flight controller (via mavros) by replacing "thumper_imu" with "/mavros/imu/data" so that it looks like below:
+
+::
+
+    <remap from="imu_topic" to="/mavros/imu/data" />
+
 Edit Hector SLAM's tutorial.launch file which can be found at `$HOME/catkin_ws/src/hector_slam/hector_slam_launch/launch/tutorial.launch <https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/launch/tutorial.launch>`__ and change the "use_sim_time" line to look like below:
 
 ::
 
     <param name="/use_sim_time" value="false"/>
+
+Continue editing the `tutorial.launch <https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/launch/tutorial.launch>`__ and add a new line (just below the existing include line) so that the `example.launch <https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_imu_attitude_to_tf/launch/example.launch>`__ file modified above is included:
+
+::
+
+    <include file="$(find hector_imu_attitude_to_tf)/launch/example.launch"/>
+
+By default, once started, Hector SLAM will pop-up a window to show the map in real-time but this can be disabled by commenting out one line of `tutorial.launch <https://github.com/tu-darmstadt-ros-pkg/hector_slam/blob/catkin/hector_slam_launch/launch/tutorial.launch>`__ file so that it looks like below:
+
+::
+
+    <!--node pkg="rviz" type="rviz" name="rviz"
+      args="-d $(find hector_slam_launch)/rviz_cfg/mapping_demo.rviz"/-->
 
 Build the Packages
 ------------------
@@ -117,7 +147,7 @@ In Terminal2:
 
     roslaunch rplidar_ros rplidar.launch
 
-In Terminal3:
+In Terminal3 (For RaspberryPi we recommend running this on another Machine explained `here <http://wiki.ros.org/ROS/Tutorials/MultipleMachines>`__):
 
 .. code-block:: bash
 
@@ -141,6 +171,7 @@ Connect to the flight controller with a ground station (i.e. Mission Planner) an
 -  :ref:`EK3_ENABLE <copter:EK3_ENABLE>` = 0 (the default)
 -  :ref:`GPS_TYPE <copter:GPS_TYPE>` = 0 to disable the GPS
 -  :ref:`EK2_GPS_TYPE <copter:EK2_GPS_TYPE>` = 3 to disable the EKF's use of the GPS
+-  MAG_ENABLE = 0, :ref:`COMPASS_USE <copter:COMPASS_USE>` = 0, :ref:`COMPASS_USE2 <copter:COMPASS_USE2>` = 0, :ref:`COMPASS_USE3 <copter:COMPASS_USE3>` = 0 to disable the EKF's use of the compass and instead rely on the heading from ROS and Hector SLAM
 
 After changing any of the values above, reboot the flight controller.
 
@@ -154,6 +185,12 @@ If all is working, vision position estimates should begin flowing in from ROS to
     EKF2 IMU0 is using external nav data
 
 Using the Mission Planner (or similar) go to the Flight Data screen and right-mouse-button click on the map and select "Set Home Here" >> "Set EKF Origin".  The vehicle should appear immediatley on the map where you clicked.
+
+Video
+-----
+
+..  youtube:: P0Xblybi0aw
+    :width: 100%
 
 .. note::
 

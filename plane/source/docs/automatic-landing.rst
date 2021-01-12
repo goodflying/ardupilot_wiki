@@ -145,12 +145,12 @@ Controlling the flare
 
 The final stage of the landing is called the "flare". During the flare
 the aircraft tries to retain a course along the line between the last
-waypoint and the landing waypoint, and it controls it's height solely
+waypoint and the landing waypoint, and it controls its height solely
 using a target descent rate. Once the flare is started the throttle is
 "disabled" - set to some value between :ref:`THR_MIN <THR_MIN>` and
 zero.
 
-The main job of the flight controller in the flare is to try to achieve
+The main job of the autopilot in the flare is to try to achieve
 the descent rate specified in the
 :ref:`TECS_LAND_SINK <TECS_LAND_SINK>` parameter. That defaults to 0.25 meters/second, which is a reasonable
 touchdown vertical speed for most models. To achieve that speed the TECS
@@ -180,7 +180,7 @@ parameter if it is non-zero, otherwise by the
 :ref:`LIM_PITCH_MAX <LIM_PITCH_MAX>` parameter.
 
 The ``TECS_LAND_DAMP`` parameter is a damping constant for the pitch
-control during. A larger number will cause the pitch demand to change
+control during flare. A larger number will cause the pitch demand to change
 more slowly. This parameter can be used to reduce issues with sudden
 pitch changes when the flare happens.
 
@@ -240,8 +240,7 @@ Also note that if you have a longer range rangefinder then it is a very
 good idea to set the minimum range of the rangerfinder well above zero.
 For example, the PulsedLight Lidar has a typical range of over 40
 meters, and when it gets false readings it tends to read ranges of less
-than 1 meter. Setting :ref:`RNGFND_MIN_CM <RNGFND_MIN_CM>`
-to 150 will discard any rangerfinder readings below 1.5 meters, and will
+than 1 meter. And setting :ref:`RNGFND1_MIN_CM <RNGFND1_MIN_CM>` to 150 , if its the first system rangefinder, will discard any rangerfinder readings below 1.5 meters, and will
 greatly improve the robustness of the Lidar for landing.
 
 Improving the landing
@@ -322,24 +321,23 @@ How to abort an auto-landing
 A landing-abort mechanism is provided to allow you to abort a landing sequence in a safe, controlled, and expected way. Custom abort behaviour can be pre-programmed as part of the mission or you can use the default abort mechanism. To enable this feature set param LAND_ABORT_THR=1.
  
 There are three steps to this feature:
-#. Trigger an abort
-#. The behavior during the abort
-#. The mission state after the abort completes.
 
-.. note::
+1. :ref:`Trigger an abort <trigger_an_abort>`
+#. :ref:`The behavior during the abort <behavior_during_the_abort>`
+#. :ref:`The mission state after the abort completes <mission_state_after_an_aborted_landing_completes>`
 
-   This section describes the abort behavior introduced in Plane
-   3.4.
 
-   
+.. _trigger_an_abort:
+
 Step 1) Abort land triggers
 ---------------------------
 The are three ways to trigger an auto-landing abort. All of them will only work while in AUTO mode and currently executing a ``LAND`` waypoint mission item:
 
--  *Send the ``MAV_CMD_DO_GO_AROUND`` command using a GCS.* Mission Planner has a button labeled "Abort Landing" on the FlightData Actions tab.
--  *RC input Throttle > 90%*. This will trigger an abort while staying in AUTO mode. The throttle only needs to be high briefly to trigger it. Don't forget to lower it!
--  *Mode change*. For human piloted landing abort you can switch out of AUTO mode into, for example MANUAL/STABILIZE/FBWA, and navigate the aircraft safely however you'd like. Using this method will skip abort behavior step 2 because it is being done manually. When switching back to AUTO the mission will resume as described in step 3 below.
+-  **Send the ``MAV_CMD_DO_GO_AROUND`` command using a GCS.** Mission Planner has a button labeled "Abort Landing" on the FlightData Actions tab.
+-  **RC input Throttle > 90%**. This will trigger an abort while staying in AUTO mode. The throttle only needs to be high briefly to trigger it. Don't forget to lower it!
+-  **Mode change**. For human piloted landing abort you can switch out of AUTO mode into, for example MANUAL/STABILIZE/FBWA, and navigate the aircraft safely however you'd like. Using this method will skip abort behavior step 2 because it is being done manually. When switching back to AUTO the mission will resume as described in step 3 below.
 
+.. _behavior_during_the_abort:
 
 Step 2) Abort land flight behavior
 ----------------------------------
@@ -350,6 +348,7 @@ The abort behaviour has a default configuration and does not require a pre-plann
   
 This step is skipped if the abort trigger is via mode change because it is assumed the pilot manually took over and flew the aircraft to a safe altitude at the pitch and throttle of their choosing.
 
+.. _mission_state_after_an_aborted_landing_completes:
 
 Step 3) Mission state after an aborted landing completes
 --------------------------------------------------------
@@ -362,48 +361,55 @@ Once an abort land has completed, by either reaching the target altitude or swit
 
 .. _reverse-thrust:
 
-Reverse-Thrust Landing
-======================
+Reverse Thrust Setup
+====================
 
-Some ESC's allow for reverse direction. When using reverse on the propeller it will generate a negative thrust which can be used to reduce your airspeed. 
-During a steep landing approach this method can be used to maintain a stable and low airspeed allowing you to land much more softly and precisely. 
-To use this feature it is highly recommend to use an airspeed sensor and a rangefinder (see above) for an accurate altitude.
+Some ESC's allow for reversing motor direction. When using reverse on the propeller it will generate a negative thrust which can be used to reduce your airspeed. During a steep landing approach this method can be used to maintain a stable and low airspeed allowing you to land much more softly and precisely. Reverse thrust can also be automatically used during automatic landings (see below) or during other throttle controlled modes to steepen descents. 
+See  :ref:`Reverse Thrust Setup<reverse-thrust-setup>` for details on setting up reverse thrust.
 
-.. note::
+.. warning:: enabling reverse thrust automatically sets the SERVOx_TRIM value to LOW throttle stick for the throttle output servo. SERVOx_TRIM is normally ignored, and low stick is SERVOx_MIN! Arming in this condition with an ESC not properly setup will spin-up the motor, possibly dramatically!
 
-   Reverse-thrust landings are available starting from Plane
-   v3.5.1.
+Reverse-Thrust in AutoLanding and Throttle Controlled Modes
+===========================================================
 
+.. note:: To use this feature in automatic landings, it is highly recommend to use an airspeed sensor and a rangefinder (see above) for an accurate altitude.
 
-The below video is an example of a Skywalker X8 performing an auto-landing with a 15 degree slope. The target is the hat on the ground showing it is possible to get repeatable high precision landings where the final position error was dictated by the GPS position error. This particular aircraft has been landed at 20deg and 25deg slopes too. YMMV depending on weight of aircraft and available thrust from motor/propeller. Typically a Skywalker X8 would need a shallow slope such at 6 to 10deg.  
+The below video is an example of a Skywalker X8 performing an auto-landing with a 15 degree slope. The target is the hat on the ground showing it is possible to get repeatable high precision landings where the final position error was dictated by the GPS position error. This particular aircraft has been landed at 20deg and 25deg slopes too. You may have different results depending on weight of aircraft and available thrust from motor/propeller. Typically a Skywalker X8 would need a shallow slope such at 6 to 10deg.
 
 ..  youtube:: kdw8vjbttNo
     :width: 100%
 
+.. _reverse-thrust-key-parameters:
 
 Key Parameters
 --------------
 
-The key parameters that control reverse thrust landing in addition to the ones :ref:`listed in section 1.1 <automatic-landing_key_parameters>` are:
+The key parameters that control reverse thrust landing in addition to the ones :ref:`listed in section 1.1 <automatic-landing_key_parameters>`  and :ref:` Reverse Thrust setup <-reverse-thrust>` are:
 
 -  :ref:`LAND_PF_ALT <LAND_PF_ALT>`
 -  :ref:`LAND_PF_SEC <LAND_PF_SEC>`
 -  :ref:`LAND_PF_ARSPD <LAND_PF_ARSPD>`
 -  :ref:`USE_REV_THRUST <USE_REV_THRUST>`
 -  :ref:`TECS_APPR_SMAX <TECS_APPR_SMAX>`
--  :ref:`RC3_TRIM <RC3_TRIM>`
+-  ``SERVx_TRIM`` where x is the throttle output channel
 -  :ref:`THR_MIN <THR_MIN>`
 
+The maximum amount of reverse thrust used in autopilot throttle controlled modes is set by :ref:`THR_MIN <THR_MIN>`. A value of -100 provides the maximum, while -20 would provide 20% of  maximum, and so on.
+
+The :ref:`USE_REV_THRUST <USE_REV_THRUST>` parameter is a bit mask that allows the setting of when reverse thrust can be activated, as when autolanding, or in other throttle controlled modes.
+
+If an RC channel's ``RCx_OPTION`` auxiliary function has been set to "64", then activating the switch will also provide access to the reverse thrust capability in non-throttle controlled modes, as shown in the :ref:`Reverse Thrust Setup<reverse-thrust-setup>` section.
 
 
 ESC (Electronic Speed Controller)
 ---------------------------------
 
+Most important is to set the ::ref:`SERVO3_TRIM <SERVO3_TRIM>` (assuming the esc/motor is attached to output 3)to the point that the ESC is idle, usually around mid-range (1500us) to create an output curve that has :ref:`SERVO3_MAX<SERVO3_MAX>` for full forward thrust, and :ref:`SERVO3_MIN<SERVO3_MIN>` for full reverse thrust. This should be done AFTER the RC Calibrations setup step. 
+
 Hardware selection and programming
 ++++++++++++++++++++++++++++++++++
 
-Most ESCs can operate in forwards and reverse, however that is usually not a stock feature and may need to be reprogrammed to do it. 
-Any SimonK and BLHeli compatible ESC can be flashed to support reverse thrust. 
+Many ESCs can operate in forwards and reverse, however that is usually not a stock feature and may need to be reprogrammed to do it. Any SimonK and BLHeli compatible ESC can be flashed to support reverse thrust.
 
 `Here's info about BLHeli compatible ones <https://blhelisuite.wordpress.com/>`__.
 
@@ -415,19 +421,16 @@ Hardware configuration
 
    Remove propeller while configuring ESCs and thrust parameters
 
-Configure your ESC for reverse thrust by changing it's neutral point.
+Configure your ESC for reverse thrust by changing its neutral point.
 Many ESC require custom firmware to accomplish this. Search Google or your ESC's mfgr for instructions on how to configure your particular ESC.
 
-Set these:
-
-#. Minimum PWM to 1000, mid to 1500, and maximum to 2000.
-#. ``THR_MIN`` to a negative value such -100. Next set ``RC3_TRIM`` (or whatever ``RCx`` is mapped to throttle via ``RCMAP_THROTTLE``) to your ESC's mid value.
+Set  Minimum PWM to 1000, mid to 1500, and maximum to 2000, corresponding to maximum reverse thrust,idle, and maximum positive thrust from the ESC/Motor.
 
 Determining your max glide slope angle
 --------------------------------------
 
 For a steep landing approach, the limitation is how well you can maintain your desired airspeed. 
-This is determined by your aircraft's ability to create reverse thrust (motor+prop thrust ability) and its resistance to slowing down (aircraft mass). 
+This is determined by your aircraft's ability to create reverse thrust (motor+prop thrust or airbrake drag ability) and its resistance to slowing down (aircraft mass). 
 In many cases extreme steepness is unnecessary, but possible. 
 With an over-sized motor and lightweight aircraft you can come in as steep as 60 degrees.
 

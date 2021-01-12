@@ -1,8 +1,8 @@
 .. _common-erle-brain2-wiring-quick-start:
 
-==============================
-Erle-Brain2 Wiring Quick Start
-==============================
+==============================================
+Archived Topic: Erle-Brain2 Wiring Quick Start
+==============================================
 
 This article provides high level information about how to power
 :ref:`Erle-Brain2 <common-erle-brain-linux-autopilot>` and connect its most
@@ -19,7 +19,7 @@ Erle-Brain2 Wiring Chart
 
 [site wiki="copter"]
 Copter users should also see the 
-`official setup documentation <http://erlerobotics.com/docs/Robots/Erle-Copter/index.html>`__.
+`official setup documentation <http://docs.erlerobotics.com/erle_robots/erle_copter>`__.
 [/site]
 
 Power Erle-Brain2
@@ -70,8 +70,8 @@ I2C port with the four-position DF13 cable, as shown in the
 Connect Motors
 ==============
 
-.. image:: http://docs.erlerobotics.com/brains/erle-brain-3/hardware/power/ErleBrain3_Power_ESC.jpg
-    :target:  http://docs.erlerobotics.com/brains/erle-brain-3/hardware/power/ErleBrain3_Power_ESC.jpg
+.. figure:: ../../../images/ErleBrain3_Power_ESC.png
+    :target:  ../../../images/ErleBrain3_Power_ESC.png
 
 .. note::
 
@@ -145,8 +145,8 @@ Use a Bluetooth dongle to connect additional devices, such as joysticks.
    You will need to configure BlueTooth interface to make it
    work
 
-.. image:: http://erlerobotics.com/docs/img/Artificial_Brains/Erle_Brain2/Hardware/Erle-Brain_DongleWifi.jpg
-    :target:  http://erlerobotics.com/docs/img/Artificial_Brains/Erle_Brain2/Hardware/Erle-Brain_DongleWifi.jpg
+.. figure:: ../../../images/Erle-Brain_DongleWifi.jpg
+    :target: .. figure:: ../../../images/
 
 Connect other peripherals
 =========================
@@ -160,7 +160,7 @@ More information in `official documentation <http://erlerobotics.com/docs/Artifi
 Related information
 ===================
 
-`Erle Robotics official documentation <http://erlerobotics.com/docs/Intro.html>`__ includes
+`Erle Robotics official documentation <http://docs.erlerobotics.com/>`__ includes
 additional information about how to use Erle-Brain2.
 
 

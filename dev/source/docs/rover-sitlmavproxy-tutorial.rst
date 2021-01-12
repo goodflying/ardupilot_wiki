@@ -6,7 +6,7 @@ Rover SITL/MAVProxy Tutorial
 
 This tutorial provides a basic walk-through of how to use
 :ref:`SITL <sitl-simulator-software-in-the-loop>` and
-`MAVProxy <http://ardupilot.github.io/MAVProxy/>`__ for *Rover* testing.
+:ref:`MAVProxy<mavproxy:home>` for *Rover* testing.
 
 Overview
 ========
@@ -42,7 +42,7 @@ using the ``--map`` and ``--console`` options:
 
 ::
 
-    cd ~/ardupilot/APMrover2
+    cd ~/ardupilot/Rover
     sim_vehicle.py --map --console
 
 Arrange the *MAVProxy Command Prompt*, *Console* and *Map* conveniently
@@ -53,15 +53,14 @@ so you can observe the status and send commands at the same time.
 
 Starting
 ========
-Arm the rover by entering the following on the mavproxy console
+
+Change the rover into Guided mode and then arm it by entering the following on the mavproxy console
 ::
 
+    GUIDED
     arm throttle
 
-**Right-click** on the map at your target destination, select **Fly
-to**, and enter an altitude (which is ignored). Rover will change to
-``GUIDED`` mode, drive to the location, and then pause (still in GUIDED
-mode).
+**Right-click** on the map at your target destination, select **Fly to**, and enter an altitude (which is ignored). Rover should drive to the location, and then pause (still in Guided mode).
 
 .. figure:: ../images/MAVProxyRover_Guided_Menu.jpg
    :target: ../_images/MAVProxyRover_Guided_Menu.jpg
@@ -125,7 +124,7 @@ skip to the second waypoint, and *loop* the mission:
 
 ::
 
-    wp load ..\Tools\autotest\CMAC-circuit.txt
+    wp load ..\Tools\autotest\Generic_Missions\CMAC-circuit.txt
     mode auto
     wp set 2
     wp loop
@@ -135,7 +134,7 @@ skip to the second waypoint, and *loop* the mission:
    Rover will only run :ref:`commands it supports <rover:common-mavlink-mission-command-messages-mav_cmd_commands_supported_by_rover>`
    (others are ignored). 
 
-The `MAVProxy Waypoints documentation <http://ardupilot.github.io/MAVProxy/html/uav_configuration/waypoints.html>`__
+The :ref:`MAVProxy Waypoints documentation <mavproxy:mavproxy-waypoints>`
 lists the full set of available commands (or you can get them using
 auto-completion by typing "wp" on the command line).
 

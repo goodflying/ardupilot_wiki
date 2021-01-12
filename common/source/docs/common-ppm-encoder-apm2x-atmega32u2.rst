@@ -26,7 +26,7 @@ allows you to flash it without needing a special SPI programmer. The
 to convert radio PCM signals to a PPM signal for the 2560.  APM 2.5
 modules shipped before March 4th 2013  have an older version of the
 firmware. Here is a discussion on the
-newer \ `firmware <http://www.diydrones.com/profiles/blogs/new-arduppm-firmware-version-2-3-16-in-the-downloads-section>`__.
+newer \ `firmware <https://www.diydrones.com/profiles/blogs/new-arduppm-firmware-version-2-3-16-in-the-downloads-section>`__.
 
 What you need
 =============
@@ -34,7 +34,7 @@ What you need
 -  Windows XP/Vista/7
 -  USB cable
 -  Download and install Flip,
-   click \ `**here**. <http://www.atmel.com/tools/FLIP.aspx>`__ - The firmware (HEX file) you want to load can be `downloaded here <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/ArduPPM_v2.3.16_ATMega32U2.hex_.zip>`__.
+   click \ `**here**. <http://www.atmel.com/tools/FLIP.aspx>`__ - The firmware (HEX file) you want to load can be `downloaded here <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/ArduPPM_v2.3.16_ATMega32U2.hex_.zip>`__.
 -  *(The source code, while not necessary if using the compiled code,
    `**can be found
    here** <https://github.com/ArduPilot/ardupilot/blob/master/Tools/ArduPPM/Libraries/PPM_Encoder.h>`__.)*

@@ -28,7 +28,7 @@ fails try the "Manual ESC-by-ESC" method.
 -  Some ESCs like the DJI Opto ESCs do not require and do not support calibration, so skip this page completely
 -  Some brands of ESC do not allow calibration and will not arm unless you adjust your radio's throttle end-points so that the minimum throttle is around 1000 PWM and maximum is around 2000.  Note that if you change the end-points on your TX you must re-do the :ref:`Radio Calibration <common-radio-control-calibration>`.  Alternatively with Copter-3.4 (and higher) you may manually set the :ref:`MOT_PWM_MIN <MOT_PWM_MIN>` to 1000 and :ref:`MOT_PWM_MAX <MOT_PWM_MAX>` to 2000.
 -  If using OneShot ESCs set the :ref:`MOT_PWM_TYPE <MOT_PWM_TYPE>` to 1 (for regular OneShot) or 2 (for OneShot125).  Note only supported in Copter-3.4 (and higher).
--  Begin this procedure only after you have completed the :ref:`radio control calibration <common-radio-control-calibration>` and :ref:`Connect ESCs and motors <connect-escs-and-motors>` part of the :ref:`Assembly Instructions <assembly-instructions>`.  Next follow these steps:
+-  Begin this procedure only after you have completed the :ref:`radio control calibration <common-radio-control-calibration>` and :ref:`Connect ESCs and motors <connect-escs-and-motors>` part of the :ref:`Autopilot System Assembly Instructions <autopilot-assembly-instructions>`.  Next follow these steps:
 
 .. warning::
 
@@ -74,8 +74,7 @@ All at once calibration
     :target: ../_images/Connect-Battery.jpg
     :width: 400px
     
-#. For **PX4 or Pixhawk,** press and hold the safety button until it
-   displays solid red.
+#. For Autopilots with a safety switch, push it until the LED displays solid red
 #. The autopilot is now in ESC calibration mode. (On an APM you may
    notice the red and blue LEDs blinking alternatively on and off like a
    police car).
@@ -127,11 +126,11 @@ Manual ESC-by-ESC Calibration
 Semi Automatic ESC-by-ESC Calibration
 =====================================
 
-#. Connect to the flight controller from a ground station such as the Mission Planner and set the :ref:`ESC_CALIBRATION <ESC_CALIBRATION>` parameter to 3
-#. Disconnect the battery and USB cable so the flight controller powers down
+#. Connect to the autopilot from a ground station such as the Mission Planner and set the :ref:`ESC_CALIBRATION <ESC_CALIBRATION>` parameter to 3
+#. Disconnect the battery and USB cable so the autopilot powers down
 #. Connect the battery
 #. The arming tone will be played (if the vehicle has a buzzer attached)
-#. If using a flight controller with a safety button (like the Pixhawk) press it until it displays solid red
+#. If using a autopilot with a safety button (like the Pixhawk) press it until it displays solid red
 #. You will hear a musical tone then two beeps
 #. A few seconds later you should hear a number of beeps (one for each battery cell you're using) and finally a single long beep indicating the end points have been set and the ESC is calibrated
 #. Disconnect the battery and power up again normally and test as described below

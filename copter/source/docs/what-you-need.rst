@@ -24,13 +24,13 @@ are also supported.
 You'll need a radio control transmitter to manually control your Copter
 and to activate its flight modes. You can use any RC
 transmitter/receiver system with at least six channels. Some of the
-options are discussed in the topic :ref:`Compatible RC Transmitter and Receiver Systems (Pixhawk) <common-pixhawk-and-px4-compatible-rc-transmitter-and-receiver-systems>`.
+options are discussed in the topic :ref:`Compatible RC Transmitter and Receiver Systems <common-rc-systems>`.
 
 .. image:: ../../../images/spektrum-dx8.jpg
     :target: ../_images/spektrum-dx8.jpg
 
-Flight Controller board (Autopilot hardware)
-============================================
+Autopilot (Autopilot hardware)
+==============================
 
 Copter's autopilot board determines its capabilities for autonomous
 flight. At time of writing (December 2015)
@@ -38,12 +38,9 @@ flight. At time of writing (December 2015)
 use.
 
 Developers creating UAV vision applications should consider using a
-separate Companion Computer, or a Linux based autopilot board (e.g.
-:ref:`NAVIO+ <common-navio-overview>` or
-:ref:`Erle-Brain <common-erle-brain-linux-autopilot>`) which is capable of
-running both Copter and the image processing code.
+separate Companion Computer, or a Linux based autopilot board.
 
-For more options, see the topic :ref:`Choosing a Flight Controller <common-choosing-a-flight-controller>`.
+For more options, see the topic :ref:`Choosing an Autopilot <common-choosing-a-flight-controller>`.
 
 GPS module
 ==========
@@ -61,17 +58,16 @@ LiPo batteries and charger
     :target: ../_images/lipo_battery.jpg
 
 Copter requires a rechargeable lithium polymer (LiPo) battery. 
-A good rule of thumb is to use 1,000 mAH (milliamp hours) per
-motor. For a Quad copter, a `4,000 mAH LiPo like this one <http://www.hobbyking.com/hobbyking/store/__9185__Turnigy_4000mAh_3S_20C_Lipo_Pack.html>`__
-would work well. While your copter can use only one battery at a time,
-we recommend having at least two batteries in stock; more batteries
-means more flight time. You'll also need a `charging station for your batteries such as this one <http://hobbyking.com/hobbyking/store/__24289__Turnigy_2S_3S_Balance_Charger_Direct_110_240v_Input_USA_Warehouse_.html>`__.
+A good rule of thumb is to use 1,000 mAH (milliamp hours) per motor. 
+For a Quad copter, a `4000 mAH LiPo like this one <https://hobbyking.com/en_us/turnigy-4000mah-3s-20c-lipo-pack.html?___store=en_us>`__ would work well. 
+While your copter can use only one battery at a time, we recommend having at least two batteries in stock; more batteries means more flight time. 
+You'll also need a `charging station for your batteries such as this one <https://hobbyking.com/en_us/turnigy-2s-3s-balance-charger-direct-110-240v-input.html?___store=en_us>`__.
 
 Ground Control Station
 ======================
 
 The (free and open source) :ref:`Mission Planner <planner:home>` is required if you're going
-to be loading new versions of Copter onto the flight controller, and for
+to be loading new versions of Copter onto the autopilot, and for
 first-flight tuning and calibration. It runs on a PC and can also be
 used for planning missions.
 

@@ -4,25 +4,14 @@
 AirbotPower Power Module
 ========================
 
-This page explains how to set up the `AirbotPower Power Module <http://www.airbotservices.com/airbotpower.html>`__
-and *AirbotPDB* stackable companion power distribution board.
+This page explains how to set up the `AirbotPower Power Module <http://www.airbotservices.com/airbotpower.html>`__ and *AirbotPDB* stackable companion power distribution board.
 
-.. tip::
-
-   This power module is particularly recommended for higher power
-   systems (battery voltage from 4S to 8S and currents from 90 amps to 150
-   amps). The board encapsulates all the wiring and complexity described in
-   :ref:`Powering the Pixhawk <common-powering-the-pixhawk>`) in a single,
-   simple package.
+This power module is useful for higher power systems (battery voltage from 4S to 8S and currents from 90 amps to 150 amps). The board encapsulates all the wiring and complexity described in :ref:`Powering the Pixhawk <common-powering-the-pixhawk>`) in a single, simple package.
 
 Overview
 ========
 
-The
-
-AirbotPower Power Module (and *AirbotPDB* stackable companion power
-distribution board) provides one of the *most reliable* and *simple*
-ways to power a Pixhawk and other UAV components.
+The AirbotPower Power Module (and *AirbotPDB* stackable companion power distribution board) provides a reliable and simple way to power a Pixhawk and other UAV components.
 
 .. image:: ../../../images/AirbotPower_PowerModule_Front.jpg
     :target: ../_images/AirbotPower_PowerModule_Front.jpg
@@ -39,7 +28,7 @@ The following sections provide an overview of the setup. For more
 detailed information about the benefits of this board and setup see:
 
 -  AirbotPower Power Module (airbotservices store)
--  `AirbotPower board <http://diydrones.com/profiles/blogs/airbotpower-board>`__ (DIY
+-  `AirbotPower board <https://diydrones.com/profiles/blogs/airbotpower-board>`__ (DIY
    Drones blog post)
 
 Key Features

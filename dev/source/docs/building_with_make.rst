@@ -1,8 +1,14 @@
 .. _building_with_make:
 
-=======================================
-Building ArduPilot for APM2.x with Make
-=======================================
+=================================================
+Archived: Building ArduPilot for APM2.x with Make
+=================================================
+
+.. warning::
+
+   **ARCHIVED ARTICLE**
+
+   ArduPilot no longer supports Arduino or AVR.
 
 This article explains how to build the code for APM2.x with Make on
 Windows, Mac and Linux.
@@ -15,7 +21,7 @@ Windows, Mac and Linux.
    off the master branch (you will need to build off a supported release
    branch).
 
-   The last Copter firmware that can be built on APM 2.x `can be downloaded from here <http://firmware.ardupilot.org/downloads/wiki/firmware/ArduCopter_APM_2.0_Firmware_3.2.1.zip>`__.
+   The last Copter firmware that can be built on APM 2.x `can be downloaded from here <https://download.ardupilot.org/downloads/wiki/firmware/ArduCopter_APM_2.0_Firmware_3.2.1.zip>`__.
 
 Overview
 ========

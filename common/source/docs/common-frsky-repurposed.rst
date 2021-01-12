@@ -1,16 +1,17 @@
 .. _common-frsky-repurposed:
 
+=========================================
 FrSky Telemetry Using Repurposed Messages
 =========================================
 
-For information on how to connect the FrSky equipment together, please go :ref:`here <common-frsky-equipment>`.
+.. note:: this is superceded by :ref:`common-frsky-passthrough`
 
-For information on how to configure ArduPilot for FrSky telemetry, please go :ref:`here <common-frsky-configMP>`. 
+The original solution for transmitting ArduPilot telemetry data over the FrSky telemetry link was to reuse FrSky data messages meant for another purpose and/or reserved by FrSky for their sensors. For example in this protocol the Flight mode is sent using the tmp1 message instead of the temperature. If you are not using an FrSky temperature sensor on your vehicle, this will not cause any problem. But if you intend to use temperature, other FrSky sensors, this telemetry protocol will cause conflicts with them. 
 
 Once your equipment is connected and ArduPilot is configured, follow the instructions below to get standard FrSky telemetry displayed on your RC transmitter.
 
 Protocol information
---------------------
+====================
 
 Values that are sent over the FrSky telemetry link by ArduPilot:
 
@@ -40,6 +41,25 @@ Values that are sent over the FrSky telemetry link by ArduPilot:
 
 If you installed FrSky sensors on your vehicle, other messages from these may also appear during discovery.
 
+Repurposed Messages Scripts for ArduPilot
+=========================================
+The following script was made specifically for ArduPilot with telemetry protocol 4, repurposed messages.
+
+* `LuaPilot <http://ilihack.github.io/LuaPilot_Taranis_Telemetry>`__
+
+for additional information, see:
+
+* `LuaPilot use for plane discussion <https://discuss.ardupilot.org/t/lua-script-for-apm-plane-quadplane/16202>`__
+
+
+
+.. image:: ../../../images/LuaPilot-Logo.jpg
+      :target: ../_images/LuaPilot-Logo.jpg
+
+.. image:: ../../../images/LuaPilot.jpg
+      :target: ../_images/LuaPilot.jpg
+
+
 Configuration with OpenTX
 =========================
 
@@ -60,7 +80,7 @@ for how to display values from the FrSky telemetry feed on the RC transmitter's 
 .. image:: ../../../images/Telemetry_FrSky_TXSetup.png
     :target: ../_images/Telemetry_FrSky_TXSetup.png
 
-FrSky telemetry data consists of 16 or 32bit unsigned integers recognized by OpenTX. Standard FrSky telemetry does not include flight controller messages natively. Therefore, less important telemetry data messages (temperature, variometer…) have been repurposed to carry more useful information such as flight mode.
+FrSky telemetry data consists of 16 or 32bit unsigned integers recognized by OpenTX. Standard FrSky telemetry does not include autopilot messages natively. Therefore, less important telemetry data messages (temperature, variometer…) have been repurposed to carry more useful information such as flight mode.
 
 Using telemetry values in OpenTX
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,7 +101,7 @@ This example shows how to assign a switch on the Taranis to enable/disable vario
 .. image:: ../../../images/OpenTX_VarioSwitch.png
  :target: ../_images/OpenTX_VarioSwitch.png
 
-For a more detailed video of how to setup the variometer, you may check out this `video <http://open-txu.org/2-6-02-frsky-variometer-sensor-andrew-newton-02272015-2/>`__
+For a more detailed video of how to setup the variometer, you may check out this `video <https://youtu.be/oe_LIWRJ37w>`__
 ArduPilot already provides variometer values through the FrSky telemetry link, so the FrSky variometer sensor is not necessary.
 
 GPS

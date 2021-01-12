@@ -14,7 +14,7 @@ The *EPM688* (from NicaDrone.com) is a small (less than 4cm x 4cm x 2cm)
 Electro Permanent Magnet gripper capable of 7kg of force meaning it can
 hold about 1kg of cargo.  The gripping and releasing of the cargo if
 accomplished by delivering a short pulse to an electromagnet which
-reverses it's field.  Objects that it grips onto should be metal or have
+reverses its field.  Objects that it grips onto should be metal or have
 the included `thin steel target square <http://nicadrone.com/index.php?id_product=15&controller=product>`__
 attached to them.
 
@@ -43,26 +43,6 @@ The EPM is connected to the Pixhawk in the same way as a
    at 5V for the short period that the gripper is first activated to
    latch onto the cargo.
 
-Connecting to an APM2
-=====================
-
-.. image:: ../../../images/EPM_APM2.jpg
-    :target: ../_images/EPM_APM2.jpg
-
-The EPM is connected to the APM2 in the same way as a
-:ref:`servo <common-servo>`.
-
--  If using Copter, connect the EPM's signal wire to either A10 or A11
-   on the left side of the APM.
--  If using Plane or Rover A10, A11 or any available RC1 ~ RC8
-   connectors on the back of the APM may be used.
--  The EPM should be powered using the rear power rail (ensure JP1
-   jumper is removed) or to an external BEC (not shown).  It is
-   absolutely critical that the power and ground wires not be connected
-   to the + and - pins of A10 or A11 because the EPM will be sharing
-   power with the APM2's CPU and will likely cause a brownout when it is
-   activated.
-
 Controlling from a transmitter using servo pass-through
 =======================================================
 
@@ -83,8 +63,8 @@ channels because the EPM is connected to output ch9 (or higher).
 
 Assuming the above is possible for your set-up, connect with the mission
 planner.  Go to the Config/Tuning >> Full Parameters List and set the
-SERVO9_FUNCTION (or RC9_FUNCTION) to "1" (i.e. "RCPassThru").  Note that if the EPM is
-connected to AUX OUT 2 then SERVO10_FUNCTION (or RC10_FUNCTION)should be set instead, etc.
+:ref:`SERVO9_FUNCTION<SERVO9_FUNCTION>` (or RC9_FUNCTION) to "1" (i.e. "RCPassThru").  Note that if the EPM is
+connected to AUX OUT 2 then :ref:`SERVO10_FUNCTION<SERVO10_FUNCTION>` should be set instead, etc.
 
 On the transmitter set CH9 to be controlled from a 3-position switch and
 the positions set as follows:
@@ -116,8 +96,9 @@ pass through the receiver to the Pixhawk/APM2.  Only PWM and Ground
 should be connected.  The EPM should be powered from a BEC (not shown
 below).
 
-.. image:: ../../../images/DSC00803.jpg
-    :target: ../_images/DSC00803.jpg
+.. image:: ../../../images/EPM-with-receiver.jpg
+    :target: ../_images/EPM-with-receiver.jpg
+    :width: 450px
 
 Controlling during missions and from GCS
 ========================================
@@ -132,12 +113,11 @@ control through the ground station.
     :target: ../_images/EPM_SetupMissionControlMP.png
 
 Connect with the mission planner. Go to the Config/Tuning >> Full
-Parameters List and set the SERVO9_FUNCTION (or RC9_FUNCTION) to "0" (it's default value).
+Parameters List and set the :ref:`SERVO9_FUNCTION<SERVO9_FUNCTION>` (or RC9_FUNCTION) to "0" (its default value).
 Note that if the EPM is connected to Pixhawk's AUX OUT 2 then
-SERVO10_FUNCTION (or RC10_FUNCTION) should be set instead, etc.  If using an APM2 it will be
-the RC10_FUNCTION or RC11_FUNCTION parameter.
+:ref:`SERVO10_FUNCTION<SERVO10_FUNCTION>` (or RC10_FUNCTION) should be set instead, etc.
 
-Create the mission you wish to fly and add pairs of DO_SET_SERVO
+Create the mission you wish to fly and add pairs of ``DO_SET_SERVO``
 commands to grip or release the cargo and then return the EPM to
 neutral.
 
@@ -167,6 +147,7 @@ Specifications and more info
 
 .. image:: ../../../images/EPMV2_1.jpg
     :target: ../_images/EPMV2_1.jpg
+    :width: 450px
 
 The EPM has an onboard PIC12F MCU with an in circuit programming header
 to allow easy reflashing.
@@ -185,15 +166,11 @@ capacitor size .
 Reduced magnetic interference allows mounting within 5cm of a compass
 (please test it with your application)
 
-`Paper by Ara Nerses Knaian <http://www.hizook.com/files/users/3/Electropermanent_Magnets_Knaian.pdf>`__
-
-`Datasheet <http://nicadrone.com/img/Datasheet%20EPM688-V2.0.pdf>`__
-
-`Schematics and PCB files <https://upverter.com/eda/#tool=schematic,designId=5466622af0d942e4>`__
-
-`Git repository for Parts Drawing PCB Masks Pic12F source code <https://github.com/ctech4285/EPM_688_V2>`__
-
-`User Group (Help) <https://groups.google.com/forum/#%21forum/opengrab>`__
+- `Paper by Ara Nerses Knaian <http://www.hizook.com/files/users/3/Electropermanent_Magnets_Knaian.pdf>`__
+- `Datasheet <http://nicadrone.com/img/Datasheet%20EPM688-V2.0.pdf>`__
+- `Schematics and PCB files <https://upverter.com/eda/#tool=schematic,designId=5466622af0d942e4>`__
+- `Git repository for Parts Drawing PCB Masks Pic12F source code <https://github.com/ctech4285/EPM_688_V2>`__
+- `User Group (Help) <https://groups.google.com/forum/#%21forum/opengrab>`__
 
 Magnetic interference and Board Voltage check
 =============================================

@@ -1,8 +1,10 @@
 .. _first-time-apm-setup:
 
-================================
-Mandatory Hardware Configuration
-================================
+==========================================
+Archived: Mandatory Hardware Configuration
+==========================================
+
+This page has been included in other topics after re-organization.
 
 This topic explains how to configure the components that are required
 for correct operation of the autopilot.
@@ -14,6 +16,7 @@ transmitter/receiver, compass, and accelerometer and failsafes using
 .. toctree::
     :maxdepth: 1
 
+    Basic System Overview <common-basic-operation>
     Accelerometer Calibration <common-accelerometer-calibration>
     Radio Control Calibration <common-radio-control-calibration>
     RC Transmitter Flight Mode Configuration <common-rc-transmitter-flight-mode-configuration>

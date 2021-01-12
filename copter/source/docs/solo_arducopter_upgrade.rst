@@ -8,11 +8,11 @@ This article details upgrading and operating ArduCopter version 3.5.0 and higher
 
 Overview
 --------
-The 3DR Solo contains, among many things, a Pixhawk 2.0 flight controller. It comes with a heavily customized branch of an early ArduCopter 3.3 compiled specifically for the Solo by 3DR. When you do the initial pre-flight update on a new Solo (or after a factory reset), part of that update is this Solo  branch of ArduCopter. It is installed on the Pixhawk, and has all the necessary default parameters and customizations baked into it. It is essentially transparent to the user, taking place behind the curtains.  Since 3DR is no longer in the consumer UAS business, this custom branch of ArduCopter will not be seeing any further updates. It was last updated in early 2016, and is now very far behind.
+The 3DR Solo contains, among many things, a Pixhawk 2.0 autopilot. It comes with a heavily customized branch of an early ArduCopter 3.3 compiled specifically for the Solo by 3DR. When you do the initial pre-flight update on a new Solo (or after a factory reset), part of that update is this Solo  branch of ArduCopter. It is installed on the Pixhawk, and has all the necessary default parameters and customizations baked into it. It is essentially transparent to the user, taking place behind the curtains.  Since 3DR is no longer in the consumer UAS business, this custom branch of ArduCopter will not be seeing any further updates. It was last updated in early 2016, and is now very far behind.
 
 Life After 3DR
 ^^^^^^^^^^^^^^
-Since the Solo uses a Pixhawk flight controller, it is capable of running variations of ArduCopter besides the 3DR customized Solo version. This article will focus on installing, configuring, and operating ArduCopter version 3.5.0 or higher on a 3DR Solo. ArduCopter continues where 3DR left off, keeping the Solo a modern, advanced, and highly capable sUAS.  There are countless advances in the autopilot firmware making it a more stable, reliable, and agile aircraft. There are many new features such as boat mode, RTK GPS, enhanced telemetry, ADS-B, lidar laser altimeters, terrain awareness and following, IR precision landing, and even and "indoor GPS".
+Since the Solo uses a Pixhawk autopilot, it is capable of running variations of ArduCopter besides the 3DR customized Solo version. This article will focus on installing, configuring, and operating ArduCopter version 3.5.0 or higher on a 3DR Solo. ArduCopter continues where 3DR left off, keeping the Solo a modern, advanced, and highly capable sUAS.  There are countless advances in the autopilot firmware making it a more stable, reliable, and agile aircraft. There are many new features such as boat mode, RTK GPS, enhanced telemetry, ADS-B, lidar laser altimeters, terrain awareness and following, IR precision landing, and even and "indoor GPS".
 
 .. image:: ../images/solo_skids_here.jpg
     :width: 45 %
@@ -53,7 +53,7 @@ There are several great resources online for modification ideas,vendors, beta te
 -  `Solo Mod Club Facebook group <https://www.facebook.com/groups/3DRSOLOModClub/>`_
 -  `Solex Users Facebook group <https://www.facebook.com/groups/176789056089526/>`_
 -  `ArduPilot Discuss Forums <https://discuss.ardupilot.org/c/arducopter/copter-3-5>`_
--  `ArduPilot copter Wiki <http://ardupilot.org/copter/docs/common-advanced-configuration.html>`_
+-  `ArduPilot copter Wiki <https://ardupilot.org/copter/docs/common-advanced-configuration.html>`_
 -  `3DR Pilots Forum <https://3drpilots.com/>`_ 
 -  :ref:`Solo Battery Calibration Process <solo_battery_calibration>`
 
@@ -156,7 +156,7 @@ Value   Meaning
 =====   =======
 
 =====   =======
-:ref:`FS_BATT_ENABLE <FS_BATT_ENABLE>` controls the low battery failsafe action. The low battery failsafe kicks in when when the values set in parameters ``FS_BATT_VOLTAGE`` or ``FS_BATT_MAH`` are breached.
+FS_BATT_ENABLE controls the low battery failsafe action for Copter-3.5 (and earlier). For Copter-3.6 (and higher) check the :ref:`BATT_FS_LOW_ACT <BATT_FS_LOW_ACT>` parameter. The low battery failsafe kicks in when when the values set in parameters ``FS_BATT_VOLTAGE`` or ``FS_BATT_MAH`` are breached.
 ---------------
 Value   Meaning
 =====   =======
@@ -166,7 +166,7 @@ Value   Meaning
 =====   =======
 
 =====   =======
-:ref:`FS_BATT_VOLTAGE <FS_BATT_VOLTAGE>` is the low battery voltage threshold. When the battery voltage drops below this point, the low battery beeper sounds and it will do what you have ``FS_BATT_ENABLE`` set for. This value is expressed in volts. The default is 14.0. You can adjust this higher or lower depending on use case and preference.
+FS_BATT_VOLTAGE is the low battery voltage threshold for Copter-3.5 (and earlier). For Copter-3.6 (and higher) check the :ref:`BATT_LOW_VOLT <BATT_LOW_VOLT>` parameter. When the battery voltage drops below this point, the low battery beeper sounds and it will do what you have ``FS_BATT_ENABLE`` set for. This value is expressed in volts. The default is 14.0. You can adjust this higher or lower depending on use case and preference.
 ---------------
 Value   Meaning
 =====   =======
@@ -176,7 +176,7 @@ Value   Meaning
 
 
 =====   =======
-:ref:`FS_BATT_MAH <FS_BATT_MAH>` is the battery capacity remaining threshold expressed in milliamperes (MAH). When the battery remaining capacity drops below this point, the low battery beeper sounds and it will do what you have ``FS_BATT_ENABLE`` set for. The default is 520. On the solo, that is on average about 1.5 minutes of flying time remaining. You can adjust this up or down to fit your preference and use case. Setting it for 0 will disable capacity remaining based alarms and failsafes.
+FS_BATT_MAH is the battery capacity remaining threshold expressed in milliamperes (MAH) for Copter-3.5 (and earlier). For Copter-3.6 (and higher) check the :ref:`BATT_LOW_MAH <BATT_LOW_VOLT>` parameter. When the battery remaining capacity drops below this point, the low battery beeper sounds and it will do what you have ``FS_BATT_ENABLE`` set for. The default is 520. On the solo, that is on average about 1.5 minutes of flying time remaining. You can adjust this up or down to fit your preference and use case. Setting it for 0 will disable capacity remaining based alarms and failsafes.
 ---------------
 Value   Meaning
 =====   =======

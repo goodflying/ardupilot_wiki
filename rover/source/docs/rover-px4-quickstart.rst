@@ -21,7 +21,7 @@ Mounting the PX4FMU / PX4IO board stack
 It is recommended that you mount the PX4FMU / PX4IO board stack upside
 down with the PX4IO board on top to provide unrestricted access to the
 connectors on the PX4IO board. If you do mount the PX4IO board on top
-you will need to specify the AHRS_BOARD_ORIENTATON as number 8 or roll
+you will need to specify the :ref:`AHRS_ORIENTATION<AHRS_ORIENTATION>` as number 8 or roll
 180 in the Mission Planner Advanced Parameter list.
 
 See also :ref:`Mounting the Flight Controller <common-mounting-the-flight-controller>`.
@@ -87,7 +87,7 @@ Test MANUAL mode
 ----------------
 
 To test the Manual mode, put the Rover up on blocks, to prevent a
-runaway, turn on the R/C transmitter, power up the flight controller
+runaway, turn on the R/C transmitter, power up the autopilot
 (depressing the safety button on the PX4FMU for 5 seconds to disengage the
 safety lock (LED solid on)), and when a 3D lock has been obtained
 
@@ -132,7 +132,3 @@ sure to set the Waypoint Radius to around 2 meters for good performance.
 A more complete guide to using the Mission Planner with Rover is
 described in \ :ref:`Learning a Mission <learning-a-mission>`.
 
-Further information
-===================
-
-A full PX4 vehicle build is described in :ref:`PX4 Rover Build with Brushless Traxxas Stampede 4WD Truck <px4-rover-build-with-brushless-traxxas-stampede-4wd-truck>`.

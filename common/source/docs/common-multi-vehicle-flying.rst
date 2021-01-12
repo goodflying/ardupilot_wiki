@@ -7,11 +7,11 @@ Multi-Vehicle Flying
 This page shows how to monitor and control multiple vehicles using a
 single ground station. Although this capability has been demonstrated
 (see video below) it is somewhat
-`experimental <http://diydrones.com/profiles/blogs/multi-vehicle-testing-with-apm-copter-tracker-and-mission-planner>`__.
+`experimental <https://diydrones.com/profiles/blogs/multi-vehicle-testing-with-apm-copter-tracker-and-mission-planner>`__.
 
 .. note::
 
-   This example has been greatly surpassed by `Michael Clement's 50 plane demonstration <http://diydrones.com/profiles/blogs/from-zero-to-fifty-planes-in-twenty-seven-minutes>`__\ 
+   This example has been greatly surpassed by `Michael Clement's 50 plane demonstration <https://diydrones.com/profiles/blogs/from-zero-to-fifty-planes-in-twenty-seven-minutes>`__\ 
 
 ..  youtube:: M4LxtYa94nk
     :width: 100%
@@ -19,7 +19,7 @@ single ground station. Although this capability has been demonstrated
 Equipment you will need
 =======================
 
--  Multiple :ref:`Planes <plane:home>` or
+-  Multiple `Planes <https://ardupilot.org/plane/index.html>`_ or
    :ref:`Copters <copter:home>` or
    :ref:`Rovers <rover:home>`
 -  An :ref:`Antenna Tracker <antennatracker:home>`\ (a.k.a. Tracker)
@@ -39,13 +39,13 @@ Pre-Flight Setup
    of each pair of radios to a unique number.  I.e. if controlling 3
    vehicles, set the ``NetID`` of one pair to "23", the 2nd pair to
    "24", the 3rd pair to "25".
--  Connect one of each radio pairs to the vehicle flight controllers
+-  Connect one of each radio pairs to the vehicle autopilots
    (i.e. Pixhawk) using Telem1 or Telem2.
 -  Connect the other pairs to the Tracker's controller (i.e. Pixhawk)
    using Telem1, Telem2 and Serial 4/5 ports.
 -  If using Serial 4/5 set the Tracker's ``SERIAL4_PROTOCOL`` to "1" to
    enable MAVLink communication on that port.
--  Connect to each vehicle's flight controller and the tracker and set
+-  Connect to each vehicle's autopilot and the tracker and set
    the ``SYSID_THISMAV`` to a unique number (i.e. "1" for first vehicle,
    "2" for second vehicle, "3" for third, "9" for the tracker).
 -  On the GCS, :ref:`reduce data rate <common-mission-planner-telemetry-logs_setting_the_datarate>`

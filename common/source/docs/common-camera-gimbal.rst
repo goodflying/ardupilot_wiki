@@ -5,7 +5,7 @@ Camera Gimbal with Servos
 =========================
 
 This article explains how to connect a camera gimbal with servos to a
-flight controller and configure it for use with ArduPilot (in Mission
+autopilot and configure it for use with ArduPilot (in Mission
 Planner).
 
 Overview
@@ -55,44 +55,6 @@ and ground to an aux out ground (-) pin.
 .. image:: ../../../images/pixhawk_to_gimbal_connection.jpg
     :target: ../_images/pixhawk_to_gimbal_connection.jpg
 
-Connecting the servos to an APM2
-================================
-
--  The gimbal's roll and pitch servo's signal wires (only the signal
-   wires!) should be connected to the inner most pin (labelled S in the
-   image below) of A10 and A11.
-
-   -  **Very Important 1:** The labels on the side of the APM2 case may
-      not exactly line up with the pins.
-   -  **Very Important 2:** The illustration below shows the 2 rows of
-      SPI pins (marked "NC" in the image) as being unpopulated but most
-      APM2.x boards will also have connector pins in them.
-   -  **Very Important 3: You MUST NOT hook up to the pins marked NC
-      below.**
-
--  If you have digital servos you can assign the gimbal roll/tilt to RC5
-   to RC8 outputs, if they are free.
--  Do not connect the servo's power (red) and ground (black) wires to
-   the RC10 (A10) & RC11 (A11) or you may cause the APM to brownout when
-   the servos move.  Instead power the servos from an external BEC or
-   from the APM's rear power rail with the JP1 jumper removed.
-
-.. image:: ../../../images/CAMERA_APM2b.jpg
-    :target: ../_images/CAMERA_APM2b.jpg
-
-.. note::
-
-    APM2.x RC10 & RC11 outputs operate at 50hz (labeled A10 & A11
-    on the case) making them acceptable for analog or digital servos while
-    PWM outputs RC1 to RC8 operate at 490hz making them theoretically only
-    suitable for digital servos.
-
-For the APM 2.x board for ch9, ch10 and/or ch11 ensure that the jumper
-trace(s) on the bottom of the board have not been cut and that they have
-not been re-jumpered for analog use.
-
-For APM 1: ch5, ch6, ch7 and/or ch8
-
 Gimbal configuration through the mission planner
 ================================================
 
@@ -104,10 +66,8 @@ channel and ensure the **"Stabilise"** checkbox is checked.
 
 .. note::
 
-   Modern brushless gimbals (like the :ref:`Tarot <common-tarot-gimbal>`
-   and :ref:`SToRM32 <common-storm32-gimbal>`) usually come with their own
-   controllers that handle gimbal *stabilisation*. For those controllers
-   the **"Stabilise"** checkbox must not be checked. 
+   Modern brushless gimbals (like the :ref:`SToRM32 <common-storm32-gimbal>`) usually come with their own controllers that handle gimbal *stabilisation*. 
+   For those controllers the **Stabilise** checkbox must not be checked. 
 
 The **Servo Limits** should be adjusted to ensure the gimbal servos
 don't bind.
@@ -221,9 +181,7 @@ ground is a good place to start, but more dramatic viewpoints can be
 achieved with angles other than vertical. Mount about 40 degrees
 deviation from vertical to obtain mainly ground photos but with oblique
 view. About 70 degrees off vertical will give you a lot more sky giving
-scenic photos
-(from `Draganfly <http://www.draganfly.com/news/2008/08/23/rc-aerial-photography-get-great-pictures-tutorial/>`__).
-ArduPilot will stabilise the gimbal to whatever position you set.
+scenic photos. ArduPilot will stabilise the gimbal to whatever position you set.
 
 Shutter configuration
 =====================

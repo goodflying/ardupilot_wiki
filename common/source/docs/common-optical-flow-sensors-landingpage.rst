@@ -6,14 +6,18 @@ Optical Flow Sensors (landingpage)
 
 [copywiki destination="copter,plane"]
 
-Copter and Plane support *Optical Flow Sensors* (camera modules that use ground texture and visible features to determine aircraft ground velocity).
+Copter and Plane support Optical Flow Sensors.  These are camera modules that use ground texture and visible features to determine aircraft ground velocity.
 
 Select the links below for information on the available sensors.
 
 .. toctree::
     :maxdepth: 1
 
-[site wiki="copter"]
+    Optical Flow Setup <common-optical-flow-sensor-setup>
+    Cheerson CX-OF <common-cheerson-cxof>
+    HereFlow <common-hereflow>
     PX4FLOW <common-px4flow-overview>
-[/site]
-    ADNS3080 Mouse Sensor (no longer supported) <common-mouse-based-optical-flow-sensor-adns3080>
+    OpenMV <common-openmv-optflow>
+
+
+    

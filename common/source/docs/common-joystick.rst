@@ -25,7 +25,7 @@ What you will need
 
 You will need the following equipment:
 
--  USB joystick or Gamepad such as the `Logitech F310 <http://gaming.logitech.com/en-us/product/f310-gamepad>`__
+-  USB joystick or Gamepad such as the `Logitech F310 <https://www.logitechg.com/en-us/products/gamepads/f310-gamepad.html>`__
    (shown above).
 -  A :ref:`telemetry connection <common-telemetry-landingpage>`
    between your ground station and vehicle.
@@ -97,7 +97,7 @@ To check the above controls move in the correct direction:
 
 -  Click the **Enable** button on the Joystick setup screen to enable
    sending messages to the vehicle
--  Connect your flight controller to the computer with a USB cable
+-  Connect your autopilot to the computer with a USB cable
 -  Push the Mission Planner's **Connect** button
 -  Go to the **Initial Setup \| Mandatory Hardware \| Radio
    Calibration** screen and ensure the green bars all move in the
@@ -148,7 +148,7 @@ no failover to regular transmitter):
    by checking "ch3in" is very high (around 1900 usually)
 #. On the Joystick screen push the **Disable** button and check the
    "ch3in" has dropped to a mid value (around 1500)
-#. The vehicle should remain in it's current flight mode (Stabilize) but
+#. The vehicle should remain in its current flight mode (Stabilize) but
    controls have been returned to the transmitter.  The pilot's inputs
    should be reflected in the "ch1in" ~ "ch8in" values.  Switch the
    vehicle to AltHold mode by moving the flight mode switch.

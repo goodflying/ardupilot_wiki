@@ -27,7 +27,7 @@ and heading orientation.
 
 **AMA**: Academy of Model Aeronautics. The main US model aircraft
 association. The AMA works closely with the Federal Aviation
-Administration (FAA) to establish\ `reasonable rules <http://www.modelaircraft.org/aboutama/gov.aspx>`__\ for the use
+Administration (FAA) to establish\ `reasonable rules <https://www.modelaircraft.org/aboutama/gov.aspx>`__\ for the use
 of amateur UAVs. Each AMA chapter and field may have slightly different
 policies, but it's possible to fly and test air frames and some
 technology on AMA fields without violating the association's (or
@@ -39,7 +39,7 @@ and necessary supporting hardware, and a software programming
 environment based on the C-like Processing language. Official site
 is \ `here <http://www.arduino.cc/en/>`__.
 
-**APM (AutoPilot Mega)**: Flight Controller providing capabilities for
+**APM (AutoPilot Mega)**: Autopilot providing capabilities for
 stabilized flight, position maintenance and automated mission (waypoint)
 path following.
 
@@ -65,11 +65,11 @@ program. Also see Firmware.
 **COA**: Certificate of Authorization. A FAA approval for a UAV flight.
 See
 the \ `faa.gov <http://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/systemops/aaim/organizations/uas/coa/>`__ web
-site for more details and the \ `DIY Drones Regulatory FAQ <http://www.diydrones.com/profiles/blogs/regulatory-faq>`__.
+site for more details and the \ `DIY Drones Regulatory FAQ <https://www.diydrones.com/profiles/blogs/regulatory-faq>`__.
 
 **DCM**: Direction Cosine Matrix. A algorithm that is a less processing
 intensive equivalent of the Kalman Filter.
-See \ `this <http://diydrones.com/forum/topics/robust-estimator-of-the>`__ for
+See \ `this <https://diydrones.com/forum/topics/robust-estimator-of-the>`__ for
 more.
 
 **Eagle file**: The schematic and PCB design files (and related files
@@ -143,7 +143,7 @@ over short periods of time), while gyros drift over time. The data from
 both types of sensors must be combined in software to determine true
 aircraft attitude and movement to create an AHRS (see above). One
 technique for doing this is the Kalman filter (see below). Now
-superseded by Flight controllers which include CPU and sensors in one
+superseded by Autopilots which include CPU and sensors in one
 unit.
 
 **Inner loop/Outer loop**: Usually used to refer to the stabilization
@@ -191,7 +191,7 @@ $GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,\ **47**
 **Oilpan**: An arduino style shield meant to be paired with the
 ArduPilotMega. Contained the majority of the sensors (gyos,
 accelerometers, barometer, etc) that allow the ArduPilotMega to function
-as an autopilot, now superseded by subsequent Flight controllers that
+as an autopilot, now superseded by subsequent Autopilots that
 incorporate CPU and sensors in one board.
 
 **OSD**: On-screen display. A way to integrate data (often telemetry
@@ -235,7 +235,7 @@ signal and only provide PWM signals for each channel.
 control to drive servos and speed controllers. There is one PWM signal
 for each channel. The width varies from 1000 to 2000 microseconds, depending on the RC manufacturer.
 
-**PX4FMU/PX4IO**: First version of Pixhawk-series flight controllers (FMUv1). Discontinued.
+**PX4FMU/PX4IO**: First version of Pixhawk-series autopilots (FMUv1). Discontinued.
 
 **RTL**: Return to Launch. Fly back to the "home" location where the aircraft took off.
 
@@ -290,4 +290,4 @@ from \ `sparkfun <https://www.sparkfun.com/products/11812>`__.
 than Bluetooth but lower power consumption than WiFi.
 
 
-[copywiki destination="copter,plane,rover,planner,planner2,antennatracker,dev"]
+[copywiki destination="copter,plane,rover,planner,planner2,antennatracker,dev,ardupilot,mavproxy"]

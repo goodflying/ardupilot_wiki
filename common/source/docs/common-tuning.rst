@@ -4,7 +4,7 @@
 Tuning
 ======
 
-With the default PID settings, Ardupilot will fly most RC vehicles
+With the default PID settings, ArduPilot will fly most RC vehicles
 safely right out of the box. To fly well, with tight navigation and
 reliable performance in wind, you’ll want to tune your autopilot
 parameters. The following topics shown you how.
@@ -13,9 +13,20 @@ parameters. The following topics shown you how.
 .. toctree::
     :maxdepth: 1
 
+    Tuning Process Instructions <tuning-process-instructions>
     AutoTune <autotune>
-    Roll and Pitch Tuning <ac_rollpitchtuning>
+    Manual Roll and Pitch Tuning <ac_rollpitchtuning>
+    Basic Tuning <basic-tuning>
     Advanced Tuning <tuning>
+    Transmitter Based Tuning <common-transmitter-tuning>
+    Configuring Notch Filtering <common-imu-notch-filtering>
+    Configuring In-Flight FFT <common-imu-fft>
+
+-----
+
+.. image:: ../../../images/banner-freespace.png
+   :target: https://freespace.solutions/
+
 [/site]
 
 [site wiki="plane"]
@@ -26,6 +37,7 @@ parameters. The following topics shown you how.
     Automatic Tuning with AUTOTUNE <automatic-tuning-with-autotune>
     Roll, Pitch and Yaw Controller Tuning <roll-pitch-controller-tuning>
     Navigation Tuning <navigation-tuning>
+    Cruise Speed Tuning <tuning-cruise>
     TECS (Total Energy Control System) for Speed & Height – Tuning Guide <tecs-total-energy-control-system-for-speed-height-tuning-guide>
     Calibrating an Airspeed Sensor <calibrating-an-airspeed-sensor>
     Tuning Ground Steering for a Plane <tuning-ground-steering-for-a-plane>

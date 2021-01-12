@@ -6,14 +6,18 @@ Reference Frames
 
 .. image:: ../images/reference-frame-top-image.png
 
-This section includes details on tested frames to speed up DIY builds of rovers and boats.  If you are looking for a completely ready-to-use vehicle please see our `RTF wiki page <http://ardupilot.org/ardupilot/docs/common-rtf.html>`__.
+This section includes details on tested frames to speed up DIY builds of rovers and boats.  If you are looking for a completely ready-to-use vehicle please see our `RTF wiki page <https://ardupilot.org/ardupilot/docs/common-rtf.html>`__.
 
 .. toctree::
     :maxdepth: 1
 
+    ArduRoller Balance Bot <reference-frames-arduroller>
+    Boogie Board Boat <reference-frames-boogieboard-boat>
     Thunder Tiger Toyota Hilux <reference-frames-tt-toyotahilux>
     HobbyKing Hydrotek <reference-frames-hydrotek>
+    HobbyKing Hydropro Inception <reference-frames-hydropro-inception>
     Traxxas Stampede 4WD Truck <reference-frame-traxxas-stampede>
+    Vac-U-Tug Tugboat <reference-frames-vacutug>
 
 .. note::
 

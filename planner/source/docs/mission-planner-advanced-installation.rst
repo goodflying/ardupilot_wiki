@@ -27,8 +27,8 @@ Download the most recent Mission Planner ZIP Files
 --------------------------------------------------
 
 You can find all the different versions of Mission Planner zip (and MSI)
-files `here <http://firmware.ardupilot.org/Tools/MissionPlanner/>`__.
-The most recent version of the zip file can be `downloaded from here <http://firmware.ardupilot.org/Tools/MissionPlanner/MissionPlanner-latest.zip>`__.
+files `here <https://firmware.ardupilot.org/Tools/MissionPlanner/>`__.
+The most recent version of the zip file can be `downloaded from here <https://firmware.ardupilot.org/Tools/MissionPlanner/MissionPlanner-latest.zip>`__.
 
 Download and save the zip file to your computer.
 
@@ -42,17 +42,17 @@ Here is how you "install" a version into a different folder:
 
    We suggest un-zipping to Program Files folder where the normal
    installation is, but with a different folder name I.E. a folder name
-   like APM Planner-xxx where xxx is the version number.
+   like Mission Planner-xxx where xxx is the version number.
 -  After you do the un-zip, you should have all the files necessary to
    run that version of MP in the new folder.
 
    -  You can run this version by double clicking on the
-      ArdupilotMegaPlanner10.exe file in the folder's root.
+      MissionPlanner.exe file in the folder's root.
    -  Be sure to answer "no" to the upgrade notice if you want to stay
       with the version you are using in that folder.
    -  To create a desktop icon for that version do this:
 
-      -  Find the fileArdupilotMegaPlanner10.exe in the folder's root.
+      -  Find the file MissionPlanner.exe in the folder's root.
       -  Right click and hold the file name and drag it to your desktop
       -  Select the 'Create a shortcut here" option when you release the
          mouse button.

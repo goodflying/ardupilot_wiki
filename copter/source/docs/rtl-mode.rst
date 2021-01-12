@@ -18,11 +18,8 @@ The copter will first rise to :ref:`RTL_ALT <RTL_ALT>` before returning home or 
 .. image:: ../images/RTL.jpg
     :target: ../_images/RTL.jpg
 
-RTL is a GPS-dependent move, so it is essential that GPS lock is
-acquired before attempting to use this mode. Before arming, ensure that
-the APM's blue LED is solid and not blinking. For a GPS without compass,
-the LED will be solid blue when GPS lock is acquired. For the
-GPS+Compass module, the LED will be blinking blue when GPS is locked.
+RTL mode requires a reliable position estimate to work properly, most commonly provided by GPS and compass. Default prearm checks will ensure a 3D GPS lock with sufficient HDOP is acquired and your mag is working as expected prior to arming. When using non-default arming checks, make sure you do have a sufficient GPS lock and / or a reliable position estimate for RTL to perform as expected.
+
 
 RTL will command the copter to return to the home position, meaning that
 it will return to the location where it was armed. Therefore, the home
@@ -34,7 +31,7 @@ Copter, it will return to the location where it was armed.
 
 .. warning::
 
-   In RTL mode the flight controller uses a barometer which
+   In RTL mode the autopilot uses a barometer which
    measures air pressure as the primary means for determining altitude
    ("Pressure Altitude") and if the air pressure is changing in your flight
    area, the copter will follow the air pressure change rather than actual
@@ -71,7 +68,7 @@ Options (User Adjustable Parameters)
    -  0 = Never change Yaw.
    -  1 = Face Next Waypoint including facing home during RTL.
    -  2 = Face Next Waypoint except for RTL (i.e. during RTL vehicle
-      will remain pointed at it's last heading)
+      will remain pointed at its last heading)
 
 -  :ref:`LAND_SPEED <LAND_SPEED>`:
    The descent speed for the final stage of landing in centimeters per

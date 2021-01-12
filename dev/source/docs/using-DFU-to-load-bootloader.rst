@@ -24,8 +24,9 @@ You access it by pulling the "boot0" pin high on the processor when it
 is powered on. On a Pixhawk1 this is done by pulling the "FMU-BOOT"
 pad on the top surface of the Pixhawk1 high. The FMU-BOOT pad is
 located between the buzzer and DSM/Spkt connectors on the Pixhawk1.
+On a 3DR Pixhawk FMU-BOOT is located between the switch and Telem2.
 You should pull it up to 3.3V, but in a pinch it does work to pull it
-up to 5V if you don't have 3.3V handy.
+up to 5V if you don't have 3.3V handy. The 3.3V supply on the switch is suitable for this.
 
 When the pin is pulled up apply power to the board (eg. plug in the
 USB connector) and the board should boot into DFU mode.
@@ -73,7 +74,7 @@ Loading a bootloader
 
 The current bootloaders suitable for ArduPilot on STM32 are here:
 
-  `http://firmware.ardupilot.org/Tools/Bootloaders <http://firmware.ardupilot.org/Tools/Bootloaders>`__
+  `https://firmware.ardupilot.org/Tools/Bootloaders <https://firmware.ardupilot.org/Tools/Bootloaders>`__
 
 download the px4fmuv2_bl.bin and run this:
 

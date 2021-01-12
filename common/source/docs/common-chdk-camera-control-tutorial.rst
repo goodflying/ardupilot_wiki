@@ -103,7 +103,7 @@ to take pictures automatically at intervals during flight. We'll do this
 by adding an `intervalometer <https://en.wikipedia.org/wiki/Intervalometer>`__ script
 to the SD card. Our friends at `Drone Mapper <https://dronemapper.com/>`__ have created a great CHDK
 intervalometer script that can be found in Drone Mapper's \ `CHDK documentation <https://s3.amazonaws.com/DroneMapper_US/documentation/DroneMapper_CHDK.pdf>`__
-or `viewed by clicking here <http://download.ardupilot.org/downloads/wiki/other_files/DM-Intervalometer.txt>`__. Copy
+or `viewed by clicking here <https://download.ardupilot.org/downloads/wiki/other_files/DM-Intervalometer.txt>`__. Copy
 the intervalometer script into a text editor and save the file as **DM_interval.bas**.
 
 This script will measure time intervals for five minutes and trigger the
@@ -154,17 +154,17 @@ Integrating CHDK with ArduPilot
     :target: ../_images/chdk-cable.jpg
 
 To integrate your CHDK setup with ArduPilot, you will need a CHDK cable
-(pictured across) that connects the flight controller's output signal pins with the
+(pictured across) that connects the autopilot's output signal pins with the
 camera's USB port. We used \ `Gentles' gentWIRE-USB2 cable <http://gentles.ltd.uk/gentwire/usb.htm>`__. (Stay tuned for a 3DR
 CHDK cable.)
 
 CHDK cables work by translating pulse width modulation (PWM) output by
-the flight controller into USB power pulses that can be read by the camera. It does
+the autopilot into USB power pulses that can be read by the camera. It does
 this by establishing a range of how long power is applied to the USB
 port (ex: 40-80 ms) and assigning that range to a PWM value
 corresponding to a channel switch position (ex: channel 1 middle). The
 table below shows the corresponding values between the switch position
-on the RC transmitter, the flight controller's PWM output, and the camera's USB power.
+on the RC transmitter, the autopilot's PWM output, and the camera's USB power.
 
 +-------------------+-----------+------------------+
 | Switch position   | PWM (µs)  | USB power (ms)   |
@@ -193,11 +193,11 @@ Configuring the CHDK cable for use with ArduPilot
 -------------------------------------------------
 
 First we need to select an RC channel to assign to CHDK's channel 1.
-Connect your plane's flight controller to Mission Planner. Go to **Configuration \|
+Connect your plane's autopilot to Mission Planner. Go to **Configuration \|
 Radio Calibration** to locate an available channel and its corresponding
 three-position switch on your RC transmitter. For this tutorial, we'll
 use channel 7. (If you decide to use a different channel, substitute
-your channel wherever we input channel 7.) Don't disconnect your flight controller
+your channel wherever we input channel 7.) Don't disconnect your autopilot
 yet.
 
 Before we fly, we'll need to test the integration between this channel
@@ -213,18 +213,18 @@ us, it's **Servo out function (SERVO7_FUNCTION or RC7_FUNCTION)**.
 
    Set this parameter to **Manual** whenever you want to control your
    camera using your RC transmitter; set to **Disabled** when you want the
-   flight controller to control the camera automatically.
+   autopilot to control the camera automatically.
 
 Since we're using the RC transmitter to test the CHDK cable, set **Servo
 out function** to **Manual**. Select **Write Params** before
-disconnecting your flight controller.
+disconnecting your autopilot.
 
 Once you've chosen your camera control channel, you'll need to connect
-your CHDK cable to the flight controller's output pins. Connect either of the pin
-connectors on the CHDK cable to the flight controller output pins corresponding to
+your CHDK cable to the autopilot's output pins. Connect either of the pin
+connectors on the CHDK cable to the autopilot output pins corresponding to
 your camera control channel (black cable on the outside). For example,
-we connected our CHDK cable to the channel 7 output pins on the flight controller.
-Make sure no input pins are connected to the flight controller for that channel.
+we connected our CHDK cable to the channel 7 output pins on the autopilot.
+Make sure no input pins are connected to the autopilot for that channel.
 
 For **Pixhawk**, connect the CHDK cable to aux out pin 5. However, this
 pin outputs only 3.3V, and 5V are required to trigger CHDK. To convert
@@ -235,7 +235,7 @@ Adding a script
 ---------------
 
 Now that you've configured your CHDK cable, we'll add a script to
-control the camera when commanded by the flight controller. Let's break down a CHDK
+control the camera when commanded by the autopilot. Let's break down a CHDK
 cable UBASIC script into its main parts.
 
 ::
@@ -326,7 +326,7 @@ When channel 7 is set to the mid position, CHDK will set zoom to 30
 When channel 7 is set to the down position, CHDK will set zoom to 100
 (extended position).
 
-`Click here to view the above script <http://download.ardupilot.org/downloads/wiki/other_files/3DR_Shoot.txt>`__,
+`Click here to view the above script <https://download.ardupilot.org/downloads/wiki/other_files/3DR_Shoot.txt>`__,
 copy into a text editor, and save as \ **3DR_Shoot.bas**. Now that
 you're familiar with how the script works, you can easily change the
 commands of each function. For example, you can add a **shoot** command
@@ -374,11 +374,11 @@ below, select your first waypoint and click “Add Below”.
     :target: ../_images/mp_add_command1.jpg
 
 For your new command, set **Command** type to **DO_SET_SERVO**. (This
-tells the flight controller that this command means output to a servo.) Set **Ser
+tells the autopilot that this command means output to a servo.) Set **Ser
 No**\ (servo number) to the number of your camera control channel
-(ex:**7**). (This tells the flight controller where to output: for us, servo channel 7
+(ex:**7**). (This tells the autopilot where to output: for us, servo channel 7
 is the CHDK cable.) And set **PWM** to **1900**. (This value tells the
-flight controller what to output: 1,900 microseconds of pulse width modulation
+autopilot what to output: 1,900 microseconds of pulse width modulation
 corresponds to the high position under which the shoot command is
 located). Repeat this process for each waypoint at which you would like
 to take a picture. The screen below shows a shutter command correctly
@@ -394,12 +394,12 @@ applied at each of three waypoints.
     become visible when the command is selected as different parameters
     apply to different types of commands.*
 
-Since we're using the flight controller to control the camera, we need to set
+Since we're using the autopilot to control the camera, we need to set
 the \ **Servo out function (RC7_FUNCTION or SERVO7_FUNCTION)** parameter to **Disabled**
 (under **Standard Parameters**). Write waypoints and parameters to the
-flight controller.
+autopilot.
 
-Ensure that your camera and flight controller are connected correctly.
+Ensure that your camera and autopilot are connected correctly.
 Run \ **3DR_Shoot.bas** prior to launch. Fly your mission according to
 standard practices and safety procedures.
 
@@ -409,7 +409,7 @@ Creating a composite image
 One of our favorite applications of CHDK is creating a map of an area by
 stitching automatically-captured pictures into a composite image. We'll
 use the same
-`3DR_Shoot.bas <http://download.ardupilot.org/downloads/wiki/other_files/3DR_Shoot.txt>`__\ script
+`3DR_Shoot.bas <https://download.ardupilot.org/downloads/wiki/other_files/3DR_Shoot.txt>`__\ script
 that we used in the previous section. The process is similar to setting
 shutter triggers at waypoints, only to make sure we capture the entire
 area we need more frequent, more regular waypoints. We’ll do this
@@ -551,12 +551,12 @@ CHDK Cable Troubleshooting and Testing
 --------------------------------------
 
 CHDK cables work by translating pulse width modulation (PWM) output by
-the flight controller into USB power pulses that can be read by the camera. It does
+the autopilot into USB power pulses that can be read by the camera. It does
 this by establishing a range of how long power is applied to the USB
 port (ex: 40-80 ms) and assigning that range to a PWM value
 corresponding to a channel switch position (ex: Channel middle).The
 table below shows the corresponding output values between the switch
-position on the RC transmitter, the flight controller's PWM output, and the camera's
+position on the RC transmitter, the autopilot's PWM output, and the camera's
 USB power. In practice, our Spektrum DX 8 outputs the values shown in
 the rightmost column.
 
@@ -578,7 +578,7 @@ the rightmost column.
 
 To verify that your transmitter behaves similarly, you may want to
 perform a test to ensure that a valid USB power value is returned for
-each switch position. View the `3DR CHDK Tester script here <http://download.ardupilot.org/downloads/wiki/other_files/3DRCHDKTester.txt>`__.
+each switch position. View the `3DR CHDK Tester script here <https://download.ardupilot.org/downloads/wiki/other_files/3DRCHDKTester.txt>`__.
 Copy the contents into a text editor and save as **3DRCHDKTester.bas**.
 Load into your (unlocked) SD card by copying the file into the
 **Scripts** folder (in the **CHDK** folder).
@@ -588,13 +588,13 @@ Configuring CHDK cable for Testing
 
 Before we can test the CHDK cable, we'll need to choose a channel for
 camera control and configure the corresponding inputs. Connect your
-plane's flight controller to Mission Planner. Go to **Configuration \| Radio
+plane's autopilot to Mission Planner. Go to **Configuration \| Radio
 Calibration** to locate an available channel and its corresponding
 switch on your RC transmitter. (We'll use channel 7.) Check the PWM
 outputs for the up, mid, and down positions of the channel. Compare them
 with the table shown above.
 
-Before we disconnect the flight controller, we need to change an important parameter
+Before we disconnect the autopilot, we need to change an important parameter
 that you'll be using often. Under **Configuration** -> **Standard
 Parameters**, scroll about 4/5 of the way down to find the **Servo out
 function** parameters for each channel. Find the parameter that
@@ -602,18 +602,18 @@ corresponds to your camera control channel. For us, it's **Servo out
 function (SERVO7_FUNCTION or RC7_FUNCTION)**.
 
 ***Set this parameter to Manual whenever you want to control your camera
-using your RC transmitter; set to Disabled when you want the flight controller to
+using your RC transmitter; set to Disabled when you want the autopilot to
 control the camera automatically.***
 
 Since we're using the RC transmitter to test the CHDK cable, set **Servo
 out function** to **Manual**. Select Write Params before disconnecting
-your flight controller.
+your autopilot.
 
 Once you've chosen your camera control channel, you'll need to connect
-your CHDK cable to the flight controller's output pins. Connect either of the pin
-connectors on the CHDK cable to the flight controller output pins corresponding to
+your CHDK cable to the autopilot's output pins. Connect either of the pin
+connectors on the CHDK cable to the autopilot output pins corresponding to
 your camera control channel (black cable on the outside). For example,
-we connected our CHDK cable to the channel 7 output pins on the flight controller.
+we connected our CHDK cable to the channel 7 output pins on the autopilot.
 Make sure no input pins are connected for that channel.
 
 Testing the CHDK cable
@@ -643,7 +643,7 @@ GeoTagging Images
 -----------------
 
 For information regarding geotagging images, more information can be
-found on `Sandro Beningo's step-by-step guide. <http://www.diydrones.com/profiles/blogs/geotagging-images-with-mission-planner>`__
+found on `Sandro Beningo's step-by-step guide. <https://www.diydrones.com/profiles/blogs/geotagging-images-with-mission-planner>`__
 
 Troubleshooting
 ---------------

@@ -4,7 +4,7 @@
 Swift Navigation's Piksi Multi RTK GPS Receiver
 ===============================================
 
-This article provides a brief overview of Piksi Multi multi-band multi-constellation RTK GPS receiver, available from `Swift Navigation <http://swiftnav.com/>`__.
+This article provides a brief overview of Piksi Multi multi-band multi-constellation RTK GPS receiver, available from `Swift Navigation <https://www.swiftnav.com/>`__.
 
 .. image:: ../../../images/PiksiMulti.jpg
 	:target: ../_images/PiksiMulti.jpg
@@ -32,4 +32,4 @@ However, RTK GPS can only calculate centimeter-accurate positions once an intege
 ArduPilot Integration
 =====================
 
-See the `ArduPilot Integration Guide for Piksi Multi <https://support.swiftnav.com/customer/portal/articles/2803651-piksi-multi-ardupilot-integration-guide>`__ supplied by Swift Navigation.
+See the `ArduPilot Integration Guide for Piksi Multi <https://support.swiftnav.com/support/solutions/articles/44001850784-piksi-multi-ardupilot-integration-guide>`__ supplied by Swift Navigation.

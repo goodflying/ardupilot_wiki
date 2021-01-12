@@ -7,7 +7,7 @@ Antenna Design Overview
 This article provides an overview of the the fundamental principles of
 antenna design. Antenna design is an important factor in using UAVs over
 extended range and where there are obstructed views. While this is not
-directly related to Antenna Tracking/flight controllers, it may be
+directly related to Antenna Tracking/autopilots, it may be
 useful for some readers.
 
 .. image:: ../../../images/Cupoblique.jpg
@@ -372,7 +372,7 @@ Acknowledgements
 ================
 
 Much of this antenna information has been provided by Joe Noci as an
-extension of this discussion: `433 UHF LRS Antenna "Turn Stile" <http://diydrones.com/forum/topics/433-uhf-lrs-antenna-turn-stile>`__.
+extension of this discussion: `433 UHF LRS Antenna "Turn Stile" <https://diydrones.com/forum/topics/433-uhf-lrs-antenna-turn-stile>`__.
 
 
 

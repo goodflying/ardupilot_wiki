@@ -67,60 +67,6 @@ Preconditions
    system PATH. SSH is installed with GIT, or you can install it
    independently for your platform.
 
-Building PX4 Firmware - Rsync
------------------------------
-
-If you're using this Vagrant file for the purpose of building PX4
-firmware you will probably also wish to install *Rsync*, as this
-significantly speeds up PX4 builds. The relative build times using
-different approaches (on a 3Ghz i5 Haswell / 16 Gb) are shown below:
-
--  Native windows px4 toolchain (gcc/mingw): 190 minutes
--  Vagrant with shared folders (the default setup described here): 15
-   minutes 30s (12x faster)
--  Vagrant with rsync folders: 1 minute 40s (120x faster)!.
-
-.. tip::
-
-   Everything is set up to use shared folders by default. The only
-   caveat is that ``px4-clean`` *does not work with shared folders*. You
-   either need to use rsync or run ``px4-clean`` from outside Vagrant (you
-   can also get usable results by cd'ing to each module subdirectory and
-   running\ `` git clean -x -d -f`` but don't do this from the top level
-   otherwise you will delete your vagrant temporary files.
-
-If you want to use rsync you need to:
-
--  Uncomment the `appropriate line <https://github.com/ArduPilot/ardupilot/blob/master/Vagrantfile#L37>`__
-   in the Vagrantfile:
-
-   ::
-
-       # config.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__auto: true
-
--  *rsync* must be installed on the host computer and be added to the
-   system PATH. According to `the vagrant rsync guide <http://docs.vagrantup.com/v2/synced-folders/rsync.html>`__ you
-   can install rsync from either
-   `Mingw <http://sourceforge.net/projects/mingw/files/Installer/>`__ or
-   `Cygwin <https://cygwin.com/>`__. Assuming you're using Mingw:
-
-   -  `Download the latest Mingw installer <http://sourceforge.net/projects/mingw/files/Installer/>`__
-   -  In the installer, select and install the *mingw-developer-toolkit*
-
-      .. figure:: ../images/MinGW-InstallationManager.png
-         :target: ../_images/MinGW-InstallationManager.png
-
-         MinGW Installation Manager
-
-   -  Use *mingw-get* to install rsync (you may need to add *mingw-get*
-      to your path):
-
-      ::
-
-          mingw-get install msys-rsync
-
-   -  Set the system path to point to rsync (By default this is in
-      **C:\\MinGW\\msys\\1.0\\bin**.)
 
 Set up the Vagrant and the virtual machine
 ==========================================
@@ -179,7 +125,7 @@ then run the simulator:
 
 ::
 
-    vagrant ssh -c "sim_vehicle.py -j 2"
+    vagrant ssh -c "sim_vehicle.py -j 2 -v ArduCopter"
 
 Once the simulation is running, you will start getting information from
 the MAVLink prompt about vehicle state. For example:
@@ -192,13 +138,13 @@ the MAVLink prompt about vehicle state. For example:
     APM: Frame: QUAD
     APM: PreArm: RC not calibrated
 
-The Copter Simulator is built by default, but you can instead build for
-the plane or rover using the ``-v`` option:
+The Copter Simulator is built in this example, but you can instead build for
+the plane or rover by changing the ``-v`` option:
 
 ::
 
     vagrant ssh -c "sim_vehicle.py -j 2 -v ArduPlane"
-    vagrant ssh -c "sim_vehicle.py -j 2 -v APMrover2"
+    vagrant ssh -c "sim_vehicle.py -j 2 -v Rover"
 
 .. tip::
 
@@ -260,7 +206,7 @@ the source tree (or pull a new version from Github).
 Next steps
 ==========
 
-To get the most out of SITL we recommend you `Learn MavProxy <http://ardupilot.github.io/MAVProxy/>`__.
+To get the most out of SITL we recommend you read the :ref:`MAVProxy documentation <mavproxy:home>`.
 
 The topic :ref:`Using SITL for ArduPilot Testing <using-sitl-for-ardupilot-testing>` explains how to use the
 simulator, and covers topics like how to use SITL with Ground Stations

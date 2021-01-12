@@ -1,8 +1,8 @@
 .. _common-compatible-rc-transmitter-and-receiver-systems-erle-brain-2:
 
-=============================================================
-Compatible RC Transmitter and Receiver Systems (Erle-Brain 2)
-=============================================================
+=============================================================================
+Archived Topic: Compatible RC Transmitter and Receiver Systems (Erle-Brain 2)
+=============================================================================
 
 This article provides an overview of the RC Transmitter and Receiver
 Systems that can be used with Erle-Brain 2, along with guidance on how
@@ -33,7 +33,7 @@ PPM channels into a PPM-Sum type, which is supported by Erle-Brain.
 
 For more information see the
 `manual <http://www.hobbyking.com/hobbyking/store/uploads/1022671243X1465900X53.pdf>`__
-and the `offial documentation <http://erlerobotics.com/docs/Robots/Common_Parts/Radio_Control.html>`__.
+and the `offical documentation <http://erlerobotics.com/docs/Robots/Common_Parts/Radio_Control.html>`__.
 
 Setting up connections
 ~~~~~~~~~~~~~~~~~~~~~~

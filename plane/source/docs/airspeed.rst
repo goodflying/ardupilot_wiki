@@ -9,12 +9,24 @@ conditions, slow flight and autonomous landings. It is not recommended
 for most new users, however, as it does require additional tuning and
 adds one more layer of control to set up.
 
-The following sections explain how to wire sensors to the flight
-controller. After you install an airspeed sensor don't forget to
+The following sections explain how to wire sensors to the autopilot. After you install an airspeed sensor don't forget to
 :ref:`calibrate it <calibrating-an-airspeed-sensor>`!
 
 .. image:: ../images/BR-0004-03-2T1.jpg
     :target: ../_images/BR-0004-03-2T1.jpg
+
+
+ARSPD USE
+=========
+
+:ref:`ARSPD_USE<ARSPD_USE>` enables airspeed use for automatic throttle modes instead of :ref:`TRIM_THROTTLE<TRIM_THROTTLE>` . The autopilot continues to display and log airspeed if set to 0, but only airspeed sensor readings for control if set to 1. It will only use airspeed sensor readings when throttle is idle, if set to 2 (useful for gliders with airspeed sensors behind propellers).
+
+Airspeed Sensor Type
+====================
+
+Airspeed sensors can be either analog or digital. The analog sensors connect to an A/D converter input pin on the autopilot, while digital sensors connect to the autopilot's external I2C bus using the SDA and SCL external digital I/O pins. The type is set by the :ref:`ARSPD_TYPE<ARSPD_TYPE>` parameter. Analog sensors are type 2, and supported digital sensors by other numbers. If there is no sensor, be sure to set the :ref:`ARSPD_TYPE<ARSPD_TYPE>` to 0. ArduPilot calculates an sensor-less airspeed estimate that is used if no sensor is present or fails. :ref:`ARSPD_TYPE<ARSPD_TYPE>` must be set to zero in order to display this value if no sensor is present.
+
+.. warning:: Many airspeed sensors are sensitive to light. Unless you are certain that the particular sensor used is not light sensitive, in order to avoid measurement errors, the sensor should be shielded from light.
 
 Pixhawk Digital Airspeed Pin
 ============================
@@ -81,7 +93,7 @@ For the PX4
 -  Assign the airspeed sensor to an appropriate "PIN" in Mission Planner
    - Configuration - Advanced Params - Adv Parameter List.
 
-   -  Set the ``ARSPD_PIN`` parameter to 11 in the Advanced Parameter
+   -  Set the :ref:`ARSPD_PIN <ARSPD_PIN>` parameter to 11 in the Advanced Parameter
       List and select "Write Parameters".
 
 For the Pixhawk
@@ -103,8 +115,16 @@ For the Pixhawk
 -  Assign the airspeed sensor to an appropriate "PIN" in Mission Planner
    - Configuration - Advanced Params - Adv Parameter List.
 
-   -  Set the ``ARSPD_PIN`` parameter to 15 in the Advanced Parameter
-      List and select "Write Parameters".
+   -  For Pixhawk v1, set the :ref:`ARSPD_PIN <ARSPD_PIN>` parameter to 15 in the Advanced Parameter
+      List and select "Write Parameters". 
+   -  For Pixhawk v4, set the :ref:`ARSPD_PIN <ARSPD_PIN>` parameter to 4 in the Advanced Parameter
+      List and select "Write Parameters". 
+
+For other  autopilots:
+
+- Many have an analog RSSI input pin that can serve as the analog airspeed sensor input.
+
+.. note:: Most analog sensors output a signal from 0 to 5V, but most RSSI inputs are 3.3V maximum. If you will never exceed ~60% of the sensor's maximum speed output (normally ~ 200mph for 5V), you will not exceed that rating. However, if you might or just want to be absolutely safe, you can use a 2:1 resistive voltage divider on the signal before applying to the autopilot RSSI input pin.
 
 APM 2
 -----
@@ -185,24 +205,23 @@ a loose fitting cover over the pitot tube that shields the front hole
 and the four small side holes from the wind. This cover should be fitted
 prior to power on and removed before flight. If you forget to do this,
 you can always place the cover and repeat the airspeed auto-zero using
-the Mission Planner's PREFLIGHT_CALIBRATE => Do Action.
+the Mission Planner's PREFLIGHT CALIBRATE => Do Action.
 
-The airspeed reading scale factor is adjusted using the ARSPD_RATIO
+The airspeed reading scale factor is adjusted using the :ref:`ARSPD_RATIO<ARSPD_RATIO>`
 parameter. Plane has an automatic calibration function that will adjust
-the value of ARSPD_RATIO automatically provided the plane is flown with
+the value of :ref:`ARSPD_RATIO<ARSPD_RATIO>` automatically provided the plane is flown with
 frequent direction changes. A normal model flying field circuit pattern
 or loiter will achieve the required direction changes, cross-country
 flying will not. To enable automatic airspeed sensor calibration, set
-the value of ARSPD_AUTOCAL to 1.
+the value of :ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` to 1.
 
 Using a different pin for the airspeed sensor
 =============================================
 
--  To assign the airspeed sensor to a specific pin, hook up your flight
-   controller to your PC via USB. Start Mission Planner and select the
+-  To assign the airspeed sensor to a specific pin, hook up your autopilot to your PC via USB. Start Mission Planner and select the
    **Connect** button on the upper right of the page.
 -  Select the *Configuration* tab then **Advanced Params** and then the
-   **Adv Parameter List**. Scroll down the list to the ``ARSPD_PIN``
+   **Adv Parameter List**. Scroll down the list to the :ref:`ARSPD_PIN <ARSPD_PIN>`
    parameter and select the pin you wish to use.
 
    -  Set this to 0..9 for the APM2 analog pins.
@@ -210,6 +229,7 @@ Using a different pin for the airspeed sensor
       the board.
    -  Set to 11 on PX4 for the analog airspeed port.
    -  Set to 65 on the PX4 for an I2C airspeed sensor.
+   -  Set to the listed RSSI pin in other board's :ref:`documentation<common-autopilots>` ,often it is pin 0.
 
 - After you have selected the pin, select the "Update Parameters" tab and
       close *Mission Planner*.

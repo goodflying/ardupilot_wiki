@@ -1,8 +1,14 @@
 .. _building-apm-for-flymaple:
 
-========================================
-Building ArduPilot for Flymaple on Linux
-========================================
+==================================================
+Archived: Building ArduPilot for Flymaple on Linux
+==================================================
+
+.. warning::
+
+   **ARCHIVED ARTICLE**
+
+   ArduPilot no longer supports FlyMaple.
 
 .. note::
 
@@ -13,7 +19,7 @@ About Flymaple
 ==============
 
 -  The APMPilot firmware has been ported to run on
-   `Flymaple <http://www.dfrobot.com/wiki/index.php?title=Flymaple_V1.1(SKU:DFR0188)>`__
+   `Flymaple <https://www.dfrobot.com/wiki/index.php/Flymaple_V1.1(SKU:DFR0188)>`__
 -  Flymaple is an inexpensive board based on a 75MHz ARM Cortex-M3
    processor.
 -  It includes 10DOF sensors (accelerometer, gyroscope, magnetometer and
@@ -78,7 +84,7 @@ How to build APM for Flymaple on Linux.
 
 ::
 
-    cd APMrover2
+    cd Rover
      make flymaple
      make upload
 

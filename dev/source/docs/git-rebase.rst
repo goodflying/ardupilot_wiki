@@ -26,11 +26,17 @@ the "Git Shell" or "Git Bash" utility that should already be :ref:`installed <gi
 
        cd <ardupilot-path>
 
-#. Starting from here we will assume that you want to rebase you master branch on ArduPilot master branch. This process is the same on all branch, just replace master by your branch name. Ensure you are looking at your master branch or the branch that you want to rebase.
+#. Starting from here we will assume that you want to rebase your topic-branch on ArduPilot master branch. This process is the same for the master branch, just replace topic-branch with master. Ensure you are looking at your master branch or the branch that you want to rebase.
 
    ::
 
-       git checkout master
+       git checkout topic-branch
+
+   If you want to create a new branch to work on which you would like to rebase on top of the ArduPilot master branch,
+
+   ::
+
+       git checkout -b topic-branch
 
 #. Ensure your repository is connected to the upstream repository you
    forked from.
@@ -39,7 +45,8 @@ the "Git Shell" or "Git Bash" utility that should already be :ref:`installed <gi
 
        git remote add upstream https://github.com/ArduPilot/ardupilot.git
 
-#. Fetch changes from the upstream repository (this simply downloads changes into a local cache, it will not overwrite or modify your changes in any way)
+#. Fetch changes from the upstream repository (this simply downloads changes into a local cache, it will not overwrite or modify your changes in any way).
+   If you are rebasing your branch on your own fork's master branch, replace upstream with origin
 
    ::
 
@@ -63,7 +70,7 @@ the "Git Shell" or "Git Bash" utility that should already be :ref:`installed <gi
 
    ::
 
-       git push
+       git push origin topic-branch
 
 
 When things go wrong
@@ -79,4 +86,11 @@ The rebase step (step 5) above may fail for a few reasons:
 
 The submodule update (step 6) occasionally fails if new submodules have been added.  ``git submodule init`` usually resolves this.
 
-The push step (step 7) above may fail if your :ref:`fork <git-fork>`'s branch has already been updated previously.  You can "force" the push using ``git push -f`` which will overwrite your github fork's branch to look like your local repo's branch.
+The push step (step 7) above may fail if your :ref:`fork <git-fork>`'s branch has already been updated previously.  You can "force" the push using ``git push -f`` which will overwrite your github fork's branch to look like your local repo's branch. It will also fail if the topic-branch does not already exist in your remote repository. In that case use
+
+   ::
+
+       git push -u origin topic-branch
+
+to create the branch there and have your local topic-branch track it.
+

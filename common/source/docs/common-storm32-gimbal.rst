@@ -16,13 +16,16 @@ corrections leading to better performance during aggressive maneuvers.
 
 Please refer to the `STorM32-BGC wiki pages <http://www.olliw.eu/storm32bgc-wiki/Main_Page>`__ for more
 detailed information including where the gimbals can be purchased.  This
-gimbal has been tested with a `DYS 3-axis brushless gimbal <http://www.hobbyking.com/hobbyking/store/__52136__DYS_Smart3_3_Axis_GoPro_Gimbal_with_AlexMos_Control_Board_BaseCam_.html>`__.
+gimbal has been tested with a `DYS 3-axis brushless gimbal <https://hobbyking.com/en_us/dys-smart3-3-axis-gopro-gimbal-with-alexmos-control-board-basecam.html?___store=en_us>`__.
 
 .. note::
 
-   Support for this gimbal is included in Copter 3.3 (and higher) for
+   Support for this gimbal is included for
    gimbals running
    `v067e <http://www.olliw.eu/storm32bgc-wiki/Downloads>`__ (or higher). 
+
+Be aware that some v1.3x boards has been found to cause significant RF interference on the 433mhz and 915mhz band.
+Use with caution, if you are using either 433/915mhz control or telemetry.
 
 Connecting the gimbal to the Pixhawk
 ====================================
@@ -115,11 +118,10 @@ Testing the gimbal
 ==================
 
 For instructions for testing the gimbal moves correctly please check the
-:ref:`similar section for the Tarot gimbal <common-tarot-gimbal_testing_the_gimbal_moves_correctly>`.
+:ref:`similar section for the SimpleBGC gimbal <common-simplebgc-gimbal_testing_the_gimbal_moves_correctly>`.
 
-The video below shows the STorM32 being tested on Copter3.3. It
-demonstrates a few features that would not be possible on a 2-axis
-gimbal like the :ref:`Tarot Gimbal <common-tarot-gimbal>`.
+The video below shows the STorM32 being tested on Copter3.3. 
+It demonstrates a few features that would not be possible on a 2-axis gimbal like the :ref:`Tarot Gimbal <common-tarot-gimbal>`.
 
 ..  youtube:: LAKrGXSFWpM
     :width: 100%
@@ -127,7 +129,7 @@ gimbal like the :ref:`Tarot Gimbal <common-tarot-gimbal>`.
 Resistor issue on some boards
 =============================
 
-Some in-depth analysis `here on rcgroups <http://www.rcgroups.com/forums/showthread.php?t=2494532&page=5>`__
+Some in-depth analysis `here on rcgroups <https://www.rcgroups.com/forums/showthread.php?2494532-Storm32-with-Pixhawk-over-serial-connection/page5>`__
 turned up that some STorM32 boards need resistor #4 (shown in pic below)
 shorted (i.e. a wire soldered over the top of the resistor to turn it
 into a regular wire) in order for the gimbal controllers messages to get

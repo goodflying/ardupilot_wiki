@@ -7,7 +7,7 @@ ROS distance sensor usage
 Distance sensor message
 =======================
 
-ArduPilot support `distance sensor message <http://mavlink.org/messages/common#DISTANCE_SENSOR>`__ both as input and output.
+ArduPilot support `distance sensor message <https://mavlink.io/en/messages/common.html#DISTANCE_SENSOR>`__ both as input and output.
 The following chapters will explain you how to use distance sensor with ROS for :
 
 - Rangefinder : how to receive data from rangefinder plug in a FCU (e.g. pixhawk) and how to send data from ROS to FCU
@@ -30,7 +30,7 @@ Receive from FCU
     - Plane >= 3.8.0 (Planned)
 
 By default, ArduPilot will send distance sensors message for each rangefinder connected on FCU on Rover and only downward oriented (PITCH_270) on Copter and Plane.
-Example : launch SITL and add a analog rangefinder, see `SITL instruction here <http://ardupilot.org/dev/docs/using-sitl-for-ardupilot-testing.html#adding-a-virtual-rangefinder>`__.
+Example : launch SITL and add a analog rangefinder, see `SITL instruction here <https://ardupilot.org/dev/docs/using-sitl-for-ardupilot-testing.html#adding-a-virtual-rangefinder>`__.
 Launch MAVROS with default config. You should have rangefinder data in /mavros/distance_sensor/rangefinder_pub.
 
 .. code-block:: none
@@ -45,17 +45,9 @@ Launch MAVROS with default config. You should have rangefinder data in /mavros/d
 
 Send to FCU
 -----------
-.. warning::
-
-    Distance sensor message is currently support on :
-
-    - ArduPilot Master
-    - Copter >= 3.4
-    - Rover >= 3.1.0
-    - Plane >= 3.7.1
 
 ArduPilot support receiving rangefinder data coming from Companion Computer for example.
-To do that, setup a Mavlink rangefinder on ArduPilot side and simply set a subscriber in MAVROS plugin :
+To do that, setup a MAVLink rangefinder on ArduPilot side and simply set a subscriber in MAVROS plugin :
 
 .. code-block:: none
 

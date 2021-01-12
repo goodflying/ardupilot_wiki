@@ -101,7 +101,7 @@ See also :ref:`Connecting the Radio Receiver <common-connecting-the-radio-receiv
    in the Mission Planner setup process.
 
 If you're flying a V-tail, please see the
-:ref:`VTAIL_OUTPUT <VTAIL_OUTPUT>`
+``VTAIL_OUTPUT``.
 option in the :ref:`servo setup documentation <reversing-servos-and-setting-normalelevon-mode>`.
 
 Reassigning your RC transmitter stick channels:
@@ -147,7 +147,7 @@ Four channel setup:
 .. image:: ../images/APM_2_5_PLANE_V_ELEVONS_enc.jpg
     :target: ../_images/APM_2_5_PLANE_V_ELEVONS_enc.jpg
 
-Elevon setup.  At this stage its not critical which channel is plugged
+Elevon setup.  At this stage it's not critical which channel is plugged
 into which elevon.  They can be swapped around later if needs be:
 
 #. Starboard (right) elevon

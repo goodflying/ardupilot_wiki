@@ -25,7 +25,7 @@ Note that alternative firmwares are use **at your own risk** and probably void y
 As of early 2018 there are two versions of the firmware available:
 
 - the `official firmware from skyrocket <http://firmware.sky-viper.com/latest/>`__ (see file ending with ".abin") is the safest firmware to use.
-- the `latest firmware from ArduPilot <http://firmware.ardupilot.org/Copter/latest/skyviper-v2450/>`__ includes some new features (i.e. :ref:`SmartRTL <smartrtl-mode>`) but is also missing some features (i.e. ability to control vehicle during RTL).
+- the `latest firmware from ArduPilot <https://firmware.ardupilot.org/Copter/latest/skyviper-v2450/>`__ includes some new features (i.e. :ref:`SmartRTL <smartrtl-mode>`) but is also missing some features (i.e. ability to control vehicle during RTL).
 
 **Uploading using the SD card**
 
@@ -41,13 +41,13 @@ As of early 2018 there are two versions of the firmware available:
 **Uploading using APWeb**
 
 - from your PC, connect to the SkyViper wifi access point (normally called "SKYVIPERGPS-xxxxxx", password is "vipergps")
-- open a web browser to http://192.168.99.1 and click the "Upgrade Firmware" link
+- open a web browser to ``http://192.168.99.1`` and click the **Upgrade Firmware** link
 
 .. image:: ../images/skyrocket-software-web1.png
     :width: 70%
 
 - in the "Upgrade ArduPilot Firmware" section, push the "Browse" button and select the \*.abin file downloaded above
-- push the "Upload File" button and wait a minute or two.  The green bar at the top of the web page should crawl from left to right and then the flight controller should reboot and reconnect to the transmitter
+- push the "Upload File" button and wait a minute or two.  The green bar at the top of the web page should crawl from left to right and then the autopilot should reboot and reconnect to the transmitter
 
 .. image:: ../images/skyrocket-software-web2.png
     :width: 70%

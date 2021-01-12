@@ -8,8 +8,8 @@ MAVExplorer is a log exploration tool. It is based on the same concepts
 as mavgraph, but is interactive, and supports a community contribution
 model for pre-defined graphs.
 
-Installing MAVExplorer
-======================
+Installing MAVExplorer on Linux
+-------------------------------
 
 You will need the latest version of pymavlink and mavproxy installed. On
 Linux do this:
@@ -22,6 +22,44 @@ Linux do this:
 
 after running that you should have a new command "MAVExplorer.py" in
 your path.
+
+Installing MAVExplorer on Windows
+---------------------------------
+
+To install MAVExplorer on Windows download the pre-built MAVProxy package here:
+
+https://firmware.ardupilot.org/Tools/MAVProxy/
+
+That package includes both MAVProxy and MAVExplorer. 
+
+Then create a link from 
+
+::
+
+    c:\Program Files (x86)\MAVProxy\MAVExplorer.exe 
+    
+onto your desktop. You can then start MAVExplorer by dragging a log file onto the MAVExplorer shortcut.
+
+Installing MAVExplorer on MacOS
+-------------------------------
+
+To install MAVExplorer on MacOS you will need to have "pip" installed. If you don't have pip, then use:
+::
+
+  sudo easy_install pip
+
+Then install mavproxy (which contains MAVExplorer) like this:
+
+::
+
+ pip install mavproxy --user
+
+Then add $HOME/Library/Python/2.7/bin to your $PATH, like this:
+
+::
+
+ echo 'export PATH=$PATH:$HOME/Library/Python/2.7/bin' >> $HOME/.bash_profile
+
 
 Starting MAVExplorer
 --------------------
@@ -89,6 +127,12 @@ Again you can TAB complete, for example:
 
 You can do this for multiple fields in one graph, allowing you to
 construct complex graphs quickly.
+
+Some messages have ``Instance`` fields, for storing data of multiple instances of sensors, e.g. the ``RFND`` log message. In such cases, an instance number must be specified while graphing, else values from all the instances will be combined in a single graph.
+
+::
+
+    graph RFND[0].Dist
 
 Modifying pre-defined graphs
 ----------------------------

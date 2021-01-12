@@ -1,21 +1,14 @@
 .. _common-camera-shutter-with-servo:
 
-===============================================
-Camera Shutter Configuration in Mission Planner
-===============================================
-
-This article explains how to configure Mission Planner to trigger the
-camera shutter with a servo or relay.
-
-Overview
-========
+============================
+Camera Shutter Configuration
+============================
 
 ArduPilot allows you to configure a particular port (servo or relay) as
 the camera trigger, which will then be activated when 
 :ref:`camera commands are specified in missions <common-camera-control-and-auto-missions-in-mission-planner>`.
 
-This article explains what settings you need to configure for both
-servos and relays, and covers both Pixhawk and APM.
+This article explains what settings you need to configure for both servos and relays.
 
 .. note::
 
@@ -95,17 +88,7 @@ The actual port used for the shutter is set and configured in the
 Enhanced camera trigger logging
 ===============================
 
-.. note::
-
-   This functionality was first introduced in Plane 3.5.0. At time of
-   writing it is not yet present in Copter 3.3/Rover 3.5 releases).
-
-ArduPilot logs TRIG messages when it *triggers* the camera. You can
-additionally set up ArduPilot to log CAM messages when the camera has
-actually fired, by monitoring a 
-:ref:`digital input pin <common-pixhawk-overview_pixhawk_digital_outputs_and_inputs_virtual_pins_50-55>`
-that has been connected to the camera hot shoe. This more accurately
-logs the exact time that pictures are recorded.
+ArduPilot logs TRIG messages when it *triggers* the camera.  You can additionally set up ArduPilot to log CAM messages when the camera has actually fired, by connecting a :ref:`digital input pin <common-pixhawk-overview_pixhawk_digital_outputs_and_inputs_virtual_pins_50-55>` on the autopilot to the camera's hot shoe (consider using `Seagulls SYNC2 Shoe Horn Adapter <https://www.seagulluav.com/product/seagull-sync2/>`__).  This more accurately logs the exact time that pictures are recorded.
 
 You will need to configure one of the AUX pins as a digital
 output/input, and connect it to the camera flash hotshoe (a universal
@@ -117,33 +100,13 @@ The main steps are:
 #. Open *Mission Planner* and then click on **CONFIG/TUNING \| Full
    Parameters List**
 #. Set at least two of the AUX pins as digital output/inputs using the
-   BRD_PWM_COUNT parameter, as described in 
+   :ref:`BRD_PWM_COUNT<BRD_PWM_COUNT>` parameter, as described in 
    :ref:`digital outputs <common-pixhawk-overview_pixhawk_digital_outputs_and_inputs_virtual_pins_50-55>`.
 #. Set :ref:`CAM_FEEDBACK_PIN <CAM_FEEDBACK_PIN>`
    to the pin number connected to the hotshoe.
 #. Set :ref:`CAM_FEEDBACK_POL <CAM_FEEDBACK_POL>`
    to indicate whether the feedback pin (hotshoe voltage) goes high or
    low when the picture is taken.
-
-Shutter configuration with APM 2.x
-==================================
-
-APM2.x has dedicated servo and relay ports, so unlike for Pixhawk, there
-is no need to separately specify the trigger type (``CAM_TRIGG_TYPE``).
-Pins **A10** or **A11** are used for servos (*Mission Planner* refers to
-these as RC10 and RC11, respectively). Pin **A9** is used for relays on
-APM2.x (*Mission Planner* refers to this as *Relay* in the shutter
-selection drop-down.)
-
-.. figure:: ../../../images/apm2_analog_pins2.jpg
-   :target: ../_images/apm2_analog_pins2.jpg
-   
-   APM Analog Pins
-
-All configuration is done in the *Camera Gimbal Configuration Screen*.
-The configuration settings are exactly the same as for Pixhawk, except
-that you need to select **Relay** in *Shutter* drop-down list for a
-relay shutter trigger.
 
 Manually trigger the camera shutter
 ===================================
@@ -180,8 +143,7 @@ hardware is used to send the shutter signal to the camera. The following
 topics describe the hardware setup and configuration settings for a
 number of specific cameras/camera types:
 
--  `Camera Shutter Tutorial using
-   Stratosnapper <common-pixhawk-auto-camera-trigger-without-chdk>`__ -
+-  :ref:`Camera Triggering using Stratosnapper <common-camera-trigger-stratosnapperv2>` -
    shows how to connect to a camera with an IR interface. The
    Stratosnapper can also be used to connect to cameras using other
    cables and protocols

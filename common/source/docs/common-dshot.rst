@@ -1,170 +1,75 @@
 .. _common-dshot:
 
-============================
-DShot and BLHeli ESC Support
-============================
+=========================
+ESC Related Configuration
+=========================
 
-[copywiki destination="copter,plane"]
 
-..  youtube:: np7xXY_e5sA
-    :width: 100%
-
-This articles describes how to setup and use three features supported
-by recent BLHeli ESC firmwares.
-
-- DShot ESC protocol support (for sending digital signals to the ESC)
-- ESC telemetry support (for receiving performance data from the ESC)
-- BLHeli pass-thru configuration and ESC flashing (for configuring the ESC)
-
-Detailed descriptions of these features are lower down on this page. 
-Dshot and telemetry ESC's provide an advantage over traditional ESC's for a number of reasons. 
-
-The primary advantage of Dshot is that it provides fast, high resolution digital communication. This opens the door for more precise vehicle control and removes the need to calibrate ESC's for different PWM ranges. 
-
-Telemetry ESC's also provide monitoring of performance data that previously required additional sensors (like power modules and RPM sensors). Because of the detailed data provided by every ESC, real-time decisions can be made and logs can be analyzed for indidvidual ESC or motor failure.
-
-.. warning::
-
-   As of April 2018 these features are currently only available with Copter-3.6, Plane-3.9, Rover-3.3 (or higher) using the ChibiOS firmware for STM32 based flight boards, and not yet in a stable release.
-   Please join the http://gitter.im/ArduPilot/ChibiOS gitter channel for up to date information on these builds.
-   Only try DShot on ESCs that are known to support it or you will get unpredictable results. 
-   Reverse thrust and virtual batteries are not yet supported.
-
-Where to buy
+ESC Protocol
 ============
 
-`blheli32.com provides this list of BLHeli compatible ESCs <http://www.blheli32.com/list-of-blheli_32-escs/>`__.
-We recommend choosing one that has the telemetry wire pre-soldered (see blue wire below).
+Ardupilot supports several communication protocols with brushless motor ESCs:
 
-.. image:: ../../../images/dshot-telemwire.jpg
-    :target: https://hobbyking.com/en_us/turnigy-multistar-32bit-51a-race-spec-esc-2-6s-opto.html
-    :width: 400px
+- Normal (standard PWM 1000uS - 2000uS pulse widths)
+- Oneshot
+- Oneshot125 (PWM pulse widths divided by 8)
+- DShot150 at 150kbaud (recommended)
+- DShot300 at 300kbaud
+- DShot600 at 600kbaud
+- DShot1200 at 1200kbaud
 
-*image courtesy of hobbyking.com*
+These are selected by the :ref:`MOT_PWM_TYPE <MOT_PWM_TYPE>` parameter on Copter or :ref:`Q_M_PWM_TYPE <Q_M_PWM_TYPE>` on QuadPlanes for copter function motors. On Plane, other motors use Normal (PWM) protocol.
 
-Connecting and Configuring
-==========================
+.. note:: The autopilot should be re-booted after changing the protocol type.
 
-.. image:: ../../../images/dshot-pixhawk.jpg
-    :target: ../_images/dshot-pixhawk.jpg
-    :width: 600px
+However,in Plane, other motors,like the traditional fixed wing's main motor or Dual Motor Tailsitters (SERVOn_FUNCTION = 70 throttle, 73 throttle left and / or 74 throttle right), can be changed to another protocol using the :ref:`SERVO_BLH_MASK<SERVO_BLH_MASK>` parameter to specify the output number of the motor together with the :ref:`SERVO_BLH_OTYPE<SERVO_BLH_OTYPE>` parameter to select the protocol of these motors independently of that selected for the copter function motors. 
 
-For :ref:`Pixhawk <common-pixhawk-overview>`, :ref:`The Cube <common-thecube-overview>` and related boards with IO co-processors, the ESC's ground and signal wire should be connected to the AUX OUT ports.
-For :ref:`Pixracer <common-pixracer-overview>` and :ref:`other boards <common-autopilots>` with all PWM outputs coming from the main processor, the normal outputs can be used.
+.. warning:: Be sure your ESC can support the configuraton you select for it. Damage can occur otherwise. This includes frame rates discussed below.
 
-To enable DShot (output):
+PWM ESCs Frame Rates
+====================
 
-- :ref:`MOT_PWM_TYPE <MOT_PWM_TYPE>`, :ref:`SERVO_BLH_OTYPE <SERVO_BLH_OTYPE>`, or :ref:`Q_M_PWM_TYPE <Q_M_PWM_TYPE>` on quadplanes to **4** meaning "DShot150"
-- on Pixhawk and Cube boards:
+ArduPilot defaults will work with all PWM ESCs. If the ESC is capable of a higher frame rate than 50Hz then :ref:`RC_SPEED<RC_SPEED>` parameter can be set accordingly. This includes use with OneShot125 ESCs if they support the higher frame rates.
 
-  - do not use channels 1-8 for DShot ESC's. Turn off :ref:`SERVO1_FUNCTION <SERVO1_FUNCTION>` to :ref:`SERVO8_FUNCTION <SERVO8_FUNCTION>` OR set them to something other than motor or throttle functions.
-  - set the auxillary channels to their appropriate functions (:ref:`SERVO9_FUNCTION <SERVO9_FUNCTION>` to :ref:`SERVO14_FUNCTION <SERVO14_FUNCTION>`). For quadcopters quadplanes, these parameters will be 33, 34, 35, and 36 for channels 9-12 (Aux 1-4).
-  - When using more than the first 4 Aux ports for DShot ESC's, set :ref:`BRD_PWM_COUNT <BRD_PWM_COUNT>` to 6.
+OneShot is a special case. It is Normal PWM, but at a frame rate that is the same as the main loop rate, :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` .
 
-To enable ESC telemetry (feedback):
+DShot
+=====
 
-Connect all ESC's telemetry wires to a single Telemetry RX pin on the flight board (above diagram uses Serial5).
-ESC telemetry is currently only available with BLHeli_32 ESCs, and a wire for the telemetry is only 
-pre-soldered for some ESCs. If the wire isn't pre-soldered you will need to solder it yourself. Pinouts for
-serial ports on The Cube can be found `here <http://ardupilot.org/copter/docs/common-pixhawk2-overview.html>`__.
-Support for KISS ESC Telemetry is planned.
-
-- :ref:`SERIAL5_PROTOCOL <SERIAL5_PROTOCOL>` = 16 (if telemetry is connected to Serial5).
-- :ref:`SERVO_BLH_TRATE <SERVO_BLH_TRATE>` to 10 to enable 10hz updates and logging from the ESC.
-- :ref:`SERVO_BLH_MASK <SERVO_BLH_MASK>` to the corresponding sum for the channels you want to monitor. (channel 1 = 1, channel 9 = 256, channel 10 = 512)
-
-The flight board requests telemetry from only one ESC at a time, cycling between them. 
-The following data is logged in the ESCn log messages in your dataflash
-log. This can be viewed in any ArduPilot dataflash log viewer.
-
-- RPM
-- Voltage
-- current
-- temperature
-- total-current
-
-To configure and flash ESC's using BLHeli, see the Pass-Through Support section bleow.
-
-DShot Protocol
-==============
-
-The DShot ESC protocol is a digital protocol for communication between
-a flight board and an ESC. The key advantages are:
-
-- all values sent to the ESC are protected with a 4 bit CRC
-- clock differences between the ESC and flight controller don't affect
-  flight
-- no need to do any ESC throttle range calibration
-- very high protocol frame frames are supported
-
-The DShot protocol can run at several different speeds. ArduPilot
-supports four speeds:
+The DShot protocol can run at different speeds. ArduPilot supports four speeds:
 
 - DShot150 at 150kbaud (recommended)
 - DShot300 at 300kbaud
-- DShot600 at 600kbaud (may be needed for BLHeli_S ESC's)
+- DShot600 at 600kbaud
 - DShot1200 at 1200kbaud
 
-We recommend using the lowest baud rate, DShot150,
-as it is the most reliable protocol (lower baudrates are less
-susceptible to noise on cables).  Higher values will be beneficial
-once ArduPilot's main loop rate is capable of speeds above 1kHz.
+We recommend using the lowest baud rate, DShot150, as it is the most reliable protocol (lower baudrates are less susceptible to noise on cables). Higher values will be beneficial once ArduPilot's main loop rate is capable of speeds above 1kHz.
 
-The protocol ArduPilot uses is controlled by setting the 
-:ref:`MOT_PWM_TYPE <MOT_PWM_TYPE>` (or :ref:`Q_M_PWM_TYPE <Q_M_PWM_TYPE>` on quadplanes) to a value from 4 to 7.
-The value of 4 corresponds to DShot150.
+.. note:: When an output is configured for DShot, the ``SERVOx_MIN/MAX`` parameters for that output will always be reset to 1000/2000, respectively, upon every boot, since DShot does not use these parameters and they can affect scaling in other sections of the code. The ``SERVOx_TRIM``  value will be reset to 1500 if it's a reversible output, or 1000 if normal output setup in DShot.
 
-DShot sends 16 bits per frame, with bits allocated as follows:
+Autopilot Output Capabilities
+=============================
 
-- 11 bits for the throttle level
-- 1 bit for telemetry request
-- 4 bits for CRC (simple XOR)
+While all the servo/motor outputs of an ArduPilot autopilot are capable of Normal PWM operation at 50Hz frame rates, not all are capable of advanced configurations. And, usually, these configurations must apply to pre-designated groups of outputs, even if they are not all driving an ESC. So the following cautions apply:
 
-This gives a good throttle resolution, with support for asking the ESC
-to provide telemetry feedback. See below for more information on ESC
-telemetry.
+#. The 8 "MAIN" outputs of autopilots using an IOMCU (like PixHawk and Cube), cannot be used for  protocols other than Normal PWM and OneShot. On these autopilots, only the additional "AUX" outputs can properly support OneShot125 and DShot protocols. If you attempt to set a "MAIN" output to DShot, then normal PWM output will occur, even though it has been set to a DShot protocol.
 
-We do not currently support DShot output on other vehicle types.
+#. For :ref:`Pixracer <common-pixracer-overview>` and :ref:`other boards <common-autopilots>` without a separate IOMCU coprocessor, all servo/motor outputs can be used.
 
-.. note::
+#. Groups of outputs sharing a common timer, MUST have the same advanced configuration. Usually, these are specified in the autopilot's hardware description linked from the :ref:`common-autopilots` page. For example, if an output is configured for DShot in a group, then you cannot use another output in that group for Normal PWM ESC **or** normal PWM servo operation.
 
-   DShot output is currently only supported on the "FMU" outputs of
-   your flight controller. If you have a board with an IO
-   microcontroller, with separate "main" and "auxillary" outputs, such
-   as a Pixhawk or Cube, then you can only use DShot on the
-   "auxillary" outputs. You will need to use the SERVOn_FUNCTION
-   parameters to remap your motors to the auxillary outputs.
+.. note:: Everytime the autopilot initializes, it sends a log message to the ground control station, showing which outputs are PWM/Oneshot/or DShot. The remaining higher numbered outputs are assigned as GPIOs.
 
 
-BLHeli Pass-Through Support
-===========================
+.. image:: ../../../images/RCOutbanner.jpg
 
-BLHeli pass-through support is a feature that allows you to configure
-and upgrade the firmware on your ESCs without having to disconnect
-them from your vehicle. You can plug a USB cable into your flight
-controller and run the BLHeliSuite software for Windows to configure
-your ESCs.
+BLHeli32 Compatibility
+======================
 
-Note that you do not have to be using DShot to take advantage of
-BLHeli pass-through support, although it is recommended that you do.
+Ardupilot is compatible with BLHeli32 Passthrough and ESC Telemetry Functions:
 
-To enable BLHeli pass-through support you need to set one of two
-variables:
+.. toctree::
+    :maxdepth: 1
 
-- :ref:`SERVO_BLH_AUTO <SERVO_BLH_AUTO>` = 1 to enable automatic mapping of motors to
-  BLHeliSuite ESC numbers.  for most users this will do the right thing.
-- :ref:`SERVO_BLH_MASK <SERVO_BLH_MASK>` if you want to instead specify a specific set of
-  servo outputs to enable.  For more complex setups where you want to choose exactly which servo outputs you want to configure
-
-Once you have enabled BLHeli support with one of the above two
-parameters you should reboot your flight board.
-
-Now connect a USB cable to your flight board and use BLHeliSuite on
-Windows to connect. You will need to use BLHeliSuite32 for BLHeli_32
-ESCs, and BLHeliSuite16 for BLHeli/BLHeli_S ESCs.
-
-You need to select "BLHeli32 Bootloader (Betaflight/Cleanflight)" from
-the interfaces menu
-
-.. image:: ../../../images/blhelisuite32.jpg
-    :target: ../_images/blhelisuite32.jpg
+    BLHeli32 Passthrough <common-blheli32-passthru>
+    BLHeli32 ESC Telemetry <common-dshot-blheli32-telemetry>

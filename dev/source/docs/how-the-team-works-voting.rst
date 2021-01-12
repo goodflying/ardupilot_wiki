@@ -41,11 +41,15 @@ Description belows how to creat a form from scratch, alternatively you can use `
   - push the Send button
   - set the "Email To" field to "ardupilot-dev-team@googlegroups.com"
   - fill in the Subject and Message fields
-  - to allow others to see the responses (including ardupilot.devel@gmail.com), click the "Collaborators" link and add their email in the "Invite people" field.  If you are submitting the vote as yourself, include 
+  - to allow others to see the responses (including ardupilot.devel@gmail.com), click the "Collaborators" link and add their email in the "Invite people" field
   - check "Include form in email" and press "Send"
 
-Normally after a few days, you will want to check the response and inform the development team:
+Normally the vote should be open for 1 week and be discussed at the weekly development call.
+
+After the voting period ends, you will want to check the response and inform the development team:
 
 - open `docs.google.com/forms <https://docs.google.com/forms>`__
 - find your voting form and click on it
-- click the "Responses" tab to see a graph of who voted and the results
+- click the "Responses" tab to see a graph of who voted (ensure there is only one response per person) and the results.
+
+The vote is passed if more than 50% of the responses are positive.

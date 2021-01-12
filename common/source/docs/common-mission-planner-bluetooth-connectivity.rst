@@ -12,7 +12,7 @@ Android Ground station at distances up to 50m.
     :target: ../_images/Bluetooth.jpg
     :width: 450px
 
-Connecting to the Flight Controller
+Connecting to the Autopilot
 ===================================
 
 The Bluetooth data link comes with both a DF13 6 pin and 6-to-5 pin
@@ -243,11 +243,11 @@ Change the Device Name
 ----------------------
 
 This example show you how to change the name of the Bluetooth module to
-Ardupilot: In the terminal program, send the command (case sensitive):
+ArduPilot: In the terminal program, send the command (case sensitive):
 
 ::
 
-    AT+NAMEArdupilot
+    AT+NAMEArduPilot
 
 The Bluetooth should reply:
 

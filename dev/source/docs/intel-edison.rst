@@ -1,8 +1,12 @@
 .. _intel-edison:
 
-====================================
-Intel Edison as a Companion Computer
-====================================
+==============================================
+Archived: Intel Edison as a Companion Computer
+==============================================
+
+.. warning::
+
+    The Intel Edison has been discontinued
 
 This page explains how to setup and use the `Intel Edison <http://www.intel.com/content/www/us/en/do-it-yourself/edison.html>`__ as a companion computer primarily for use with the `The Cube <http://www.proficnc.com/content/13-pixhawk2>`__.
 
@@ -49,7 +53,7 @@ Setting up the Edison
 
 The easiest way to get started is to flash the Edison with the :ref:`APSync <apsync-intro>` image recommended by the ArduPilot team:
 
--  Download the `latest image from firmware.ardupilot.org <http://firmware.ap.ardupilot.org/Companion/apsync/>`__. Look for the file starting with "apsync-edison".
+-  Download the `latest image from firmware.ardupilot.org <https://firmware.ardupilot.org/Companion/apsync/>`__. Look for the file starting with "apsync-edison".
 -  Extract/Unzip the image (a "toFlash" directory should appear):
 
    - Windows users can use `7-zip <http://www.7-zip.org/>`__
@@ -337,10 +341,10 @@ serial port connecting the Edison to The Cube):
 Done!  Now you can run your own custom DroneKit code on the Edison (see
 the tutorial or documentation for more information).
 
-Wifi mavlink bridging
+Wifi MAVLink bridging
 =====================
 
-The Edison can forward mavlink to other computers on your wifi lan (and
+The Edison can forward MAVLink to other computers on your wifi lan (and
 you can either run a traditional GCS on those computers or run DroneKit
 scripts on your PC).
 

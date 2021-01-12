@@ -4,18 +4,11 @@
 Advanced Compass Setup
 ======================
 
-This article provides advanced guidance for how to setup and calibrate
-the compass (magnetometer). 
+This article provides advanced guidance for how to setup the system compass(es) and advanced compass related features.
 
 .. tip::
 
-   Users with who have selected the :ref:`UBlox GPS + Compass Module <common-installing-3dr-ublox-gps-compass-module>`
-   (recommended) and have mounted it in the default orientation can
-   usually perform a simple "Onboard Calibration" as described in :ref:`Compass Calibration <common-compass-calibration-in-mission-planner>`).
-
-   This topic provides a more complete overview of compass calibration. It
-   will be useful if the compass is mounted in a non-standard orientation
-   or if you need additional calibration support.
+   Users who have only internal compasses or an external compass using a UBlox GPS + compass combination,such as :ref:`UBlox GPS + Compass Module <common-installing-3dr-ublox-gps-compass-module>`, and have mounted it in the default orientation can usually perform a simple "Onboard Calibration" as described in :ref:`Compass Calibration <common-compass-calibration-in-mission-planner>`).
 
 Overview
 ========
@@ -26,203 +19,79 @@ will not move in the correct direction in autopilot modes (i.e. AUTO,
 LOITER, PosHold, RTL, etc). This can lead to circling (aka
 "toiletbowling") or fly-aways.
 
-ArduPilot currently allows up to three compasses to be connected. Only
-one compass (specified using the ``COMPASS_PRIMARY`` parameter) is used
-for navigation. While many autopilots have an internal compass, most
-will instead use an external compass. This provides more reliable data
+ArduPilot allows multiple compasses to be connected, but only three are used at one time. And usually, only the primary compass is used, unless there are consistency problems with its readings versus other compasses and/or other sensors. In this case, the autopilot will automatically determine which of the first three compasses to use.
+
+While many autopilots have an internal compass or compasses, many applications will instead use an external compass. This provides more reliable data
 than an internal compass because of the separation from other
-electronics.
+electronics. See :ref:`common-autopilots` for details about the specific autopilot to determine how many built-in compasses the autopilot may have, if any.
 
-Standard configurations for the main autopilot boards are shown in the
-table below:
+Most users will only need to  perform the normal :ref:`Compass Calibration<common-compass-calibration-in-mission-planner>` but details are also given on the less-used  :ref:`CompassMot <common-compass-setup-advanced_compassmot_compensation_for_interference_from_the_power_wires_escs_and_motors>` 
 
-+-------------------------------------------+--------------+-----------------+
-| Configuration                             | Compass #1   | Compass #2      |
-+===========================================+==============+=================+
-| Pixhawk + Compass                         | External     | Internal        |
-+-------------------------------------------+--------------+-----------------+
-| Pixhawk (no external compass used)        | Internal     | Available       |
-+-------------------------------------------+--------------+-----------------+
-| APM2.6                                    | External     | Not supported   |
-+-------------------------------------------+--------------+-----------------+
-| APM2.5                                    | Internal     | Not supported   |
-+-------------------------------------------+--------------+-----------------+
-| APM2.5 trace cut, external compass used   | External     | Not supported   |
-+-------------------------------------------+--------------+-----------------+
 
-Most users will only need to select their autopilot/compass
-configuration and perform the :ref:`Live Calibration <common-compass-setup-advanced_live_calibration_of_offsets>` but details are also given on the less-used  :ref:`CompassMot <common-compass-setup-advanced_compassmot_compensation_for_interference_from_the_power_wires_escs_and_motors>` and Manual Declination.  
-Most of this configuration can be performed from the *Mission Planner*'s **Initial Setup \| Mandatory
-Hardware \| Compass** screen.  
-Other ground stations may have similar features.
-
-.. tip::
-
-   The article is Copter-focused but the instructions are equally
-   applicable to Plane and Rover (except where marked).
-
-Configuration settings
-======================
+Compass Settings
+================
 
 The *Mission Planner Compass Setup screen* can be found in menu
-**Initial Setup \| Mandatory Hardware \| Compass** in the sidebar. This
-screen is used for setting almost all compass configuration and tuning
-parameters.
+**Setup \| Mandatory Hardware \| Compass** in the sidebar. This
+screen is used for setting compass ordering, priority, calibration, and use. No other settings are required for normal use.
 
-.. figure:: ../../../images/MissionPlanner_CompassCalibration_MainScreen.png
-   :target: ../_images/MissionPlanner_CompassCalibration_MainScreen.png
+.. figure:: ../../../images/CompassCalibration_Onboard.png
+   :target: ../_images/CompassCalibration_Onboard.png
 
-   Mission Planner: Compass Calibration
+   Mission Planner: Advanced Compass Setup and Calibration
 
-Quick configuration
--------------------
 
-Mission Planner supports automatic configuration of almost all
-parameters for the most common autopilot boards. All you need to do is
-select the button corresponding to your autopilot controller:
+Compass Ordering and Priority
+-----------------------------
 
--  For Pixhawk and PX4, select the button **Pixhawk/PX4**. You may be
-   prompted for a specific ArduPilot version.
--  For APM 2.6, select **APM with External Compass**.
--  For APM 2.5, select **APM (Internal Compass)**.
+During boot, ArduPilot automatically detects the compasses present in the system, adds them to a list, and assigns the first three a priority (1-3) linked to their DEV ID (``COMPASS_PRIOx_ID``), according to the order in which they are discovered. This priority determines which compass is used by the EKF lanes. The primary compass (highest priority, 1) will be used by all lanes, and fallback to the next viable compass in the first three priorities, if the primary becomes unhealthy.
 
-If your external compass is in a non-standard orientation, you must manually 
-select the orientation in the combo box (change from ``ROTATION_NONE``). 
-When externally connected the COMPASS_ORIENT option operates independently 
-of the AHRS_ORIENTATION board orientation option.
+The list of discovered compasses and their priority is maintained across boots.
 
-Most users will then only need to press the **Live Calibration** button
-and perform a :ref:`Live Calibration <common-compass-setup-advanced_live_calibration_of_offsets>`.
+If a user wishes to change to a different compass for one of the three priorities, he can change the ``COMPASS_PRIOx_ID`` to that compass's ``COMPASS_DEV_IDx`` ID value. If a ``COMPASS_PRIOx_ID`` is set to zero, the compasses will be moved up contiguously, in order, to fill that priority slot on the next reboot. This is easily done in Mission Planner with the arrows on the right side.
 
-Checking Compass Orientation
-----------------------------
--  Ensure your AHRS_ORIENT parameter is correct.  This will ensure that your internal compass' orientation will be correct
--  When rotating your aircraft through all axes each of the compasses should move in the same direction, and should be of approximately the same values
+.. warning:: never change a compass's ``COMPASS_DEV_IDx`` ID value manually and then reboot!
+
+If a previously discovered compass is missing or not detected on boot, and is in one of the three priority positions, a pre-arm failure will occur warning the user. The user will need to either remove the compass from the priority position, or correct the problem in order to prevent the pre-arm failure. Mission Planner provides a button to remove an undetected compass on the above screen.
+
+.. note:: Compasses not present or detected during a calibration will automatically be removed.
+
+Compass Enables
+---------------
+
+Any one of the first three compasses can be disabled. This would leave only the remaining ones to be used by the autopilot. You may wish to disable any internal compasses if you are consistently seeing the “inconsistent compasses” pre-arm message often and you are sure that the external compass is calibrated.
+
+  .. note::
+
+      Compasses should always be enabled for Copter/Rover, but may be disabled (not recommended, if one is available) for Plane.
+
+Orientation
+-----------
+
+The :ref:`AHRS_ORIENTATION<AHRS_ORIENTATION>` must be set correctly for the compass calibration to be successful. In addition,the :ref:`common-accelerometer-calibration` should be completed before the Compass Calibration.
+
+The setting of the orientation of external compasses is no longer required. It's determined automatically during calibration now.
+
+However, if the need to double-check the orientation of a compass should arise:
+
+-  When rotating your aircraft through all axes each of the compasses should move in the same direction, and should be of approximately the same values:
 
 - Northern Hemisphere:
-  - Z-component should be *positive*
-  - when pitching the vehicle down, the X component should *increase* in value
-  - when rolling the vehicle right, the Y component should *increase* in value
+   - Z-component should be *positive*
+   - when pitching the vehicle down, the X component should *increase* in value
+   - when rolling the vehicle right, the Y component should *increase* in value
 
 - Southern Hemisphere:
-  - Z-component should be *negative*
-  - when pitching the vehicle down, the X component should *decrease* in value
-  - when rolling the vehicle right, the Y component should *decrease* in value
+   - Z-component should be *negative*
+   - when pitching the vehicle down, the X component should *decrease* in value
+   - when rolling the vehicle right, the Y component should *decrease* in value
 
-General settings
+Other parameters
 ----------------
 
-The *general settings* apply to all compasses connected to the autopilot
-controller:
+Earlier versions of ArduPilot did not incorporate the world magnetic model database, and a locations magnetic declination might need to manually entered, or learned through flight. This is not necessary now. In addition, this allows the declination to be continuously updated on long distance flights. 
 
--  **Enable compasses**: determines whether whether (any) compasses are
-   enabled. If enabled the flight controller will use the primary
-   compass for heading data, otherwise the heading will be estimated
-   from GPS. Enabling this checkbox corresponds to setting parameter
-   ``MAG_ENABLE=1``.
-
-   .. note::
-
-      Compasses should always be enabled for Copter/Rover, but may be
-         disabled (not recommended) for Plane.
-
--  **Primary Compass**: specifies which compass ArduPilot will use for
-   heading data (only one compass is used for navigation). Normally this
-   will be set to the first compass ("Compass1"). This selection list
-   corresponds to setting the parameter ``COMPASS_PRIMARY`` to a value
-   from 0 to 2 (compasses are 0 indexed, even though labelled in the
-   screen from 1 to 3).
--  **Obtain declination automatically**: sets the declination based on
-   lookup tables following GPS lock. Users can override this default
-   behaviour; after deselecting the checkbox (``COMPASS_AUTODEC=0``)
-   they can manually enter declination in ``COMPASS_DEC``.
--  **Automatically learn offsets**: TBD.
-
-Compass specific settings
--------------------------
-
-The settings that are specific to each compass are grouped together.
-Some settings are only visible when the compass is enabled.
-
--  **Use this compass**: This checkbox enables a particular compass for
-   use by the autopilot. Each checkbox corresponds to a ``COMPASS_USEx``
-   parameter (where *x* is 0 to 2, depending on the compass).
-
-   .. note::
-
-      Even if multiple ``COMPASS_USEx`` parameters are set to 1, the
-         autopilot will still only uses the primary compass
-         (``COMPASS_PRIMARY``).
-
--  **Externally mounted**: Set whether or not a particular compass is
-   externally mounted (corresponds to ``COMPASS_EXTERNAL=1``). If the
-   compass is internal it uses the flight controller’s orientation
-   (``AHRS_ORIENTATION``). If the compass is external, the orientation
-   may differ from the flight controller (set using the selection list
-   discussed next)
--  **Compass orientation**: sets the compass orientation for externally
-   mounted compasses. The value is saved as a ``COMPASS_ORIENTx``
-   parameter.
-
-The OFFSETS (``COMPASS_OFFSx``) and and MOT (``COMPASS_MOT``) parameters
-are populated by the live calibration and CompasMot procedures (see the
-calibration sections below).
-
-
-.. _common-compass-setup-advanced_live_calibration_of_offsets:
-
-Live calibration of offsets
-===========================
-
-Live calibration calculates offsets to compensate for “hard iron”
-distortions.
-
-#. Click the **Live Calibration** button.
-
-   A window should pop-up showing you the state of the live calibration.
-   This shows a sphere for each compass with a red dot showing where the
-   compass is pointing and six "white dot" targets around the sphere.
-   You rotate the vehicle so that the red dot reaches each white dot and
-   causes it to disappear.
-
-   .. figure:: ../../../images/MissionPlanner_CompassCalibration_LiveCalibrationScreen.png
-      :target: ../_images/MissionPlanner_CompassCalibration_LiveCalibrationScreen.png
-
-      Mission Planner: Live Compass Calibration
-
-   As you rotate the vehicle you will notice the red dot moves and
-   (perhaps confusingly) the sphere itself also rotates. A colored trail
-   is left behind wherever the compass has already been: high values (>
-   400) will turn yellow and may indicate magnetic interference. Offsets
-   > 600 will turn red and generate a warning.
-
-#. Hold the vehicle in the air and rotate it slowly so that each side
-   (front, back, left, right, top and bottom) points down towards the
-   earth for a few seconds in turn.
-
-   .. figure:: ../../../images/accel-calib-positions-e1376083327116.jpg
-      :target: ../_images/accel-calib-positions-e1376083327116.jpg
-
-      Compass Calibration Positions (shown for Copter, but true for all vehicles)
-
-#. The calibration will automatically complete when it has data for all
-   the positions. At this point, another window will pop up telling you
-   that it is saving the newly calculated offsets. These are displayed
-   on the main screen below each associated compass.
-
-   .. note::
-
-      In Copter-3.2.1 and later offsets are considered acceptable
-         provided their combined "length" is less than 600 (i.e.
-         *sqrt(offset_x^2+offset_y^2+offset_Z^2) < 600*). Prior to Copter
-         3.2.1 the recommendation was that the absolute value of each offset
-         be less than 150 (i.e. *-150 < offset < 150*).
-
-The video below is from earlier versions of the calibration routine but
-may still produce good offsets.
-
-..  youtube:: DmsueBS0J3E
-    :width: 100%
+Also, learning the compass offsets in flight, instead of ground calibration, is an option for vehicles difficult to move in order to calibrate. But is not recommended, since the Large Vehicle MagCal option is now available. See :ref:`common-compass-calibration-in-mission-planner` page for details.
 
 [site wiki="copter"]
 .. _common-compass-setup-advanced_compassmot_compensation_for_interference_from_the_power_wires_escs_and_motors:
@@ -247,33 +116,18 @@ Please follow these instructions:
 -  Secure the copter (perhaps with tape) so that it does not move
 -  Turn on your transmitter and keep throttle at zero
 -  Connect your vehicle's LiPo battery
--  Connect your flight controller to your computer with the usb cable
--  **If using AC3.2:**
-
-   -  Open the **Initial Setup \| Optional Hardware \| Compass/Motor
-      Calib** screen
-   -  Press the **Start** button
+-  Connect your autopilot to your computer with the usb cable
+-  Open the **Initial Setup \| Optional Hardware \| Compass/Motor Calib** screen
+-  Press the **Start** button
 
       .. image:: ../../../images/CompassCalibration_CompassMot.png
          :target: ../_images/CompassCalibration_CompassMot.png
-
--  **If using AC3.1.5:**
-
-   -  open the Terminal screen, press the **Connect APM** or **Connect
-      PX4** button
-   -  At the prompt type ``setup`` and then ``compassmot``
-   -  If the PowerModule/Current monitor is enabled you should see
-      "measuring compass vs CURRENT"
-
-      .. image:: ../../../images/CompassMot1.png
-          :target: ../_images/CompassMot1.png
 
 -  You should hear your ESCs arming beep
 -  Raise the throttle slowly to between 50% ~ 75% (the props will spin!)
    for 5 ~ 10 seconds
 -  Quickly bring the throttle back down to zero
--  Press the **Finish** button (AC3.2) or press **Enter** (AC3.1.5) to
-   complete the calibration
+-  Press the **Finish** button to complete the calibration
 -  Check the % of interference displayed.  If it is less than 30% then
    your compass interference is acceptable and you should see good
    Loiter, RTL and AUTO performance.  If it is 31% ~ 60% then the
@@ -283,66 +137,29 @@ Please follow these instructions:
    consider purchasing an external compass (or 
    :ref:`GPS+compass module<common-positioning-landing-page>` (some of these)).
 
-Here is a video of the procedure based on AC3.1.5:
-
-..  youtube:: 0vZoPZjqMI4
-    :width: 100%
 [/site]
 
-Manual declination
-==================
 
-By default the declination is looked up in a compressed table when the
-vehicle first achieves GPS lock. This method is accurate to within 1
-degree (which should be sufficient) but if you wish to use the
-uncompressed declination:
+.. _automatic-compass-offset-calibration:
 
--  Open the `Declination Website <http://www.magnetic-declination.com/>`__.
--  It should automatically figure out your location based on you IP
-   address or you can enter your location
-
-   .. image:: ../../../images/declination.png
-       :target: ../_images/declination.png
-    
--  Uncheck the **Obtain declination automatically** checkbox and
-   manually enter the declination (highlighted in red in the image
-   above) into the mission planner's declination field. In this example,
-   we would enter "14" Degrees and "13" Minutes.
--  As soon as your cursor exits the field (i.e by pressing Tab) the
-   value will be converted to decimal radians and saved to the
-   ``COMPASS_DEC`` parameter.
-
-Tuning declination in-flight
+Automatic Offset Calibration
 ============================
 
-Although we do not believe this is ever necessary, you can manually tune
-the declination in flight using the Channel 6 tuning knob on your
-transmitter by following these steps:
+In the 4.0 releases of ArduPilot, an automatic offset learning feature is available. The :ref:`COMPASS_LEARN<COMPASS_LEARN>` parameter determines how this feature works. This is for advanced users and not recommended.
 
-#. Connect your Pixhawk (or other board) to the Mission Planner
-#. Go to the **Software \| Copter Pids** screen
-#. Set the Ch6 Opt to "Declination", Min to "0.0" and Max to "3.0". 
-   This will give a tunable range of -30 to +30 degrees.  Set Max to
-   "2.0" to tune from -20 to +20 degrees, etc.
+- If set to 3, the offsets will be learned automatically during flight, be saved, and this parameter reset to 0. Position control modes (Loiter, Auto, etc.) should not be used while the offsets are being learned.
 
-   .. image:: ../../../images/CompassCalibration_TuneDec.png
-       :target: ../_images/CompassCalibration_TuneDec.png
-    
-#. Check the declination is updating correctly when turning the channel
-   6 tuning knob to it's maximum position, go to **Config/Tuning \|
-   Standard Params** screen, press the **Refresh Params** button and
-   ensuring that ``COMPASS_DEC`` is 0.523 (this is 30 degrees expressed
-   in radians)
+.. note:: Setting :ref:`COMPASS_LEARN<COMPASS_LEARN>` to 1 or 2 is not recommended. These modes are deprecated and are either non-functional, or still in development.
 
-   .. image:: ../../../images/CompassCalibration_TuneDecCheck.png
-       :target: ../_images/CompassCalibration_TuneDecCheck.png
+  The procedure for :ref:`COMPASS_LEARN<COMPASS_LEARN>` = 3 is:
 
-#. Fly your copter in Loiter mode in at least two directions and ensure
-   that after a fast forward flight you do not see any circling (also
-   known as "toilet bowling").
-#. If you find it's impossible to tune away the circling then it's
-   likely you will require an external compass
-   or :ref:`GPS+compass module<common-positioning-landing-page>` (some of these)
+  1. set :ref:`COMPASS_LEARN<COMPASS_LEARN>` = 3. The message “CompassLearn: Initialised” will appear on the MP’s message tab (it does not appear in red letters on the HUD).
+  2. “Bad Compass” will appear but this is nothing to be worried about. We will hopefully make this disappear before the final release.
+  3. Arm and drive/fly the vehicle around in whatever mode you like, do some turns “CompassLearn: have earth field” should appear on MP’s message tab and then eventually “CompassLearn: finished”.
+  4. If you want you can check the :ref:`COMPASS_LEARN<COMPASS_LEARN>` parameter has been set back to zero (you may need to refresh parameters to see this) and the COMPASS_OFS_X/Y/Z values will have changed.
+  5. This method can also be evoked using the RCxOPTION for "Compass Learn". It will activate when the channel goes above 1800uS and automatically complete and save.
+
+.. note: These methods do not fully calibrate the compass, like Onboard Calibration does, setting the scales and (in 4.0 vehicle releases) automatically determining the compass orientation.
 
 Compass error messages
 ======================
@@ -357,3 +174,14 @@ Compass error messages
 -  **Compass Offsets High**: One of your compass offsets exceeds 600,
    indicating likely magnetic interference. Check for sources of
    interference and try calibrating again.
+
+Refining Calibration Parameters using a Flight Log
+==================================================
+
+The compass offsets, scales, diagonals, and even motor compensation can be determined from a flight dataflash log of the vehicle using an analysis utility. 
+
+
+.. toctree::
+    :maxdepth: 1
+
+    Magfit Python Utility <common-magfit>

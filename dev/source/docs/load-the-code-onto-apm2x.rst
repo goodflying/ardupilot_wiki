@@ -1,15 +1,15 @@
 .. _load-the-code-onto-apm2x:
 
-============================
-Loading the code onto APM2.x
-============================
+======================================
+Archived: Loading the code onto APM2.x
+======================================
 
 What you'll need:
 =================
 
 -  mini USB cable (for APM1) or micro USB cable (for APM2)
 -  modified version of the Arduino IDE
-   for \ `windows <http://firmware.ardupilot.org/Tools/Arduino/>`__ or `macintosh <http://firmware.ardupilot.org/Tools/Arduino/>`__
+   for \ `windows <https://firmware.ardupilot.org/Tools/Arduino/>`__ or `macintosh <https://firmware.ardupilot.org/Tools/Arduino/>`__
 
 Setting up the software drivers
 ===============================

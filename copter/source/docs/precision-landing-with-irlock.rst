@@ -7,10 +7,10 @@ Precision Landing and Loiter with IR-LOCK
 Overview
 ========
 
-Copter 3.4 (and higher) supports Precision Landing using the `IR-LOCK sensor <http://irlock.com/collections/frontpage/products/ir-lock-sensor-precision-landing-kit>`__ and a :ref:`sonar or lidar <common-rangefinder-landingpage>`.
+Copter supports Precision Landing using the `IR-LOCK sensor <https://irlock.com/collections/frontpage/products/ir-lock-sensor-precision-landing-kit>`__ and a :ref:`sonar or lidar <common-rangefinder-landingpage>`.
 Using this system, when the vehicle enters LAND mode (and has GPS lock) it is possible to reliably land within 30cm of an IR beacon that is moving at less than 1m/s.
 
-Copter 3.5 (and higher) additionally supports Precision Loiter which allows a vehicle to maintain its position above a target while in Loiter mode.  The Pilot can enable this using one of the transmitter's :ref:`auxiliary function switches <channel-7-and-8-options>`.
+Copter 3.5 (and higher) additionally supports Precision Loiter which allows a vehicle to maintain its position above a target while in Loiter mode.  The Pilot can enable this using one of the transmitter's :ref:`auxiliary function switches <common-auxiliary-functions>` (in versions prior to Copter-4.0, CH7_OPT or CH_8_OPT would be used).
 
 ..  youtube:: rGFO73ZxADY
     :width: 100%
@@ -18,13 +18,13 @@ Copter 3.5 (and higher) additionally supports Precision Loiter which allows a ve
 Where to get it
 ===============
 
-The `IR-LOCK sensor <http://irlock.com/collections/frontpage/products/ir-lock-sensor-precision-landing-kit>`__
-can be purchased from `irlock.com <http://irlock.com/>`__.  The IR-LOCK
-sensor is a modified version of the `Pixy camera <http://charmedlabs.com/default/pixy-cmucam5/>`__, which comes
+The `IR-LOCK sensor <https://irlock.com/collections/frontpage/products/ir-lock-sensor-precision-landing-kit>`__
+can be purchased from `irlock.com <https://irlock.com/>`__.  The IR-LOCK
+sensor is a modified version of the `Pixy camera <https://pixycam.com/pixy-cmucam5/>`__, which comes
 pre-configured to work as an IR beacon detector. There are multiple IR
-beacons which are compatible with the sensor. The `MarkOne Beacon <http://irlock.com/collections/markone>`__
+beacons which are compatible with the sensor. The `MarkOne Beacon <https://irlock.com/collections/markone>`__
 can be reliably detected in **all** **lighting conditions**, with a
-detection range of **15 meters**. `Beacon (V1.1) <http://irlock.com/collections/shop/products/beacon>`__ is a more
+detection range of **15 meters**. `Beacon (V1.1) <https://irlock.com/collections/shop/products/beacon>`__ is a more
 cost-effective option which can be reliably detected in **most lighting
 conditions**.
 
@@ -36,11 +36,9 @@ conditions**.
 Connecting to Pixhawk
 =====================
 
-The IR-LOCK sensor can be connected directly to Pixhawk via an `I2C cable <http://irlock.com/collections/shop/products/pixhawk-cable>`__. If
+The IR-LOCK sensor can be connected directly to Pixhawk via an `I2C cable <https://irlock.com/collections/shop/products/pixhawk-cable>`__. If
 you are using multiple I2C sensors, then you will need an \ `I2C splitter <http://store.jdrones.com/Pixhawk_I2C_splitter_p/dstpx4i2c01.htm>`__.
-More detailed instructions are included in the `irlock.com Documentation <https://irlock.readme.io/docs>`__. The IR-LOCK sensor can
-also be `connected via USB to a Linux system <https://irlock.readme.io/docs/interfacing-sensor-w-linux-and-python>`__,
-and sensor output can be retrieved in Python.
+More detailed instructions are included in the `irlock.com Documentation <https://irlock.readme.io/docs>`__. 
 
 .. figure:: ../images/precision_landing_connect_irlock_to_pixhawk.jpg
    :target: ../_images/precision_landing_connect_irlock_to_pixhawk.jpg
@@ -53,7 +51,7 @@ Mounting to the frame
 The IRLOCK sensor should be mounted to the underside of the frame with
 the camera lens pointing directly down toward the ground.  A mounting
 bracket for IRIS is sold
-`here <http://irlock.com/collections/frontpage/products/sensor-bracket-for-iris>`__
+`here <https://irlock.com/collections/frontpage/products/sensor-bracket-for-iris>`__
 (and pictured below).  The sensor board should be oriented so that the
 white button on the board points towards the front of the vehicle (or to
 put it another way, the side closest to the camera lens should be
@@ -76,14 +74,14 @@ Setup through Mission Planner
 =============================
 
 Set the following parameters through the Mission Planner (or other GCS)
-to enable the precision landing feature and then Reboot the flight controller.
+to enable the precision landing feature and then Reboot the autopilot.
 
 -  :ref:`PLND_ENABLED <PLND_ENABLED>` = 1
 -  :ref:`PLND_TYPE <PLND_TYPE>` = 2
 
-To enable Precision Loiter, an :ref:`Auxiliary Function Switch <channel-7-and-8-options>` must be set to "Precision Loiter":
+To enable Precision Loiter, an :ref:`Auxiliary Function Switch <common-auxiliary-functions>` must be set to 39 to enable "Precision Loiter"
 
--  :ref:`CH7_OPT <CH7_OPT>` = 39 (or alternatively set :ref:`CH8_OPT <CH8_OPT>` to :ref:`CH12_OPT <CH12_OPT>`)
+-  in versions prior to  Copter-4.0, a CHx_OPT parameter could be set via Mision Planner to 39 for this enable.
 
 Flying and Testing
 ==================
@@ -109,8 +107,6 @@ and examine the PL messages.
 -  If the "TAcq" (meaning Target Acquired) field is not "1" then the sensor is not seeing the target.
 -  The pX, pY values show the horizontal distance to the target from the vehicle.
 -  The vX, vY values show the estimated velocity of the target relative to the vehicle.
-
-Refer to the IR-LOCK `wiki page <https://irlock.readme.io/docs/interpreting-pl-logs>`__ for more trouble-shooting information.
 
 ..  youtube:: IRfo5GcHniU
     :width: 100%

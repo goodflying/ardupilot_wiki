@@ -11,7 +11,7 @@ This page outlines the steps that are normally followed for a Copter release.  L
 Alpha Testing
 =============
 
-The `AutoTester <http://autotest.ardupilot.org/>`__ runs after each
+The `AutoTester <https://autotest.ardupilot.org/>`__ runs after each
 commit and highlights issues that it has been setup to test.
 
 Developers and some Alpha testers perform intermittent tests of master
@@ -22,7 +22,7 @@ Releasing Beta Versions / Release Candidates
 
 Beta Testing / Release candidates are made available to beta testers through the
 mission planner's "Beta firmwares" link.  The Mission Planner "Beta
-firmware" link pulls the firmware from the `Copter/beta directory of firmware.ardupilot.org. <http://firmware.ardupilot.org/Copter/beta/>`__
+firmware" link pulls the firmware from the `Copter/beta directory of firmware.ardupilot.org. <https://firmware.ardupilot.org/Copter/beta/>`__
 
 .. image:: ../images/ReleaseProcedures_MPBetaFirmwares.jpg
     :target: ../_images/ReleaseProcedures_MPBetaFirmwares.jpg
@@ -73,9 +73,7 @@ Steps 4 to 8 above should be repeated for the ``ArduCopter-beta-heli`` tag to re
 Check the versions are available in Mission Planner
 ---------------------------------------------------
 
-Wait a few hours for the binaries to be built and then open the Mission Planner's Initial Setup > Install Firmware page and
-click the "Beta firmwares" link and ensure that the version displayed
-below each multicopter icon has updated.
+Wait 4hrs to 8hrs for the binaries to be built (check the `autotest-output.txt <https://autotest.ardupilot.org/autotest-output.txt>`__ file for status) and then open the Mission Planner's Initial Setup > Install Firmware page and click the "Beta firmwares" link and ensure that the version displayed below each multicopter icon has updated.
 
 .. image:: ../images/ReleaseProcedures_MPBetaFirmwares.jpg
     :target: ../_images/ReleaseProcedures_MPBetaFirmwares.jpg
@@ -98,7 +96,7 @@ Releasing Stable Versions
 
 Stable releases are done after weeks or months of beta testing and normally only after two weeks have passed with no unexplained crashes.
 
-The go-no-go decision on a stable release is discussed on the preceding :ref:`weekly development call <ardupilot-mumble-server>`.  This discussion normally includes a review of the outstanding issues.
+The go-no-go decision on a stable release is discussed on the preceding :ref:`weekly development call <ardupilot-discord-server>`.  This discussion normally includes a review of the outstanding issues.
 
 Releasing a stable version is the same as a beta version except the ``ArduCopter-stable`` and ``ArduCopter-stable-heli`` tags are used.
 
@@ -107,11 +105,12 @@ An additional tag is created including the patch release number:
 - ``git tag Copter-3.6.0``
 - ``git push origin Copter-3.6.0``
 
+Announcements are done in much the same way as beta releases, namely an announcement is made on ArduPilot's discuss forums and on ArduPilot's facebook page.  Mission Planner will also show a pop-up informing users that a new version is available.
+
 Didn't find what you are looking for?
 =====================================
 
 If you think of something that should be added to this site, please
 `open an issue <https://github.com/ArduPilot/ardupilot/issues>`__ or
 post a comment on the
-`drones-discuss <https://groups.google.com/forum/#!forum/drones-discuss>`__
-mailing list.
+`ArduPilot Discord Chat <https://ardupilot.org/discord>`__.

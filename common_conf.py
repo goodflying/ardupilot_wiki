@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# This contains common configuration information for the ardupilot wikis. 
+# This contains common configuration information for the ardupilot wikis.
 # This information is imported by the conf.py files in each of the sub wikis
 #
 
@@ -11,7 +11,7 @@ disable_non_local_image_warnings=True
 #wiki_base_url='https://dl.dropboxusercontent.com/u/3067678/share2/wiki'
 #intersphinx_base_url=wiki_base_url+'/%s/build/html/'
 
-wiki_base_url='http://ardupilot.org/'
+wiki_base_url='https://ardupilot.org/'
 intersphinx_base_url=wiki_base_url+'%s/'
 
 
@@ -36,6 +36,8 @@ intersphinx_mapping = {'copter': (intersphinx_base_url % 'copter',
                                   None),
                        'ardupilot': (intersphinx_base_url % 'ardupilot',
                                   None),
+                       'mavproxy': (intersphinx_base_url % 'mavproxy',
+                                  None),
                                   }
 
 ############ PATCH REMOVE NON-LOCAL IMAGE WARNINGS
@@ -56,3 +58,6 @@ if disable_non_local_image_warnings:
 
     sphinx.environment.BuildEnvironment.warn_node = _warn_node
 ############ ENDPATH
+
+def setup(app):
+   app.add_stylesheet("common_theme_override.css")

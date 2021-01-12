@@ -23,15 +23,11 @@ For movement, Plane uses:
 message encoded with the "current" parameter set to "2" to indicate that
 it is a guided mode "goto" message.
 
-:ref:`MAV_CMD_CONDITION_CHANGE_ALT <plane:mav_cmd_condition_change_alt>`
-message encoded with the "current" parameter set to "3" to indicate that
-it is a guided mode "altitude change" message.
-
 MAV_CMDs
 =========
 
 These MAV_CMDs can be processed if packaged within a
-`COMMAND_LONG <https://pixhawk.ethz.ch/mavlink/#COMMAND_LONG>`__ message.
+`COMMAND_LONG <https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ message.
 
 :ref:`MAV_CMD_NAV_LOITER_UNLIM <plane:mav_cmd_nav_loiter_unlim>`
 
@@ -100,27 +96,27 @@ GUIDED mode.
    Most of these commands are not relevant to DroneKit-Python apps or
    are already provided through the API.
 
-`SET_MODE <https://pixhawk.ethz.ch/mavlink/#SET_MODE>`__
+`SET_MODE <https://mavlink.io/en/messages/common.html#SET_MODE>`__
 
-`MISSION_REQUEST_LIST <https://pixhawk.ethz.ch/mavlink/#MISSION_REQUEST_LIST>`__
+`MISSION_REQUEST_LIST <https://mavlink.io/en/messages/common.html#MISSION_REQUEST_LIST>`__
 
-`MISSION_REQUEST <https://pixhawk.ethz.ch/mavlink/#MISSION_REQUEST>`__
+`MISSION_REQUEST <https://mavlink.io/en/messages/common.html#MISSION_REQUEST>`__
 
 MISSION_ACK:
 
-`PARAM_REQUEST_LIST <https://pixhawk.ethz.ch/mavlink/#PARAM_REQUEST_LIST>`__
+`PARAM_REQUEST_LIST <https://mavlink.io/en/messages/common.html#PARAM_REQUEST_LIST>`__
 
-`PARAM_REQUEST_READ <https://pixhawk.ethz.ch/mavlink/#PARAM_REQUEST_READ>`__
+`PARAM_REQUEST_READ <https://mavlink.io/en/messages/common.html#PARAM_REQUEST_READ>`__
 
-`MISSION_CLEAR_ALL <https://pixhawk.ethz.ch/mavlink/#MISSION_CLEAR_ALL>`__
+`MISSION_CLEAR_ALL <https://mavlink.io/en/messages/common.html#MISSION_CLEAR_ALL>`__
 
-`MISSION_SET_CURRENT <https://pixhawk.ethz.ch/mavlink/#MISSION_SET_CURRENT>`__
+`MISSION_SET_CURRENT <https://mavlink.io/en/messages/common.html#MISSION_SET_CURRENT>`__
 
-`MISSION_COUNT <https://pixhawk.ethz.ch/mavlink/#MISSION_COUNT>`__
+`MISSION_COUNT <https://mavlink.io/en/messages/common.html#MISSION_COUNT>`__
 
-`MISSION_WRITE_PARTIAL_LIST <https://pixhawk.ethz.ch/mavlink/#MISSION_WRITE_PARTIAL_LIST>`__
+`MISSION_WRITE_PARTIAL_LIST <https://mavlink.io/en/messages/common.html#MISSION_WRITE_PARTIAL_LIST>`__
 
-`MISSION_ITEM <https://pixhawk.ethz.ch/mavlink/#MISSION_ITEM>`__
+`MISSION_ITEM <https://mavlink.io/en/messages/common.html#MISSION_ITEM>`__
 
 MAVLINK_MSG_ID_FENCE_POINT
 
@@ -130,36 +126,36 @@ RALLY_POINT
 
 RALLY_FETCH_POINT
 
-`PARAM_SET <https://pixhawk.ethz.ch/mavlink/#PARAM_SET>`__
+`PARAM_SET <https://mavlink.io/en/messages/common.html#PARAM_SET>`__
 
 GIMBAL_REPORT
 
-`RC_CHANNELS_OVERRIDE <https://pixhawk.ethz.ch/mavlink/#RC_CHANNELS_OVERRIDE>`__
+`RC_CHANNELS_OVERRIDE <https://mavlink.io/en/messages/common.html#RC_CHANNELS_OVERRIDE>`__
 
-`HEARTBEAT <https://pixhawk.ethz.ch/mavlink/#HEARTBEAT>`__
+`HEARTBEAT <https://mavlink.io/en/messages/common.html#HEARTBEAT>`__
 
-`HIL_STATE <https://pixhawk.ethz.ch/mavlink/#HIL_STATE>`__
+`HIL_STATE <https://mavlink.io/en/messages/common.html#HIL_STATE>`__
 
 RADIO
 
-`RADIO_STATUS <https://pixhawk.ethz.ch/mavlink/#RADIO_STATUS>`__
+`RADIO_STATUS <https://mavlink.io/en/messages/common.html#RADIO_STATUS>`__
 
-`LOG_REQUEST_DATA <https://pixhawk.ethz.ch/mavlink/#LOG_REQUEST_DATA>`__
+`LOG_REQUEST_DATA <https://mavlink.io/en/messages/common.html#LOG_REQUEST_DATA>`__
 
-`LOG_ERASE <https://pixhawk.ethz.ch/mavlink/#LOG_ERASE>`__
+`LOG_ERASE <https://mavlink.io/en/messages/common.html#LOG_ERASE>`__
 
-`LOG_REQUEST_LIST <https://pixhawk.ethz.ch/mavlink/#LOG_REQUEST_LIST>`__
+`LOG_REQUEST_LIST <https://mavlink.io/en/messages/common.html#LOG_REQUEST_LIST>`__
 
-`LOG_REQUEST_END <https://pixhawk.ethz.ch/mavlink/#LOG_REQUEST_END>`__
+`LOG_REQUEST_END <https://mavlink.io/en/messages/common.html#LOG_REQUEST_END>`__
 
-`SERIAL_CONTROL <https://pixhawk.ethz.ch/mavlink/#SERIAL_CONTROL>`__
+`SERIAL_CONTROL <https://mavlink.io/en/messages/common.html#SERIAL_CONTROL>`__
 
-`GPS_INJECT_DATA <https://pixhawk.ethz.ch/mavlink/#GPS_INJECT_DATA>`__
+`GPS_INJECT_DATA <https://mavlink.io/en/messages/common.html#GPS_INJECT_DATA>`__
 
-`TERRAIN_DATA <https://pixhawk.ethz.ch/mavlink/#TERRAIN_DATA>`__
+`TERRAIN_DATA <https://mavlink.io/en/messages/common.html#TERRAIN_DATA>`__
 
-`TERRAIN_CHECK <https://pixhawk.ethz.ch/mavlink/#TERRAIN_CHECK>`__
+`TERRAIN_CHECK <https://mavlink.io/en/messages/common.html#TERRAIN_CHECK>`__
 
 AUTOPILOT_VERSION_REQUEST
 
-`REQUEST_DATA_STREAM <https://pixhawk.ethz.ch/mavlink/#REQUEST_DATA_STREAM>`__
+`REQUEST_DATA_STREAM <https://mavlink.io/en/messages/common.html#REQUEST_DATA_STREAM>`__

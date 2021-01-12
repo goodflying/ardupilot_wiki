@@ -6,7 +6,7 @@ Copter SITL/MAVProxy Tutorial
 
 This tutorial provides a basic walk-through of how to use
 :ref:`SITL <sitl-simulator-software-in-the-loop>` and
-`MAVProxy <http://ardupilot.github.io/MAVProxy/>`__ for *Copter* testing.
+:ref:`MAVProxy documentation <mavproxy:home>` for *Copter* testing.
 
 Overview
 ========
@@ -23,7 +23,7 @@ The tutorial is complementary to the topic :ref:`Using SITL for ArduPilot Testin
    -  We use *MAVProxy* here, but you can :ref:`attach another ground station to SITL <using-sitl-for-ardupilot-testing_connecting_otheradditional_ground_stations>`
       if you prefer (similar instructions can be used in any GCS).
    -  This tutorial is for Copter - see
-      :ref:`Plane <plane-sitlmavproxy-tutorial>` and Rover for similar
+      :ref:`Plane <plane-sitlmavproxy-tutorial>` and :ref:`Rover <rover-sitlmavproxy-tutorial>` for similar
       tutorials on the other vehicles.
 
 Preconditions
@@ -36,7 +36,19 @@ using the ``--map`` and ``--console`` options:
 ::
 
     cd ~/ardupilot/ArduCopter
-    sim_vehicle.py --map --console
+    ../Tools/autotest/sim_vehicle.py --map --console
+
+.. note::
+
+   If you wish to start the simulation at a different map location or use a different frame type
+   (-f option for hexa,tri,octa,heli,etc.) than a standard + layout quadcopter, see
+   :ref:`SITL Advance Testing <using-sitl-for-ardupilot-testing>`. A complete list of startup
+   options for the simulator can be found using the --help option:
+
+::
+
+    sim_vehicle.py --help
+
 
 The *MAVProxy Command Prompt*, *Console* and *Map* should be arranged
 conveniently so you can observe the status and send commands at the same
@@ -177,8 +189,8 @@ In addition to ``takeoff``, you can send the following commands in
 
 ::
 
-    yaw ANGLE ANGULAR_SPEED MODE  (MODE is 0 for "absolute" or 1 for "relative")
-    speed SPEED_VALUE
+    setyaw ANGLE ANGULAR_SPEED MODE  (MODE is 0 for "absolute" or 1 for "relative")
+    setspeed SPEED_VALUE
     velocity x y z   (m/s)
 
 .. note::
@@ -187,7 +199,7 @@ In addition to ``takeoff``, you can send the following commands in
    :ref:`MAV_CMD_NAV_TAKEOFF <copter:mav_cmd_nav_takeoff>`,
    :ref:`MAV_CMD_DO_CHANGE_SPEED <copter:mav_cmd_do_change_speed>`,
    :ref:`MAV_CMD_CONDITION_YAW <copter:mav_cmd_condition_yaw>`,
-   `SET_POSITION_TARGET_LOCAL_NED <http://mavlink.org/messages/common#SET_POSITION_TARGET_LOCAL_NED>`__.
+   `SET_POSITION_TARGET_LOCAL_NED <https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_LOCAL_NED>`__.
 
    At time of writing, the other :ref:`Copter Commands <copter-commands-in-guided-mode>`
    are not supported (`MAVProxy #150 <https://github.com/ArduPilot/MAVProxy/issues/150>`__)
@@ -204,12 +216,12 @@ skip to the second waypoint, and *loop* the mission:
 
 ::
 
-    wp load ..\Tools\autotest\CMAC-circuit.txt
+    wp load ..\Tools\autotest\Generic_Missions\CMAC-circuit.txt
     mode auto
     wp set 2
     wp loop
 
-The `MAVProxy Waypoints documentation <http://ardupilot.github.io/MAVProxy/html/uav_configuration/waypoints.html>`__
+The :ref:`MAVProxy Waypoints documentation <mavproxy:mavproxy-waypoints>`
 lists the full set of available commands (or you can get them using
 auto-completion by typing "wp" on the command line).
 
@@ -246,7 +258,7 @@ Setting a GeoFence
 
 A GeoFence is is a virtual barrier that Copter uses to constrain the
 movement of the vehicle. Copter uses a simple "tin can border" as
-described in :ref:`Simple GeoFence <copter:ac2_simple_geofence>`.
+described in :ref:`Simple GeoFence <common-ac2_simple_geofence>`.
 When the radius or maximum altitude is breached, Copter returns to the
 launch point and/or lands.
 

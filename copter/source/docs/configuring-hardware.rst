@@ -17,10 +17,13 @@ camera gimbal, antenna tracker etc.
 .. toctree::
     :maxdepth: 1
 
+    Basic System Overview <common-basic-operation>
     Frame Type Configuration <frame-type-configuration>
-    Compass Calibration <common-compass-calibration-in-mission-planner>
+    Motor Numbering and Direction <connect-escs-and-motors>
     Radio Control Calibration <common-radio-control-calibration>
     Accelerometer Calibration <common-accelerometer-calibration>
+    Compass Calibration <common-compass-calibration-in-mission-planner>
     RC Transmitter Mode Setup <common-rc-transmitter-flight-mode-configuration>
     ESC Calibration <esc-calibration>
     Configure Motor Range (optional) <set-motor-range>
+    Failsafe Mechanisms <failsafe-landing-page>

@@ -6,7 +6,7 @@ Rover Home
 
 .. tip::
 
-   Keep up with the latest ArduPilot related blogs on `ArduPilot.org! <http://ardupilot.org/>`__
+   Keep up with the latest ArduPilot related blogs on `ArduPilot.org! <https://ardupilot.org/>`__
 
 .. image:: /images/home_rover.jpg
     :target: _images/home_rover.jpg
@@ -24,26 +24,29 @@ applications (you can see a few examples including agricultural
 automation in our :ref:`Video Demos <rover-video-demonstrations>`).
 
 
-Table of Contents
------------------
-
 .. toctree::
-   :titlesonly:
+   :maxdepth: 4
+   :hidden:
    
     Introduction <docs/gettit>
+    Autopilot Hardware Options <docs/common-autopilots>
     First Time Setup <docs/apmrover-setup>
     First Drive <docs/rover-first-drive>
+    If A Problem Arises <docs/common-when-problems-arise>
     Advanced Configuration <docs/common-advanced-configuration>
     Mission Planning <docs/common-mission-planning>
     Logs <docs/common-logs>
-    Optional Hardware <docs/common-optional-hardware>
+    Peripheral Hardware <docs/common-optional-hardware>
     Boats <docs/boat-configuration>
     Balance Bots <docs/balance_bot-home>
+    Sailboats <docs/sailboat-home>
+    Walking Robots <docs/walking-robots>
     Reference Frames <docs/reference-frames>
-    Autopilot Hardware Options <docs/common-autopilots>
     Use-Cases and Applications <docs/common-use-cases-and-applications>
     Antenna Tracking <docs/common-antenna-tracking>
     Simulation <docs/common-simulation>
+    User Alerts <docs/common-user-alerts>
+    Upcoming Features <docs/common-master-features>
     Appendix <docs/common-appendix>
     Full Table of Contents <docs/common-table-of-contents>
 

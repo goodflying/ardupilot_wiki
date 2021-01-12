@@ -21,7 +21,7 @@ and
 available) began as a fork of the open source `Martinez 2-axis brushless gimbal controller <https://sourceforge.net/projects/brushless-gimbal-brugi/>`__
 to support the more powerful STM32 CPUs but since then has been mostly
 rewritten and includes significant enhancements including 3-axis support
-and Mavlink for serial communication with the flight controller or
+and MAVLink for serial communication with the autopilot or
 ground station.
 
 -  `Official quick start guide can be found here <https://vrgimbal.wordpress.com/quick-start-guide/>`__
@@ -34,7 +34,7 @@ ground station.
 .. note::
 
    We do not yet have an recommended affordable 3-axis gimbal for use
-   with the VRGimbal.  Testing by the Ardupilot dev team has so far been
+   with the VRGimbal.  Testing by the ArduPilot dev team has so far been
    limited to using a Tarot 2-axis gimbal.
 
 Connecting the VRGimbal to the Pixhawk
@@ -92,7 +92,7 @@ fail (see "BAD" device driver screen shot below).
       computer for driver software" and select the folder where you
       unzipped the driver.  Windows 8 machines may complain because the
       driver is not signed, instructions are
-      `here <http://www.makeuseof.com/tag/how-can-i-install-hardware-with-unsigned-drivers-in-windows-8/>`__
+      `here <https://www.makeuseof.com/tag/how-can-i-install-hardware-with-unsigned-drivers-in-windows-8/>`__
       on how to get around this.
    -  After the driver is installed, if the Maple device appears as COM9
       or higher you will not be able to connect.  The Control Panel's
@@ -154,7 +154,7 @@ Other Open Source Alternatives
 
 `Martinez 2-axis gimbal controllers <https://sourceforge.net/projects/brushless-gimbal-brugi/>`__
 using the original AVR328 chip can be found at retailers including
-`hobbyking <http://www.hobbyking.com/hobbyking/store/__41386__2_Axis_Brushless_Camera_Gimbal_Stabilization_Control_Board_w_IMU.html>`__.
+`hobbyking <https://hobbyking.com/en_us/2-axis-brushless-camera-gimbal-stabilization-control-board-w-imu.html?___store=en_us>`__.
 
 `OlliW's STorM3 BGC 3-Axis STM32 based brushless gimbal controller <http://www.olliw.eu/2013/storm32bgc/?en>`__ is open source
 hardware, closed source (but free) gimbal firmware and open source

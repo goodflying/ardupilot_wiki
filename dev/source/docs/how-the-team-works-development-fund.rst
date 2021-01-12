@@ -1,13 +1,15 @@
 .. _how-the-team-works-development-fund:
 
-================
-Development Fund
-================
+=================
+Funding Committee
+=================
 
-ArduPilot collects funds through donations from individuals and Partners and are held within SPI.
+ArduPilot collects funds through donations from :ref:`individuals <common-donation>` and `Partners <https://ardupilot.org/about/Partners>`__ and these are held within SPI.
 Some of these funds go to pay for fixed costs including servers (i.e. build servers, wiki servers, etc) and are billed directly to ArduPilot's account within SPI.
 
-This page attempts to outline how any remaining funds are managed.
+Each month SPI publishes an in-month and year-to-date financial report on the Treasurer `page <https://spi-inc.org/treasurer/>`__.  Annual Reports, containing a high level summary, are published `here <https://spi-inc.org/corporate/annual-reports/>`__
+
+This page attempts to outline how ArduPilot Project funds are managed.
 
 Submitting Proposals
 --------------------
@@ -29,7 +31,11 @@ All proposal submissions are considered public information, and may be disclosed
 Evaluating Proposals
 --------------------
 
-The ArduPilot funding committee is made up of three elected members from the team.  Elections are held each year in November.
+The ArduPilot funding committee is made up of three elected members from the team with elections held each December.  The currently elected members are:
+
+- Francisco Ferreira
+- James Pattison
+- Pierre Kancir
 
 This committee reviews the `Proposal category <https://discuss.ardupilot.org/c/proposals>`__ regularly and evaluates proposals based on both the benefit to ArduPilot and likelihood of success.
 The approve/reject decision is made by a simple majority vote (i.e. 2 of 3 must approve).
@@ -44,7 +50,10 @@ Additional guidance:
 - we should keep red-tape to a minimum. There is no point in there being 10 hours of admin for a $200 request. Small proposals should be encouraged which are just a few paragraphs, and the person should get their money quickly and with a minimum of fuss.
 - all proposals should receive and accepted or rejected response within a reasonable amount of time.
 
-Making Payments
----------------
+Getting Paid
+------------
 
-Payments are made via PayPal by ArduPilot's SPI liason (the ArduPilot team member who has been elected to be the main point of contact with SPI).
+Payments from ArduPilot are made in one of two ways:
+
+- ArduPilot's SPI liason (the team member who has been elected to be the main point of contact with SPI) can make payments via PayPal
+- Through direct bank transfer.  Follow the `instructions here to create a Reimbursement Request <http://spi-inc.org/treasurer/reimbursement-form/>`__ and send to ArduPilot's SPI liason along with receipts

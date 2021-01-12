@@ -18,16 +18,10 @@ This page describes generic waypoint setup for all types of vehicles.
 Setting the Home Position
 =========================
 
-For **Copter** the home position is set as the location where the copter
-was armed. This means if you execute an RTL in Copter, it will return to
-the location where it was armed, so arm your copter in the location you
-want it to return to.
-
-For **Plane** the home position is the location of the plane where the
-GPS was locked. This means if you execute an RTL in Plane, it will
-return to the location where it first acquired the GPS lock, so only
-power up your plane in the location you intend it to return to when
-performing an RTL.
+For **Copter**, **Plane** and **Rover** the home position is set as the location where the vehicle
+was armed. This means if you execute an RTL, it will return to
+the location where it was armed, so arm your vehicle in the location you
+want it to return to, or use a rally point to setup an alternative return point.
 
 Video: Produce and save a Multi-waypoint Mission
 ================================================
@@ -48,8 +42,7 @@ In the screenshot below, a Copter mission starts with an auto takeoff to
 20 meters altitude; then goes to WP 2 rising to 100 meters altitude on
 the way, then waits 10 seconds; then the craft will proceed to WP 3
 (descending to 50 meters altitude on the way), then returns to launch.
-Since the default altitude is 100 meters, the return to launch will be
-at 100 meters.  After reaching the launch position, the craft will land.
+After reaching the launch position, the craft will land.
 The mission assumes that the launch position is set at the home
 position.
 
@@ -67,11 +60,7 @@ Lon can be entered by clicking on the map. Altitude is relative to your
 launch altitude/home position, so if you set 100m, for example, it will
 fly 100m above you.
 
-**Default Alt** is the default altitude when entering new waypoints.
-It's also the altitude RTL (return to launch) mode will fly at if you
-have **Hold Default ALT** checked; if you don't have that checked, your
-aircraft will try to maintain the altitude it was at when you switched
-on RTL.
+**Default Alt** is the default altitude when entering new waypoints. See :ref:`common-understanding-altitude` for altitude definitions.
 
 **Verify height** means that the Mission Planner will use Google Earth
 topology data to adjust your desired altitude at each waypoint to

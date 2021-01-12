@@ -24,7 +24,7 @@ information here pertains to those modes as well.
 
 .. note::
 
-   The flight controller uses a barometer which measures air pressure
+   The autopilot uses a barometer which measures air pressure
    as the primary means for determining altitude ("Pressure Altitude") and
    if the air pressure is changing in your flight area due to extreme
    weather, the copter will follow the air pressure change rather than
@@ -46,14 +46,13 @@ throttle stick.
    the vehicle will descend or climb depending upon the deflection of
    the stick.  When the stick is completely down the copter will descend
    at 2.5m/s and if at the very top it will climb by 2.5m/s.  These
-   speeds can be adjusted with the ``PILOT_VELZ_MAX`` parameter.
--  The size of the deadband can be adjusted with the THR_DZ parameter
-   (AC3.2 and higher only).  This params value should be between "0" and
+   speeds can be adjusted with the :ref:`PILOT_SPEED_UP<PILOT_SPEED_UP>` and :ref:`PILOT_SPEED_DN<PILOT_SPEED_DN>` parameters.
+-  The size of the deadband can be adjusted with the :ref:`THR_DZ<THR_DZ>` parameter.  This param's value should be between "0" and
    "400" with "0" meaning no deadband.  "100" would produce a deadband
    10% above and below mid throttle (i.e. deadband extends from 40% to
    60% throttle stick position).
 
-AC3.1 and later allow arming and disarming in altitude hold mode. When
+Copter allows arming and disarming in altitude hold mode. When
 disarming, the copter may need to rest in the landing position for a few
 seconds to allow the "landing checker" to verify that the copter has
 landed before you are able to disarm.
@@ -96,11 +95,7 @@ barometer altitude, desired altitude and inertial navigation based
 altitude estimate.  This data is found in slight different columns
 depending upon the version and board.
 
-APM running AC3.1: graph CTUN's BarAlt (baro alt), WPAlt (desired
-altitude) and the GPS message's RelAlt (inertial nav alt estimate)
-
-APM running AC3.2 or Pixhawk running AC3.1 or AC3.2: CTUN's BarAlt (baro
-alt), DAlt (desired alt) and Alt (inertial nav alt estimate)
+CTUN's BAlt (baroalt), DAlt (desired alt) and Alt (inertial nav alt estimate)
 
 The three should track well as shown below.
 
@@ -138,20 +133,20 @@ Common Problems
 #. Momentary altitude loss of 1m ~ 2m when the copter levels out after a
    high speed forward flight.  This is caused by an aerodynamic effect
    which leads to a momentary low pressure bubble forming on the top of
-   the copter where the flight controller is mounted which leads the
+   the copter where the autopilot is mounted which leads the
    altitude hold controller to believe it is climbing so it responds by
    descending.  There is no cure for this behaviour at the moment
-   although increasing the ``INAV_TC_Z`` parameter to 7 (default is 5)
-   reduces the effect but increases the change of Common Problem #1
-   listed above.
+   although increasing the ``EK2_ALT_M_NSE`` parameter reduces 
+   the effect but increases the change of Common Problem #1
+   listed above. The ``EK2_ALT_M_NSE`` parameter has a range from 0.1 to
+   10.0 and allows increments of 0.1.
 #. Altitude hold becomes erratic when the vehicle is close to the ground
    or during landing.  This can be caused by the barometer being
    affected by pressure changes created by prop-wash.  The solution is
-   to move the flight controller out of the prop wash effect or shield
+   to move the autopilot out of the prop wash effect or shield
    it within an appropriately ventilated enclosure.
 #. Sudden altitude changes caused by light striking the barometer. 
-   APM2.x sold after mid 2013 come with black tape on the inside of the
-   case to protect against this.
+
 
 Adequate Power
 ==============
