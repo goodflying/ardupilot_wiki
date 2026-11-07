@@ -1,5 +1,7 @@
 .. _common-apm-to-chdk-camera-link-tutorial:
 
+**ARCHIVED: page considered obsolete**
+
 ====================================
 Camera Shutter Triggering using CHDK
 ====================================
@@ -29,10 +31,12 @@ instead of using the custom cable (please extend this list if you find another a
 
 The article covers both Pixhawk and APM2.x.
 
-.. figure:: ../../../images/CHDK_APM2_to_camera_connection.jpg
-   :target: ../_images/CHDK_APM2_to_camera_connection.jpg
+.. only:: html
 
-   APM Connected to aCanon SX260 HS using a custom cable
+   .. figure:: ../../../images/CHDK_APM2_to_camera_connection.jpeg
+      :target: ../_images/CHDK_APM2_to_camera_connection.jpeg
+
+      APM Connected to a Canon SX260 HS using a custom cable
 
 .. note::
 
@@ -52,7 +56,7 @@ instructions/functions based on the signal pulse-length. When using a
 relay, the script can be very simple — all it needs to do is check the
 voltage (in a loop), and take a picture when it detects the relay
 voltage go high. More complicated scripts might first set the focus,
-zoom, or preform any other default behaviour.
+zoom, or perform any other default behaviour.
 
 The `CHDK Wiki <http://chdk.wikia.com/wiki/CHDK>`__ documentation
 explains which cameras are supported, how you install CHDK on you
@@ -84,19 +88,21 @@ rail) because the servo rail itself is not powered.
 
 1 x 220 ohm
 
-.. figure:: http://api.ning.com/files/6A05RJELsODapmzmxrkfVjh3WsYV3VM6gRNmnUfTqO8MDOtaCuWg6baF2UChPaKaq52lXT63W*i-uwbGNqEGfbEczIHGK3ER/3.3vto5vlogiclevelshifterwithtransistorsinproteus.jpg
-   :target:  http://diydrones.com/xn/detail/705844:Comment:1581209
+.. only:: html
 
-   3Vto 5V Shifter Circuit
+   .. figure:: http://api.ning.com/files/6A05RJELsODapmzmxrkfVjh3WsYV3VM6gRNmnUfTqO8MDOtaCuWg6baF2UChPaKaq52lXT63W*i-uwbGNqEGfbEczIHGK3ER/3.3vto5vlogiclevelshifterwithtransistorsinproteus.jpg
+      :target:  https://diydrones.com/forum/topics/using-aux-pins-as-relays-for-chdk?commentId=705844%3AComment%3A1581209
 
-.. figure:: http://api.ning.com/files/iAT0B9wCR3AoT2PagGiqpRaMPAUgnytMSGSeJ7sSKh9gtRNuhdzj01dCdTkRLM2*x0pN58LfGHlqFbKfTThHXPkyjaetHNu-/Pixhawk_35_diag.png
-   :target:  http://diydrones.com/xn/detail/705844:Comment:1594680
+      3Vto 5V Shifter Circuit
 
-   3V to5V Shifter (PCB)
+   .. figure:: http://api.ning.com/files/iAT0B9wCR3AoT2PagGiqpRaMPAUgnytMSGSeJ7sSKh9gtRNuhdzj01dCdTkRLM2*x0pN58LfGHlqFbKfTThHXPkyjaetHNu-/Pixhawk_35_diag.png
+      :target:  https://diydrones.com/forum/topics/using-aux-pins-as-relays-for-chdk?commentId=705844%3AComment%3A1594680
+
+      3V to5V Shifter (PCB)
 
 .. note::
 
-   The voltage stepper circuit and PCB above are `from the community discussion boards <http://diydrones.com/forum/topics/using-aux-pins-as-relays-for-chdk?commentId=705844%3AComment%3A1581209>`__.
+   The voltage stepper circuit and PCB above are `from the community discussion boards <https://diydrones.com/forum/topics/using-aux-pins-as-relays-for-chdk?commentId=705844%3AComment%3A1581209>`__.
 
 It is also possible to find pre-built stepper circuits like the
 `SparkFun 5V Step-Up Breakout - NCP1402 <https://www.sparkfun.com/products/10968>`__ (not tested).

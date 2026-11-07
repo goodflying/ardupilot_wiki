@@ -1,0 +1,98 @@
+.. _common-future-wiki-changes:
+
+==========================================
+Future Wiki Changes (in Master branch now)
+==========================================
+Will be in future 4.8 release and is currently in master ("latest")
+
+[copywiki destination="plane,copter,rover,blimp,sub"]
+
+New Board Support
+=================
+- JPilot-C, see https://github.com/ArduPilot/ardupilot_wiki/pull/7567
+- SparkNavi Blue , see https://github.com/ArduPilot/ardupilot_wiki/pull/7643
+- PrinciploT H7 Pi , see https://github.com/ArduPilot/ardupilot_wiki/pull/7694
+- GPILOT P1, see https://github.com/ArduPilot/ardupilot_wiki/pull/7877
+- SIYI UniFC 6 PICO, see https://github.com/ArduPilot/ardupilot_wiki/pull/7877
+- SimpliFly H7, see https://github.com/ArduPilot/ardupilot_wiki/pull/7915
+- AET-H743-Air, see https://github.com/ArduPilot/ardupilot_wiki/pull/7918
+- CUAV-X25-MEGA, see https://github.com/ArduPilot/ardupilot_wiki/pull/7944
+- Agam MegH7, see https://github.com/ArduPilot/ardupilot_wiki/pull/7974
+- FlyFishRC F405, see https://github.com/ArduPilot/ardupilot_wiki/pull/7985
+- Lectron Pi5, see https://github.com/ArduPilot/ardupilot_wiki/pull/7976
+- HGLRC H743 EVO, see https://github.com/ArduPilot/ardupilot_wiki/pull/8016
+- NWBlue Pro H757, see https://github.com/ArduPilot/ardupilot_wiki/pull/8017
+- Tustin MACH, see https://github.com/ArduPilot/ardupilot_wiki/pull/8029
+- SVehicle E2-mini, see https://github.com/ArduPilot/ardupilot_wiki/pull/8091
+- ZenFC743, see https://github.com/ArduPilot/ardupilot_wiki/pull/8106
+- CyberX-Cube, see https://github.com/ArduPilot/ardupilot_wiki/pull/8206
+- DroneerX6, see https://github.com/ArduPilot/ardupilot_wiki/pull/8207
+- HGLRC H743 PRO, see https://github.com/ArduPilot/ardupilot_wiki/pull/8224
+- AcctonGodwit GFH7, see https://github.com/ArduPilot/ardupilot_wiki/pull/8225
+- AcctonGodwit GFF4, see https://github.com/ArduPilot/ardupilot_wiki/pull/8226
+
+New Peripheral Support
+======================
+- Trimble PX-1 GSOF AHRS, see https://github.com/ArduPilot/ardupilot_wiki/pull/7566
+- Kebni SensAItion IMU and INS sensors, see https://github.com/ArduPilot/ardupilot_wiki/pull/7337
+- YARI DroneCAN GNSSs, see https://github.com/ArduPilot/ardupilot_wiki/pull/7785
+- RPLidarS2, see https://github.com/ArduPilot/ardupilot_wiki/pull/7787
+- LightwareGRF-250 I2C, see https://github.com/ArduPilot/ardupilot_wiki/pull/7795
+- Aeron Systems PLX3 INS, see https://github.com/ArduPilot/ardupilot_wiki/pull/7750
+- HC Robotics HCR-523 DroneCAN GPS/Compass, see https://github.com/ArduPilot/ardupilot_wiki/pull/7947
+
+New Features
+============
+
+- Option to clear GCS RC overrides on RC stick input, see https://github.com/ArduPilot/ardupilot_wiki/pull/7880
+- Accel and gyro consistency pre-arm checks now run concurrently, see https://github.com/ArduPilot/ardupilot_wiki/pull/7921
+- EK3_OPTIONS bits for optical flow (terrain alt above rangefinder range, AGL Kalman filter for flow scaling), see https://github.com/ArduPilot/ardupilot_wiki/pull/7962
+- MAV_CMD_DO_SET_MISSION_CURRENT can now reset DO_JUMP repeat counters without changing the current mission item, see https://github.com/ArduPilot/ardupilot_wiki/pull/7982
+- Read-only MAVn_DEVID parameter identifying which port each MAVLink channel's parameter group belongs to, see https://github.com/ArduPilot/ardupilot_wiki/pull/8051
+- I2C TFmini Plus lidar can now be powered down above the RNGFNDx_PWRRNG height above terrain, see https://github.com/ArduPilot/ardupilot_wiki/pull/8055
+- ARSPD_TYPE = 20 allows a LUA script to provide the airspeed or differential pressure, see https://github.com/ArduPilot/ardupilot_wiki/pull/8057
+- Multiple MAVLink rangefinders facing the same direction can be told apart by setting RNGFNDx_ADDR to the DISTANCE_SENSOR id each should accept, see https://github.com/ArduPilot/ardupilot_wiki/pull/8072
+- PPP gateway ethernet adapters (BotBlox DroneNet, CubeNode ETH) have a new tabbed web interface whose parameter editor allows the adapter to be configured from a browser, without a CAN connection to it, see https://github.com/ArduPilot/ardupilot_wiki/pull/8081
+- Crash dumps are now saved as a full memory dump to APM/CrashDump.DAT on the microSD card on most autopilots with one, instead of a partial dump in internal flash; delete the file to clear the CrashDump pre-arm failure, see https://github.com/ArduPilot/ardupilot_wiki/pull/8097
+- MAVLink cameras keep their own identity when relayed to ground stations, new CAMx_COMPID, MNTx_ATT_RATE and MNTx_TARG_RATE parameters, MAVx_OPTIONS "Unicast" option for camera/gimbal links, and camera/gimbal IDs 7-255 select MAVLink devices by component ID, see https://github.com/ArduPilot/ardupilot_wiki/pull/8099
+- SITL can be built as WebAssembly (``--board wasm``) to run a simulated vehicle in a web browser or Node.js, with serial ports bridged to JavaScript, see https://github.com/ArduPilot/ardupilot_wiki/pull/8103
+- Terrain cache blocks are now allocated individually, so a large TERRAIN_CACHE_SZ no longer needs one contiguous region of free RAM, see https://github.com/ArduPilot/ardupilot_wiki/pull/8128
+- INS_HNTCH_ESCMSK and INS_HNTC2_ESCMSK select which ESCs drive an ESC telemetry harmonic notch, e.g. to give QuadPlane VTOL and forward motors separate notches, see https://github.com/ArduPilot/ardupilot_wiki/pull/8130
+- Home-centered circular inclusion fence (MAV_CMD_NAV_FENCE_HOME_CIRCLE_INCLUSION) that moves with home, see https://github.com/ArduPilot/ardupilot_wiki/pull/8131
+- Servo camera zoom and focus speed for continuous (rate) commands is now set by CAMx_ZOM_RAT_MAX and CAMx_FOC_RAT_MAX, see https://github.com/ArduPilot/ardupilot_wiki/pull/8133
+- MAVLink 2.1 32-bit system IDs: MAV_SYSID, MAV_GCS_SYSID(_HI), FOLL_SYSID and MNTx_SYSID_DFLT accept values up to 4294967295, and SD-card Lua MAVLink modules must be updated, see https://github.com/ArduPilot/ardupilot_wiki/pull/8149
+- CRSF/ELRS on an F4/F7 UART without RX DMA now gives a repeating GCS warning while disarmed, see https://github.com/ArduPilot/ardupilot_wiki/pull/8151
+- Duplicate RCx_OPTION and mode channel/RCx_OPTION conflicts are now reported as pre-arm failures while disarmed, even with no RC input, and are only skipped by the ARMING_SKIPCHK RC bit, see https://github.com/ArduPilot/ardupilot_wiki/pull/8154
+- EK3_MAG_CAL = 7 learns the compass field on the ground and after the first in-flight yaw reset, but not during the initial climb, for compasses close to the motors, see https://github.com/ArduPilot/ardupilot_wiki/pull/8210
+- STM32H7 firmware built with --enable-USB-debug can be debugged with GDB over USB without a debug probe, see https://github.com/ArduPilot/ardupilot_wiki/pull/8156
+
+[site wiki="plane"]
+- Rangefinder engagement distance, see https://github.com/ArduPilot/ardupilot_wiki/pull/7559
+- QRTL approach now descends gradually to RTL_ALTITUDE instead of stepping down to it, see https://github.com/ArduPilot/ardupilot_wiki/pull/8031
+- Weathervaning is now active while navigating between VTOL waypoints in AUTO, see https://github.com/ArduPilot/ardupilot_wiki/pull/8058
+- Q_RTL_PAUSE_TIME pauses above the landing point before the final VTOL descent, defaulting to 5s on tailsitters, see https://github.com/ArduPilot/ardupilot_wiki/pull/8059
+- Automatic flap speed schedule reworked: target airspeed is used without needing an airspeed sensor, with AIRSPEED_CRUISE as the fallback, see https://github.com/ArduPilot/ardupilot_wiki/pull/8060
+- ALT_OFFSET now always resets to zero at boot, and new FLIGHT_OPTIONS bit 17 also resets it on flight mode and AUTO navigation command changes, see https://github.com/ArduPilot/ardupilot_wiki/pull/8094
+[/site]
+[site wiki="copter"]
+- Ability to abort flip using aux switch low, see https://github.com/ArduPilot/ardupilot_wiki/pull/7759
+- Pilot yaw input now also gates during landing (LAND_REPOSITION), see https://github.com/ArduPilot/ardupilot_wiki/pull/7879
+- MAV_CMD_DO_SET_ROI_WPNEXT_OFFSET mission command (point gimbal at next waypoint with an offset), see https://github.com/ArduPilot/ardupilot_wiki/pull/7920
+- Simple/Super Simple mode fix: rotation now correctly applied in more flight modes, including Drift mode and during Precision Landing reposition, see https://github.com/ArduPilot/ardupilot_wiki/pull/7967
+- Tradheli: DDFP tail rotor moved to the RSC controller with independent H_TAIL_RAMP_TIME, see https://github.com/ArduPilot/ardupilot_wiki/pull/7979
+- Flip mode rotation rate is now set by FLIP_RATE, with the flip timeout derived from it, see https://github.com/ArduPilot/ardupilot_wiki/pull/8049
+- Follow: changing FOLL_SYSID now discards the previous lead vehicle's state, and FOLL_SYSID = 0 no longer adopts the first vehicle seen, see https://github.com/ArduPilot/ardupilot_wiki/pull/8061
+- Battery failsafe no longer disarms a landed vehicle when the failsafe action is 0 (Warn Only), so a vehicle that was force-armed with a low battery stays armed, see https://github.com/ArduPilot/ardupilot_wiki/pull/8118
+- Tradheli: SWSH log blade pitch angles are now calculated from the actual swashplate servo outputs, and SWSH logging requires the new H_CYC_ANG_MAX to be set (default 0 disables it), see https://github.com/ArduPilot/ardupilot_wiki/pull/8155
+[/site]
+[site wiki="rover"]
+- Follow: changing FOLL_SYSID now discards the previous lead vehicle's state, and FOLL_SYSID = 0 no longer adopts the first vehicle seen, see https://github.com/ArduPilot/ardupilot_wiki/pull/8061
+- GUID_TIMEOUT sets how long Guided mode waits for a new velocity, heading, turn rate or steering/throttle command before stopping (previously fixed at 3s), see https://github.com/ArduPilot/ardupilot_wiki/pull/8126
+[/site]
+[site wiki="sub"]
+- Remote (MAVLink) leak detection, see https://github.com/ArduPilot/ardupilot_wiki/pull/7593
+- GUIDED mode accepts an acceleration target alongside position and velocity, see https://github.com/ArduPilot/ardupilot_wiki/pull/8053
+[/site]
+[site wiki="blimp"]
+- Four motor (propeller) blimp frame, AUTO (waypoint) and HOLD modes, LAND now descends while holding position, and Loiter/Velocity parameters moved and renamed under ``LOIT_``, see https://github.com/ArduPilot/ardupilot_wiki/pull/8135
+[/site]

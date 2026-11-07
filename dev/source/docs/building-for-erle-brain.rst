@@ -1,8 +1,8 @@
 .. _building-for-erle-brain:
 
-=======================
-Building for Erle-Brain
-=======================
+=======================================
+Archived Topic: Building for Erle-Brain
+=======================================
 
 .. warning::
 
@@ -53,9 +53,8 @@ Clone the source:
 ::
 
     cd 
-    git clone https://github.com/erlerobot/ardupilot.git
+    git clone --recurse-submodules https://github.com/erlerobot/ardupilot.git
     cd ardupilot
-    git submodule update --init --recursive
 
 Build
 -----
@@ -77,7 +76,7 @@ file.
 .. note::
 
    If building for Plane, Rover or Antenna Tracker replace the above
-   "ArduCopter" with "ArduPlane", "APMrover2" or "AntennaTracker".
+   "ArduCopter" with "ArduPlane", "Rover" or "AntennaTracker".
 
 Move firmware to the executable directory
 -----------------------------------------

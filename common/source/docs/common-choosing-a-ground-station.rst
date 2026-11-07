@@ -1,5 +1,5 @@
 .. _common-choosing-a-ground-station:
-
+[copywiki destination="plane,copter,rover,blimp,sub"]
 =========================
 Choosing a Ground Station
 =========================
@@ -12,40 +12,34 @@ Overview
 ========
 
 A ground station is typically a software application, running on a
-ground-based computer, that communicates with your UAV via :ref:`wireless telemetry <common-telemetry-landingpage>`. It displays real-time data
+ground-based computer,phone,or transmitter, that communicates with your UAV via :ref:`wireless telemetry <common-telemetry-landingpage>` or USB cable. It displays real-time data
 on the UAVs performance and position and can serve as a “virtual
 cockpit”, showing many of the same instruments that you would have if
 you were flying a real plane. A GCS can also be used to control a UAV in
 flight, uploading new mission commands and setting parameters. It is
 often also used to monitor the live video streams from a UAV’s cameras.
 
-There are at least ten different ground control stations. On desktop there is (*Mission
-Planner*, *APM Planner 2*, *MAVProxy*, *QGroundControl* and *UgCS*. For Tablet/Smartphone there is
-*Tower* (DroidPlanner 3), *MAVPilot*, *AndroPilot* and *SidePilot* that can be
-used to communicate with ArduPilot (i.e.
-:ref:`Copter <copter:home>`,
-:ref:`Plane <plane:home>`,
-:ref:`Rover <rover:home>`,
-:ref:`AntennaTracker <antennatracker:home>`).
+A GCS is also required to setup the configuration of the autopilot prior to its use and to update the autopilot's firmware.
+
+There are at least ten different ground control stations. On desktop there is *Mission
+Planner*, *APM Planner 2*, *MAVProxy*, *QGroundControl*, *UgCS*, *LOGOS*, *FlightZoomer*, and *ArduDeck*. For Tablet/Smartphone there are
+*QGroundControl*, *Tower* (DroidPlanner 3), *MAVPilot*, *AndroPilot*, *SidePilot* and *ArduDeck* that can be
+used to communicate with ArduPilot.
 
 The decision to select a particular GCS often depends on your vehicle
 and preferred computing platform:
 
 -  **Ready-to-fly** users may prefer the portability and ease of use of
-   *Tower* (Droid Planner 3), or another GCS running on a tablet or
+   *QGroundControl*, or another GCS running on a tablet or
    phone.
 -  **DIY/Kit** users and developers often have to access configuration
    and analysis tools, and would therefore need (at least initially)
-   *Mission Planner*, *APM Planner 2* or another more full-featured GCS.
+   *Mission Planner*, *QGroundControl*, *APM Planner 2* or another more full-featured GCS.
+-  **Code Developers** will appreciate some of *MAVProxy's* features.
 
-.. note::
 
-   This wiki primarily refers to set-up and configuration using the
-   Mission Planner, because it was created first and is the most
-   full-featured GCS.
-
-Comparison Desktop
-==================
+Desktop GCSs
+============
 
 Mission Planner
 ---------------
@@ -59,19 +53,19 @@ Full featured and widely used GCS.
 .. image:: ../../../images/MP-FP-Screen.jpg
     :target: ../_images/MP-FP-Screen.jpg
 
--  `Download <http://firmware.ardupilot.org/Tools/MissionPlanner/MissionPlanner-latest.msi>`__
+-  `Download <https://firmware.ardupilot.org/Tools/MissionPlanner/MissionPlanner-latest.msi>`__
 -  :ref:`Wiki <planner:home>`
--  `Support Forum <http://ardupilot.com/forum/viewforum.php?f=12>`__
+-  `Support Forum <https://discuss.ardupilot.org/c/ground-control-software/mission-planner>`__
 -  `Issues List <https://github.com/ArduPilot/MissionPlanner/issues>`__
 -  `Source Code <https://github.com/ArduPilot/MissionPlanner>`__
 
 APM Planner 2.0
 ---------------
 
-The best autopilot for use on MAC and Linux platforms. It has a smaller
-user base and a reduced feature set when compared with Mission Planner.
+A GCS for use on macOS, Linux & Windows platforms. It has a smaller
+user base and a reduced feature set when compared with others.
 
-- **Platform**: Windows, Mac OS X, Linux
+- **Platform**: Windows, macOS, Linux
 - **Licence**: `Open source <https://github.com/ArduPilot/apm_planner/blob/master/license.txt>`__
    (GPLv3)
 
@@ -79,14 +73,14 @@ user base and a reduced feature set when compared with Mission Planner.
     :target: ../_images/planner2_choose_agcs.jpg
 
 - :ref:`Wiki <planner2:home>`
-- `Support Forum <http://ardupilot.com/forum/viewforum.php?f=82>`__
+- `Support Forum <https://discuss.ardupilot.org/c/ground-control-software/apm-planner-2-0>`__
 - `Issues List <https://github.com/ArduPilot/apm_planner/issues>`__
 - `Source Code <https://github.com/ArduPilot/apm_planner>`__
 
 MAVProxy
 --------
 
-Linux GCS often used by Plane developers. Primarily a command line
+Linux GCS often used by code developers. Primarily a command line
 interface with graphical modules for map and mission editing. Written in
 Python, and extensible via python modules.
 
@@ -95,17 +89,16 @@ Python, and extensible via python modules.
    (GPLv3)
 
 .. image:: ../../../images/mavproxy_linux.jpg
-    :target:  http://ardupilot.github.io/MAVProxy/html/_images/mavproxy_linux.jpg
+    :target:  ../_images/mavproxy_linux.jpg
 
--  `Getting Started <http://ardupilot.github.io/MAVProxy/html/index.html>`__
+-   :ref:`Wiki <mavproxy:home>`
 -  `Issues List <https://github.com/ArduPilot/MAVProxy/issues>`__
 -  `Source Code <https://github.com/ArduPilot/MAVProxy>`__
 
 QGroundControl
 --------------
 
-QGroundControl work with MAVLink capable autopilots. 
-It's main focus was originally the PX4 Flight Stack, but it now also comes with complete support for ArduPilot based autopilots. 
+QGroundControl works with MAVLink capable autopilots including ArduPilot.
 It's unique among the GCS offerings as it runs on all platforms desktop and mobile.
 
 -  **Platform**: Windows, Mac OS X, Linux, Android and iOS
@@ -116,8 +109,7 @@ It's unique among the GCS offerings as it runs on all platforms desktop and mobi
     :target: ../_images/QGroundControlTabletImage.jpg
 
 -  `Website <http://qgroundcontrol.com/>`__
--  `Support Forum <https://groups.google.com/forum/#!forum/qgroundcontrol>`__
--  `Gitter <https://gitter.im/mavlink/qgroundcontrol>`__
+-  `Support Forum <https://discuss.px4.io/c/qgroundcontrol/15>`__
 
 UgCS - Universal Ground Control Station
 ---------------------------------------
@@ -136,16 +128,78 @@ Supports multi-node installation, meaning that it is possible to connect multipl
 
 -  **Platform**: Windows, Mac OS X, Ubuntu
 -  **Licence**: Proprietary with a free licence available as well (UgCS Open)
-
-.. image:: https://www.ugcs.com/files/2016-04/1459769168_elevation-profile.jpeg
-    :target:  https://www.ugcs.com/files/2016-04/1459769168_elevation-profile.jpeg
-
 -  `UgCS Website <http://www.ugcs.com>`__
--  `DIY Drones Group for UgCS Users <http://diydrones.com/group/ugcs>`__
+-  `DIY Drones Group for UgCS Users <https://diydrones.com/group/ugcs>`__
 -  `UgCS Github Repository <https://github.com/ugcs>`__
 
-Comparison Mobile
-=================
+LOGOS
+-----
+
+GCS designed to streamline the planning of complex missions that include area scanning, taking photos, & videos. It provides a 3D view mode, binding of physical structures and an in-built simulator that helps to better visualize planned missions.
+
+-  **Platform**: Windows
+-  **Licence**: Proprietary. Can be used freely, but advanced features are not available without purchase.
+
+.. image:: ../../../images/LOGOS_GCS.png
+    :target: ../_images/LOGOS_GCS.png
+
+-  `Download <https://aerologos.by/download>`__
+-  `Website <https://aerologos.by/>`__
+-  `Youtube <https://www.youtube.com/@AerologosBusinessAccount/>`__
+
+FlightZoomer
+------------
+
+GCS designed for flying rather than managing the vehicle, with a cockpit based on a modern airliner. It provides airliner-style instruments and autopilot modes, a Flight Management System with LNAV/VNAV route following, terrain awareness displays and a synthetic 3D outside view generated from telemetry. It can connect to the vehicle through standard telemetry or its own 3G/4G cellular link. Supports Copter and Plane.
+
+-  **Platform**: Windows 10 and later (PC, notebook or tablet)
+-  **Licence**: Proprietary
+-  `Website <http://www.flightzoomer.com/>`__
+-  `Documentation <http://www.flightzoomer.com/manual/hfw_contents.html>`__
+-  `Microsoft Store <https://apps.microsoft.com/detail/9pc8nw0z900j>`__
+
+ArduDeck
+--------
+
+Open source desktop GCS for ArduPilot and PX4 vehicles over MAVLink. It also configures Betaflight and INAV boards over MSP.
+It covers vehicle setup (parameters with descriptions, calibration and setup wizards, firmware flashing), mission, fence and rally planning
+with survey patterns and terrain-aware altitude profiles, real-time telemetry with map instruments, multi-vehicle operation,
+DataFlash and ULog log analysis, MAVLink signing and a built-in SITL launcher. It serves terrain data to the autopilot[site wiki="plane"] (see :ref:`common-terrain-following`)[/site][site wiki="blimp"] (see :ref:`plane:common-terrain-following`)[/site].
+A mobile app for Android and iOS is described under :ref:`Mobile GCSs <common-choosing-a-ground-station-mobile>`.
+
+-  **Platform**: Windows, Mac OS X, Linux
+-  **Licence**: `Open source <https://github.com/rubenCodeforges/ardudeck/blob/master/LICENSE>`__
+   (GPLv3)
+
+.. image:: ../../../images/ardudeck_desktop_map_and_synthetic_vision.jpg
+    :target: ../_images/ardudeck_desktop_map_and_synthetic_vision.jpg
+
+-  `Website <https://ardudeck.com>`__
+-  `Download and Install <https://ardudeck.com/docs/Getting-Started/>`__
+-  `Support Forum <https://discuss.ardupilot.org/t/ardudeck-open-source-cross-platform-gcs/142407>`__
+-  `Issues List <https://github.com/rubenCodeforges/ardudeck/issues>`__
+-  `Source Code <https://github.com/rubenCodeforges/ardudeck>`__
+
+.. _common-choosing-a-ground-station-mobile:
+
+Mobile GCSs
+===========
+
+QGroundControl
+--------------
+
+QGroundControl works with MAVLink capable autopilots including ArduPilot.
+It's unique among the GCS offerings as it runs on all platforms desktop and mobile.
+
+-  **Platform**: Windows, Mac OS X, Linux, Android and iOS
+-  **Licence**: `Open Source <http://www.qgroundcontrol.org/license>`__
+   (GPLv3)
+
+.. image:: ../../../images/QGroundControlTabletImage.jpg
+    :target: ../_images/QGroundControlTabletImage.jpg
+
+-  `Website <http://qgroundcontrol.com/>`__
+-  `Support Forum <https://discuss.px4.io/c/qgroundcontrol/15>`__
 
 Tower
 -----
@@ -167,7 +221,7 @@ drone) and special missions for 3D mapping.
    from Google Play.
 -  `Android compatible hardware list <https://github.com/arthurbenemann/droidplanner/wiki/Compatible-Devices>`__
 -  `Wiki <https://github.com/DroidPlanner/Tower/wiki>`__
--  `Support Forum <http://ardupilot.com/forum/viewforum.php?f=15>`__
+-  `Support Forum <https://discuss.ardupilot.org/c/ground-control-software/tower>`__
 -  `Issues List <https://github.com/DroidPlanner/Tower/issues>`__
 -  `Source Code <https://github.com/DroidPlanner/droidplanner>`__
 
@@ -180,8 +234,7 @@ drone) and special missions for 3D mapping.
 MAV Pilot 1.4
 -------------
 
-A GCS in your pocket that supports predominantly ArduPilot autopilot on iPhone/iPad. Supports for Plane, Copter & Rover vehicle types.
-Also supports ArDrone2.0 with Flight Recorder and PX4 Flight Stack.
+A GCS in your pocket that supports predominantly ArduPilot autopilot on iPhone/iPad. Supports for Plane, Copter & Rover vehicle types
 
 See website for how-to on how connect it to your autopilot
 
@@ -191,7 +244,7 @@ See website for how-to on how connect it to your autopilot
 .. image:: ../../../images/MAVPilot_1.4.png
     :target: ../_images/MAVPilot_1.4.png
 
--  `Release announcement Blog & Discussion <http://diydrones.com/profiles/blogs/mav-pilot-1-4-for-iphone-released>`__
+-  `Release announcement Blog & Discussion <https://diydrones.com/profiles/blogs/mav-pilot-1-4-for-iphone-released>`__
 -  `Support Blog <http://www.communistech.com/support/>`__
 -  `Support Forum <http://www.communistech.com/forums/>`__
 -  `iTunes Store link <https://itunes.apple.com/ca/developer/communis-tech/id649232032>`__
@@ -199,8 +252,7 @@ See website for how-to on how connect it to your autopilot
 SidePilot
 ---------
 
-ArduPilot compatible GCS that runs on iPhone/iPad. 
-Also supports PX4 and 3DR Solo.
+ArduPilot compatible GCS that runs on iPhone/iPad.
 
 See website for how-to on how connect it to your autopilot
 
@@ -210,10 +262,30 @@ See website for how-to on how connect it to your autopilot
 .. image:: ../../../images/sidepilot.jpg
     :target: ../_images/sidepilot.jpg
 
--  `Release announcement Blog & Discussion <http://diydrones.com/profiles/blogs/sidepilot-app-version-1-1-formerly-imavlink>`__
+-  `Release announcement Blog & Discussion <https://diydrones.com/profiles/blogs/sidepilot-app-version-1-1-formerly-imavlink>`__
 -  `Website <http://sidepilot.net>`__
 -  `Support Forum <http://sidepilot.net/forum>`__
 -  `iTunes Store link <https://itunes.apple.com/us/app/sidepilot/id1138193193?ls=1&mt=8>`__
+
+ArduDeck (mobile)
+-----------------
+
+Field GCS for ArduPilot on phones and tablets, the mobile companion to the ArduDeck desktop application.
+It connects over USB OTG (telemetry radio or cable), Bluetooth Low Energy, or wifi using UDP or TCP, and shows a moving map
+with flight instruments, live video, the mission stored on the vehicle (missions are edited in the desktop application),
+the full parameter list and field calibrations (compass, level, accelerometer and gyroscope).
+A second screen mode mirrors telemetry forwarded from ArduDeck on the desktop.
+
+-  **Platform**: Android phones and tablets (open beta), iPhone and iPad (TestFlight beta)
+-  **Licence**: Proprietary, free
+
+.. image:: ../../../images/ardudeck_mobile_map_and_synthetic_vision.jpg
+    :target: ../_images/ardudeck_mobile_map_and_synthetic_vision.jpg
+
+-  `Google Play <https://play.google.com/store/apps/details?id=com.ardudeck.gcs>`__
+-  `TestFlight beta (iOS) <https://testflight.apple.com/join/FMPtzrAz>`__
+-  `Website <https://ardudeck.com>`__
+-  `Support Forum <https://discuss.ardupilot.org/t/ardudeck-open-source-cross-platform-gcs/142407>`__
 
 AndroPilot
 ----------
@@ -235,7 +307,7 @@ Android GCS intended for enthusiasts.
 -  `Downloads (Google Play) <https://play.google.com/store/apps/details?id=com.geeksville.andropilot>`__
 -  `Android compatible hardware list <https://github.com/geeksville/arduleader/wiki/Android%20Device%20Compatibility%20List>`__
 -  `Wiki <https://github.com/geeksville/arduleader/wiki>`__
--  `Support Forum <http://ardupilot.com/forum/viewforum.php?f=14>`__
+-  `Support Forum <https://discuss.ardupilot.org/c/ground-control-software/other-gcs>`__
 -  `Issues List <https://github.com/geeksville/arduleader/issues>`__
 -  `Source Code <https://github.com/geeksville/arduleader/tree/master/andropilot>`__
 
@@ -247,35 +319,62 @@ Android
 
 For Android devices, you will need:
 
--  Android based tablet that can act as a USB host. Google Nexus tablets
-   are recommended, and the compatible hardware lists for the different
-   GCSs are listed in the table above.
--  :ref:`SiK Telemetry Radio System <common-sik-telemetry-radio>` or
-   similar (915 Mhz for US, 433 for Europe) which includes the
-   bidirectional ground and air telemetry units.
--  USB OTG cable (typically less than $2 on
-   `ebay <http://www.ebay.com/sch/i.html?_trksid=m570.l3201&_nkw=usb+otg+cable&_sacat=0>`__
-   and
-   `Amazon <http://www.amazon.com/T-Flash-Adapter-Samsung-GT-i9100-GT-N7000/dp/B005FUNYSA/ref=sr_1_5?ie=UTF8&qid=1376262351&sr=8-5&keywords=android+otg+cable>`__).
+-  Android based tablet or smartphone. *QGroundControl* can utilize Bluetooth, WIFI, or USB connectivity to the autopilot from the phone. For USB the device must be ablke to act as a USB host (OTG). 
+- A connectivity method to vehicle's autopilot:
+   - :ref:`SiK Telemetry Radio System <common-sik-telemetry-radio>` or other radio telemetry (:ref:`common-telemetry-landingpage`) with OTG cable can be used for long range, in-the-air, connectivity to a similar vehicle telemetry unit.
+   - WIFI (:ref:`common-esp8266-telemetry`)
+   - Bluetooth (:ref:`common-mission-planner-bluetooth-connectivity`)
+   - for benchtop USB connectivity, a USB OTG cable (typically less than $2 on `ebay <http://www.ebay.com/sch/i.html?_trksid=m570.l3201&_nkw=usb+otg+cable&_sacat=0>`__ and `Amazon <http://www.amazon.com/T-Flash-Adapter-Samsung-GT-i9100-GT-N7000/dp/B005FUNYSA/ref=sr_1_5?ie=UTF8&qid=1376262351&sr=8-5&keywords=android+otg+cable>`__ ).
+   - Some other telemetry method (:ref:`common-telemetry-landingpage`)
 
-   
 iOS
 ---
 
 For iOS devices, you will need:
 
--  iOS Based device such as an iPad or iPhone. If running iPad, the cellular version is recommended for better GPS support.
+-  iOS Based devices such as an iPad or iPhone. If running iPad, the cellular version is recommended for better GPS support.
 -  Wifi or Bluetooth LE link to the Drone
--  Bridge Connection to a:ref:`SiK Telemetry Radio System <common-sik-telemetry-radio>` via Wifi or Bluetooth LE
+-  Bridge Connection to a :ref:`SiK Telemetry Radio System <common-sik-telemetry-radio>` via Wifi or Bluetooth LE
 
   See iOS App Vendors for more details.
 
-Desktop PCs (Windows/Mac/Linux
-------------------------------
+Desktop PCs (Windows/Mac/Linux)
+-------------------------------
 
 For Desktop devices you will need:
 
--  :ref:`SiK Telemetry Radio System <common-sik-telemetry-radio>` or
-   :ref:`similar <common-telemetry-landingpage>` (915 Mhz for US, 433 for
-   Europe) which includes the bidirectional ground and air telemetry
-   units.
+-  A USB cable, BT module, WIFI adapter, or other connectivity means as listed here (:ref:`common-telemetry-landingpage`)
+
+[site wiki="plane"]
+
+.. toctree::
+   :hidden:
+
+   ArduPlane_MAVLink_Messages
+
+[/site]
+[site wiki="copter"]
+
+.. toctree::
+   :hidden:
+
+   ArduCopter_MAVLink_Messages
+
+[/site]
+[site wiki="rover"]
+
+.. toctree::
+   :hidden:
+
+   Rover_MAVLink_Messages
+
+[/site]
+[site wiki="sub"]
+
+.. toctree::
+   :hidden:
+
+   ArduSub_MAVLink_Messages
+
+[/site]
+

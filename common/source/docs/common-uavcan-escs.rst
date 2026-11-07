@@ -1,94 +1,76 @@
 .. _common-uavcan-escs:
 
-===========
-UAVCAN ESCs
-===========
+=============
+DroneCAN ESCs
+=============
 
-Copter, Plane and Rover support `UAVCAN <http://uavcan.org>`__ Electronic Speed Controllers
-(ESCs) that allow two-way communication with the flight controller
+Copter, Plane and Rover support `DroneCAN <https://dronecan.org>`__ Electronic Speed Controllers
+(ESCs) that allow two-way communication with the autopilot
 enabling potentially easier setup and in-flight monitoring of ESC and
 motor health.
 
 ..  youtube:: LnUmYgAINBc
     :width: 100%
 
-List of CAN ESCs
-================
+List of DroneCAN ESCs
+=====================
 
-+-----------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+
-+ Name                                                                                          + Avail                                                                                     + Ever Worked                                                                                           +
-+===============================================================================================+===========================================================================================+=======================================================================================================+
-+ `Zubax Orel 20 <https://files.zubax.com/products/io.px4.sapog/Zubax_Orel_20_Datasheet.pdf>`__ + `Yes <http://titaneliteinc.com/titanoc/index.php?route=product/product&product_id=995>`__ + Yes                                                                                                   +
-+-----------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+
-+ `AutoQuad ESC32 <http://autoquad.org/esc32/>`__                                               + No                                                                                        + No                                                                                                    +
-+-----------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+
-+ `VESC <http://vedder.se/2015/01/vesc-open-source-esc/>`__                                     + `Yes <http://www.ollinboardcompany.com/product/vedder-s-speed-controller>`__              + No (`proposal <http://discuss.ardupilot.org/t/next-gen-esc-validation-and-integration-vesc/12534>`__) +
-+-----------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+
-+ `HiEnd Can Bus ESC <https://www.aerolab.de/esc-regler/hiend-can-bus-esc/>`__                  + Yes                                                                                       + ?                                                                                                     +
-+-----------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+
-+ `ESC Velocity <http://www.currawongeng.com/products/sensors-and-actuators/esc-velocity/>`__   + Yes                                                                                       + No                                                                                                    +
-+-----------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+
 
-Connecting to the Pixhawk
-=========================
+- :ref:`AM32 DroneCAN ESCs <common-am32-escs>`
+- :ref:`Currawong Velocity ESCs <common-velocity-can-escs>`
+- :ref:`Hargrave Technologies DroneCAN ESCs <common-hargrave-dronecan-escs>`
+- :ref:`Hobbywing CAN ESCs <common-hobbywing-dronecan-esc>`
+- `Holybro Kotleta20 <https://holybro.com/products/kotleta20>`__
+- :ref:`KDE UVC ESCs <common-kde-can-escs>`
+- `Zubax Mitochondrik <https://zubax.com/products/mitochondrik>`__
+- `Zubax Myxa <https://zubax.com/products/myxa/>`__
+- `Zubax Orel 20 <https://files.zubax.com/products/io.px4.sapog/Zubax_Orel_20_Datasheet.pdf>`__
+
+Connecting to the Flight Controller
+===================================
 
 .. image:: ../../../images/Pixhawk_UAVCAN_ESC.jpg
     :target: ../_images/Pixhawk_UAVCAN_ESC.jpg
 
-One ESC (it does not matter which) should be connected to the Pixhawk's
-CAN port using a 4-pin DF13 to 4-pin UAVCAN adapter cable. Each
+One ESC (it does not matter which) should be connected to the autopilot's
+CAN port using a 4-pin DF13 to 4-pin DroneCAN adapter cable. Each
 subsequent ESC should be connected to the previous using a 4-pin
-UAVCAN cable.  The final ESC should have a CAN bus terminator plugged
-into one of it's 4-pin UAVCAN ports.
+DroneCAN cable.  The final ESC should have a CAN bus terminator plugged
+into one of its 4-pin DroneCAN ports.
 
-The FTDI Cable connection is only required for the one-time set-up
-discussed below.
+An FTDI Cable connection to the ESC's debug port is only required for set-up if the ESC does not present its parameters via DroneCAN. In that case, contact the manufacturer for detailed instructions.
 
-Alternatively, the ESC can be configured via CAN bus using the `UAVCAN GUI Tool <http://uavcan.org/GUI_Tool/>`__.
+Preferably, the ESC can be configured via CAN bus using the :ref:`DroneCAN GUI Tool <common-uavcan-gui>`.
 
-ESC setup using CLI
-===================
+Autopilot Setup
+===============
 
-Each ESC must go through a one-time manual setup using an `FTDI cable <http://store.jdrones.com/cable_ftdi_6pin_5v_p/cblftdi5v6p.htm>`__
-to define it's UAVCAN Node Id and motor number.  In future versions of
-ArduPilot this will be replaced with a setup procedure using the mission
-planner (and other GCSs).
+There are several parameters that determine which autopilot servo/motor channels are sent to the DroneCAN ESCs:
+For the examples below, the values are shown for DroneCAN driver #1 using CAN Port #1
 
-The steps required are:
+-  :ref:`CAN_P1_DRIVER<CAN_P1_DRIVER>` = 1, which assigns driver1 to port1
+-  :ref:`CAN_D1_PROTOCOL<CAN_D1_PROTOCOL>` = 1 (DroneCAN protocol)
+-  :ref:`CAN_D1_UC_NODE<CAN_D1_UC_NODE>` - which is the node ID of the autopilot sending the commands to the ESCs so that there can be differentiation between multiple sources on the CAN bus. This is normally automatically set during discovery, but can be altered for advanced configurations (multiple sources on the bus).
+-  :ref:`CAN_D1_UC_ESC_BM<CAN_D1_UC_ESC_BM>` - bitmask that determines which autopilot servo/motor output signals are sent to the DroneCAN ESCSs
+-  :ref:`CAN_D1_UC_ESC_RV<CAN_D1_UC_ESC_RV>` - bitmask that designates which autopilot servo/motor outputs have reversible DroneCAN ESCs, allowing both positive and negative control values to be sent.
 
--  Connect the FTDI cable to the ESC's "Developer port" as shown in the
-   image above.
--  Power the ESCs with a battery
--  Use a terminal program such as
-   `Putty <http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html>`__
-   to connect to the ESC using the FTDI cable's COM port, using serial
-   at 115200 baud
--  press **Enter** into the terminal and a "ch>" prompt should appear
--  type ``cfg list`` to see a full list of parameters
--  on motor #1 (i.e. front-right on a quad) set the uavcan_node_id to
-   "10" and esc_index to "0" by typing:
+Logging and Reporting
+---------------------
 
-   -  ``cfg set uavcan_node_id 10``
-   -  ``cfg set esc_index 0``
-   -  ``cfg save``   (to save the configuration)
-   - ``reboot``
+DroneCAN ESCs provide information back to the autopilot which is recorded in the autopilot's onboard log's CESC messages and can be viewed in any :ref:`ArduPilot compatible log viewer <common-logs>`.  This information includes:
 
--  to test the motor moves:
+- Error Count
+- Voltage
+- Current
+- Temperature
+- RPM
+- Power (as a percentage)
 
-   -  ``dc arm``  (to enable the output)
-   -  ``dc 0.2`` (to spin motor at 20%)
-   -  ``dc`` (to stop motor)
-
--  repeat for motors #2 (back left on a quad), #3, #4, etc with each
-   motor having a node-id and index one higher than the previous (in
-   fact the node-id doesn't matter as long as it's unique).
-
-.. image:: ../../../images/ESC_cli_setup.png
-    :target: ../_images/ESC_cli_setup.png
+The RCOU messages are also written to the onboard logs which hold the requested output level sent to the ESCs expressed as a number from 1000 (meaning stopped) to 2000 (meaning full output).
 
 Additional information
 ======================
 
-`Zubax Sapog wiki page <https://kb.zubax.com/x/hIAh>`__,
+`Zubax Sapog wiki page <https://kb.zubax.com/display/MAINKB/Using+Sapog-based+ESC+with+ArduPilot>`__,
 `Sapog reference manual <https://files.zubax.com/products/io.px4.sapog/Sapog_v2_Reference_Manual.pdf>`__,
 and `ESC firmware <https://github.com/PX4/sapog>`__.

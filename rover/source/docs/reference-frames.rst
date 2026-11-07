@@ -6,14 +6,21 @@ Reference Frames
 
 .. image:: ../images/reference-frame-top-image.png
 
-This section includes details on tested frames to speed up DIY builds of rovers and boats.  If you are looking for a completely ready-to-use vehicle please see our `RTF wiki page <http://ardupilot.org/ardupilot/docs/common-rtf.html>`__.
+This section includes details on tested frames to speed up DIY builds of rovers and boats.  If you are looking for a completely ready-to-use vehicle please see our :ref:`RTF wiki page <common-rtf>`.
 
 .. toctree::
     :maxdepth: 1
 
-    Thunder Tiger Toyota Hilux <reference-frames-tt-toyotahilux>
+    Boogie Board Boat <reference-frames-boogieboard-boat>
+    DeSET mapping boat <reference-frames-deset-mapping-boat>
     HobbyKing Hydrotek <reference-frames-hydrotek>
+    HobbyKing Hydropro Inception <reference-frames-hydropro-inception>
+    Maker Boat Advanced <https://squirm.tech/an-overview-of-the-maker-boat-advanced/>
+    Maker Boat Boogie Board Boat <https://squirm.tech/maker-boat-basic-quick-start/>
+    Thunder Tiger Toyota Hilux <reference-frames-tt-toyotahilux>
     Traxxas Stampede 4WD Truck <reference-frame-traxxas-stampede>
+    Vac-U-Tug Tugboat <reference-frames-vacutug>
+    Yahboom Balance Bot <reference-frames-yahboom-balancebot>
 
 .. note::
 

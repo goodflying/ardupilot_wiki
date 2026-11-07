@@ -12,6 +12,8 @@ navigation tuning. As with :ref:`Return To Launch (RTL) <rtl-mode>` and
 :ref:`AUTO <auto-mode>` mode you can "nudge" the plane while in LOITER
 using stick mixing, if enabled.
 
+If :ref:`FLIGHT_OPTIONS<FLIGHT_OPTIONS>` bit 12 is set (+4096 to value) and :ref:`STICK_MIXING<STICK_MIXING>` is set to 1, then altitude of the loiter can be changed using the pitch stick, as in FBWB mode.
+
 .. warning::
 
    "Home" position is always supposed to be your Plane's actual
@@ -23,8 +25,5 @@ using stick mixing, if enabled.
       plane acquires its GPS lock. It is then continuously updated as long as
       the autopilot is disarmed.
 
-      - This means if you execute an RTL in Plane, it will return to the
-	location where it was when it was armed - assuming it had
-	acquired GPS lock.
-      - Consider the use of :ref:`Rally Points <common-rally-points>` to
-	avoid returning directly to your arming point on RTL
+      - This means if you execute an RTL in Plane, it will return to the location where it was when it was armed - assuming it had acquired GPS lock.
+      - Consider the use of :ref:`Rally Points <common-rally-points>` to avoid returning directly to your arming point on RTL.

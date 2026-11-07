@@ -5,7 +5,7 @@
 ArduPilot Pre-Built Binaries
 ============================
 
-The ArduPilot firmware server at http://firmware.ardupilot.org has pre-built binaries for many common flight boards.
+The ArduPilot firmware server at https://firmware.ardupilot.org has pre-built binaries for many common flight boards.
 
 Build Categories
 ----------------
@@ -26,15 +26,15 @@ types:
 
  - ``*.apj`` files: these are "ArduPilot JSON" firmwares, which contain a firmware that can be loaded by ArduPilot compatible ground station software
  - ``*.px4`` files: these are an older name for an apj file, and use the same format
- - hex files: these are firmwares in Intel hex format, for loading with DFU loading tools. 
+ - ``*.hex`` files: these are firmwares in Intel hex format, for loading with DFU loading tools. 
    These are used for boards which don't come with an ArduPilot compatible bootloader
- - hex with bl files: these are variants of the hex files with the bootloader built-in. 
+ - ``*_with_bl.hex`` files: these are variants of the hex files with the bootloader built-in. 
    They can be used to install both the bootloader and ArduPilot vehicle firmware in one step using a DFU loading tool
 
 Build Variants
 --------------
 
 For some types of flight boards multiple builds in separate directories are provided. 
-For example, you can find a firmware suitable for a Pixhawk2.1 Cube in both the px4-v3 directory and the CubeBlack directory. 
+For example, you can find a firmware suitable for a Pixhawk 2.1 (CubePilot CubeBlack) in both the px4-v3 directory and the CubeBlack directory. 
 These variants use different underlying RTOS code (NuttX and ChibiOS). 
 As we move the project away from NuttX to ChibiOS the NuttX builds will be removed over time.

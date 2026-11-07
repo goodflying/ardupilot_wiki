@@ -1,30 +1,20 @@
 .. _common-using-a-current-sensor:
 
-=========================================
-Attopilot 180A Voltage and Current Sensor
-=========================================
 
-This article explains how to use the AttoPilot for measuring high
-current and voltages.
+=========================================================
+Archived Topic: Attopilot 180A Voltage and Current Sensor
+=========================================================
 
-Overview
-========
-
-In general it is best to power your Flight Controller with
-the :ref:`Power Module <common-3dr-power-module>`\  because it provides
-solid 5V power and also allows you to read current and voltage. But for
-cases where you need to measure over 18V (i.e. over 4S batteries) or
-current over 90A, you should use the 
-`AttoPilot 180A current and voltage module <https://www.sparkfun.com/products/10644>`__ which can be
-purchased from `Sparkfun <https://www.sparkfun.com/products/10644>`__.
+In general it is best to use a power module specifically designed to work with autopilots but for cases where you need to measure over the voltage limit (i.e. > 18V) or current limit (i.e. > 90Amps) of the available power modules you may wish to use an `AttoPilot 180A current and voltage module <https://www.sparkfun.com/products/10644>`__ which can be purchased from `Sparkfun <https://www.sparkfun.com/products/10644>`__.
 
 Connection to Pixhawk
 =====================
 
 .. figure:: ../../../images/Pixhawk_AttoPilot_CurrentSensor.jpg
    :target: ../_images/Pixhawk_AttoPilot_CurrentSensor.jpg
+   :width: 450px
 
-   Pixhawk/ toAttopilot 180A Voltage/Current Sensor Wiring Diagram
+   Pixhawk/ to Attopilot 180A Voltage/Current Sensor Wiring Diagram
 
 Connecting the autopilot sensor to the Pixhawk requires modifying a
 `DF13 6 position cable <http://store.jdrones.com/cable_df13_6pin_25cm_p/cbldf13p6c25.htm>`__
@@ -33,19 +23,6 @@ as shown in the photo above including connecting:
 -  V pin (voltage) to the Pixhawk's 3rd pin from the left
 -  I pin (current) to the Pixhawk's 4th pin from the left
 -  GND pin (ground) to the 1st pin on the left
-
-Connection to APM
-=================
-
-.. image:: ../../../images/ConnectionDiagram2.jpg
-    :target: ../_images/ConnectionDiagram2.jpg
-
-Connect the autopilot sensor to APM as shown in the photo above
-including connecting:
-
--  V pin (voltage) to APM's A1's S pin
--  I pin (current) to APM's A2's S pin
--  GND pin (ground) to APM's A1 "-" pin
 
 Setup in Mission Planner
 ========================

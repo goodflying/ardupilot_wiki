@@ -1,35 +1,32 @@
 .. _balance_bot-home:
 
 =================
-Balance Bot Home
+Balance Bots
 =================
 
-.. warning:: This module is at an experimental stage only. Proceed at your own risk!
+ArduPilot Rover includes support for Self Balancing Robots or Balance Bots. This section provides instructions for configuring Rover to run on Balance Bots. 
 
-Ardupilot can now run Balance Bots too! Well.. almost! There's still a bit to go before this becomes a mainstream part of the ardupilot family. This guide is meant to help anyone interested, in trying out this new module before it is realeased. We would greatly appreciate your suggestions and feedback.
+..  youtube:: EmhTBPNDpWw
+    :width: 100%
 
-This guide explains how to test the balance bot module on the SITL simulator as well as on a real vehicle. Currently, this code has only been tested for Manual and Hold modes.
+.. note:: New users are recommended to go through the Rover :ref:`Introduction<rover-introduction>`, :ref:`First Time Setup<apmrover-setup>` and :ref:`First drive<rover-first-drive>` sections before proceeding with this section.
 
-Before you proceed:
--------------------
-This module is still under development and can have serious bugs. The documentation is also limited. Hence we strongly recommend that only advanced users try this out. Proceed only if you meet the following criteria:
-
-#. Previous experience with an ardupilot vehicle.
-#. Can handle connections, assembly and configuration steps
-#. Familiar with how a balance bot works in theory
-#. Basic experience with linux shell
-
-If you are all of the above, let's go ahead. If not, dont worry! The final release will happen shortly. Stay tuned!
+Get Started
+-----------
 
 .. toctree::
   :titlesonly:
 
-    Hardware Setup <balance_bot-hardware>
-    Cloning and Uploading the code <balance_bot-code_upload>
+    How it works <balance_bot-working>
+    Hardware Options <balance_bot-hardware>
     Configuration and Setup <balance_bot-configure>
-    Using SITL for balancebot <balance_bot-SITL>
-    Testing <balance_bot-testing>
-    Feedback <balance_bot-feedback>
+    Balance Bot Control Modes <balance_bot-modes>
+    Testing the Balance Bot <balance_bot-testing>
+    Tuning the Balance Bot <balance_bot-tuning>
+    Common Issues and Fixes<balance_bot-issues>
+
+
+
 
 
 

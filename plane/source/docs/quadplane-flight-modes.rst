@@ -3,15 +3,31 @@
 QuadPlane Flight modes
 ======================
 
-The QuadPlane code is based upon the Plane master firmware but with 5
-extra modes:
+The QuadPlane code is based upon the Plane master firmware but with 6
+extra modes. Most are identical to equivalent Copter modes:
 
--  mode 17: QSTABILIZE (like :ref:`Copter STABILIZE <copter:stabilize-mode>`)
--  mode 18: QHOVER (like :ref:`Copter ALT_HOLD <copter:altholdmode>`)
--  mode 19: QLOITER (like :ref:`Copter LOITER <copter:loiter-mode>`)
--  mode 20: QLAND (like :ref:`Copter LAND <copter:land-mode>`)
--  mode 21: QRTL (like :ref:`Copter RTL <copter:rtl-mode>`)
+.. toctree::
+    :maxdepth: 1
 
+    QSTABILIZE (Mode 17) <qstabilize-mode>
+    QHOVER    (Mode 18) <qhover-mode>
+    QLOITER   (Mode 19) <qloiter-mode>
+    QLAND     (Mode 20) <qland-mode>
+    QRTL      (Mode 21) <qrtl-mode>
+    QAUTOTUNE(deprecated and not in most builds on firmware server) (Mode 22) <qautotune-mode> 
+    QACRO     (Mode 23) <qacro-mode>
+    LOITER to QLAND (mode 25) <loiter-to-qland-mode>
+    AIRMODE** <airmode>
+    QUICKTUNE*** <quicktune>
+    SYSTEMID**** <common-systemid-mode>
+
+** not actually a flight mode, but rather a feature of QACRO and QSTABILIZE
+
+\*\*\* not actually a flight mode, but a VTOL tuning feature
+
+\*\*\*\* not actually a flight mode, but a VTOL tuning and model development tool
+
+.. note:: RTL mode can behave differently than a normal fixed wing RTL, depending on the setting of the :ref:`Q_RTL_MODE<Q_RTL_MODE>` parameter. See :ref:`Hybrid RTLs <hybrid_rtl>`.
 .. tip::
 
    You may need to set the ``FLTMODE*`` parameters for these
@@ -19,16 +35,19 @@ extra modes:
    values yet.
 
 If you are familiar with the equivalent Copter flight modes then you
-should be comfortable flying a QuadPlane. The only real difference comes
+should be comfortable flying a QuadPlane. The most significant difference comes
 during transition between fixed wing and QuadPlane flight, which is
-described below.
+described :ref:`here <quadplane-flying>`.
 
 .. tip::
 
-   There is also a difference in throttle channel parameters from Copter: instead of THR_DZ for setting the deadzone, QuadPlane uses RCn_DZ (where n is the channel mapped to throttle input). 
+   There is also a difference in throttle channel parameters from Copter: instead of :ref:`THR_DZ<copter:THR_DZ>` for setting the deadzone, QuadPlane uses RCn_DZ (where n is the channel mapped to throttle input). 
    The default for throttle channel deadzone is 60 (+/- 6%).
-   Also, there is no mapping of hover throttle to mid-stick in manual throttle modes. 
-   If your quadplane does not hover at mid-stick (+/- 6%) in QSTABILIZE, you will need to center it (move it into the deadzone) when switching from QSTABILIZE to QHOVER to hold the current altitude.
+   If your QuadPlane does not hover at mid-stick (+/- 6%) in QSTABILIZE, you will need to center it using :ref:`Q_M_THST_HOVER<Q_M_THST_HOVER>` to set the throttle percentage applied at mid-stick in QSTABILIZE such that switching to QHOVER or QLOITER does not result in an altitude change. This value can be automatically learned and applied during QLOITER and QHOVER modes, by enabling :ref:`Q_M_HOVER_LEARN<Q_M_HOVER_LEARN>`.
+
+.. tip::
+
+   Since QuadPlanes have much higher surface area than most Copters, hovering or loitering in a tail wind can be a challenge for stability. It is generally better to hover or loiter with the nose pointed into the wind, see :ref:`Weathervaning <quadplane-weathervaning>`.
 
 .. note::
 
@@ -38,7 +57,7 @@ described below.
 Flight modes to avoid
 ---------------------
 
-The linked nature of of the vertical lift and fixed wing control in quadplanes means the autopilot always needs to know what the pilot is trying to do in terms of speed and attitude. 
+The linked nature of the vertical lift and fixed wing control in quadplanes means the autopilot always needs to know what the pilot is trying to do in terms of speed and attitude. 
 For this reason you should avoid the following flight modes in a quadplane:
 
 -  ACRO
@@ -48,7 +67,7 @@ For this reason you should avoid the following flight modes in a quadplane:
 these modes are problematic as the stick input from the pilot is not sufficient to tell the autopilot what attitude the aircraft wants or what climb rate is wanted, so the quadplane logic does not engage the quad motors when in these modes. 
 These modes also make log analysis difficult. Please use FBWA mode instead of STABILIZE for manual flight.
 
-In the future we may adds ways to use the quad motors in these modes, but for now please avoid them.
+In the future we may add ways to use the quad motors in these modes, but for now please avoid them.
 
 The other mode where the quad motors are disabled is MANUAL mode. 
 That mode still can be useful for checking aircraft trim in fixed wing flight or for taxiing your aircraft.

@@ -1,8 +1,8 @@
 .. _common-electro-permanent-magnet-gripper:
 
-=========================================
-Electro Permanent Magnet Gripper (EPM688)
-=========================================
+========================================================
+Electro Permanent Magnet Gripper (EPM688) (discontinued)
+========================================================
 
 This article shows how to use the `Electro Permanent Magnet Gripper (EPM688) <http://nicadrone.com/index.php?id_product=13&controller=product>`__
 with ArduPilot.
@@ -14,7 +14,7 @@ The *EPM688* (from NicaDrone.com) is a small (less than 4cm x 4cm x 2cm)
 Electro Permanent Magnet gripper capable of 7kg of force meaning it can
 hold about 1kg of cargo.  The gripping and releasing of the cargo if
 accomplished by delivering a short pulse to an electromagnet which
-reverses it's field.  Objects that it grips onto should be metal or have
+reverses its field.  Objects that it grips onto should be metal or have
 the included `thin steel target square <http://nicadrone.com/index.php?id_product=15&controller=product>`__
 attached to them.
 
@@ -43,26 +43,6 @@ The EPM is connected to the Pixhawk in the same way as a
    at 5V for the short period that the gripper is first activated to
    latch onto the cargo.
 
-Connecting to an APM2
-=====================
-
-.. image:: ../../../images/EPM_APM2.jpg
-    :target: ../_images/EPM_APM2.jpg
-
-The EPM is connected to the APM2 in the same way as a
-:ref:`servo <common-servo>`.
-
--  If using Copter, connect the EPM's signal wire to either A10 or A11
-   on the left side of the APM.
--  If using Plane or Rover A10, A11 or any available RC1 ~ RC8
-   connectors on the back of the APM may be used.
--  The EPM should be powered using the rear power rail (ensure JP1
-   jumper is removed) or to an external BEC (not shown).  It is
-   absolutely critical that the power and ground wires not be connected
-   to the + and - pins of A10 or A11 because the EPM will be sharing
-   power with the APM2's CPU and will likely cause a brownout when it is
-   activated.
-
 Controlling from a transmitter using servo pass-through
 =======================================================
 
@@ -77,14 +57,14 @@ instructions for setting up manual control through a transmitter.
 
 Control using the transmitter is accomplished by setting up "RC Pass
 Through" which means the "input" channel from the transmitter is passed
-through to the Pixhawk/APM's "output" channel of the same number.  For
+through to the autopilot's "output" channel of the same number.  For
 Copter this means you must have a transmitter capable of 9 or more
 channels because the EPM is connected to output ch9 (or higher).
 
 Assuming the above is possible for your set-up, connect with the mission
 planner.  Go to the Config/Tuning >> Full Parameters List and set the
-SERVO9_FUNCTION (or RC9_FUNCTION) to "1" (i.e. "RCPassThru").  Note that if the EPM is
-connected to AUX OUT 2 then SERVO10_FUNCTION (or RC10_FUNCTION)should be set instead, etc.
+:ref:`SERVO9_FUNCTION<SERVO9_FUNCTION>` (or RC9_FUNCTION) to "1" (i.e. "RCPassThru").  Note that if the EPM is
+connected to AUX OUT 2 then :ref:`SERVO10_FUNCTION<SERVO10_FUNCTION>` should be set instead, etc.
 
 On the transmitter set CH9 to be controlled from a 3-position switch and
 the positions set as follows:
@@ -103,21 +83,22 @@ bring the switch high and then return the switch to neutral.
 To release the cargo, momentarily bring the switch low and then return
 it to neutral.
 
-Note: the :ref:`Copter Ch7/Ch8 switch <copter:channel-7-and-8-options>`
-includes options for the EPM but these unfortunately do not function
-properly.
+Note: the :ref:`Copter auxiliary switch <copter:common-auxiliary-functions>`
+Gripper option can be assigned to the EPM but these unfortunately do
+not function properly.
 
 Note: it is also possible (if using an older style, non ppm-sum
 receiver) to directly connect one signal wire from the receiver to the
-EPM's PWM pin thus by passing the Pixhawk/APM2 completely.  The image
+EPM's PWM pin thus bypassing the autopilot completely.  The image
 below shows the power line between the receiver and EPM connected but
 this is not correct and is quite dangerous because power spikes could
-pass through the receiver to the Pixhawk/APM2.  Only PWM and Ground
+pass through the receiver to the autopilot.  Only PWM and Ground
 should be connected.  The EPM should be powered from a BEC (not shown
 below).
 
-.. image:: ../../../images/DSC00803.jpg
-    :target: ../_images/DSC00803.jpg
+.. image:: ../../../images/EPM-with-receiver.jpg
+    :target: ../_images/EPM-with-receiver.jpg
+    :width: 450px
 
 Controlling during missions and from GCS
 ========================================
@@ -132,14 +113,12 @@ control through the ground station.
     :target: ../_images/EPM_SetupMissionControlMP.png
 
 Connect with the mission planner. Go to the Config/Tuning >> Full
-Parameters List and set the SERVO9_FUNCTION (or RC9_FUNCTION) to "0" (it's default value).
+Parameters List and set the :ref:`SERVO9_FUNCTION<SERVO9_FUNCTION>` (or RC9_FUNCTION) to "0" (its default value).
 Note that if the EPM is connected to Pixhawk's AUX OUT 2 then
-SERVO10_FUNCTION (or RC10_FUNCTION) should be set instead, etc.  If using an APM2 it will be
-the RC10_FUNCTION or RC11_FUNCTION parameter.
+:ref:`SERVO10_FUNCTION<SERVO10_FUNCTION>` (or RC10_FUNCTION) should be set instead, etc.
 
-Create the mission you wish to fly and add pairs of DO_SET_SERVO
-commands to grip or release the cargo and then return the EPM to
-neutral.
+Create the mission you wish to fly and add pairs of ``DO_GRIPPER``
+commands to grip or release the cargo .The EPM is returned to neutral after each command.
 
 -  "Ser No" should be set according to which output the EPM is connected
    to (i.e. "9" = Pixhawk's AUX OUT 1, "10" = APM2's RC10).
@@ -149,7 +128,7 @@ neutral.
 .. image:: ../../../images/EPM_Mission.jpg
     :target: ../_images/EPM_Mission.jpg
 
-In the example above the vehicle takes off to 20m, flies west 150m where
+In the example above the vehicle takes off to 20ft, flies west 548ft where
 it delays for 5 seconds, releases the cargo, delays another 5 seconds
 and then returns home.
 
@@ -167,6 +146,7 @@ Specifications and more info
 
 .. image:: ../../../images/EPMV2_1.jpg
     :target: ../_images/EPMV2_1.jpg
+    :width: 450px
 
 The EPM has an onboard PIC12F MCU with an in circuit programming header
 to allow easy reflashing.
@@ -185,15 +165,11 @@ capacitor size .
 Reduced magnetic interference allows mounting within 5cm of a compass
 (please test it with your application)
 
-`Paper by Ara Nerses Knaian <http://www.hizook.com/files/users/3/Electropermanent_Magnets_Knaian.pdf>`__
-
-`Datasheet <http://nicadrone.com/img/Datasheet%20EPM688-V2.0.pdf>`__
-
-`Schematics and PCB files <https://upverter.com/eda/#tool=schematic,designId=5466622af0d942e4>`__
-
-`Git repository for Parts Drawing PCB Masks Pic12F source code <https://github.com/ctech4285/EPM_688_V2>`__
-
-`User Group (Help) <https://groups.google.com/forum/#%21forum/opengrab>`__
+- `Paper by Ara Nerses Knaian <http://www.hizook.com/files/users/3/Electropermanent_Magnets_Knaian.pdf>`__
+- `Datasheet <http://nicadrone.com/img/Datasheet%20EPM688-V2.0.pdf>`__
+- `Schematics and PCB files <https://upverter.com/eda/#tool=schematic,designId=5466622af0d942e4>`__
+- `Git repository for Parts Drawing PCB Masks Pic12F source code <https://github.com/ctech4285/EPM_688_V2>`__
+- `User Group (Help) <https://groups.google.com/forum/#%21forum/opengrab>`__
 
 Magnetic interference and Board Voltage check
 =============================================
@@ -219,7 +195,7 @@ In addition to magnetic interference, if a weak BEC is used a voltage
 drop may be noticed.  For example the BEC in a 3DR ESC leads to a drop
 of 0.4V when the EPM is activated.  This is normally not a concern
 because the BEC should only be powering the servo rail of the
-Pixhawk/APM2 and so the CPU's voltage should be unaffected.  This can be
+autopilot, so the CPU's voltage should be unaffected.  This can be
 tested by graphing the "hwvoltage" field in the same way the "magfield"
 was checked above.  Ideally this test should be performed when connected
 via :ref:`Telemetry <common-telemetry-landingpage>`\ because a USB cable
@@ -228,5 +204,6 @@ will also provide power the CPU and may hide any voltage disturbance.
 User Video
 ==========
 
-..  youtube:: _iyTo9H7HAk#t=190
+..  youtube:: _iyTo9H7HAk
     :width: 100%
+    :url_parameters: ?start=190

@@ -6,7 +6,7 @@ Crash Check
 
 Copter includes a crash check which disarms the motors in cases where the vehicle is likely out of control and has hit the ground.  This reduces damage to the vehicle and also reduces the chance of injury to people near the vehicle.
 
-The crash check is similar to the :ref:`parachute release <parachute>` logic except that the parachute will normally release as the vehicle falls, while the crash check should trigger once the vehicle has hit the ground.
+The crash check is similar to the :ref:`parachute release <common-parachute>` logic except that the parachute will normally release as the vehicle falls, while the crash check should trigger once the vehicle has hit the ground.
 
 When will the crash check disarm the motors?
 ============================================
@@ -18,12 +18,14 @@ When all the following are true for 2 full seconds:
 #. the vehicle is not accelerating by more than 3m/s/s
 #. the actual lean angle has diverged from the desired lean angle (perhaps input by the pilot) by more than 30 degrees
 
+.. note:: Additional internal gating, such as speed and lean-angle checks, may also apply before the motors are disarmed.
+
 What will happen when the crash check fires?
 ============================================
 
 #. the motors will disarm
 #. "Crash: Disarming" will be displayed on the Ground Station
-#. a crash event will be written to the dataflash logs (look for EV, 12 in the logs)
+#. a crash event will be written to the dataflash logs (look for the corresponding ERR record)
 
 How and when should the crash check be disabled?
 ================================================
@@ -32,11 +34,11 @@ In general the crash check should be left enabled but if the vehicle is likely t
    .. image:: ../images/crash_check_drone_boarding.jpg
        :target: ../_images/crash_check_drone_boarding.jpg
 
-Image courtesy of `The Verge <http://www.theverge.com/2016/2/3/10905970/droneboarding-is-happening>`__
+Image courtesy of `The Verge <https://www.theverge.com/2016/2/3/10905970/droneboarding-is-happening>`__
 
-In Copter-3.3.3 (and higher) the crash check can be disabled by setting :ref:`FS_CRASH_CHECK <FS_CRASH_CHECK>` to 0.
+The crash check can be disabled by setting :ref:`FS_CRASH_CHECK <FS_CRASH_CHECK>` to 0.
 
-Below is a video describing the crash check from Copter-3.1 (the logic has changed in 3.3 and higher)
+Below is a video describing an early version of the crash check. It may be outdated, since the crash check has been improved since it was made.
 
 ..  youtube:: xaw3-oSahtE
     :width: 100%

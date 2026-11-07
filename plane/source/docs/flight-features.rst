@@ -7,7 +7,7 @@ Flight Features
 Plane has a lot of advanced features which can be accessed either via
 configuration parameters or via mission commands. The list below will
 give you some information on some of the more widely used features. For
-a full set of features see the :doc:`full parameter list <parameters>` and the `MAVLink protocol definition <http://mavlink.org>`__.
+a full set of features see the :doc:`full parameter list <parameters>` and the `MAVLink protocol definition <https://mavlink.io/en/>`__.
 
 .. toctree::
     :maxdepth: 1
@@ -16,7 +16,9 @@ a full set of features see the :doc:`full parameter list <parameters>` and the `
     Automatic Landing <automatic-landing>
     Inverted Flight <inverted-flight>
     Stall Prevention <stall-prevention>
-    Geo-Fencing in Plane <geofencing>
+    Geo-Fencing in Plane <common-geofencing-landing-page>
     Terrain Following <common-terrain-following>
-    Channel Output Functions <channel-output-functions>
-    Soaring <soaring>
+    Soaring <soaring-4_1>
+    Automated Aerobatics <common-scripted-aerobatics-4.4>
+    Moving Vehicle/Ship Takeoff/Landing <common-ship-landing>
+    High Altitude Glider Drop Pullup <glider-pullup>

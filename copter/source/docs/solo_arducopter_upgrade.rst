@@ -8,11 +8,11 @@ This article details upgrading and operating ArduCopter version 3.5.0 and higher
 
 Overview
 --------
-The 3DR Solo contains, among many things, a Pixhawk 2.0 flight controller. It comes with a heavily customized branch of an early ArduCopter 3.3 compiled specifically for the Solo by 3DR. When you do the initial pre-flight update on a new Solo (or after a factory reset), part of that update is this Solo  branch of ArduCopter. It is installed on the Pixhawk, and has all the necessary default parameters and customizations baked into it. It is essentially transparent to the user, taking place behind the curtains.  Since 3DR is no longer in the consumer UAS business, this custom branch of ArduCopter will not be seeing any further updates. It was last updated in early 2016, and is now very far behind.
+The 3DR Solo contains, among many things, a Pixhawk 2.0 autopilot. It comes with a heavily customized branch of an early ArduCopter 3.3 compiled specifically for the Solo by 3DR. When you do the initial pre-flight update on a new Solo (or after a factory reset), part of that update is this Solo  branch of ArduCopter. It is installed on the Pixhawk, and has all the necessary default parameters and customizations baked into it. It is essentially transparent to the user, taking place behind the curtains.  Since 3DR is no longer in the consumer UAS business, this custom branch of ArduCopter will not be seeing any further updates. It was last updated in early 2016, and is now very far behind.
 
 Life After 3DR
 ^^^^^^^^^^^^^^
-Since the Solo uses a Pixhawk flight controller, it is capable of running variations of ArduCopter besides the 3DR customized Solo version. This article will focus on installing, configuring, and operating ArduCopter version 3.5.0 or higher on a 3DR Solo. ArduCopter continues where 3DR left off, keeping the Solo a modern, advanced, and highly capable sUAS.  There are countless advances in the autopilot firmware making it a more stable, reliable, and agile aircraft. There are many new features such as boat mode, RTK GPS, enhanced telemetry, ADS-B, lidar laser altimeters, terrain awareness and following, IR precision landing, and even and "indoor GPS".
+Since the Solo uses a Pixhawk autopilot, it is capable of running variations of ArduCopter besides the 3DR customized Solo version. This article will focus on installing, configuring, and operating ArduCopter version 3.5.0 or higher on a 3DR Solo. ArduCopter continues where 3DR left off, keeping the Solo a modern, advanced, and highly capable sUAS.  There are countless advances in the autopilot firmware making it a more stable, reliable, and agile aircraft. There are many new features such as boat mode, RTK GPS, enhanced telemetry, ADS-B, lidar laser altimeters, terrain awareness and following, IR precision landing, and even and "indoor GPS".
 
 .. image:: ../images/solo_skids_here.jpg
     :width: 45 %
@@ -30,14 +30,14 @@ Since the Solo uses a Pixhawk flight controller, it is capable of running variat
 
 Hardware Requirements
 ^^^^^^^^^^^^^^^^^^^^^
-The Pixhawk 2.1 Green Cube (or a traditional Cube with the internal jumper set for 5 volts) is currently required for safe and reliable use of ArduCopter 3.5.0 and higher on a 3DR Solo. You can purchase the Green Cube from `Jesters Drones <http://www.jestersdrones.org/store/index.php?rt=product/category&path=68>`_ or directly from  `ProfiCNC <http://www.proficnc.com/3dr-solo-accessories/79-the-cube.html>`_.  The Cube has significantly more advanced components.  This includes 3 temperature controlled IMUs and the 5 volt signalling the Solo needs to operate safely. If you already have a Cube, you can set an internal solder jumper to 5 volt signalling and use it in your Solo.  The Green Cube comes with this jumper pre-set for 5 volts.
+The Pixhawk 2.1 (CubePilot CubeGreen/CubeBlack) (or a traditional Cube with the internal jumper set for 5 volts) is currently required for safe and reliable use of ArduCopter 3.5.0 and higher on a 3DR Solo. You can purchase the Green Cube from `Jesters Drones <http://www.jestersdrones.org/store/index.php?rt=product/category&path=68>`_ or directly from  `CubePilot <https://www.cubepilot.com>`_.  The Cube has significantly more advanced components.  This includes 3 temperature controlled IMUs and the 5 volt signalling the Solo needs to operate safely. If you already have a Cube, you can set an internal solder jumper to 5 volt signalling and use it in your Solo.  The Green Cube comes with this jumper pre-set for 5 volts.
 
 .. image:: ../images/solo_greencube.jpg
     :width: 45 %
 .. image:: ../images/solo_cube_installed.jpg
     :width: 45 %
 
-You *can* install ArduCopter master on the stock Pixhawk 2.0, but it is highly discouraged. It will install, and it will fly.  But you are at fairly high risk for motors shutting down in flight, leading to a serious crash. This is because of an electrical hardware flaw in the Solo's motor pods.  The old stock firmware has a software patch to *mostly* mitigate this flaw. This is what you may hear referred to as "slew rate protection". You can view the code for the slew rate protection in the stock 3DR firmware `here on their GitHub site <https://github.com/3drobotics/ardupilot-solo/blob/master/libraries/AP_Motors/AP_MotorsMatrix.cpp#L388>`_.  The production versions of ArduCopter, including ArduCopter 3.5 do not have this slew rate protection. It is severely handicapping and difficult to manage for a world of vehicles that use ArduCopter besides the Solo.  The 5 volt signalling used in the Pixhawk 2.1 Green Cube effectively solves the electrical problem on the motor pods.
+You *can* install ArduCopter master on the stock Pixhawk 2.0, but it is highly discouraged. It will install, and it will fly.  But you are at fairly high risk for motors shutting down in flight, leading to a serious crash. This is because of an electrical hardware flaw in the Solo's motor pods.  The old stock firmware has a software patch to *mostly* mitigate this flaw. This is what you may hear referred to as "slew rate protection". You can view the code for the slew rate protection in the stock 3DR firmware `here on their GitHub site <https://github.com/3drobotics/ardupilot-solo/blob/master/libraries/AP_Motors/AP_MotorsMatrix.cpp#L388>`_.  The production versions of ArduCopter, including ArduCopter 3.5 do not have this slew rate protection. It is severely handicapping and difficult to manage for a world of vehicles that use ArduCopter besides the Solo.  The 5 volt signalling used in the Pixhawk 2.1 (CubePilot CubeGreen/CubeBlack) effectively solves the electrical problem on the motor pods.
 
 There are other potential ways to mitigate the electrical problem with the motor pods without buying a new Cube.  You could use conventional DIY ESCs and bypass the ones built into the motor pods.  Or you could build a level converter that steps the signalling voltage up from 3v to 5v.  None of these solutions are commercially available as a kit, but can be done on a DIY basis if you are creative. You would not have the benefit of enhanced hardware in The Cube, but it would be just as safe and reliable to fly.
 
@@ -53,7 +53,7 @@ There are several great resources online for modification ideas,vendors, beta te
 -  `Solo Mod Club Facebook group <https://www.facebook.com/groups/3DRSOLOModClub/>`_
 -  `Solex Users Facebook group <https://www.facebook.com/groups/176789056089526/>`_
 -  `ArduPilot Discuss Forums <https://discuss.ardupilot.org/c/arducopter/copter-3-5>`_
--  `ArduPilot copter Wiki <http://ardupilot.org/copter/docs/common-advanced-configuration.html>`_
+-  `ArduPilot copter Wiki <https://ardupilot.org/copter/docs/common-advanced-configuration.html>`_
 -  `3DR Pilots Forum <https://3drpilots.com/>`_ 
 -  :ref:`Solo Battery Calibration Process <solo_battery_calibration>`
 
@@ -70,12 +70,12 @@ Upgrade Process
 
 Preparation
 ^^^^^^^^^^^
-Before beginning the upgrade to ArduCopter 3.5 with the Pixhawk 2.1 Green Cube on your Solo, you need to complete some important requisites.
+Before beginning the upgrade to ArduCopter 3.5 with the Pixhawk 2.1 (CubePilot CubeGreen/CubeBlack) on your Solo, you need to complete some important requisites.
 
 - Complete Solo and controller in good working order, paired, flyable, and fully charged.
 - Solo and controller both up to date with current 3DR Solo firmware from the initial pre-flight update. The current 3DR firmware is 2.4.2.
 - Flight tested, working properly in all respects. An untested or malfunctioning Solo should not be used for this process. It won't fix it.
-- Pixhawk 2.1 Green Cube
+- Pixhawk 2.1 (CubePilot CubeGreen/CubeBlack)
 - Philips and flat head screwdrivers
 - Solex App for Android or a Windows PC for Mission Planner and WinSCP
 
@@ -130,7 +130,7 @@ With all of the above complete, it is time to take your first flight on ArduCopt
 
 ArduCopter Parameters
 ---------------------
-There are over 700 parameters in ArduCopter. For everyday use of the Solo, you still do not need to worry about any of them. They're all pre-set for you in the above processes and by way of defaults.  All the configuration parameters for the Solo that require a value different from the ArduCopter defaults can be found in the `ArduPilot GitHub repository /tools/frame_params/ directory <https://github.com/ArduPilot/ardupilot/blob/master/Tools/Frame_params/Solo_AC35.param>`_. These are the parameters that are loaded during the upgrade process. If you are not familiar with editting parameters and have no special use case to warrant changing them, altering them is not recommended. 
+There are over 700 parameters in ArduCopter. For everyday use of the Solo, you still do not need to worry about any of them. They're all pre-set for you in the above processes and by way of defaults.  All the configuration parameters for the Solo that require a value different from the ArduCopter defaults can be found in the `ArduPilot GitHub repository /tools/frame_params/ directory <https://github.com/ArduPilot/ardupilot/blob/master/Tools/Frame_params/Solo_AC35.param>`_. These are the parameters that are loaded during the upgrade process. If you are not familiar with editing parameters and have no special use case to warrant changing them, altering them is not recommended. 
 
 However, there are some advanced and special use cases that may require changing some parameters. Some key parameters for advanced users are detailed below. This list will likely grow as new use cases and modifications develop.
 
@@ -156,7 +156,7 @@ Value   Meaning
 =====   =======
 
 =====   =======
-:ref:`FS_BATT_ENABLE <FS_BATT_ENABLE>` controls the low battery failsafe action. The low battery failsafe kicks in when when the values set in parameters ``FS_BATT_VOLTAGE`` or ``FS_BATT_MAH`` are breached.
+FS_BATT_ENABLE controls the low battery failsafe action for Copter-3.5 (and earlier). For Copter-3.6 (and higher) check the :ref:`BATT_FS_LOW_ACT <BATT_FS_LOW_ACT>` parameter. The low battery failsafe kicks in when when the values set in parameters ``FS_BATT_VOLTAGE`` or ``FS_BATT_MAH`` are breached.
 ---------------
 Value   Meaning
 =====   =======
@@ -166,7 +166,7 @@ Value   Meaning
 =====   =======
 
 =====   =======
-:ref:`FS_BATT_VOLTAGE <FS_BATT_VOLTAGE>` is the low battery voltage threshold. When the battery voltage drops below this point, the low battery beeper sounds and it will do what you have ``FS_BATT_ENABLE`` set for. This value is expressed in volts. The default is 14.0. You can adjust this higher or lower depending on use case and preference.
+FS_BATT_VOLTAGE is the low battery voltage threshold for Copter-3.5 (and earlier). For Copter-3.6 (and higher) check the :ref:`BATT_LOW_VOLT <BATT_LOW_VOLT>` parameter. When the battery voltage drops below this point, the low battery beeper sounds and it will do what you have ``FS_BATT_ENABLE`` set for. This value is expressed in volts. The default is 14.0. You can adjust this higher or lower depending on use case and preference.
 ---------------
 Value   Meaning
 =====   =======
@@ -176,7 +176,7 @@ Value   Meaning
 
 
 =====   =======
-:ref:`FS_BATT_MAH <FS_BATT_MAH>` is the battery capacity remaining threshold expressed in milliamperes (MAH). When the battery remaining capacity drops below this point, the low battery beeper sounds and it will do what you have ``FS_BATT_ENABLE`` set for. The default is 520. On the solo, that is on average about 1.5 minutes of flying time remaining. You can adjust this up or down to fit your preference and use case. Setting it for 0 will disable capacity remaining based alarms and failsafes.
+FS_BATT_MAH is the battery capacity remaining threshold expressed in milliamperes (MAH) for Copter-3.5 (and earlier). For Copter-3.6 (and higher) check the :ref:`BATT_LOW_MAH <BATT_LOW_VOLT>` parameter. When the battery remaining capacity drops below this point, the low battery beeper sounds and it will do what you have ``FS_BATT_ENABLE`` set for. The default is 520. On the solo, that is on average about 1.5 minutes of flying time remaining. You can adjust this up or down to fit your preference and use case. Setting it for 0 will disable capacity remaining based alarms and failsafes.
 ---------------
 Value   Meaning
 =====   =======
@@ -216,7 +216,7 @@ Value   Meaning
 =====   =======
 
 =====   =======
-:ref:`LOG_DISARMED <LOG_DISARMED>` enables and disables dataflash (\*.bin) logging when the Solo is disarmed.  It is currently enabled by default since it can be very useful for testing and troubleshooting. But it does result in large and often unneccessary logs.  If you are comfortable and confident in your Solo, you disable logging while disarmed.  The dataflash logs be much cleaner and volumnous.
+:ref:`LOG_DISARMED <LOG_DISARMED>` enables and disables dataflash (\*.bin) logging when the Solo is disarmed.  It is currently enabled by default since it can be very useful for testing and troubleshooting. But it does result in large and often unnecessary logs.  If you are comfortable and confident in your Solo, you disable logging while disarmed.  The dataflash logs be much cleaner and volumnous.
 ---------------
 Value   Meaning
 =====   =======

@@ -4,18 +4,31 @@
 Tuning
 ======
 
-With the default PID settings, Ardupilot will fly most RC vehicles
+With the default PID settings, ArduPilot will fly most RC vehicles
 safely right out of the box. To fly well, with tight navigation and
-reliable performance in wind, you’ll want to tune your autopilot
-parameters. The following topics shown you how.
+reliable performance in the wind, you’ll want to tune your autopilot
+parameters. The following topics show you how.
 
 [site wiki="copter"]
 .. toctree::
     :maxdepth: 1
 
+    Tuning Process Instructions <tuning-process-instructions>
+    Setting up for Tuning <setting-up-for-tuning>
+    Initial Tuning Flight <initial-tuning-flight>
+    Evaluating the Tune <evaluating-the-aircraft-tune>
+    Manual Tuning <ac_rollpitchtuning>
+    QuikTune <quiktune>
     AutoTune <autotune>
-    Roll and Pitch Tuning <ac_rollpitchtuning>
-    Advanced Tuning <tuning>
+    Input Shaping <input-shaping>
+    Throttle Boost <throttle-boost>
+    Transmitter Based Tuning <common-transmitter-tuning>
+    Configuring Notch Filtering <common-imu-notch-filtering>
+    Configuring In-Flight FFT <common-imu-fft>
+    Coping with Ground Resonance Oscillation <common-ground-resonance>
+
+.. note:: Please consider using the `Methodic Configurator <https://ardupilot.github.io/MethodicConfigurator/>`__ for step-by-step setup
+
 [/site]
 
 [site wiki="plane"]
@@ -24,8 +37,9 @@ parameters. The following topics shown you how.
 
     Tuning QuickStart <tuning-quickstart>
     Automatic Tuning with AUTOTUNE <automatic-tuning-with-autotune>
-    Roll, Pitch and Yaw Controller Tuning <roll-pitch-controller-tuning>
+    Manual Roll, Pitch and Yaw Controller Tuning <new-roll-and-pitch-tuning>
     Navigation Tuning <navigation-tuning>
+    Cruise Speed Tuning <tuning-cruise>
     TECS (Total Energy Control System) for Speed & Height – Tuning Guide <tecs-total-energy-control-system-for-speed-height-tuning-guide>
     Calibrating an Airspeed Sensor <calibrating-an-airspeed-sensor>
     Tuning Ground Steering for a Plane <tuning-ground-steering-for-a-plane>
@@ -33,3 +47,8 @@ parameters. The following topics shown you how.
 
 
 [copywiki destination="copter,plane"]
+
+
+
+
+

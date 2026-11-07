@@ -1,16 +1,16 @@
 .. _common-downloads_advanced_user_tools:
 
-==============================
-DOWNLOADS: Advanced User Tools
-==============================
+========================================
+Archived: DOWNLOADS: Advanced User Tools
+========================================
 
-The advanced users tools `can be downloaded from here <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/>`__.
+The advanced users tools `can be downloaded from here <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/>`__.
 
 .. note::
 
     Not all of these tools are "up to date". For example, vehicle binaries and 
     GCS software should be downloaded from their respective locations in the 
-    `firmware server <http://firmware.ardupilot.org/>`__.
+    `firmware server <https://firmware.ardupilot.org/>`__.
 
 The rest of the article provides an overview of some of the files and the tool licensing.
 
@@ -23,8 +23,8 @@ Tarot Gimbal firmware
 
 Tarot Gimbal firmware and configuration UI for Windows.
 
-* `ZYX-BMGC-EN_V1.5.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/ZYX-BMGC-EN_V1.5.zip>`__ (v1.5)
-* `ZYX-BMGC-EN_V1.4.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/ZYX-BMGC-EN_V1.4.zip>`__ (v1.4)
+* `ZYX-BMGC-EN_V1.5.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/ZYX-BMGC-EN_V1.5.zip>`__ (v1.5)
+* `ZYX-BMGC-EN_V1.4.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/ZYX-BMGC-EN_V1.4.zip>`__ (v1.4)
 
 
 Copter Firmware
@@ -34,8 +34,8 @@ Copter Firmware
 
     Not necessarily the latest!
     
-* `ArduCopter_APM_1.0_Firmware_3.2.1.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/ArduCopter_APM_1.0_Firmware_3.2.1.zip>`__
-* `ArduCopter_APM_2.0_Firmware_3.2.1.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/ArduCopter_APM_2.0_Firmware_3.2.1.zip>`__
+* `ArduCopter_APM_1.0_Firmware_3.2.1.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/ArduCopter_APM_1.0_Firmware_3.2.1.zip>`__
+* `ArduCopter_APM_2.0_Firmware_3.2.1.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/ArduCopter_APM_2.0_Firmware_3.2.1.zip>`__
 
 
 Rover Firmware
@@ -45,19 +45,19 @@ Rover Firmware
 
     Not necessarily the latest!
     
-* `APMrover2-2.45.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/APMrover2-2.45.zip>`__
-* `APMrover2-2.46.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/APMrover2-2.46.zip>`__
-* `APMrover2-2.47.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/APMrover2-2.47.zip>`__
+* `APMrover2-2.45.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/APMrover2-2.45.zip>`__
+* `APMrover2-2.46.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/APMrover2-2.46.zip>`__
+* `APMrover2-2.47.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/APMrover2-2.47.zip>`__
 
 
 
 3DR PPM Encoder V3 Manual
 -------------------------
 
-`PPM-Encoder-V3-Manual.pdf <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/PPM-Encoder-V3-Manual.pdf>`__
+`PPM-Encoder-V3-Manual.pdf <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/PPM-Encoder-V3-Manual.pdf>`__
 
-VERSION	1
-DATE POSTED	January 29, 2014
+VERSION 1
+DATE POSTED January 29, 2014
 
 User manual for the third version of the 3DR PPM Encoder module
 
@@ -65,7 +65,7 @@ User manual for the third version of the 3DR PPM Encoder module
 USB Driver for Pixhawk Boards
 -----------------------------
 
-`px4_win_drivers.zip <http://firmware.us.ardupilot.org/Tools/PX4_Windows_Driver/px4_win_drivers.zip>`__
+`px4_win_drivers.zip <https://firmware.ardupilot.org/Tools/PX4_Windows_Driver/px4_win_drivers.zip>`__
 
 Drivers for Pixhawk Boards
 Date Posted: May 15, 2013
@@ -74,9 +74,9 @@ Date Posted: May 15, 2013
 3DR-uBlox configuration file
 ----------------------------
 
-`3DR-Ublox.txt <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/3DR-Ublox.txt>`__
+`3DR-Ublox.txt <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/3DR-Ublox.txt>`__
 
-DATE POSTED	November 24, 2013
+DATE POSTED November 24, 2013
 
 This file is an extract of :
 ArduPlane-2.73/libraries/AP_GPS/config
@@ -86,10 +86,10 @@ You can use it for configuring CRIUS CN-06 V2 for example.
 APM2 / Ublox passthrough
 ------------------------
 
-`GPS_UBLOX_passthrough_APM2.hex <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/GPS_UBLOX_passthrough_APM2.hex>`__
+`GPS_UBLOX_passthrough_APM2.hex <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/GPS_UBLOX_passthrough_APM2.hex>`__
 
-VERSION	1.0
-DATE POSTED	November 24, 2013
+VERSION 1.0
+DATE POSTED November 24, 2013
 
 This executable allows the APM2.x to be used as a pass through to the GPS so that U-Center can be used to examine and change the UBlox’s configuration
 
@@ -97,9 +97,9 @@ This executable allows the APM2.x to be used as a pass through to the GPS so tha
 ArduCAM OSD Config (For MinimOSD's Firmware v2.0)
 -------------------------------------------------
 
-`Config_OSD_20.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/Config_OSD_20.zip>`__
+`Config_OSD_20.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/Config_OSD_20.zip>`__
 
-DATE POSTED	April 29, 2013
+DATE POSTED April 29, 2013
 
 
 Important NOTE: After install the “ArduCAM OSD Config Tool” remember that you need to update the Character Set. A new one is available on the install folder. From now on it will be always there as “OSD_Charset.mcm”.
@@ -107,8 +107,8 @@ Important NOTE: After install the “ArduCAM OSD Config Tool” remember that yo
 ArduCopter APM 1.0 Firmware
 ---------------------------
 
-VERSION	3.2.1
-DATE POSTED	March 18, 2015
+VERSION 3.2.1
+DATE POSTED March 18, 2015
 
 ArduCopter v3.2.1 firmware for APM 1.0. This is the last build of ArduCopter that still fits on the APM 1.0 boards.
 
@@ -116,8 +116,8 @@ ArduCopter v3.2.1 firmware for APM 1.0. This is the last build of ArduCopter tha
 ArduCopter APM 2.x Firmware
 ---------------------------
 
-VERSION	3.2.1
-DATE POSTED	March 18, 2015
+VERSION 3.2.1
+DATE POSTED March 18, 2015
 
 
 ArduCopter v3.2.1 firmware for APM 2.x. This is the last build of ArduCopter that still fits on the APM 2.x boards.
@@ -126,10 +126,10 @@ ArduCopter v3.2.1 firmware for APM 2.x. This is the last build of ArduCopter tha
 ArduPPM Encoder 3DR Manual v2.3.16.pdf
 --------------------------------------
 
-`PPM-Encoder-3DR-Manual-v2.3.16.pdf <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/PPM-Encoder-3DR-Manual-v2.3.16.pdf>`__
+`PPM-Encoder-3DR-Manual-v2.3.16.pdf <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/PPM-Encoder-3DR-Manual-v2.3.16.pdf>`__
 
-VERSION	2.3.16
-DATE POSTED	April 26, 2013
+VERSION 2.3.16
+DATE POSTED April 26, 2013
 
 Manual for the standalone PPM Encoder by 3DR.
 This manual covers firmware version 2.3.16.
@@ -138,11 +138,11 @@ This manual covers firmware version 2.3.16.
 ArduPPM v2.3.16 ATMega32U2 firmware for APM 2.x (recommended APM2.x)
 --------------------------------------------------------------------
 
-* `ArduPPM_v2.3.16_ATMega32U2.hex_.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/ArduPPM_v2.3.16_ATMega32U2.hex_.zip>`__
+* `ArduPPM_v2.3.16_ATMega32U2.hex_.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/ArduPPM_v2.3.16_ATMega32U2.hex_.zip>`__
 
 .. tip:: Recommended for all APM 2.x users
 
-DATE POSTED	April 29, 2013
+DATE POSTED April 29, 2013
 
 
 
@@ -166,7 +166,7 @@ APM 2.x LED STATUS:
 * - RX – ON = Input signal(s) lost during flight and fail-safe activated
 * - TX – OFF= PPM output disabled
 * - TX – FAST TOGGLE = PPM output enabled
-* - TX – SLOW TOGGLE = PPM pass-trough mode
+* - TX – SLOW TOGGLE = PPM pass-through mode
 
 SERVO INPUT (PWM) MODE:
 +++++++++++++++++++++++
@@ -183,8 +183,8 @@ PPM PASS-THROUGH MODE (signal pin 2&3 shorted):
 
 * – PPM output will not be enabled unless a input signal has been detected
 * – Active signal on input channel 1 has been detected:
-* + Any input level changes will be passed directly to the PPM output (PPM pass-trough)
-* + If no input level changes are detected withing 250ms:
+* + Any input level changes will be passed directly to the PPM output (PPM pass-through)
+* + If no input level changes are detected within 250ms:
 * + PPM output is enabled and default fail-safe values for all eight channels transmitted
 * + Input level change detected again, PPM fail-safe output is terminated and normal PPM pass-through operation is restored
 
@@ -194,13 +194,13 @@ PPM PASS-THROUGH MODE (signal pin 2&3 shorted):
 ArduPPM v2.3.16 ATMega328p firmware for APM1.x Copter and standalone PPM encoder. 
 ---------------------------------------------------------------------------------
 
-`ArduPPM_v2.3.16_ATMega328p_for_ArduCopter.hex_.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/ArduPPM_v2.3.16_ATMega328p_for_ArduCopter.hex_.zip>`__
+`ArduPPM_v2.3.16_ATMega328p_for_ArduCopter.hex_.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/ArduPPM_v2.3.16_ATMega328p_for_ArduCopter.hex_.zip>`__
 
 .. warning::
 
     **Do not use with APM 2.x**
     
-    DATE POSTED	April 29, 2013
+    DATE POSTED April 29, 2013
 
 
 This version is dedicated to ArduCopter (CH8 radio passthrough mode disabled).
@@ -235,16 +235,16 @@ Normal mode:
 ArduPPM v2.3.16 ATMega328p firmware for APM1.x Plane and standalone PPM encoder.
 --------------------------------------------------------------------------------
 
-`ArduPPM_v2.3.16_ATMega328p_for_ArduPlane.hex_.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/ArduPPM_v2.3.16_ATMega328p_for_ArduPlane.hex_.zip>`__
+`ArduPPM_v2.3.16_ATMega328p_for_ArduPlane.hex_.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/ArduPPM_v2.3.16_ATMega328p_for_ArduPlane.hex_.zip>`__
 
-DATE POSTED	April 29, 2013
+DATE POSTED April 29, 2013
 
 .. warning::
 
     Do not use with APM 2.x
     
 This version is dedicated to ArduPlane (or ArduRover / Arduboat) (CH8 radio passthrough mode).
-For Arducopter it is better to use the dedicated version so that CH8 can be fully used without risk to trig radio passthrough mode.
+For ArduCopter it is better to use the dedicated version so that CH8 can be fully used without risk to trig radio passthrough mode.
 
 Changes:
 ++++++++
@@ -280,7 +280,7 @@ Radio Passthrough mode (for ArduPlane only):
 ArduPPM v2.3.16 ATMega32U2 firmware for APM 2.x 
 -----------------------------------------------
 
-DATE POSTED	April 29, 2013
+DATE POSTED April 29, 2013
 
 ArduPPM v2.3.16 ATMega32U2 firmware for APM 2.x
 
@@ -305,7 +305,7 @@ APM 2.x LED STATUS:
 * RX – ON = Input signal(s) lost during flight and fail-safe activated
 * TX – OFF= PPM output disabled
 * TX – FAST TOGGLE = PPM output enabled
-* TX – SLOW TOGGLE = PPM pass-trough mode
+* TX – SLOW TOGGLE = PPM pass-through mode
 
 SERVO INPUT (PWM) MODE:
 +++++++++++++++++++++++
@@ -322,25 +322,25 @@ PPM PASS-THROUGH MODE (signal pin 2&3 shorted):
 
 * – PPM output will not be enabled unless a input signal has been detected
 * – Active signal on input channel 1 has been detected:
-* + Any input level changes will be passed directly to the PPM output (PPM pass-trough)
-* + If no input level changes are detected withing 250ms:
+* + Any input level changes will be passed directly to the PPM output (PPM pass-through)
+* + If no input level changes are detected within 250ms:
 * + PPM output is enabled and default fail-safe values for all eight channels transmitted
 * + Input level change detected again, PPM fail-safe output is terminated and normal PPM pass-through operation is restored
 
 MediaTek GPS firmware update and utility
 ----------------------------------------
 
-`MTK_DIYdrones.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/MTK_DIYdrones.zip>`__
+`MTK_DIYdrones.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/MTK_DIYdrones.zip>`__
 
-DATE POSTED	April 29, 2013
+DATE POSTED April 29, 2013
 
 
 MinimOSD Firmware v2.0
 ----------------------
 
-`MinimOSD_20.hex_.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/MinimOSD_20.hex_.zip>`__
+`MinimOSD_20.hex_.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/MinimOSD_20.hex_.zip>`__
 
-DATE POSTED	April 29, 2013
+DATE POSTED April 29, 2013
 
 Firmware 2.0 for MinimOSD. More powerful than ever!
 
@@ -350,10 +350,10 @@ Important NOTE: You need to install the newest “ArduCAM OSD Config Tool” and
 MinimOSD Firmware v2.2 (Beta) - New Flight Modes
 ------------------------------------------------
 
-`MinimOSD_22_hex.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/MinimOSD_22_hex.zip>`__
+`MinimOSD_22_hex.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/MinimOSD_22_hex.zip>`__
 
 
-DATE POSTED	May 8, 2014
+DATE POSTED May 8, 2014
 
 Firmware 2.2 for MinimOSD. New Flight-modes added for APM Plane and APM Copter.
 
@@ -363,10 +363,10 @@ Important NOTE: If you were using a firmware older than 2.0, remember of install
 OpticalFlow test sketch / APM2
 ------------------------------
 
-`AP_OpticalFlow_test.hex <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/AP_OpticalFlow_test.hex>`__
+`AP_OpticalFlow_test.hex <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/AP_OpticalFlow_test.hex>`__
 
-VERSION	1.0
-DATE POSTED	December 5, 2013
+VERSION 1.0
+DATE POSTED December 5, 2013
 
 Optical Flow test sketch for APM2
 
@@ -374,10 +374,10 @@ Optical Flow test sketch for APM2
 PX4Flow-KLT
 -----------
 
-`px4flow-klt-06Dec2014.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/px4flow-klt-06Dec2014.zip>`__
+`px4flow-klt-06Dec2014.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/px4flow-klt-06Dec2014.zip>`__
 
-VERSION	Beta-06Dec2014
-DATE POSTED	December 6, 2014
+VERSION Beta-06Dec2014
+DATE POSTED December 6, 2014
 
 PX4Flow sensor firmware using Lucas-Kanade method for use with ArduPilot
 
@@ -385,9 +385,9 @@ PX4Flow sensor firmware using Lucas-Kanade method for use with ArduPilot
 USB Driver for APM 2 
 --------------------
 
-`APM_Arduino_Drivers.zip <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/APM_Arduino_Drivers.zip>`__
+`APM_Arduino_Drivers.zip <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/APM_Arduino_Drivers.zip>`__
 
-DATE POSTED	April 25, 2013
+DATE POSTED April 25, 2013
 
 Arduino USB driver for the Atmega32u2 USB interface chip on APM 2
 
@@ -426,4 +426,4 @@ Since we want you to have a great experience, please make sure that you do all o
   The software and hardware we provide is only for use in unmanned vehicles.
 
 
-[copywiki destination="copter,plane,rover,planner,planner2,antennatracker,dev,ardupilot"]
+[copywiki destination="copter,plane,rover,dev,sub"]

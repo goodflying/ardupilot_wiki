@@ -1,58 +1,96 @@
-# -*- coding: utf-8 -*-
-#
-# This contains common configuration information for the ardupilot wikis. 
+# This contains common configuration information for the ardupilot wikis.
 # This information is imported by the conf.py files in each of the sub wikis
-#
 
-#Set False to re-enable warnings for non-local images.
-disable_non_local_image_warnings=True
+import os
+import sys
 
+# Add the wiki root and extensions directory to the path so our custom extensions can be found
+_wiki_root = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _wiki_root)
+sys.path.insert(0, os.path.join(_wiki_root, 'scripts', 'extensions'))
 
-#wiki_base_url='https://dl.dropboxusercontent.com/u/3067678/share2/wiki'
-#intersphinx_base_url=wiki_base_url+'/%s/build/html/'
+# Parallel reading of source files (use all available CPUs)
+parallel_read_safe = True
+parallel_write_safe = True
 
-wiki_base_url='http://ardupilot.org/'
-intersphinx_base_url=wiki_base_url+'%s/'
+# Add any Sphinx extension module names here, as strings. They can be
+# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
+# ones.
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.todo',
+    'sphinx.ext.mathjax',     # For :math: element rendering
+    'sphinx.ext.ifconfig',
+    'sphinxcontrib.youtube',  # For youtube embedding
+    'lazy_youtube',           # loading="lazy" on every embed the line above renders
+    'sphinxcontrib.jquery',
+    'sphinx_tabs.tabs',       # For clickable tabs
+    'sphinx_skip_versioned_params',  # Skip labels for versioned parameter files (saves RAM/time)
+]
+
+# wiki_base_url='https://dl.dropboxusercontent.com/u/3067678/share2/wiki'
+# intersphinx_base_url=wiki_base_url+'/%s/build/html/'
+
+wiki_base_url = 'https://ardupilot.org/'
+intersphinx_base_url = wiki_base_url + '%s/'
 
 
 # Where to point the base of the build for the main site menu
-html_context= {'target':'/'}
+html_context = {'target': '/'}
 # This needs to change to the actual URL root once the theme updated.
 
-# Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'copter': (intersphinx_base_url % 'copter',
-                                  None),
-                       'plane': (intersphinx_base_url % 'plane',
-                                  None),
-                       'rover': (intersphinx_base_url % 'rover',
-                                  None),
-                       'planner': (intersphinx_base_url % 'planner',
-                                  None),
-                       'planner2': (intersphinx_base_url % 'planner2',
-                                  None),
-                       'dev': (intersphinx_base_url % 'dev',
-                                  None),
-                       'antennatracker': (intersphinx_base_url % 'antennatracker',
-                                  None),
-                       'ardupilot': (intersphinx_base_url % 'ardupilot',
-                                  None),
-                                  }
+# Don't generate search index for versioned parameter pages
+html_search_options = {
+    'dict_max_word_length': 40,  # Skip very long parameter names
+}
 
-############ PATCH REMOVE NON-LOCAL IMAGE WARNINGS
-### From:
-##  http://stackoverflow.com/questions/12772927/specifying-an-online-image-in-sphinx-restructuredtext-format
-##  And https://github.com/sphinx-doc/sphinx/issues/2429
+# Known wiki keys (single source of truth)
+WIKI_KEYS = [
+    'antennatracker',
+    'ardupilot',
+    'blimp',
+    'copter',
+    'dev',
+    'mavproxy',
+    'plane',
+    'planner',
+    'planner2',
+    'rover',
+    'sub',
+]
 
-#Set False to re-enable warnings for non-local images.
-disable_non_local_image_warnings=True
+# Build mapping programmatically (remote auto-discovery by using None for objects.inv)
+intersphinx_mapping = {k: (intersphinx_base_url % k, None) for k in WIKI_KEYS}
+
+
+# Suppress warnings that slow down builds (already have nitpicky = False)
+suppress_warnings = [
+    'epub.unknown_project_files',  # Suppress epub warnings
+]
+
+disable_non_local_image_warnings = True
 
 if disable_non_local_image_warnings:
-    import sphinx.environment
-    from docutils.utils import get_source_line
+    suppress_warnings.append('image.nonlocal_uri')  # Suppress external image warnings
 
-    def _warn_node(self, msg, node, **kwargs):
-        if not msg.startswith('nonlocal image URI found:'):
-            self._warnfunc(msg, '%s:%s' % get_source_line(node),**kwargs)
 
-    sphinx.environment.BuildEnvironment.warn_node = _warn_node
-############ ENDPATH
+def setup(app):
+    app.add_css_file("common_theme_override.css")
+
+
+# Consumed by each wiki's conf.py; the theme's offline hooks (manifest,
+# pwa.js, the Offline menu entry) stay off for any other consumer. Requested
+# only when the installed theme declares the option, so the wiki also builds
+# against a theme that predates sphinx_rtd_theme PR 24.
+def _theme_offers(option):
+    import configparser
+    import os
+
+    import sphinx_rtd_theme
+    conf = configparser.ConfigParser()
+    conf.read(os.path.join(os.path.dirname(sphinx_rtd_theme.__file__), "theme.conf"))
+    return conf.has_option("options", option)
+
+
+html_theme_options = {"offline_hooks": True} if _theme_offers("offline_hooks") else {}

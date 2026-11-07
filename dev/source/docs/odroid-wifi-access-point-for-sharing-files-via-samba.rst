@@ -1,8 +1,8 @@
 .. _odroid-wifi-access-point-for-sharing-files-via-samba:
 
-====================================================
-ODroid Wifi Access Point for sharing files via Samba
-====================================================
+==============================================================
+Archived: ODroid WiFi Access Point for Sharing Files via Samba
+==============================================================
 
 Overview
 ========
@@ -69,7 +69,7 @@ try with another dongle.
     * AP 
 
 Use your favourite editor (nano or vi perhaps) to edit the
-``/etc/network/interfaces`` fileand add an entry for your wifi dongle. 
+``/etc/network/interfaces`` file and add an entry for your wifi dongle. 
 Note you should replace "wlan2" if your dongle has a different name:
 
 ``auto wlan2``
@@ -110,7 +110,7 @@ Try starting hostapd:
     hostapd /etc/hostapd/hostapd.conf
 
 If this fails try replacing the /usr/sbin/hostapd and hostapd_cli files
-with the version found in `the downloads area <http://firmware.ardupilot.org/downloads/wiki/developer_tools/hostapd_OdroidU3_Ubuntu1404.zip>`__.
+with the version found in `the downloads area <https://download.ardupilot.org/downloads/wiki/developer_tools/hostapd_OdroidU3_Ubuntu1404.zip>`__.
 
 You will also need to install the libnl-dev package:
 

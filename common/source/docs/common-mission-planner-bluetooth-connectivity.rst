@@ -1,10 +1,10 @@
 .. _common-mission-planner-bluetooth-connectivity:
-
+[copywiki destination="plane,copter,rover,blimp,sub"]
 =========================
 Bluetooth Telemetry radio
 =========================
-
-A `Bluetooth Data Link <http://store.jdrones.com/Bluetooth_telemetry_modem_p/tlmbt01.htm>`__ can
+`
+A Bluetooth Data Link , such as an `HC-06 module <https://www.amazon.com/s?k=hc-06>`__ can
 be used to connect your Pixhawk (or other controller) to your Bluetooth enabled PC or
 Android Ground station at distances up to 50m.
 
@@ -12,21 +12,22 @@ Android Ground station at distances up to 50m.
     :target: ../_images/Bluetooth.jpg
     :width: 450px
 
-Connecting to the Flight Controller
+.. note:: this module's baud rate usually must be changed from its default of 9600 to 57600 for use with ArduPilot. This is usually accomplished connecting it to a FTDI USB-serial adapter and using AT commands in a terminal program like Putty. See the last section of this page for more information on setting up the HC-06.
+
+Connecting to the Autopilot
 ===================================
 
-The Bluetooth data link comes with both a DF13 6 pin and 6-to-5 pin
-connector which make it easy to connect to the Pixhawk Telem1 or
-APM2.x's Telem ports.  Note that for the Pixhawk, although Telem1 is the
-recommendation, Telem2 or even Serial 4/5 will work.
+The Bluetooth data link often comes with both a DF13 6 pin and 6-to-5 pin
+connector which make it easy to connect to the autopilot's serial ports. Note that any unused serial port
+on the autopilot can be used.
 
 .. image:: ../../../images/telemetry_bluetooth_datalink_pixhawk_and_apm2.jpg
     :target: ../_images/telemetry_bluetooth_datalink_pixhawk_and_apm2.jpg
 
 Once you have connected the Bluetooth data link you can power up the
-board.  It is OK to use USB connected power while using the Bluetooth
-module connected to the APM or PixHawk as the USB connection can supply
-enough power BUT YOU MUST USE A WALL WART with Micro or Mini USB).
+autopilot.  It is OK to use USB connected power while using the Bluetooth
+module connected to the autopilot as long the the total power of ALL autopilot connected
+peripherals do not exceed the computer's capability (usually 1A)
 
 Bluetooth data link's LEDs:
 
@@ -34,45 +35,19 @@ Bluetooth data link's LEDs:
 -  Red LED blinks at 0.5z : pairing
 -  Red LED solid : connected
 
-Quick Start connecting with Mission Planner
-===========================================
+AutoPilot Setup
+---------------
 
-If you are familiar with Bluetooth, search for Bluetooth Device HC-05 or
-6 (some may have Linvor as well) , Pair with device (code 1234 or 0000)
-check it's properties and look at the services tab. Make sure SPP com
-port box is checked (only there if your Bluetooth device is active) Look
-in Device Manager (Windows) and make sure there is a Com Port for the
-Bluetooth and in the com port properties set the baud rate to 57600
-(note the Com Port number).
+On the autopilot SERIAL port that the module is attached (we will use SERIAL2, sometimes labeled TELEM2, for the following), make sure it's parameters are set as:
 
-.. note::
+- :ref:`SERIAL2_BAUD <SERIAL2_BAUD>` = 57 (57600)
+- :ref:`SERIAL2_PROTOCOL <SERIAL2_PROTOCOL>` = 2 (MAVLink2)
 
-   For use with Mission Planner on the Configure/Tuning tab make sure
-   and UNCHECK the box **Reset on USB Connect**:
-
-.. image:: ../../../images/mp.jpg
-    :target: ../_images/mp.jpg
-
-The default Baud Rate for the Bluetooth Module is 57600 (most other
-modules are 9600) Be sure when you connect it is at 57600 and for the
-new Com Port you saw in Device Manager.
-
-When you power up the PixHawk or APM with the Bluetooth the module will
-flash at 1hz the red LED when not connected. When Paring it will flash
-at .5 Hz and when connected it will be steady on.
-
-And you're done! You can now use your Bluetooth telemetry for up to about
-50m range. (your range may vary depending on back ground noise and
-conditions in your area)
-
-If you have problems connecting or you don't know Bluetooth very well or
-you want to change the default Baud Rate or Device Name, read on for the
-step by step process.
 
 .. _common-mission-planner-bluetooth-connectivity_detailed_connecting_with_mission_planner:
 
-Detailed connecting with Mission Planner
-========================================
+Connecting with Mission Planner
+===============================
 
 .. image:: ../../../images/Mini_Bluetooth_Dongle.jpg
     :target: ../_images/Mini_Bluetooth_Dongle.jpg
@@ -80,9 +55,9 @@ Detailed connecting with Mission Planner
 Many PCs and Laptops have bluetooth adapters built in but if not then
 you can use a generic USB Bluetooth dongle (pic above) or use an
 additional Bluetooth data link
-connected via an `FTDI Cable <http://store.jdrones.com/cable_ftdi_6pin_5v_p/cblftdi5v6p.htm>`__.
+connected via an `FTDI Cable <https://www.amazon.com/ftdi-adapter/s?k=ftdi+adapter>`__.
 
-After first making sure your Pixhawk/APM2 is powered on, and your PC's
+After first making sure your autopilot is powered on, and your PC's
 bluetooth dongle is plugged in and installed, click on the Windows task
 bar's little up triangle (aka "show hidden icons") which should be on
 the bottom right of the screen.
@@ -138,55 +113,43 @@ Right click and select "properties"
 
 Change baud rate to 57600
 
-Once again start Mission Planner and go to the Configure/Tuning tab and
-make sure you UNCHECK the box "Reset on USB connect"
-
-.. image:: ../../../images/mp.jpg
-    :target: ../_images/mp.jpg
-
-Your Bluetooth device should now be ready and you can connect to the
-proper port at the proper baud rate of 57600 (red LED steady on and not
+Your Bluetooth device should now be ready and you can connect to the port presented by the BT adapter in Mission Planner at the baud rate of 57600 (red LED steady on and not
 flashing)
 
 Connecting From your Android ground station
 ===========================================
 
 These instructions will show you how to connect to your vehicle from
-AndroPilot or DroidPlanner 2 running on  NExus 7 tablet using the
+Android device with a GCS app (like QGC, etc.) using the
 Bluetooth module.
 
-Open the Android device's settings application and turn Bluetooth
+Open the Android device's settings panel and turn Bluetooth
 connectivity ON (usually by sliding a slider to the right).  In the same
 settings screen click on "Bluetooth" which should cause a list of
 AVAILABLE DEVICES to appear
 
-Power the vehicle and the "HC-06" device should appear.  Click on it and
-enter "1234" or "0000" as the PIN to pair with the device, then select
+Power the vehicle and the "HC-06" (or whatever name you have changed it to below) device should appear.  Click on it and enter "1234" or "0000" as the PIN to pair with the device, then select
 OK.
 
 The device will appear under "PAIRED DEVICES"
 
-If using DroidPlanner:
+Then start you Android based ground control station and connect the Bluetooth data stream. Some systems will automatically ask you select the GCS application to use the BT connection. Sometimes you will have to explicitly setup the BT connection within the GCS application.
 
--  open the Droid Planner settings, and select Telemetry Connection
-   Type, Bluetooth.
--  In the main DroidPlanner interface, select Connect, and select the
-   paired Bluetooth device.
+Connecting with Linux to any Ground Station
+===================================================
 
-If using AndroPilot:
+To bind the Bluetooth module to a ground station like MAVProxy or Mission Planner you need to pair it to your machine. With Linux the easiest way is to use rfcomm, this is a Linux utility that allows you to bind a Bluetooth device to a serial port so you can connect to it like you have a USB cable plugged in.
 
--  a "bluetooth" button should appear on the screen, click it
-
-When live data appears on the screen, you’re ready to start mission
-planning.
+1. Connect the Bluetooth device to your laptop. The easiest way to do this is through your GUI, I am using the settings that are built in to GNOME. You need to put it in pairing mode then pair it, you will be prompted to enter a code; the code is often 1234 or 0000, but see below for more info.
+2. You need to find the MAC address of your module, you can do this by using CLI tools but you can also find it in your GUI.
+3. To bind the Bluetooth device to a serial port you can use a tool like rfcomm, this is a Linux tool (see the `man page <https://manpages.debian.org/rfcomm>`__). It is quite simple to use, you first need to run ``sudo rfcomm bind /dev/your_serial_port_of_choice XX:XX:XX:XX:XX:XX`` where the last argument is your MAC address. For my module the command looked like ``sudo rfcomm bind /dev/rfcomm24 04:25:04:12:0A:16``. This is not persistent between reboots, so after a reboot you should use ``sudo rfcomm release all`` which will release all bindings, then you can re-pair with the previous command.
+4. Connecting to the device is as easy as connecting to a normal serial device. For MAVProxy you can run ``mavproxy.py --master=/dev/rfcomm24`` and you are connected.
 
 How to Change Baud Rate, Device Name and Device PIN
 ===================================================
 
 You will need a FTDI to USB cable to change any of the configurations of
-the device (not supplied) It is not necessary to change anything in
-order for your BT device to function properly it will function quite
-well as supplied. This is for reference and your convenience only!
+the device (not supplied). Often the baud rate must be changed from 9600 to 57600.
 
 To change the above you need a "Terminal" emulator program. You can not
 use "Putty" (a popular serial port tool)  because it will not accept
@@ -196,6 +159,8 @@ input an entire line before hitting "send". You can use the Arduino IDE
 to send commands to the com port if you are familiar with that. I use 
 "Advanced Serial Port Terminal" but any terminal emulator that allows
 you to type in a line of text before hitting send will work just a good.
+
+See this `video for an example <https://youtu.be/jSxcEZHsV0A?si=RKToLGc-GopPVXnW>`__.
 
 Change the baud rate
 --------------------
@@ -209,13 +174,13 @@ rate:
 
 3----4800bps
 
-4----9600bps
+4----9600bps (usually the default)
 
 5----19200bps
 
 6----38400bps
 
-7----57600bps
+7----57600bps (how we setup the autopilot to communicate)
 
 8----115200bps
 
@@ -243,11 +208,11 @@ Change the Device Name
 ----------------------
 
 This example show you how to change the name of the Bluetooth module to
-Ardupilot: In the terminal program, send the command (case sensitive):
+ArduPilot: In the terminal program, send the command (case sensitive):
 
 ::
 
-    AT+NAMEArdupilot
+    AT+NAMEArduPilot
 
 The Bluetooth should reply:
 

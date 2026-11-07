@@ -4,241 +4,52 @@
 Copter Commands in Guided Mode
 ==============================
 
-This article lists the commands that are handled by Copter in GUIDED
-mode (for example, when writing GCS or Companion Computer apps in
-`DroneKit <http://dronekit.io/>`__). Except where explicitly stated,
-most of these can also be called in other modes too.
+This article lists the MAVLink commands that affect the movement of a Copter.  Normally these commands are sent by a ground station or :ref:`Companion Computers <companion-computers>` often running `DroneKit <http://dronekit.io/>`__.
 
 .. note::
 
-   The list is inferred from Copter's
-   `GCS_Mavlink.cpp <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/GCS_Mavlink.cpp#L967>`__
-   for AC3.3.
+   The Copter code which processes these commands can be found `here in GCS_MAVLink_Copter.cpp <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/GCS_MAVLink_Copter.cpp>`__
 
-Movement commands
+Movement Commands
 =================
 
-These commands can only be called in GUIDED Mode. They are used for
-position and velocity control of the vehicle.
+These commands can be used to control the vehicle's position, velocity or attitude while in :ref:`Guided Mode <copter:ac2_guidedmode>`
 
-:ref:`SET_POSITION_TARGET_LOCAL_NED <copter-commands-in-guided-mode_set_position_target_local_ned>`
-
-:ref:`SET_POSITION_TARGET_GLOBAL_INT <copter-commands-in-guided-mode_set_position_target_global_int>`
-
-:ref:`SET_ATTITUDE_TARGET (for Guided_NoGPS mode) <copter-commands-in-guided-mode_set_attitude_target>`
+- :ref:`SET_POSITION_TARGET_LOCAL_NED <copter-commands-in-guided-mode_set_position_target_local_ned>`
+- :ref:`SET_POSITION_TARGET_GLOBAL_INT <copter-commands-in-guided-mode_set_position_target_global_int>`
+- :ref:`SET_ATTITUDE_TARGET <copter-commands-in-guided-mode_set_attitude_target>` (supported in Guided and Guided_NoGPS modes)
 
 MAV_CMDs
 =========
 
-These MAV_CMDs can be processed if packaged within a
-`COMMAND_LONG <https://pixhawk.ethz.ch/mavlink/#COMMAND_LONG>`__
-message.
-
-:ref:`MAV_CMD_NAV_TAKEOFF <copter:mav_cmd_nav_takeoff>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_NAV_LOITER_UNLIM <copter:mav_cmd_nav_loiter_unlim>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_NAV_RETURN_TO_LAUNCH <copter:mav_cmd_nav_return_to_launch>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_NAV_LAND <copter:mav_cmd_nav_land>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_CONDITION_YAW <copter:mav_cmd_condition_yaw>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_DO_CHANGE_SPEED <copter:mav_cmd_do_change_speed>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_DO_SET_HOME <copter:mav_cmd_do_set_home>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_DO_SET_ROI <copter:mav_cmd_do_set_roi>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_MISSION_START <copter:mav_cmd_mission_start>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_COMPONENT_ARM_DISARM <copter:mav_cmd_component_arm_disarm>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_DO_SET_SERVO <copter:mav_cmd_do_set_servo>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_DO_REPEAT_SERVO <copter:mav_cmd_do_repeat_servo>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_DO_SET_RELAY <copter:mav_cmd_do_set_relay>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_DO_REPEAT_RELAY <copter:mav_cmd_do_repeat_relay>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_DO_FENCE_ENABLE <copter:mav_cmd_do_fence_enable>`
-(Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_DO_PARACHUTE <copter:mav_cmd_do_parachute>`
-(If parachute enabled) (Copter 3.2.1 or earlier)
-
-:ref:`MAV_CMD_DO_GRIPPER <copter:mav_cmd_do_gripper>`
-(If gripper enabled) (Copter 3.2.1 or earlier)
-
-`MAV_CMD_START_RX_PAIR <http://mavlink.org/messages/common#MAV_CMD_START_RX_PAIR>`__
-(Copter 3.3) Starts receiver pairing
-
-`MAV_CMD_PREFLIGHT_CALIBRATION <http://mavlink.org/messages/common#MAV_CMD_PREFLIGHT_CALIBRATION>`__
-(Copter 3.3)
-
-`MAV_CMD_PREFLIGHT_SET_SENSOR_OFFSETS <http://mavlink.org/messages/common#MAV_CMD_PREFLIGHT_SET_SENSOR_OFFSETS>`__
-(Copter 3.3)
-
-`MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN <http://mavlink.org/messages/common#MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN>`__
-(Copter 3.3)
-
-`MAV_CMD_DO_MOTOR_TEST <http://mavlink.org/messages/ardupilotmega#MAV_CMD_DO_MOTOR_TEST>`__
-(Copter 3.3)
-
-`MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES <http://mavlink.org/messages/common#MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES>`__
-(Copter 3.3)
-
-`MAV_CMD_GET_HOME_POSITION <http://mavlink.org/messages/common#MAV_CMD_GET_HOME_POSITION>`__
-(Copter 3.3)
-
-`MAV_CMD_DO_START_MAG_CAL <http://mavlink.org/messages/ardupilotmega#MAV_CMD_DO_START_MAG_CAL>`__
-(Master - not in Copter 3.3)
-
-`MAV_CMD_DO_ACCEPT_MAG_CAL <http://mavlink.org/messages/ardupilotmega#MAV_CMD_DO_ACCEPT_MAG_CAL>`__
-(Master - not in Copter 3.3)
-
-`MAV_CMD_DO_CANCEL_MAG_CAL <http://mavlink.org/messages/ardupilotmega#MAV_CMD_DO_CANCEL_MAG_CAL>`__
-(Master - not in Copter 3.3)
-
-`MAV_CMD_DO_FLIGHTTERMINATION <http://mavlink.org/messages/common#MAV_CMD_DO_FLIGHTTERMINATION>`__
-(Copter 3.3) Disarms motors immediately (Copter falls!).
-
-MAV_CMD_DO_SEND_BANNER - No link available (?)
-
-These MAV_CMD commands can be sent as their own message type (not
-inside `:ref:`COMMAND_LONG``): `MAV_CMD_DO_DIGICAM_CONFIGURE <copter:mav_cmd_do_digicam_configure>`
-
-:ref:`MAV_CMD_DO_DIGICAM_CONTROL <copter:mav_cmd_do_digicam_control>`
-
-`MAV_CMD_DO_MOUNT_CONFIGURE <http://mavlink.org/messages/common#MAV_CMD_DO_MOUNT_CONFIGURE>`__
-
-:ref:`MAV_CMD_DO_MOUNT_CONTROL <copter:mav_cmd_do_mount_control>`
-
-Other commands
-==============
-
-Below are other (non-MAV_CMD) commands that will be handled by Copter
-in GUIDED mode.
-
-.. note::
-
-   Most of these commands are not relevant to DroneKit-Python apps or
-   are already provided through the API.
-
-`HEARTBEAT <http://mavlink.org/messages/common#HEARTBEAT>`__
-
-`SET_MODE <http://mavlink.org/messages/common#SET_MODE>`__
-
-`PARAM_REQUEST_READ <http://mavlink.org/messages/common#PARAM_REQUEST_READ>`__
-
-`PARAM_REQUEST_LIST <http://mavlink.org/messages/common#PARAM_REQUEST_LIST>`__
-
-`PARAM_SET <http://mavlink.org/messages/common#PARAM_SET>`__
-
-`MISSION_WRITE_PARTIAL_LIST <http://mavlink.org/messages/common#MISSION_WRITE_PARTIAL_LIST>`__
-
-`MISSION_ITEM <http://mavlink.org/messages/common#MISSION_ITEM>`__
-
-`MISSION_REQUEST <http://mavlink.org/messages/common#MISSION_REQUEST>`__
-
-`MISSION_SET_CURRENT <http://mavlink.org/messages/common#MISSION_SET_CURRENT>`__
-
-`MISSION_REQUEST_LIST <http://mavlink.org/messages/common#MISSION_REQUEST_LIST>`__
-
-`MISSION_COUNT <http://mavlink.org/messages/common#MISSION_COUNT>`__
-
-`MISSION_CLEAR_ALL <http://mavlink.org/messages/common#MISSION_CLEAR_ALL>`__
-
-`REQUEST_DATA_STREAM <http://mavlink.org/messages/common#REQUEST_DATA_STREAM>`__
-
-`GIMBAL_REPORT <http://mavlink.org/messages/ardupilotmega#GIMBAL_REPORT>`__
-
-`RC_CHANNELS_OVERRIDE <http://mavlink.org/messages/common#RC_CHANNELS_OVERRIDE>`__
-
-`COMMAND_ACK <http://mavlink.org/messages/common#COMMAND_ACK>`__
-
-`HIL_STATE <https://pixhawk.ethz.ch/mavlink/#HIL_STATE>`__
-
-`RADIO <http://mavlink.org/messages/ardupilotmega#RADIO>`__
-
-`RADIO_STATUS <http://mavlink.org/messages/common#RADIO_STATUS>`__
-
-`LOG_REQUEST_DATA <http://mavlink.org/messages/common#LOG_REQUEST_DATA>`__
-
-`LOG_ERASE <http://mavlink.org/messages/common#LOG_ERASE>`__
-
-`LOG_REQUEST_LIST <http://mavlink.org/messages/common#LOG_REQUEST_LIST>`__
-
-`LOG_REQUEST_END <http://mavlink.org/messages/common#LOG_REQUEST_END>`__
-
-`SERIAL_CONTROL <http://mavlink.org/messages/common#SERIAL_CONTROL>`__
-
-`GPS_INJECT_DATA <http://mavlink.org/messages/common#GPS_INJECT_DATA>`__
-
-`TERRAIN_DATA <http://mavlink.org/messages/common#TERRAIN_DATA>`__
-
-`TERRAIN_CHECK <http://mavlink.org/messages/common#TERRAIN_CHECK>`__
-
-`RALLY_POINT <http://mavlink.org/messages/ardupilotmega#RALLY_POINT>`__
-
-`RALLY_FETCH_POINT <http://mavlink.org/messages/ardupilotmega#RALLY_FETCH_POINT>`__
-
-`AUTOPILOT_VERSION_REQUEST <http://mavlink.org/messages/ardupilotmega#AUTOPILOT_VERSION_REQUEST>`__
-
-`LED_CONTROL <http://mavlink.org/messages/ardupilotmega#LED_CONTROL>`__
-
-`ADSB_VEHICLE <http://mavlink.org/messages/common#ADSB_VEHICLE>`__
-
-`REMOTE_LOG_BLOCK_STATUS <http://mavlink.org/messages/ardupilotmega#REMOTE_LOG_BLOCK_STATUS>`__
-
-`LANDING_TARGET <http://mavlink.org/messages/common#LANDING_TARGET>`__
-(Planned for Copter 3.4)
-
-:ref:`SET_HOME_POSITION <copter-commands-in-guided-mode_set_home_position>` (Master branch - not in
-Copter 3.3)
-
-Command definitions
-===================
-
-This section contains information about some immediate commands
-supported by Copter (Mission Commands are documented in :ref:`MAVLink Mission Command Messages (MAV_CMD) <copter:common-mavlink-mission-command-messages-mav_cmd>`).
-
-.. note::
-
-   Editors: It may make sense to merge the immediate command
-   information for Copter/Plane/Rover as done for :ref:`Mission Commands <planner:common-mavlink-mission-command-messages-mav_cmd>`
-   when we have a few more
+These MAV_CMDs can be processed if packaged within a `COMMAND_LONG <https://mavlink.io/en/messages/common.html#COMMAND_LONG>`__ message.
+
+- :ref:`MAV_CMD_CONDITION_YAW <copter:mav_cmd_condition_yaw>`
+- :ref:`MAV_CMD_DO_CHANGE_SPEED <copter:mav_cmd_do_change_speed>`
+- `MAV_CMD_DO_FLIGHTTERMINATION <https://mavlink.io/en/messages/common.html#MAV_CMD_DO_FLIGHTTERMINATION>`__ - disarms motors immediately (Copter falls!).
+- :ref:`MAV_CMD_DO_PARACHUTE <copter:mav_cmd_do_parachute>`
+- :ref:`MAV_CMD_DO_SET_ROI <copter:mav_cmd_do_set_roi>`
+- :ref:`MAV_CMD_NAV_TAKEOFF <copter:mav_cmd_nav_takeoff>`
+- `MAV_CMD_NAV_LOITER_UNLIM <https://mavlink.io/en/messages/common.html#MAV_CMD_NAV_LOITER_UNLIM>`__ : changes to :ref:`Loiter mode <copter:loiter-mode>` (see :ref:`Get and Set FlightMode <mavlink-get-set-flightmode>`)
+- `MAV_CMD_NAV_RETURN_TO_LAUNCH <https://mavlink.io/en/messages/common.html#MAV_CMD_NAV_RETURN_TO_LAUNCH>`__ : changes to :ref:`RTL mode <copter:rtl-mode>` (see :ref:`Get and Set FlightMode <mavlink-get-set-flightmode>`)
+- `MAV_CMD_NAV_LAND <https://mavlink.io/en/messages/common.html#MAV_CMD_NAV_LAND>`__ : changes to :ref:`Land mode <copter:land-mode>` (see :ref:`Get and Set FlightMode <mavlink-get-set-flightmode>`)
+- `MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN <https://mavlink.io/en/messages/common.html#MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN>`__
+
+These MAV_CMDs can be processed if packaged within a `COMMAND_INT <https://mavlink.io/en/messages/common.html#COMMAND_INT>`__ message
+
+- `MAV_CMD_DO_REPOSITION <https://mavlink.io/en/messages/common.html#MAV_CMD_DO_REPOSITION>`__
+
+Movement Command Details
+========================
+
+This section contains details of MAVLink commands to move the vehicle
 
 .. _copter-commands-in-guided-mode_set_position_target_local_ned:
 
 SET_POSITION_TARGET_LOCAL_NED
 -----------------------------
 
-Set vehicle position or velocity setpoint in local frame.
-
-.. note::
-
-   Starting in Copter 3.3, velocity commands should be resent every
-   second (the vehicle will stop after a few seconds if no command is
-   received). Prior to Copter 3.3 the command was persistent, and would
-   only be interrupted when the next movement command was received.
-
-**Command parameters**
+Set the vehicle's target position (as an offset in NED from the EKF origin), velocity, acceleration, heading or turn rate.  The message definition can be found `here <https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_LOCAL_NED>`__
 
 .. raw:: html
 
@@ -251,19 +62,16 @@ Set vehicle position or velocity setpoint in local frame.
    <tr>
    <td><strong>time_boot_ms</strong></td>
    <td>
-   Timestamp in milliseconds since system boot. The rationale for the
-   timestamp in the setpoint is to allow the system to compensate for the
-   transport delay of the setpoint. This allows the system to compensate
-   processing latency.
+   Sender's system time in milliseconds since boot
    </td>
    </tr>
    <tr>
    <td><strong>target_system</strong></td>
-   <td>System ID</td>
+   <td>System ID of vehicle</td>
    </tr>
    <tr>
    <td><strong>target_component</strong></td>
-   <td>Component ID</td>
+   <td>Component ID of flight controller or just 0</td>
    </tr>
    <tr>
    <td><strong>coordinate_frame</strong></td>
@@ -273,21 +81,19 @@ Set vehicle position or velocity setpoint in local frame.
    <td><strong>type_mask</strong></td>
    <td>
 
-Bitmask to indicate which dimensions should be ignored by the vehicle (a
-value of 0b0000000000000000 or 0b0000001000000000 indicates that none of
-the setpoint dimensions should be ignored). Mapping: bit 1: x, bit 2: y,
-bit 3: z, bit 4: vx, bit 5: vy, bit 6: vz, bit 7: ax, bit 8: ay, bit 9:
+Bitmask to indicate which fields should be **ignored** by the vehicle (see POSITION_TARGET_TYPEMASK enum)
 
-.. note::
+bit1:PosX, bit2:PosY, bit3:PosZ, bit4:VelX, bit5:VelY, bit6:VelZ, bit7:AccX, bit8:AccY, bit9:AccZ, bit11:yaw, bit12:yaw rate
 
-   At
-   time of writing you **must** enable all three bits for the position
-   (0b0000111111111000) OR all three bits for the velocity
-   (0b0000111111000111). Setting just one bit of the position/velocity or
-   mixing the bits is not supported. The **acceleration**, **yaw**,
-   **yaw_rate** are present in the `protocol definition <https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_LOCAL_NED>`__
-   but are not supported by ArduPilot.
+When providing Pos, Vel and/or Accel all 3 axis must be provided.  At least one of Pos, Vel and Accel must be provided (e.g. providing Yaw or YawRate alone is not supported)
 
+- Use Position : 0b110111111000 / 0x0DF8 / 3576 (decimal)
+- Use Velocity : 0b110111000111 / 0x0DC7 / 3527 (decimal)
+- Use Acceleration : 0b110000111111 / 0x0C3F / 3135 (decimal)
+- Use Pos+Vel : 0b110111000000 / 0x0DC0 / 3520 (decimal)
+- Use Pos+Vel+Accel : 0b110000000000 / 0x0C00 / 3072 (decimal)
+- Use Yaw : 0b100111111111 / 0x09FF / 2559 (decimal)
+- Use Yaw Rate : 0b010111111111 / 0x05FF / 1535 (decimal)
    
 .. raw:: html
    
@@ -295,140 +101,162 @@ bit 3: z, bit 4: vx, bit 5: vy, bit 6: vz, bit 7: ax, bit 8: ay, bit 9:
    </tr>
    <tr>
    <td><strong>x</strong></td>
-   <td>X Position in specified NED frame in meters</td>
+   <td>X Position in meters (positive is forward or North)</td>
    </tr>
    <tr>
    <td><strong>y</strong></td>
-   <td>y Position in specified NED frame in meters</td>
+   <td>Y Position in meters (positive is right or East)</td>
    </tr>
    <tr>
    <td><strong>z</strong></td>
-   <td>Z Position in specified NED frame in meters (note, altitude is negative in NED)</td>
+   <td>Z Position in meters (positive is down)</td>
    </tr>
    <tr>
    <td><strong>vx</strong></td>
-   <td>X velocity in specified NED frame in meter/s</td>
+   <td>X velocity in m/s (positive is forward or North)</td>
    </tr>
    <tr>
    <td><strong>vy</strong></td>
-   <td>Y velocity in NED frame in meter/s</td>
+   <td>Y velocity in m/s (positive is right or East)</td>
    </tr>
    <tr>
    <td><strong>vz</strong></td>
-   <td>Z velocity in NED frame in meter/s</td>
+   <td>Z velocity in m/s (positive is down)</td>
    </tr>
-   <tr style="color: #c0c0c0">
-   <td>afx</td>
-   <td>X acceleration or force (if bit 10 of type_mask is set) in specified NED frame in meter/s^2 or N</td>
+   <tr>
+   <td><strong>afx</strong></td>
+   <td>X acceleration in m/s/s (positive is forward or North)</td>
    </tr>
-   <tr style="color: #c0c0c0">
-   <td>afy</td>
-   <td>Y acceleration or force (if bit 10 of type_mask is set) in specified NED frame in meter/s^2 or N</td>
+   <tr>
+   <td><strong>afy</strong></td>
+   <td>Y acceleration in m/s/s (positive is right or East)</td>
    </tr>
-   <tr style="color: #c0c0c0">
-   <td>afz</td>
-   <td>Z acceleration or force (if bit 10 of type_mask is set) in specified NED frame in meter/s^2 or N</td>
+   <tr>
+   <td><strong>afz</strong></td>
+   <td>Z acceleration in m/s/s (positive is down)</td>
    </tr>
-   <tr style="color: #c0c0c0">
-   <td>yaw</td>
-   <td>yaw setpoint in rad</td>
+   <tr>
+   <td><strong>yaw</strong></td>
+   <td>yaw or heading in radians (0 is forward or North)</td>
    </tr>
-   <tr style="color: #c0c0c0">
-   <td>yaw_rate</td>
-   <td>yaw rate setpoint in rad/s</td>
+   <tr>
+   <td><strong>yaw_rate</strong></td>
+   <td>yaw rate in rad/s</td>
    </tr>
    </tbody>
    </table>
 
-.. note::
-
-   The ``co-ordinate frame`` information below applies from AC3.3.
-   Prior to AC3.3, the field is ignored and all values are relative to the
-   ``MAV_FRAME_LOCAL_NED`` frame.
-
-The ``co-ordinate frame`` field takes the following values:
+The ``coordinate_frame`` field takes the following values:
 
 +--------------------------------------+--------------------------------------+
 | Frame                                | Description                          |
 +======================================+======================================+
-| ``MAV_FRAME_LOCAL_NED``              | Positions are relative to the        |
-|                                      | vehicle's *home position* in the     |
-|                                      | North, East, Down (NED) frame. Use   |
-|                                      | this to specify a position x metres  |
-|                                      | north, y metres east and (-) z       |
-|                                      | metres above the home position.      |
+| ``MAV_FRAME_LOCAL_NED`` (1)          | Positions are relative to the        |
+|                                      | vehicle's EKF Origin in NED frame    |
 |                                      |                                      |
-|                                      | Velocity directions are in the       |
-|                                      | North, East, Down (NED) frame.       |
+|                                      | I.e x=1,y=2,z=3 is 1m North, 2m East |
+|                                      | and 3m Down from the origin          |
+|                                      |                                      |
+|                                      | The **EKF origin** is the vehicle's  |
+|                                      | location when it first achieved a    |
+|                                      | good position estimate               |
+|                                      |                                      |
+|                                      | Velocity and Acceleration are in     |
+|                                      | NED frame                            |
 +--------------------------------------+--------------------------------------+
-| ``MAV_FRAME_LOCAL_OFFSET_NED``       | Positions are relative to the        |
-|                                      | current vehicle position in the      |
-|                                      | North, East, Down (NED) frame. Use   |
-|                                      | this to specify a position x metres  |
-|                                      | north, y metres east and (-) z       |
-|                                      | metres of the current vehicle        |
+| ``MAV_FRAME_LOCAL_OFFSET_NED`` (7)   | Positions are relative to the        |
+|                                      | vehicle's current position           |
+|                                      |                                      |
+|                                      | I.e. x=1,y=2,z=3 is 1m North,        |
+|                                      | 2m East and 3m below the current     |
 |                                      | position.                            |
 |                                      |                                      |
-|                                      | Velocity directions are in the       |
-|                                      | North, East, Down (NED) frame.       |
+|                                      | Velocity and Acceleration are in     |
+|                                      | NED frame                            |
 +--------------------------------------+--------------------------------------+
-| ``MAV_FRAME_BODY_OFFSET_NED``        | Positions are relative to the        |
-|                                      | current vehicle position in a frame  |
-|                                      | based on the vehicle's current       |
-|                                      | heading. Use this to specify a       |
-|                                      | position x metres forward from the   |
-|                                      | current vehicle position, y metres   |
-|                                      | to the right, and z metres down      |
-|                                      | (forward, right and down are         |
-|                                      | "positive" values).                  |
+| ``MAV_FRAME_BODY_NED`` (8)           | Positions are relative to the        |
+|                                      | EKF Origin in NED frame              |
 |                                      |                                      |
+|                                      | I.e x=1,y=2,z=3 is 1m North, 2m East |
+|                                      | and 3m Down from the origin          |
 |                                      |                                      |
-|                                      | Velocity directions are relative to  |
-|                                      | the current vehicle heading. Use     |
-|                                      | this to specify the speed forward,   |
-|                                      | right and down (or the opposite if   |
-|                                      | you use negative values).            |
+|                                      | Velocity and Acceleration are        |
+|                                      | relative to the current vehicle      |
+|                                      | heading. Use this to specify the     |
+|                                      | speed forward, right and down (or the|
+|                                      | opposite if you use negative values).|
 +--------------------------------------+--------------------------------------+
-| ``MAV_FRAME_BODY_NED``               | Positions are relative to the        |
-|                                      | vehicle's *home position* in the     |
-|                                      | North, East, Down (NED) frame. Use   |
-|                                      | this to specify a position x metres  |
-|                                      | north, y metres east and (-) z       |
-|                                      | metres above the home position.      |
+| ``MAV_FRAME_BODY_OFFSET_NED`` (9)    | Positions are relative to the        |
+|                                      | vehicle's current position and       |
+|                                      | heading                              |
 |                                      |                                      |
+|                                      | I.e x=1,y=2,z=3 is 1m forward,       |
+|                                      | 2m right and 3m Down from the current|
+|                                      | position                             |
 |                                      |                                      |
-|                                      | Velocity directions are relative to  |
-|                                      | the current vehicle heading. Use     |
-|                                      | this to specify the speed forward,   |
-|                                      | right and down (or the opposite if   |
-|                                      | you use negative values).            |
+|                                      | Velocity and Acceleration are        |
+|                                      | relative to the current vehicle      |
+|                                      | heading. Use this to specify the     |
+|                                      | speed forward, right and down (or the|
+|                                      | opposite if you use negative values).|
+|                                      |                                      |
+|                                      | Specify yaw rate of zero to stop     |
+|                                      | vehicle yaw from changing            |
 +--------------------------------------+--------------------------------------+
 
 .. tip::
 
-   In frames, ``_OFFSET_`` means "relative to vehicle position" while
-   ``_LOCAL_`` is "relative to home position" (these have no impact on
-   *velocity* directions). ``_BODY_`` means that velocity components are
-   relative to the heading of the vehicle rather than the NED frame.
+   In frames, ``_OFFSET_`` means "relative to vehicle position" while ``_LOCAL_`` is "relative to home position" (these have no impact on *velocity* directions). ``_BODY_`` means that velocity components are relative to the heading of the vehicle rather than the NED frame.
 
-   
+.. note::
+
+   If sending velocity or acceleration commands, they should be re-sent every second (the vehicle will stop after 3 seconds if no command is received)
+
+**Examples**
+
+Here are some example commands that can be copy-pasted into MAVProxy (aka SITL) to test this command.  Before running these commands enter the following
+
+- module load message
+- GUIDED
+- arm throttle
+- takeoff 10
+
++----------------------------------------------------------------------------------+-----------------------------------------------------+
+| Example MAVProxy/SITL Command                                                    | Description                                         |
++==================================================================================+=====================================================+
+| ``message SET_POSITION_TARGET_LOCAL_NED 0 0 0 1 3576 100 0 -10 0 0 0 0 0 0 0 0`` | fly to 100m North and 10m *above* of the EKF origin |
++----------------------------------------------------------------------------------+-----------------------------------------------------+
+| ``message SET_POSITION_TARGET_LOCAL_NED 0 0 0 7 3576 10 0 0 0 0 0 0 0 0 0 0``    | fly 10m North of the current position               |
++----------------------------------------------------------------------------------+-----------------------------------------------------+
+| ``message SET_POSITION_TARGET_LOCAL_NED 0 0 0 9 3576 10 0 0 0 0 0 0 0 0 0 0``    | fly 10m forward of the current position             |
++----------------------------------------------------------------------------------+-----------------------------------------------------+
+| ``message SET_POSITION_TARGET_LOCAL_NED 0 0 0 1 3527 0 0 0 1 0 0 0 0 0 0 0``     | fly North at 1m/s                                   |
++----------------------------------------------------------------------------------+-----------------------------------------------------+
+| ``message SET_POSITION_TARGET_LOCAL_NED 0 0 0 9 3527 0 0 0 1 0 0 0 0 0 0 0``     | fly forward at 1m/s                                 |
++----------------------------------------------------------------------------------+-----------------------------------------------------+
+| ``message SET_POSITION_TARGET_LOCAL_NED 0 0 0 9 1479 0 0 0 0 1 0 0 0 0 0 0``     | fly right at 1m/s with yaw rate of zero             |
++----------------------------------------------------------------------------------+-----------------------------------------------------+
+| ``message SET_POSITION_TARGET_LOCAL_NED 0 0 0 1 3135 0 0 0 0 0 0 1 0 0 0 0``     | accelerate North at 1m/s                            |
++----------------------------------------------------------------------------------+-----------------------------------------------------+
+| ``message SET_POSITION_TARGET_LOCAL_NED 0 0 0 9 3135 0 0 0 0 0 0 1 0 0 0 0``     | accelerate forward at 1m/s                          |
++----------------------------------------------------------------------------------+-----------------------------------------------------+
+| ``message SET_POSITION_TARGET_LOCAL_NED 0 0 0 9 1087 0 0 0 0 0 0 0 1 0 0 0``     | accelerate right at 1m/s with yaw rate of zero      |
++----------------------------------------------------------------------------------+-----------------------------------------------------+
+| ``message SET_POSITION_TARGET_LOCAL_NED 0 0 0 1 2503 0 0 0 0 0 0 0 0 0 0.7854 0``| turn to North-East (Yaw target + velocity of zero)  |
++----------------------------------------------------------------------------------+-----------------------------------------------------+
+| ``message SET_POSITION_TARGET_LOCAL_NED 0 0 0 9 2503 0 0 0 0 0 0 0 0 0 0.7854 0``| turn 45deg to right (Yaw target + velocity of zero) |
++----------------------------------------------------------------------------------+-----------------------------------------------------+
+| ``message SET_POSITION_TARGET_LOCAL_NED 0 0 0 1 1479 0 0 0 0 0 0 0 0 0 0 0.174`` | rotate clock-wise at 10deg/sec (velocity of zero)   |
++----------------------------------------------------------------------------------+-----------------------------------------------------+
+
 .. _copter-commands-in-guided-mode_set_position_target_global_int:
 
 SET_POSITION_TARGET_GLOBAL_INT
 ------------------------------
 
-Set vehicle position, velocity and acceleration setpoint in the WGS84
-coordinate system.
+Set the vehicle's target position (in WGS84 coordinates), velocity, heading or turn rate.  This is similar to the SET_POSITION_TARGET_LOCAL_NED message (see above) except positions are provided as latitude and longitude values and altitudes can be above sea-level, relative to home or relative to terrain.
 
-.. note::
-
-   Starting in Copter 3.3, velocity commands should be resent every
-   second (the vehicle will stop after a few seconds if no command is
-   received). Prior to Copter 3.3 the command was persistent, and would
-   only be interrupted when the next movement command was received.
-
-The protocol definition is here:
-`SET_POSITION_TARGET_GLOBAL_INT <https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_GLOBAL_INT>`__.
+The message definition can be found `here <https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_GLOBAL_INT>`__
 
 **Command parameters**
 
@@ -443,25 +271,31 @@ The protocol definition is here:
    <tr>
    <td><strong>time_boot_ms</strong></td>
    <td>
-   Timestamp in milliseconds since system boot. The rationale for the
-   timestamp in the setpoint is to allow the system to compensate for the
-   transport delay of the setpoint. This allows the system to compensate
-   processing latency.
+   Sender's system time in milliseconds since boot
    </td>
    </tr>
    <tr>
    <td><strong>target_system</strong></td>
-   <td>System ID</td>
+   <td>System ID of vehicle</td>
    </tr>
    <tr>
    <td><strong>target_component</strong></td>
-   <td>Component ID</td>
+   <td>Component ID of flight controller or just 0</td>
    </tr>
    <tr>
    <td><strong>coordinate_frame</strong></td>
    <td>
-   Valid options are: MAV_FRAME_GLOBAL_INT,
-   MAV_FRAME_GLOBAL_RELATIVE_ALT_INT
+
+Valid options are:
+
+- MAV_FRAME_GLOBAL (0): alt is in meters above sea level
+- MAV_FRAME_GLOBAL_INT (5): alt is in meters above sea level
+- MAV_FRAME_GLOBAL_RELATIVE_ALT (3): alt is in meters above home
+- MAV_FRAME_GLOBAL_RELATIVE_ALT_INT (6): alt is in meters above home
+- MAV_FRAME_GLOBAL_TERRAIN_ALT (10): alt is in meters above terrain
+- MAV_FRAME_GLOBAL_TERRAIN_ALT_INT (11): alt is in meters above terrain
+
+.. raw:: html
 
    </td>
    </tr>
@@ -469,20 +303,19 @@ The protocol definition is here:
    <td><strong>type_mask</strong></td>
    <td>
 
-Bitmask to indicate which dimensions should be ignored by the vehicle (a
-value of 0b0000000000000000 or 0b0000001000000000 indicates that none of
-the setpoint dimensions should be ignored). Mapping: bit 1: x, bit 2: y,
-bit 3: z, bit 4: vx, bit 5: vy, bit 6: vz, bit 7: ax, bit 8: ay, bit 9:
+Bitmask to indicate which fields should be **ignored** by the vehicle (see POSITION_TARGET_TYPEMASK enum)
 
-.. note::
+bit1:PosX, bit2:PosY, bit3:PosZ, bit4:VelX, bit5:VelY, bit6:VelZ, bit7:AccX, bit8:AccY, bit9:AccZ, bit11:yaw, bit12:yaw rate
 
-   At
-   time of writing you **must** enable all three bits for the position
-   (0b0000111111111000) OR all three bits for the velocity
-   (0b0000111111000111). Setting just one bit of the position/velocity or
-   mixing the bits is not supported. The **acceleration**, **yaw**,
-   **yaw_rate** are present in the `protocol definition <https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_LOCAL_NED>`__
-   but are not supported by ArduPilot.
+When providing Pos, Vel and/or Accel all 3 axis must be provided.  At least one of Pos, Vel and Accel must be provided (e.g. providing Yaw or YawRate alone is not supported)
+
+- Use Position : 0b110111111000 / 0x0DF8 / 3576 (decimal)
+- Use Velocity : 0b110111000111 / 0x0DC7 / 3527 (decimal)
+- Use Acceleration : 0b110000111000 / 0x0C38 / 3128 (decimal)
+- Use Pos+Vel : 0b110111000000 / 0x0DC0 / 3520 (decimal)
+- Use Pos+Vel+Accel : 0b110000000000 / 0x0C00 / 3072 (decimal)
+- Use Yaw : 0b100111111111 / 0x09FF / 2559 (decimal)
+- Use Yaw Rate : 0b010111111111 / 0x05FF / 1535 (decimal)
 
 .. raw:: html
 
@@ -490,173 +323,88 @@ bit 3: z, bit 4: vx, bit 5: vy, bit 6: vz, bit 7: ax, bit 8: ay, bit 9:
    </tr>
    <tr>
    <td><strong>lat_int</strong></td>
-   <td>X Position in WGS84 frame in 1e7 \* meters</td>
+   <td>Latitude * 1e7</td>
    </tr>
    <tr>
    <td><strong>lon_int</strong></td>
-   <td>Y Position in WGS84 frame in 1e7 \* meters</td>
+   <td>Longitude * 1e7</td>
    </tr>
    <tr>
    <td><strong>alt</strong></td>
-   <td>Altitude in meters in AMSL altitude, not WGS84 if absolute or relative, above terrain if GLOBAL_TERRAIN_ALT_INT</td>
+   <td>Alt in meters above sea level, home or terrain (see coordinate_frame field)</td>
    </tr>
    <tr>
    <td><strong>vx</strong></td>
-   <td>X velocity in MAV_FRAME_LOCAL_NED frame in meter/s</td>
+   <td>X velocity in m/s (positive is North)</td>
    </tr>
    <tr>
    <td><strong>vy</strong></td>
-   <td>Y velocity in MAV_FRAME_LOCAL_NED frame in meter/s</td>
+   <td>Y velocity in m/s (positive is East)</td>
    </tr>
    <tr>
    <td><strong>vz</strong></td>
-   <td>Z velocity in MAV_FRAME_LOCAL_NED frame in meter/s</td>
+   <td>Z velocity in m/s (positive is down)</td>
    </tr>
-   <tr style="color: #c0c0c0">
-   <td>afx</td>
-   <td>X acceleration or force (if bit 10 of type_mask is set) in specified
-   MAV_FRAME_LOCAL_NED frame in meter/s^2 or N
-   </td>
+   <tr>
+   <td><strong>afx</strong></td>
+   <td>X acceleration in m/s/s (positive is North)</td>
    </tr>
-   <tr style="color: #c0c0c0">
-   <td>afy</td>
-   <td>Y acceleration or force (if bit 10 of type_mask is set) in specified MAV_FRAME_LOCAL_NED frame in meter/s^2 or N</td>
+   <tr>
+   <td><strong>afy</strong></td>
+   <td>Y acceleration in m/s/s (positive is East)</td>
    </tr>
-   <tr style="color: #c0c0c0">
-   <td>afz</td>
-   <td>Z acceleration or force (if bit 10 of type_mask is set) in specified MAV_FRAME_LOCAL_NED frame in meter/s^2 or N</td>
+   <tr>
+   <td><strong>afz</strong></td>
+   <td>Z acceleration in m/s/s (positive is Down)</td>
    </tr>
-   <tr style="color: #c0c0c0">
-   <td>yaw</td>
-   <td>yaw setpoint in rad</td>
+   <tr>
+   <td><strong>yaw</strong></td>
+   <td>yaw or heading in radians (0 is forward)</td>
    </tr>
-   <tr style="color: #c0c0c0">
-   <td>yaw_rate</td>
-   <td>yaw rate setpoint in rad/s</td>
+   <tr>
+   <td><strong>yaw_rate</strong></td>
+   <td>yaw rate in rad/s</td>
    </tr>
    </tbody>
    </table>
-
-   
-.. _copter-commands-in-guided-mode_set_home_position:
-
-SET_HOME_POSITION
--------------------
-
-The position the system will return to and land on. The position is set
-automatically by the system during the takeoff if it has not been
-explicitly set by the operator before or after.
 
 .. note::
 
-   Not in Copter 3.3 (currently in master)
+   If sending velocity or acceleration commands, they should be re-sent every second (the vehicle will stop after 3 seconds if no command is received)
 
-**Command parameters**
+**Examples**
 
-.. raw:: html
+Here are some example commands that can be copy-pasted into MAVProxy (aka SITL) to test this command.  Before running these commands enter the following
 
-   <table border="1" class="docutils">
-   <tbody>
-   <tr>
-   <th>Command Field</th>
-   <th>Type</th>
-   <th>Description</th>
-   </tr>
-   <tr>
-   <td><strong>target_system</strong></td>
-   <td>uint8_t</td>
-   <td>System ID</td>
-   </tr>
-   <tr>
-   <td><strong>latitude</strong></td>
-   <td>int32_t</td>
-   <td>Latitude (WGS84), in degrees \* 1E7</td>
-   </tr>
-   <tr>
-   <td><strong>longitude</strong></td>
-   <td>int32_t</td>
-   <td>Longitude (WGS84), in degrees \* 1E7</td>
-   </tr>
-   <tr>
-   <td><strong>altitude</strong></td>
-   <td>int32_t</td>
-   <td>Altitude (AMSL), in meters \* 1000 (positive for up)</td>
-   </tr>
-   <tr style="color: #c0c0c0">
-   <td><strong>x</strong></td>
-   <td>float</td>
-   <td>Local X position of this position in the local coordinate frame.</td>
-   </tr>
-   <tr style="color: #c0c0c0">
-   <td><strong>y</strong></td>
-   <td>float</td>
-   <td>Local Y position of this position in the local coordinate frame</td>
-   </tr>
-   <tr style="color: #c0c0c0">
-   <td><strong>z</strong></td>
-   <td>float</td>
-   <td>Local Z position of this position in the local coordinate frame</td>
-   </tr>
-   <tr style="color: #c0c0c0">
-   <td><strong>q</strong></td>
-   <td>float[4]</td>
-   <td>World to surface normal and heading transformation of the takeoff
-   position. Used to indicate the heading and slope of the ground.
-   </td>
-   </tr>
-   <tr style="color: #c0c0c0">
-   <td><strong>approach_x</strong></td>
-   <td>float</td>
-   <td>
-   Local X position of the end of the approach vector. Multicopters should
-   set this position based on their takeoff path. Grass-landing fixed wing
-   aircraft should set it the same way as multicopters. Runway-landing
-   fixed wing aircraft should set it to the opposite direction of the
-   takeoff, assuming the takeoff happened from the threshold / touchdown
-   zone.
-   </td>
-   </tr>
-   <tr style="color: #c0c0c0">
-   <td><strong>approach_y</strong></td>
-   <td>float</td>
-   <td>
-   Local Y position of the end of the approach vector. Multicopters should
-   set this position based on their takeoff path. Grass-landing fixed wing
-   aircraft should set it the same way as multicopters. Runway-landing
-   fixed wing aircraft should set it to the opposite direction of the
-   takeoff, assuming the takeoff happened from the threshold / touchdown
-   zone.
+- module load message
+- GUIDED
+- arm throttle
+- takeoff 10
 
-   </td>
-   </tr>
-   <tr style="color: #c0c0c0">
-   <td><strong>approach_z</strong></td>
-   <td>float</td>
-   <td>
-   Local Z position of the end of the approach vector. Multicopters should
-   set this position based on their takeoff path. Grass-landing fixed wing
-   aircraft should set it the same way as multicopters. Runway-landing
-   fixed wing aircraft should set it to the opposite direction of the
-   takeoff, assuming the takeoff happened from the threshold / touchdown zone.
-   </td>
-   </tr>
-   </tbody>
-   </table>
-
-The protocol definition for this command is here:
-`SET_HOME_POSITION <http://mavlink.org/messages/common#SET_HOME_POSITION>`__
-
++---------------------------------------------------------------------------------------------------+----------------------------------------------------------+
+| Example MAVProxy/SITL Command                                                                     | Description                                              |
++===================================================================================================+==========================================================+
+| ``message SET_POSITION_TARGET_GLOBAL_INT 0 0 0 6 3576 -353621474 1491651746 10 0 0 0 0 0 0 0 0``  | fly to lat,lon of -35.36,149.16 and 10m above home       |
++---------------------------------------------------------------------------------------------------+----------------------------------------------------------+
+| ``message SET_POSITION_TARGET_GLOBAL_INT 0 0 0 5 3576 -353621474 1491651746 600 0 0 0 0 0 0 0 0`` | fly to lat,lon of -35.36,149.16 and 600m above sea level |
++---------------------------------------------------------------------------------------------------+----------------------------------------------------------+
+| ``message SET_POSITION_TARGET_GLOBAL_INT 0 0 0 11 3576 -353621474 1491651746 10 0 0 0 0 0 0 0 0`` | fly to lat,lon of -35.36,149.16 and 10m above terrain    |
++---------------------------------------------------------------------------------------------------+----------------------------------------------------------+
+| ``message SET_POSITION_TARGET_GLOBAL_INT 0 0 0 6 3527 0 0 0 1 0 0 0 0 0 0 0``                     | fly North at 1m/s                                        |
++---------------------------------------------------------------------------------------------------+----------------------------------------------------------+
+| ``message SET_POSITION_TARGET_GLOBAL_INT 0 0 0 6 3135 0 0 0 0 0 0 1 0 0 0 0``                     | accelerate North at 1m/s                                 |
++---------------------------------------------------------------------------------------------------+----------------------------------------------------------+
+| ``message SET_POSITION_TARGET_GLOBAL_INT 0 0 0 6 2503 0 0 0 0 0 0 0 0 0 0.7854 0``                | turn to North-East (Yaw target + velocity of zero)       |
++---------------------------------------------------------------------------------------------------+----------------------------------------------------------+
+| ``message SET_POSITION_TARGET_GLOBAL_INT 0 0 0 6 1479 0 0 0 0 0 0 0 0 0 0 0.174``                 | rotate clock-wise at 10deg/sec (velocity of zero)        |
++---------------------------------------------------------------------------------------------------+----------------------------------------------------------+
 
 .. _copter-commands-in-guided-mode_set_attitude_target:
 
 SET_ATTITUDE_TARGET
 -------------------
 
-Sets a desired vehicle attitude. Used by an external controller to command the vehicle (manual controller or other system).
-
-.. note::
-
-   Only available in Copter-3.4 (or higher)
+Set the vehicle's target attitude and climb rate or thrust.  This message is accepted in :ref:`Guided <copter:ac2_guidedmode>` or Guided_NoGPS (this is the only message accepted by Guided_NoGPS).  The message definition can be found `here <https://mavlink.io/en/messages/common.html#SET_ATTITUDE_TARGET>`__
 
 **Command parameters**
 
@@ -672,32 +420,34 @@ Sets a desired vehicle attitude. Used by an external controller to command the v
    <tr>
    <td><strong>time_boot_ms</strong></td>
    <td>uint32_t</td>
-   <td>Timestamp in milliseconds since system boot. Used to avoid duplicate commands. 0 to ignore.</td>
+   <td>Sender's system time in milliseconds since boot</td>
    </tr>
    <tr>
    <td><strong>target_system</strong></td>
    <td>uint8_t</td>
-   <td>System ID</td>
+   <td>System ID of vehicle</td>
    </tr>
    <tr>
    <td><strong>target_component</strong></td>
    <td>int8_t</td>
-   <td>Component ID</td>
+   <td>Component ID of flight controller or just 0</td>
    </tr>
    <tr>
    <td><strong>type_mask</strong></td>
    <td>int8_t</td>
    <td>
-   Mappings: If any of these bits are set, the corresponding input should be ignored: 
-   (LSB is bit 1)
-   bit 1: body roll rate, 
-   bit 2: body pitch rate, 
-   bit 3: body yaw rate. 
-   bit 4-bit 6: reserved, 
-   bit 7: throttle
-   bit 8: attitude
-   <br>
-   Currently, throttle and attitude must be set to 0, i.e. not ignored
+
+Bitmask to indicate which fields should be **ignored** by the vehicle
+
+bit1:body roll rate, bit2:body pitch rate, bit3:body yaw rate, bit7:throttle, bit8:attitude
+
+Two values are accepted:
+
+- 0b00000111 / 0x07 / 7 (decimal): ignore body roll/pitch/yaw rates and use the attitude quaternion (**q**) instead
+- 0b10000000 / 0x80 / 128 (decimal): ignore attitude quaternion (**q**) and use the body roll/pitch/yaw rates instead
+
+.. raw:: html
+
    </td>
    </tr>
    <tr>
@@ -706,32 +456,70 @@ Sets a desired vehicle attitude. Used by an external controller to command the v
    <td>
    Attitude quaternion (w, x, y, z order, zero-rotation is {1, 0, 0, 0})
    <br>
-   Note that zero-rotation causes vehicle to rotate towards 0 yaw.
+   Note that zero-rotation causes vehicle to rotate towards North.
+   <br>
+   Ignored if type_mask = 0x80
    </td>
    </tr>
    <tr>
    <td><strong>body_roll_rate</strong></td>
    <td>float</td>
-   <td>Body roll rate in radians per second</td>
+   <td>Body roll rate in rad/s.  Ignored if type_mask = 0x07</td>
    </tr>
    <tr>
    <td><strong>body_pitch_rate</strong></td>
    <td>float</td>
-   <td>Body pitch rate in radians per second</td>
+   <td>Body pitch rate in rad/s.  Ignored if type_mask = 0x07</td>
    </tr>
    <tr>
    <td><strong>body_yaw_rate</strong></td>
    <td>float</td>
-   <td>Body yaw rate in radians per second</td>
+   <td>Body yaw rate in rad/s.  Ignored if type_mask = 0x07</td>
    </tr>
    <tr>
    <td><strong>thrust</strong></td>
    <td>float</td>
-   <td>Collective thrust, normalized to 0 .. 1 (-1 .. 1 for vehicles capable of reverse trust)
+   <td>
+
+If GUID_OPTIONS = 0: climb rate where 0.5=no climb, 0=descend at WP_SPD_DN, 1=climb at WP_SPD_UP
+If GUID_OPTIONS = 8: thrust from 0 to 1
+
+.. raw:: html
+
    </td>
    </tr>
    </tbody>
    </table>
 
-The protocol definition for this command is here:
-`SET_ATTITUDE_TARGET <http://mavlink.org/messages/common#SET_ATTITUDE_TARGET>`__
+**Examples**
+
+Here are some example commands that can be copy-pasted into MAVProxy (aka SITL) to test this command.  Before running these commands enter the following
+
+- GUIDED
+- arm throttle
+- takeoff 10
+
++------------------------------------------+----------------------------------------------------------------+
+| Example MAVProxy/SITL Command            | Description                                                    |
++==========================================+================================================================+
+| ``attitude 1 0 0 0 0.5``                 | hold level attitude with zero climb rate (if GUID_OPTIONS=0)   |
+|                                          | OR hold level attitude and 50% throttle (if GUID_OPTIONS=8)    |
++------------------------------------------+----------------------------------------------------------------+
+| ``attitude 1 0 0 0 1.0``                 | climb at WPNAV_SPEED_UP (if GUID_OPTIONS=0) OR climb at 100%   |
+|                                          | throttle (if GUID_OPTIONS=8)                                   |
++------------------------------------------+----------------------------------------------------------------+
+| ``attitude 1 0 0 0 0.0``                 | descend at WPNAV_SPEED_DN (if GUID_OPTIONS=0) OR descend at 0% |
+|                                          | throttle (if GUID_OPTIONS=8)                                   |
++------------------------------------------+----------------------------------------------------------------+
+| ``attitude 0.9961947 0.0871557 0 0 0.5`` | roll at 10deg with zero climb rate (if GUID_OPTIONS=0) OR roll |
+|                                          | at 10deg and 50% throttle (if GUID_OPTIONS=8)                  |
++------------------------------------------+----------------------------------------------------------------+
+| ``attitude 128 1 0 0 0 30 0 0 0.5``      | body roll rate of 30deg/s with zero climb rate (if             |
+|                                          | GUID_OPTIONS=0) OR body roll rate of 30deg/s and 50% throttle  |
+|                                          | (if GUID_OPTIONS=8)                                            |
++------------------------------------------+----------------------------------------------------------------+
+| ``attitude 128 1 0 0 0 0 0 45 0.5``      | body yaw rate of 45deg/s with zero climb rate (if              |
+|                                          | GUID_OPTIONS=0) OR body yaw rate of 45deg/s and 50% throttle   |
+|                                          | (if GUID_OPTIONS=8)                                            |
++------------------------------------------+----------------------------------------------------------------+
+

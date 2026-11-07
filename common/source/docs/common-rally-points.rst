@@ -7,9 +7,9 @@ Rally Points
 Overview
 ========
 
-Ordinarily when a plane or copter enters :ref:`Return to Launch (RTL) <plane:rtl-mode>` mode (typically
+Ordinarily when a plane or copter enters :ref:`Return to Launch (RTL) <rtl-mode>` mode (typically
 triggered by an
-autopilot \ :ref:`failsafe <plane:apms-failsafe-function>`),
+autopilot failsafe[site wiki="plane"], see :ref:`apms-failsafe-function`\ [/site][site wiki="copter,sub"], see :ref:`failsafe-landing-page`\ [/site][site wiki="rover"], see :ref:`rover-failsafes`\ [/site]),
 the default behaviour is to return to the \ :ref:`Home point <common-planning-a-mission-with-waypoints-and-events_setting_the_home_position>`,
 but there are often cases when that can be undesirable. For example it
 may be an area full of people or property and a system running in RTL
@@ -45,7 +45,7 @@ The following steps are for specifying Rally Points in Mission Planner:
     
 #. The Rally loiter altitudes need to be specified (note that the
    default altitude for Rally Points is the default waypoint altitude
-   value):
+   value and is relative to the home location):
 
    .. image:: ../../../images/mp_rally_altitude_dialog.jpg
        :target: ../_images/mp_rally_altitude_dialog.jpg
@@ -59,7 +59,7 @@ The following steps are for specifying Rally Points in Mission Planner:
 
 The following should be considered when using Rally Points:
 
-#. If using a :ref:`geofence <plane:geofencing>`:
+#. If using a :ref:`geofence <common-geofencing-landing-page>`:
    its HIGHLY recommended the Rally Points you intend to use at your event
    are inside the geofence.
 #. Make sure Rally Point altitudes are high enough to clear terrain and
@@ -68,25 +68,24 @@ The following should be considered when using Rally Points:
    number of Rally Points is restricted to 10 on Plane and 6 on Copter
    -- this limit may be expanded on other platforms such as Pixhawk in the future.
 #. On Plane, loiter radius for a Rally Point is the same as all other
-   loiter points; determined by the :ref:`WP_LOITER_RAD <plane:WP_LOITER_RAD>`
+   loiter points; determined by the [site wiki="plane"]:ref:`WP_LOITER_RAD <WP_LOITER_RAD>` [/site][site wiki="planner"]:ref:`WP_LOITER_RAD <plane:WP_LOITER_RAD>` [/site][site wiki="copter,rover,sub"]:ref:`WP_LOITER_RAD <plane:WP_LOITER_RAD>` [/site]
    parameter.
-#. The :ref:`ALT_HOLD_RTL <plane:ALT_HOLD_RTL>` 
-   :ref:`RTL_ALT <copter:RTL_ALT>` parameters are NOT used with Rally Points! 
+#. The [site wiki="plane"]:ref:`RTL_ALTITUDE <RTL_ALTITUDE>`\ [/site][site wiki="planner"]:ref:`RTL_ALTITUDE <plane:RTL_ALTITUDE>`\ [/site][site wiki="copter,rover,sub"]:ref:`RTL_ALTITUDE <plane:RTL_ALTITUDE>`\ [/site] or 
+   [site wiki="copter"]:ref:`RTL_ALT_M<RTL_ALT_M>`\ [/site][site wiki="plane,rover,sub,planner"]:ref:`RTL_ALT_M<copter:RTL_ALT_M>`\ [/site] parameters are NOT used with Rally Points! 
    The aircraft will transit to the Rally Point at the altitude 
    specified when adding that point.
 
 The following MAVLink parameters control Rally Point behavior:
 
-#. :ref:`RALLY_LIMIT_KM <plane:RALLY_LIMIT_KM>`
+#. [site wiki="copter,plane,rover,sub"]:ref:`RALLY_LIMIT_KM <RALLY_LIMIT_KM>` [/site][site wiki="planner"]:ref:`RALLY_LIMIT_KM <copter:RALLY_LIMIT_KM>` [/site]
    is the maximum distance a Rally Point may be from the aircraft to be
    considered for an RTL event.  If all Rally Points are greater than
    this distance from the aircraft, then the Home location is used for
-   RTL events (at altitude :ref:`ALT_HOLD_RTL <plane:ALT_HOLD_RTL>`)
-   **unless** Home is farther away than the nearest Rally Point -- in
-   which case the nearest Rally point is used.  This parameter is to
-   prevent fly offs if Rally Points have been specified for multiple
+   RTL events (at altitude [site wiki="plane"]:ref:`RTL_ALTITUDE <RTL_ALTITUDE>`\ [/site][site wiki="planner"]:ref:`RTL_ALTITUDE <plane:RTL_ALTITUDE>`\ [/site][site wiki="copter,rover,sub"]:ref:`RTL_ALTITUDE <plane:RTL_ALTITUDE>`\ [/site])
+   This parameter is to prevent fly offs if Rally Points have been specified for multiple
    flying fields. This parameter can be disabled if set to 0.
-#. :ref:`RALLY_TOTAL <plane:RALLY_TOTAL>` is
+#. [site wiki="copter,plane,rover,sub"]:ref:`RALLY_INCL_HOME<RALLY_INCL_HOME>`\ [/site][site wiki="planner"]:ref:`RALLY_INCL_HOME<copter:RALLY_INCL_HOME>`\ [/site] allows Home to be included in the RALLY points, allowing it to return to home if closer than any RALLY point.
+#. [site wiki="copter,plane,rover,sub"]:ref:`RALLY_TOTAL <RALLY_TOTAL>`\ [/site][site wiki="planner"]:ref:`RALLY_TOTAL <copter:RALLY_TOTAL>`\ [/site] is
    the number of Rally Points currently specified. This parameter will
    be set for you by your ground control station (e.g., Mission Planner)
    when you add and remove Rally Points.  **IT IS HIGHLY UNLIKELY YOU
@@ -107,4 +106,16 @@ Example Flight
    :target: ../_images/mp_rally_point_dialog.jpg
 
 
-[copywiki destination="copter,plane,rover,planner"]
+[copywiki destination="copter,plane,rover,sub,planner"]
+
+Appendix
+========
+
+The RALLY fields present in a rally point file are as follows:
+
+- Lat: Latitude of Rally Point
+- Lon: Longitude of Rally Point
+- Alt: AGL altitude of Rally Point.
+- Altitude Reference Frame: for ALT value: Relative to Home, above Terrain, or Absolute ASL.
+
+

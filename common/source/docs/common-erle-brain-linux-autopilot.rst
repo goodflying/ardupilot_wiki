@@ -1,23 +1,17 @@
 .. _common-erle-brain-linux-autopilot:
 
-==========================
-Erle-Brain Linux Autopilot
-==========================
+==========================================
+Archived Topic: Erle-Brain Linux Autopilot
+==========================================
 
-This page presents the
-`Erle-Brain <https://erlerobotics.com/blog/product/erle-brain/>`__ Linux
-autopilot — an APM autopilot and :ref:`companion computer <dev:companion-computers>` in a
-single package.
+This page presents the `Erle-Brain <https://erlerobotics.com/blog/product/erle-brain/>`__ Linux autopilot — an ArduPilot autopilot and :ref:`companion computer <dev:companion-computers>` in a single package.
 
 Currently there are two versions of this Linux based Autopilot and a
 shield:
 
--  *Erle-Brain 2*: The new generation of artificial robotic brains for
-   drones and robots that use DroneCode Foundation Tools, ROS and many
-   other tools.
+-  *Erle-Brain 2*: The new generation of artificial robotic brains for drones and robots that use DroneCode Foundation Tools, ROS and many other tools.
 -  *PXFmini*: An open autopilot shield for the Raspberry Pi, :ref:`placed here  <common-pxfmini>`.
--  *Erle-Brain 1 (*Discontinued*)*: The first Open-Source Linux
-   Autopilot that runs APM and ROS natively.
+-  *Erle-Brain 1 (*Discontinued*)*: The first Open-Source Linux Autopilot that runs ArduPilot and ROS natively.
 
 Erle-Brain based drones can be assembled as discussed in the `official documentation <https://erlerobotics.com/docs/Robots/Erle-Copter/index.html>`__.
 Erle-Brain based drones can also be purchased from the Erle Robotics
@@ -32,10 +26,7 @@ is the second generation of Linux-based artificial robotic brain for
 making robots and drones with official support for the Robot Operating
 System (ROS) and access to the app store.
 
-It combines an embedded Linux computer (Raspberry Pi 2) and a daughter
-board containing several sensors, IO and power electronics. It is a
-Linux embedded device that runs APM as well many other frameworks and
-services for robotic application development.
+It combines an embedded Linux computer (Raspberry Pi 2) and a daughter board containing several sensors, IO and power electronics. It is a Linux embedded device that runs ArduPilot as well many other frameworks and services for robotic application development.
 
 Some *Erle-Brain 2* features include:
 
@@ -43,7 +34,7 @@ Some *Erle-Brain 2* features include:
 -  WiFi-enabled
 -  ROS focus (Indigo available)
 -  `ROS packages <https://github.com/erlerobot?utf8=%E2%9C%93&query=ros>`__
-   for sensors and peripherials
+   for sensors and peripherals
 -  `DroneKit-Python <http://python.dronekit.io/>`__ support
 -  Snappy Ubuntu app store supported
 -  MAVProxy can automatically bridge MAVLink packets to your WiFi
@@ -105,23 +96,21 @@ Hardware setup
 
 Typical hardware setup for flying drones is:
 
-.. image:: http://erlerobotics.com/docs/img/Artificial_Brains/Erle_Brain2/Hardware/Erle-Brain_Componentes.jpg
+.. image:: ../../../images/Erle-Brain_Componentes.jpg
     :target: ../_images/Erle-Brain_Componentes.jpg
 
 If you wish more info about hardware connections, go to our
 `docs <http://erlerobotics.com/docs/Artificial_Brains_and_Autopilots/Erle-Brain_2/Hardware/Typical_Hardware_Setup.html>`__
 
-Building APM AutoPilot on Erle-Brain 2
---------------------------------------
+Building ArduPilot on Erle-Brain 2
+----------------------------------
 
-Run the following instructions in the bash command prompt to build APM
-on Erle-Brain 2:
+Run the following instructions in the bash command prompt to build ArduPilot on Erle-Brain 2:
 
 ::
 
-    $ git clone https://github.com/erlerobot/ardupilot
+    $ git clone --recurse-submodules https://github.com/erlerobot/ardupilot
     $ cd ardupilot
-    $ git submodule update --init --recursive
 
 ::
 
@@ -159,7 +148,7 @@ Erle-Brain 1 (*Discontinued*)
 *Erle-Brain* combines an embedded Linux computer (the BeagleBone Black)
 and the PixHawk Fire cape — a daughter board containing several sensors,
 IO and power electronics. It is an open hardware Linux embedded
-device that runs APM as well many other frameworks and services for
+device that runs ArduPilot as well many other frameworks and services for
 robotic application development.
 
 .. image:: ../../../images/brain-v1.1-focus.jpg
@@ -234,11 +223,10 @@ image that shows how to do it:
 .. image:: ../../../images/RCsetup.jpg
     :target: ../_images/RCsetup.jpg
 
-Building APM AutoPilot on Erle-Brain
-------------------------------------
+Building ArduPilot on Erle-Brain
+--------------------------------
 
-Run the following instructions in the bash command prompt to build APM
-on Erle-Brain:
+Run the following instructions in the bash command prompt to build ArduPilot on Erle-Brain:
 
 ::
 
@@ -246,9 +234,8 @@ on Erle-Brain:
 
 ::
 
-    $ git clone https://github.com/erlerobot/ardupilot
+    $ git clone --recurse-submodules https://github.com/erlerobot/ardupilot
     $ cd ardupilot
-    $ git submodule update --init --recursive
 
 ::
 
@@ -368,3 +355,5 @@ More information about Erle-Brain is available in `its official documentation <h
 
 .. |Captura de pantalla 2015-04-03 a las 11.39.07| image:: ../../../images/Captura-de-pantalla-2015-04-03-a-las-11.39.07.jpg
     :target: ../_images/Captura-de-pantalla-2015-04-03-a-las-11.39.07.jpg
+
+[copywiki destination="plane,copter,rover,blimp,sub"]

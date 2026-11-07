@@ -11,7 +11,8 @@ TauLabs Sparky2
 
 .. note::
 
-   Support for the TauLabs Sparky2 will be released with Copter-3.6.
+    Due to flash memory limitations, this board does not include all ArduPilot features.
+        See :ref:`Firmware Limitations <common-limited_firmware>` for details.
 
 Specifications
 ==============
@@ -50,7 +51,9 @@ Specifications
 Where to Buy
 ============
 
-- Available from many retailers including `HobbyKing <https://hobbyking.com/en_us/taulabs-sparky-2-0-32bit-flight-controller.html>`__
+- Available from many retailers including `HobbyKing <https://hobbyking.com/en_us/taulabs-sparky-2-0-32bit-flight-controller.html?___store=en_us>`__
+
+`Schematics <https://github.com/ArduPilot/Schematics/tree/master/TauLabs-Sparky>`__
 
 Videos
 ======
@@ -64,3 +67,5 @@ Videos
     :width: 100%
 
 * 2nd flight using PosHold, RTL*
+
+[copywiki destination="plane,copter,rover,blimp,sub"]

@@ -32,7 +32,7 @@ EKF2 Advantages
 -  It can handle larger gyro bias changes in flight
 -  It is able to recover faster from bad sensor data
 -  It provides a slightly smoother output.
--  It is sightly more accurate
+-  It is slightly more accurate
 -  It uses slightly less computing power
 -  It starts using GPS when checks pass rather than waiting for the
    vehicle motors to arm.
@@ -91,28 +91,26 @@ Using EKF2
 
    -  To use only IMU1, set EK2_IMU_MASK = 1 (this is the default)
    -  To use only IMU2, set EK2_IMU_MASK = 2
-   -  To run dual EKF2 using IMU1 and IMU2,  set EK2_IMU_MASK = 3 and
-      turn off the legacy EKF by setting EKF_ENABLE = 0
+   -  To run dual EKF2 using IMU1 and IMU2,  set :ref:`EK2_IMU_MASK<copter:EK2_IMU_MASK>` = 3
 
 #. After setting the parameters you will need to reboot.
 
 EKF2 Log Data
 =============
 
-The data for EKF2 can be found in the NKF1 to NKF9 log packets.
+The data for EKF2 can be found in the NKF1 to NKF5 log packets.
 
-Packets NKF1 to NKF 4 contain information for the first EKF instance.
-Packets NKF6 to NKF9 contain the same information, for the second
-instance if enabled using the EK2_IMU_MASK parameter. Packet NKF5
+Packets NKF1 to NKF4 contain information for each EKF instance with
+the instance number given by the value of field PI.
+The number of instances enabled is set by the EK2_IMU_MASK parameter. Packet NKF5
 contains optical flow information for the EKF instance that is the
 primary for flight control.
 
-The available EKF2 available log data is listed below.  Some plots
+The available EKF2 log data is listed below.  Some plots
 showing example flight data have been included. This data was
 logged using a Pixhawk on a 3DR Iris+ quadcopter with the following
 parameter changes followed by a reboot:
 
--  EKF_ENABLE = 0 (turns off the legacy EKF)
 -  EK2_ENABLE = 1 (turns on EKF2)
 -  EK2_IMU_MASK = 3 (Instructs EKF2 to run two instances, one for IMU1
    (MPU6000) and one for IMU2 (LDG20H + LSM303D)
@@ -124,7 +122,7 @@ parameter changes followed by a reboot:
 Filter State Estimates
 ----------------------
 
-**NKF1** (and **NKF6** if a second IMU is being used) contain the
+**NKF1[0]** (and **NKF1[1]** if a second IMU is being used) contain the
 outputs used by the flight control system
 
 -  TimeUS - time stamp (uSec)
@@ -153,7 +151,7 @@ outputs used by the flight control system
 
    |EKF2 - gyro rate bias|
 
-**NKF2** (and **NKF7** if a second IMU is being used) contains
+**NKF2[0]** (and **NKF2[1]** if a second IMU is being used) contains
 additional state information
 
 -  TimeUS - time stamp (uSec)
@@ -183,7 +181,7 @@ additional state information
 Filter Innovations
 ------------------
 
-**NKF3** (and **NKF8** if a second IMU is being used) contain
+**NKF3[0]** (and **NKF3[1]** if a second IMU is being used) contain
 information on the filter innovations. An innovation is the difference
 between the measurement value predicted byEKF2 and the value returned by
 the sensor. Smaller innovations indicate smaller sensor errors. Because
@@ -221,7 +219,7 @@ large innovations for all measurements.
 Filter Health and Status
 ------------------------
 
-**NKF4** (and **NKF9** if a second IMU is being used) contain
+**NKF4[0]** (and **NKF4[1]** if a second IMU is being used) contain
 information on the innovation variance test ratios. A value of less than
 1 indicates that that measurement has passed its checks and is
 being used by the EKF2. A value of more than 1 indicates that the
@@ -294,11 +292,10 @@ Tuning Parameters
 -----------------
 
 The EKF2 parameters have been tuned to provide a compromise between
-accuracy and robustness to sensor errors. i tis likely that further
+accuracy and robustness to sensor errors. it is likely that further
 improvements in performance are available with further tuning.
 
-If you have a question regarding tuning of the filer, please post to
-https://groups.google.com/forum/#!forum/drones-discuss along with your
+If you have a question regarding tuning of the filer, please post `on the forums <https://discuss.ardupilot.org/>`__ along with your
 log file and mention the term EKF2 in your post title.
 
 The parameters for the new EKF start with the prefix EK2\_ and are
@@ -325,7 +322,7 @@ This controls the use of GPS measurements :
 
 This sets a lower limit on the speed accuracy reported by the GPS
 receiver that is used to set horizontal velocity observation noise. If
-the model of receiver used does not provide a speed accurcy estimate,
+the model of receiver used does not provide a speed accuracy estimate,
 then the parameter value will be used. Increasing it reduces the
 weighting of the GPS horizontal velocity measurements. It has units of
 metres/sec
@@ -333,8 +330,8 @@ metres/sec
 **EK2_VELD_NOISE**
 
 This sets a lower limit on the speed accuracy reported by the GPS
-receiver that is used to set verical velocity observation noise in. If
-the model of receiver used does not provide a speed accurcy estimate,
+receiver that is used to set vertical velocity observation noise in. If
+the model of receiver used does not provide a speed accuracy estimate,
 then the parameter value will be used. Increasing it reduces the
 weighting of the GPS vertical velocity measurements. It has units of
 metres/sec.
@@ -343,7 +340,7 @@ metres/sec.
 
 This sets the number of standard deviations applied to the GPS velocity
 measurement innovation consistency check. Decreasing it makes it more
-likely that good measurements willbe rejected. Increasing it makes it
+likely that good measurements will be rejected. Increasing it makes it
 more likely that bad measurements will be accepted.
 
 **EK2_POSNE_NOISE**
@@ -378,7 +375,7 @@ the filter is 250 msec.
 **EK2_ALT_SOURCE**
 
 This parameter controls which height sensor is used by the EKF. If the
-selected optionn cannot be used, it will default to Baro as the primary
+selected option cannot be used, it will default to Baro as the primary
 height source. Setting 0 will use the baro altitude at all times.
 Setting 1 uses the range finder and is only available in combination
 with optical flow navigation (EK2_GPS_TYPE = 3). Setting 2 uses GPS.
@@ -395,7 +392,7 @@ it reduces the weighting of the baro measurement and will make the
 filter respond more slowly to baro measurement errors, but will make it
 more sensitive to GPS and accelerometer errors.  It has units of metres.
 
-**EK2_HGT_GATE**
+**EK2_HGT_I_GATE**
 
 This sets the number of standard deviations applied to the height
 measurement innovation consistency check. Decreasing it makes it more
@@ -494,14 +491,14 @@ flow averaging period and does not include the time delay due to the
 
 This control disturbance noise controls the growth of estimated error
 due to gyro measurement errors excluding bias. Increasing it makes the
-flter trust the gyro measurements less and other measurements more. It
+filter trust the gyro measurements less and other measurements more. It
 has units of rad/sec.
 
 **EK2_ACC_PNOISE**
 
 This control disturbance noise controls the growth of estimated error
 due to accelerometer measurement errors excluding bias. Increasing it
-makes the flter trust the accelerometer measurements less and other
+makes the filter trust the accelerometer measurements less and other
 measurements more. It has units of metres/sec/sec.
 
 **EK2_GBIAS_PNOISE**

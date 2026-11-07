@@ -4,6 +4,8 @@
 X-Plane Hardware in the Loop Simulation
 =======================================
 
+.. note:: Archived, no longer supported
+
 This article explains how to set up *X-Plane Hardware in the Loop
 Simulation*.
 
@@ -280,7 +282,7 @@ Python Scripting with XPlane
 
 This section shows how to use Python for some basic scripted acrobatic
 moves for fixed-wing airplanes (including a left roll, a right roll and
-most of a loop). The instructions come from the tutorial `Scripted Fixed-Wing Acrobatics <http://diydrones.com/profiles/blogs/scripted-fixed-wing-acrobatics>`__.
+most of a loop). The instructions come from the tutorial `Scripted Fixed-Wing Acrobatics <https://diydrones.com/profiles/blogs/scripted-fixed-wing-acrobatics>`__.
 
 #. You need a python based script. You can start with the one I've put
    together. It's attached here.

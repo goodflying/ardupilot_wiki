@@ -4,10 +4,10 @@
 Antenna Design Overview
 =======================
 
-This article provides an overview of the the fundamental principles of
+This article provides an overview of the fundamental principles of
 antenna design. Antenna design is an important factor in using UAVs over
 extended range and where there are obstructed views. While this is not
-directly related to Antenna Tracking/flight controllers, it may be
+directly related to Antenna Tracking/autopilots, it may be
 useful for some readers.
 
 .. image:: ../../../images/Cupoblique.jpg
@@ -76,7 +76,7 @@ types)
    polarization.
 -  A Helical antenna (looks like a coil of wire wound in a screw
    fashion) wound clockwise when viewed from behind will radiate
-   clockwise circular polarization, and vise versa.
+   clockwise circular polarization, and vice versa.
 
 For reception of maximum energy, the transmitting and receiving antennae
 must be identically polarized.
@@ -372,7 +372,7 @@ Acknowledgements
 ================
 
 Much of this antenna information has been provided by Joe Noci as an
-extension of this discussion: `433 UHF LRS Antenna "Turn Stile" <http://diydrones.com/forum/topics/433-uhf-lrs-antenna-turn-stile>`__.
+extension of this discussion: `433 UHF LRS Antenna "Turn Stile" <https://diydrones.com/forum/topics/433-uhf-lrs-antenna-turn-stile>`__.
 
 
-
+[copywiki destination="plane,copter,rover,antennatracker"]

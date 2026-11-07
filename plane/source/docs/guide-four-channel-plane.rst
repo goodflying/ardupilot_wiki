@@ -8,7 +8,7 @@ The most common type of fixed wing plane is a 4 channel plane. As the
 name implies, it has 4 output channels, and they control the roll, pitch, yaw,
 and throttle independently.
 
-These are the default outputs for Arduplane as it is such a common
+These are the default outputs for ArduPlane as it is such a common
 setup. It is commonly referred to as an AETR setup.
 
 .. warning:: Remove the propeller from your aircraft before
@@ -21,12 +21,14 @@ The most important step to setting up the plane is having the correct inputs,
 outputs, and reversals. Inputs are covered on the :ref:`RC input setup page <rc-throw-trim>`. 
 After the RC inputs are configured, configure the outputs.
 
-.. warning:: Make sure the AHRS_ORIENT is set correctly for the autopilot. If it is incorrect, 
+.. warning:: Make sure the :ref:`AHRS_ORIENTATION<AHRS_ORIENTATION>` is set correctly for the autopilot. If it is incorrect, 
              this setup will fail, and the plane may crash upon entry into any stabilize mode.
              
 Servo cables can be connected to any output of the autopilot,
 but using the default channels 1-4 listed below is recommended. 
-Set the SERVOn_FUNCTIONS to the appropriate values.
+Set the SERVOn_FUNCTION to the appropriate values.
+
+You can do this by setting the  parameter directly using Ground Station software such as Mission Planner or QGroundControl using either the full parameter lists or setup tab for outputs. In Mission Planner you can do this on the SETUP -> Mandatory Hardware -> Servo Output page. Each channel has a dropdown which can be used to select the function of the channel.
 
 .. raw:: html
 
@@ -66,8 +68,8 @@ and coordinate its turns.
 
    <table border="1" class="docutils">
    <tr><th>Movement</th><th>Action</th></tr>
-   <tr><td>Roll Plane Right</td><td>Left aileron moves up and right aileron moves down</td><tr>
-   <tr><td>Roll Plane Left</td><td>Left aileron moves down and right aileron moves up</td><tr>
+   <tr><td>Roll Plane Right</td><td>Left aileron moves up and right aileron moves down</td></tr>
+   <tr><td>Roll Plane Left</td><td>Left aileron moves down and right aileron moves up</td></tr>
    <tr><td>Pitch plane up</td><td>Elevator moves down</td></tr>
    <tr><td>Pitch plane down</td><td>Elevator moves up</td></tr>
    <tr><td>Roll Plane Right</td><td>Rudder moves left</td></tr>
@@ -78,34 +80,34 @@ If the any of the control surfaces do not respond correctly, reverse the
 output by changing the corresponding SERVOn_REVERSED setting (from 0 to 1, 
 or from 1 to 0).
 
-.. note:: KFF_RDDRMIX mut not be set to 0 for rudder setup. If the 
-          plane actually needs 0, then reset it after this setup.
+The output can be reversed in Mission Planner on the SETUP/Mandatory Hardware/Servo Output page, just check the box for the channel that needs to be reversed. This will set the output's SERVOn_REVERSED parameter.
 
-          KFF_RDDRMIX should cause the tail surfaces point away from the 
-          direction of the lowered aileron. This corrects adverse yaw caused
-          by the additional drag of a lowered aileron.
+.. note:: :ref:`KFF_RDDRMIX<KFF_RDDRMIX>` mut not be set to 0 (the default value is 0.5) for checking rudder movement in FBWA as the plane is rolled away from level. If no automatic coupling of rudder to aileron for coordinated turns by the autopilot is desired, then reset it to zero after this setup check.
 
 Confirm RC Transmitter Input
 ============================
 
-Keep the plane level in FBWA mode and command the following inputs:
+Keep the plane level in FBWA mode and command the following inputs by moving the sticks on your transmitter:
 
 .. raw:: html
          
    <table border="1" class="docutils">
    <tr><th>Input</th><th>Action</th></tr>
-   <tr><td>Roll Right</td><td>Right aileron moves up and left aileron moves down</td><tr>
-   <tr><td>Roll Left</td><td>Left aileron moves up and right aileron moves down</td><tr>
-   <tr><td>Pitch up</td><td>Elevator moves up</td><tr>
-   <tr><td>Pitch down</td><td>Elevator moves down</td><tr>
-   <tr><td>Yaw right</td><td>Rudder moves right</td><tr>
-   <tr><td>Yaw left</td><td>Rudder moves right</td><tr>
+   <tr><td>Roll Right</td><td>Right aileron moves up and left aileron moves down</td></tr>
+   <tr><td>Roll Left</td><td>Left aileron moves up and right aileron moves down</td></tr>
+   <tr><td>Pitch up</td><td>Elevator moves up</td></tr>
+   <tr><td>Pitch down</td><td>Elevator moves down</td></tr>
+   <tr><td>Yaw right</td><td>Rudder moves right</td></tr>
+   <tr><td>Yaw left</td><td>Rudder moves left</td></tr>
    </table>
 
 If the control surfaces do not respond correctly, change the RCn_reversed
-parameter (from 0 to 1, or from 1 to 0). Double check MANUAL mode for the
+parameter (from 0 to 1, or from 1 to 0). Do NOT reverse the output on your transmitter. It must be changed in the autopilot!
+Double check MANUAL mode for the
 same inputs. If everything is setup correctly, the plane should be almost
 ready to fly.
+
+If in MANUAL mode the surfaces move backward with stick movements now, the corresponding RC input should be reversed. To do this, in Mission Planner RCn_REVERSED can be easily set on the SETUP/Mandatory Hardware/Radio Calibration page. There is a check box "Reverse" next to each input bar. You can reverse the correct parameter by checking the box. However, if :ref:`common-radio-control-calibration` was followed correctly, changing RC input reversal will not be necessary.
 
 Servo Trim
 ==========
@@ -121,7 +123,7 @@ Servo Throw
 ===========
 
 Finally adjust the servo throws (range of
-movement for each of the servos).
+movement for each of the servos). This should also be done in MANUAL mode.
 
 Check any instructions that came with the plane for suggested throw
 values. These are often specified in millimeters or inches of movement
@@ -133,7 +135,7 @@ when servos stall).
 To adjust the throw, change the SERVOn_MIN and SERVOn_MAX values. The
 defaults are 1100 to 1900. On many aircraft, more throw may be desired.
 Changing throws to 1000 to 2000 or beyond is normal. Make sure that 
-the servos are still moving when nearing the extrememe values.
+the servos are still moving when nearing the extreme values.
 
 Final Setup
 ===========
@@ -141,5 +143,5 @@ Final Setup
 After completing this guide, move onto the final setup of
 the aircraft.
 
-- :ref:`ESC Calibration <guide-esc-calibration>`
+- :ref:`ESC Calibration <common-esc-calibration>`
 - :ref:`Center of Gravity <guide-center-of-gravity>`

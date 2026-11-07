@@ -4,32 +4,82 @@
 Downloading and Analyzing Data Logs in Mission Planner
 ======================================================
 
-Dataflash logs are stored on the flight controller's onboard dataflash memory
-and can be download after a flight. On Plane and Rover dataflash logs are
-created soon after start-up. On Copter they are created after you first
-arm the copter. This topic explains how to configure and access
+Dataflash logs are stored on the autopilot
+and can be downloaded after a flight. By default, they are created after you first
+arm the vehicle. This topic explains how to configure and access
 Dataflash logs.
 
-[copywiki destination="copter,plane,rover,planner"]
+Depending on the autopilot type and configuration, the dataflash logs may be saved on a SD card, dataflash chip or streamed over MAVLink telemetry ports. The MAVLink option does require a high-speed telemetry port, typically 921600 baud.
 
-.. note::
+.. note:: In addition to using Mission Planner, many other tools are available to users for log analysis: :ref:`MAVExplorer(part of MAVProxy installation) <dev:using-mavexplorer-for-log-analysis>` and :ref:`Web-based tools <common-webtools>`.
 
-   :ref:`Telemetry logs <common-mission-planner-telemetry-logs>` (also
-   known as "tlogs") collect similar information to dataflash logs (see
-   :ref:`Diagnosing problems using Logs <common-diagnosing-problems-using-logs>` for more information).
+[copywiki destination="copter,plane,rover,dev,sub,planner"]
 
-.. note::
+.. note:: :ref:`Telemetry logs <planner:mission-planner-telemetry-logs>` (also known as "tlogs") collect similar information to dataflash logs (see :ref:`Diagnosing problems using Logs <common-diagnosing-problems-using-logs>` for more information).
 
-   If your vehicle is having trouble producing dataflash logs - including the infamous "No IO heartbeat" diagnostic message - try a different SD card.  You may also choose to test the card using a dedicated tool, such as ``H2testw``.  Low board voltates are also known to cause logging issues.
+.. note:: If your vehicle is having trouble producing dataflash logs - including the infamous "No IO heartbeat" diagnostic message - try a different SD card.  You may also choose to test the card using a dedicated tool, such as ``H2testw``.  Low board voltages are also known to cause logging issues.
+
+Logging Parameters
+==================
+
+Some commonly used parameters are:
+
+- [site wiki="copter,plane,rover,sub"]:ref:`LOG_BACKEND_TYPE<LOG_BACKEND_TYPE>`\ [/site][site wiki="dev,planner"]:ref:`LOG_BACKEND_TYPE<copter:LOG_BACKEND_TYPE>`\ [/site]: Bitmask for where to save logs to. Common values are "0" to disable logging, "1" (bit 0 set) to log to SD card file, "2"(bit 1 set) to stream over MAVLink and "4"(bit 2 set) to log to board dataflash memory, if equipped.
+- [site wiki="copter,plane,rover,sub"]:ref:`LOG_BITMASK<LOG_BITMASK>`\ [/site][site wiki="dev,planner"]:ref:`LOG_BITMASK<copter:LOG_BITMASK>`\ [/site]: Bitmask for what items are logged. Normally, use default value, or "0" to disable logging.
+- [site wiki="copter,plane,rover,sub"]:ref:`LOG_DISARMED<LOG_DISARMED>`\ [/site][site wiki="dev,planner"]:ref:`LOG_DISARMED<copter:LOG_DISARMED>`\ [/site]: Setting to 1 will start logging when power is applied, rather than at the first arming of the vehicle. Useful when debugging pre-arm failures. Setting to 2 will only log on power application other than USB power to prevent logging while setting up on the bench. Setting to 3 will also erase any log in which the vehicle does not proceed to the armed stated. This prevents accumulating numerous logs while configuring on the bench or at the field. See [site wiki="copter,plane,rover,sub"]:ref:`LOG_DARM_RATEMAX<LOG_DARM_RATEMAX>`\ [/site][site wiki="dev,planner"]:ref:`LOG_DARM_RATEMAX<copter:LOG_DARM_RATEMAX>`\ [/site] also for managing log file sizes while logging disarmed.
+- [site wiki="copter,plane,rover,sub"]:ref:`LOG_FILE_DSRMROT<LOG_FILE_DSRMROT>`\ [/site][site wiki="dev,planner"]:ref:`LOG_FILE_DSRMROT<copter:LOG_FILE_DSRMROT>`\ [/site]: Setting this bit will force the creation of a new log file after disarming, waiting 15 seconds, and then re-arming. Normally, a log will be one file for every power cycle of the autopilot, beginning upon first arm.
+- [site wiki="copter,plane,rover,sub"]:ref:`LOG_FILE_MB_FREE<LOG_FILE_MB_FREE>`\ [/site][site wiki="dev,planner"]:ref:`LOG_FILE_MB_FREE<copter:LOG_FILE_MB_FREE>`\ [/site]: This parameter sets the minimum free space on the logging media before logging begins. If this is not available, then older logs will be deleted to provide it during initialization. Default is 500MB.
+- [site wiki="copter,plane,rover,sub"]:ref:`LOG_FILE_RATEMAX<LOG_FILE_RATEMAX>`\ [/site][site wiki="dev,planner"]:ref:`LOG_FILE_RATEMAX<copter:LOG_FILE_RATEMAX>`\ [/site]: This sets the maximum rate that streaming log messages will be logged to the file backend to limit file sizes. A value of zero(default) means no limit is applied to normal logging, which depends on the [site wiki="copter,plane,rover,sub"]:ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>`\ [/site][site wiki="dev,planner"]:ref:`SCHED_LOOP_RATE<copter:SCHED_LOOP_RATE>`\ [/site] value ( 50Hz: Plane, 300Hz: QuadPlane/Rover, 400Hz: Copter, normally). Note that similarly, [site wiki="copter,plane,rover,sub"]:ref:`LOG_BLK_RATEMAX<LOG_BLK_RATEMAX>`\ [/site][site wiki="dev,planner"]:ref:`LOG_BLK_RATEMAX<copter:LOG_BLK_RATEMAX>`\ [/site] and [site wiki="copter,plane,rover,sub"]:ref:`LOG_MAV_RATEMAX<LOG_MAV_RATEMAX>`\ [/site][site wiki="dev,planner"]:ref:`LOG_MAV_RATEMAX<copter:LOG_MAV_RATEMAX>`\ [/site] perform the same optional limiting for the BLOCK logging and MAVLink logging streams, respectively.
+- [site wiki="copter,plane,rover,sub"]:ref:`LOG_MAX_FILES<LOG_MAX_FILES>`\ [/site][site wiki="dev,planner"]:ref:`LOG_MAX_FILES<copter:LOG_MAX_FILES>`\ [/site]: The maximum number of log file that will be written on dataflash or SD card before starting to rotate log number. Limit is a maximum of 500 logs.
+
+.. note:: If you suspect that you are missing logging entries due to excessive logging speed, you can check the DSF.Dp log message for the amount of missed entries.
+
+.. note:: Logging of the continuously streaming log messages, such as attitude, sensors, etc. can be paused by using the ``RCx_OPTION`` auxiliary function "164" on a transmitter channel. Switching this channel high will pause these messages, but not events, mode changes, warnings, etc. This allows autopilots with limited logging capabilities (ie using Block logging to chip memory and no SD card) to log only when desired during the flight, as during tuning phases or determination of TECs parameters, etc. You can also eliminate unneeded log messages using [site wiki="copter,plane,rover,sub"]:ref:`LOG_BITMASK<LOG_BITMASK>`\ [/site][site wiki="dev,planner"]:ref:`LOG_BITMASK<copter:LOG_BITMASK>`\ [/site] to reduce log size
+
+Replay Logging
+==============
+
+ArduPilot has the ability to log in a fashion that solutions to EKF/AHRS issues can be more easily verified by actually re-playing a log against code changes to see if the solution results in the desired, corrected behavior. This requires that the logs showing the issue to be worked on be made with logging active during disarmed periods (with [site wiki="copter,plane,rover,sub"]:ref:`LOG_DISARMED<LOG_DISARMED>`\ [/site][site wiki="dev,planner"]:ref:`LOG_DISARMED<copter:LOG_DISARMED>`\ [/site] set to a non-zero value, preferably 3) and [site wiki="copter,plane,rover,sub"]:ref:`LOG_REPLAY<LOG_REPLAY>`\ [/site][site wiki="dev,planner"]:ref:`LOG_REPLAY<copter:LOG_REPLAY>`\ [/site] =1 , thereby logging more sensor data than normal.
+
+SD Card Logging Issues
+======================
+
+If you are running into problems with bad logging errors on SD cards, here are some things you can try.
+
+- Format the card to FAT32 or vFAT (newer formats can work with new versions of Ardupilot and better hardware).
+- Perform a full format to check for bad sectors.
+- Check that the card is not write protected.
+- Check card contacts.
+- Some cards are problematic, try using a different one.
+- Ensure that the card is fast enough to keep up with logging demands (Class 10 works for many, but lower speeds can work too).
+- Reduce the amount of data included with the logs in LOG_BITMASK.
+- Incrementally increase BRD_SD_SLOWDOWN up to a maximum of 32 (default is 0).
+
+On-Board DataFlash Logging
+==========================
+
+Some boards do not have SD card interfaces for logging, but rather a limited amount of dataflash, typically 16MB. This saves log files in a manner like a circular buffer. Once the flash is filled, the oldest log file is overwritten with the current logging data. If there is only one file on the flash when space runs out, logging is stopped instead.
+
+A new log file will be started after boot, upon arming, or, immediately if [site wiki="copter,plane,rover,sub"]:ref:`LOG_DISARMED<LOG_DISARMED>`\ [/site][site wiki="dev,planner"]:ref:`LOG_DISARMED<copter:LOG_DISARMED>`\ [/site] is 1.
+
+If [site wiki="copter,plane,rover,sub"]:ref:`LOG_FILE_DSRMROT<LOG_FILE_DSRMROT>`\ [/site][site wiki="dev,planner"]:ref:`LOG_FILE_DSRMROT<copter:LOG_FILE_DSRMROT>`\ [/site] is enabled, any disarm will stop logging and a new file started upon the next arm or immediately if [site wiki="copter,plane,rover,sub"]:ref:`LOG_DISARMED<LOG_DISARMED>`\ [/site][site wiki="dev,planner"]:ref:`LOG_DISARMED<copter:LOG_DISARMED>`\ [/site] is 1. Otherwise, logging to the current file will resume on a re-arm. Any reboot stops logging to the current file.
+
+In order to maximize the utility of the limited flash space several things can be done:
+
+- Reduce the things logged using [site wiki="copter,plane,rover,sub"]:ref:`LOG_BITMASK<LOG_BITMASK>`\ [/site][site wiki="dev,planner"]:ref:`LOG_BITMASK<copter:LOG_BITMASK>`\ [/site].
+- Eliminate logging the EKF3 messages which are voluminous and usually needed only for problem diagnosis using the [site wiki="copter,plane,rover,sub"]:ref:`EK3_LOG_LEVEL<EK3_LOG_LEVEL>`\ [/site][site wiki="dev,planner"]:ref:`EK3_LOG_LEVEL<copter:EK3_LOG_LEVEL>`\ [/site] parameter.
+- Only log when needed during the flight, ie tuning, gathering data for TECS tuning, etc. using an RC Aux switch set to "164" to start and stop log writes.
+- Reduce the logging rate to a slower rate (below 10Hz) by setting [site wiki="copter,plane,rover,sub"]:ref:`LOG_BLK_RATEMAX<LOG_BLK_RATEMAX>`\ [/site][site wiki="dev,planner"]:ref:`LOG_BLK_RATEMAX<copter:LOG_BLK_RATEMAX>`\ [/site] which is by default unrestricted.
+- Download and erase the logs each flight and only log one file for a flight
+
+.. note:: some dataflash chips are particularly slow, leading to gaps in the logs. Setting [site wiki="copter,plane,rover,sub"]:ref:`LOG_BLK_RATEMAX<LOG_BLK_RATEMAX>`\ [/site][site wiki="dev,planner"]:ref:`LOG_BLK_RATEMAX<copter:LOG_BLK_RATEMAX>`\ [/site] to a lower value can help eliminate these gaps.
 
 .. _common-downloading-and-analyzing-data-logs-in-mission-planner_downloading_logs_via_mavlink:
 
 Downloading logs via MAVLink
 ============================
 
-This method is available in AC3.2 (or higher).
-
--  Connect your vehicle to the mission planner using the micro USB cable
+-  Connect your vehicle to the ground station using the micro USB cable
 -  Open the Mission Planner's Flight Data screen
 -  On the bottom left, select the "DataFlash Logs" tab and push the
    "Download DataFlash Log Via Mavlink" button
@@ -41,26 +91,8 @@ Then, select the log you want to download. This will save that log to
 your MissionPlanner/logs directory, in a folder named after the vehicle
 type, such as QUADCOPTER.
 
-Automatic Analysis of logs
-==========================
-
-.. figure:: ../../../images/MissionPlanner_AutomaticLogAnalysis_Buttons.png
-   :target: ../_images/MissionPlanner_AutomaticLogAnalysis_Buttons.png
-
-   Mission Planner: Start LogAnalysis
-
-The simplest analysis is to generate a basic automated report that will
-highlight common problem areas. For that, click on "Log Analysis"
-and select a log that you've already saved to the MissionPlanner/logs
-directory.  They will be in folders named after the vehicle type, such
-as QUADCOPTER or ROVER. Once you pick the log you want, it will generate
-a report that looks like this:
-
-.. image:: ../../../images/Capture3.png
-    :target: ../_images/Capture3.png
-
-Manually review a log
-=====================
+Review a log
+============
 
 For more detailed analysis, click on "Review a Log" and select a log
 that you've already saved to the MissionPlanner/logs directory.  Once
@@ -69,13 +101,14 @@ QUADCOPTER or ROVER.
 
 Steps to review a log downloaded from the internet, or your vehicle
 -------------------------------------------------------------------
-For DataFlash logs, with a .bin extension:
-#. Download the log file. Note the place on your computer to which it is downloaded. (For example, it might be C:\Downloads)
+For DataFlash logs, with a .bin or .log extension:
+
+#. Download the log file. Note the place on your computer to which it is downloaded. (For example, it might be C:\\Downloads)
 #. Open Mission Planner
 #. Navigate to the “Flight Data” page (top left)
 #. Select the “Dataflash Logs” tab (mid-screen, left side)
 #. Select the “Review a Log” button.
-#. A standard Windows “select a file” box will let you go find the .bin file that you downloaded, at the place that you downloaded it. (Per the example above, it is in C:\Downloads) Choose that file.
+#. A standard Windows “select a file” box will let you go find the .bin file that you downloaded, at the place that you downloaded it. (Per the example above, it is in C:\\Downloads) Choose that file.
 #. After reading the log, a Manual Log Review window will be open, which allows you to plot data from the log for inspection. (see below)
 
 Reviewing the log data
@@ -102,7 +135,7 @@ button. In the example above the ATT's Roll-In and Roll data have been
 graphed. The mouse's scroll wheel can be used to zoom in or out. You may
 also select an area of the graph to zoom in on it. Zoom out by
 right-mouse-button clicking and selecting "Set Scale to Default".
-`Here's <http://www.diydrones.com/profiles/blog/show?id=705844%3ABlogPost%3A801607>`__
+`Here's <https://www.diydrones.com/profiles/blog/show?id=705844%3ABlogPost%3A801607>`__
 a mini tutorial on using this feature. You may also filter on just the
 first column (the flight data message type) by clicking on the first
 column and selecting the message type from the drop-down. This is very
@@ -116,24 +149,115 @@ press "Cancel" to clear the filter.
 Setting what data you want recorded
 ===================================
 
-The LOG_BITMASK parameter controls what message types are recorded in
-the dataflash.  Recent versions of the mission planner and ArduPilot
-allow individual messages to be enabled/disabled from the MP's
-Config/Tuning, Standard Params screen.
+The [site wiki="copter,plane,rover,sub"]:ref:`LOG_BITMASK <LOG_BITMASK>`\ [/site][site wiki="dev,planner"]:ref:`LOG_BITMASK <copter:LOG_BITMASK>`\ [/site] parameter controls what messages are recorded in the logs. The bits differ between vehicles. The image above is for Copter.
 
 .. image:: ../../../images/mp_dataflash_log_bitmask.png
     :target: ../_images/mp_dataflash_log_bitmask.png
 
-Earlier versions of MP/ArduPilot allow selecting the message using a
-drop-down as shown below. 
+[site wiki="plane"]
 
-.. image:: ../../../images/mp_log_bitmask.png
-    :target: ../_images/mp_log_bitmask.png
+Bitmask Table (Plane)
+---------------------
+
+====   =====================      ==============================================================
+Bit     BitMask Name                 What is logged if bit is set
+====   =====================      ==============================================================
+0       Fast Attitude               Attitude @ 25Hz
+1       Medium Attitude             Attitude @ 10Hz
+2       GPS                         GPS
+3       System Performance          CPU,etc. Performance monitoring
+4       Control Tuning              Control Data
+5       Navigation Tuning           Navigation Data
+7       IMU                         IMU (ACC/Gyro) Data
+8       Mission Commands            Mission/GCS Commands
+9       Battery Monitor             Battery Monitors data
+10      Compass                     Compasses Data
+11      TECS                        Speed/Height Controller Data
+12      Camera                      Camera Data (if present)
+13      RC Input & Output           RC input/Servo output data
+14      Rangefinder                 Rangefinder Data (if present)
+19      Raw IMU                     Raw IMU data, unprocessed
+20      Full Rate Attitude          Attitude at :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>`
+21      Video Stabilization         GyroFlow Data logs
+====   =====================      ==============================================================
+
+ATTITUDE logging will occur at highest rate of the selections. 
+
+.. note:: the logging of EKF3 data is controlled by the :ref:`EK3_LOG_LEVEL<EK3_LOG_LEVEL>` parameter.
+
+[/site]
+[site wiki="copter"]
+
+Bitmask Table (Copter)
+----------------------
+
+====   =====================      ==============================================================
+Bit     BitMask Name                 What is logged if bit is set
+====   =====================      ==============================================================
+0       Fast Attitude               Attitude @ :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>`
+1       Medium Attitude             Attitude @ 10Hz
+2       GPS                         GPS
+3       System Performance          CPU,etc. Performance monitoring
+4       Control Tuning              Control Data
+5       Navigation Tuning           Navigation Data
+6       RC Input                    RC Input data
+7       IMU                         IMU (ACC/Gyro) Data
+8       Mission Commands            Mission/GCS Commands
+9       Battery Monitor             Battery Monitors Data
+10      RC Output                   Servo Output
+11      Optical Flow                Optical Flow Data
+12      PID                         PID controllers Data
+13      Compass                     Compass Data
+15      Camera                      Camera Data
+17      Motors                      Motor Data
+19      Raw IMU                     Raw IMU data, unprocessed
+20      Video Stabilization         Attitude at :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>`
+21      Fast harmonic notch         Fast harmonic notch
+====   =====================      ==============================================================
+
+ATTITUDE logging will occur at highest rate of the selections. 
+
+.. note:: the logging of EKF3 data is controlled by the :ref:`EK3_LOG_LEVEL<EK3_LOG_LEVEL>` parameter.
+
+[/site]
+[site wiki="rover"]
+Bitmask Table (Rover)
+---------------------
+
+====   =====================      ==============================================================
+Bit     BitMask Name                 What is logged if bit is set
+====   =====================      ==============================================================
+0       Fast Attitude               Attitude @ 400Hz
+1       Medium Attitude             Attitude @ 10Hz
+2       GPS                         GPS
+3       System Performance          CPU,etc. Performance monitoring
+4       Throttle                    Throttle/Speed Control Data
+5       Navigation Tuning           Navigation Data
+7       IMU                         IMU (ACC/Gyro) Data
+8       Mission Commands            Mission/GCS Commands
+9       Battery Monitor             Battery Monitors Data
+10      Rangefinder                 Rangefinder Data (if present)
+11      Compass                     Compasses Data
+12      Camera                      Camera Data (if present)
+13      Steering                    Steering rates and targets
+14      RC Input & Output           RC input/Servo output data
+19      Raw IMU                     Raw IMU data, unprocessed
+20      Video Stabilization         GyroFlow Data logs
+====   =====================      ==============================================================
+
+ATTITUDE logging will occur at highest rate of the selections. 
+
+.. note:: the logging of EKF3 data is controlled by the :ref:`EK3_LOG_LEVEL<EK3_LOG_LEVEL>` parameter.
+[/site]
+
 
 .. _common-downloading-and-analyzing-data-logs-in-mission-planner_message_details_copter_specific:
 
 Message Details (Copter specific)
 =================================
+
+.. note:: Many messages are detailed in the :ref:`logmessages` page in each vehicle's wiki section.
+
 
 **ATT (attitude information):**
 
@@ -214,7 +338,7 @@ a mission):**
 +--------+----------------------------------------------------------------------------------------+
 | CNum   | This command's number in the mission (0 is always home, 1 is the first command, etc)   |
 +--------+----------------------------------------------------------------------------------------+
-| CId    | The `mavlink message id <https://pixhawk.ethz.ch/mavlink/>`__                          |
+| CId    | The `MAVLink message id <https://mavlink.io/en/messages/common.html>`__                |
 +--------+----------------------------------------------------------------------------------------+
 | Copt   | The option parameter (used for many different purposes)                                |
 +--------+----------------------------------------------------------------------------------------+
@@ -232,7 +356,8 @@ a mission):**
 +---------------------+----------------------------------------------------------------------------------------+
 | Field               | Description                                                                            |
 +---------------------+----------------------------------------------------------------------------------------+
-| MagX, MagY. MagZ    | Raw magnetic field values for x, y and z axis                                          |
+| MagX, MagY, MagZ    | Raw magnetic field values for x, y, and z axis. These are magnetometer readings with   |
+|                     | calibration applied, not raw magnetometer readings.                                    |
 +---------------------+----------------------------------------------------------------------------------------+
 | OfsX, OfsY, OfsZ    | Raw magnetic offsets (will only change if COMPASS_LEARN parameter is 1)                |
 +---------------------+----------------------------------------------------------------------------------------+
@@ -258,30 +383,43 @@ a mission):**
 +---------------------+----------------------------------------------------------------------------------------+
 
 
-**CTUN (throttle and altitude information):**
+**CTUN (Control, Throttle and altitude information):**
 
 +---------+----------------------------------------------------------------------------------------------------+
 | FIELD   | DESCRIPTION                                                                                        |
 +---------+----------------------------------------------------------------------------------------------------+
-| ThrIn   | The pilot's throttle in as a number from 0 to 1000                                                 |
+| TimeUS  | Time stamp for messages in microseconds (can be ignored)                                           |
 +---------+----------------------------------------------------------------------------------------------------+
-| SonAlt  | The altitude above ground according to the sonar                                                   |
+| ThI     | The pilot's throttle in as a number from 0 to 1000                                                 |
 +---------+----------------------------------------------------------------------------------------------------+
-| BarAlt  | The altitude above ground according to the barometer                                               |
+| ABst    | Angle Boost: throttle increase (from 0 ~ 1000) as a result of the copter leaning over              |
+|         | (automatically added to all pilot and autopilot throttle to reduce altitude loss while leaning)    |
 +---------+----------------------------------------------------------------------------------------------------+
-| WPAlt   | The desired altitude while in AltHold, Loiter, RTL or Auto flight modes                            |
-+---------+----------------------------------------------------------------------------------------------------+
-| NavThr  | Not used                                                                                           |
-+---------+----------------------------------------------------------------------------------------------------+
-| AngBst  | Throttle increase (from 0 ~ 1000) as a result of the copter leaning over (automatically            |
-|         | added to all pilot and autopilot throttle to reduce altitude loss while  leaning)                  |
-+---------+----------------------------------------------------------------------------------------------------+
-| CRate   | Accelerometer + baro climb rate estimate in cm/s                                                   |
-+---------+----------------------------------------------------------------------------------------------------+
-| ThrOut  | Final throttle output sent to the motors (from 0 ~ 1000). Normally equal to ThrIn+AngBst while     |
+| ThO     | Final throttle output sent to the motors (from 0 ~ 1000). Normally equal to ThrI+ABst while        |
 |         | in stabilize mode.                                                                                 |
 +---------+----------------------------------------------------------------------------------------------------+
-| DCRate  | Pilot desired climb rate in cm/s                                                                   |
+| ThH     | Estimated throttle required to hover throttle in the range 0 ~ 1                                   |
++---------+----------------------------------------------------------------------------------------------------+
+| DAlt    | The Desired Altitude while in AltHold, Loiter, RTL or Auto flight modes.                           |
+|         | It is influenced by EKF origin, which in 3.5.X is corrected by GPS altitude. This behaviour is     |
+|         | turned off in 3.6.X and can be turned on with EKF_OGN_HGT_MASK.                                    |
++---------+----------------------------------------------------------------------------------------------------+
+| Alt     | The current EKF Altitude                                                                           |
++---------+----------------------------------------------------------------------------------------------------+
+| BAlt    | Barometer Altitude: The altitude above ground according to the barometer                           |
++---------+----------------------------------------------------------------------------------------------------+
+| DSAlt   | Desired distance in cm from ground or ceiling (only visible if Sonar is available)                 |
++---------+----------------------------------------------------------------------------------------------------+
+| SAlt    | Sonar Altitude: the altitude above ground according to the sonar                                   |
+|         | (Only visible of Sonar is available)                                                               |
++---------+----------------------------------------------------------------------------------------------------+
+| TAlt    | Terrain altitude (not used by default)                                                             |
++---------+----------------------------------------------------------------------------------------------------+
+| DCRt    | Desired Climb Rate in cm/s                                                                         |
++---------+----------------------------------------------------------------------------------------------------+
+| CRt     | Climb Rate in cm/s                                                                                 |
++---------+----------------------------------------------------------------------------------------------------+
+| N       | Harmonic notch current center frequency for gyro in Hz                                             |
 +---------+----------------------------------------------------------------------------------------------------+
 
 **D32, DU32 (single data values which are either signed 32bit integers
@@ -292,8 +430,8 @@ or unsigned 32bit integers):**
 +---------+-------------------------------------------------------------------------------------------------------+
 | id      | Identification number for the variable. There are only two possible values:                           |
 |         |                                                                                                       |
-|         | *   7 = bit mask of internal state.  ( The meaning of individual bits can be found in the def'n       |
-|         |     of the ap structure <https://github.com/ardupilot/ardupilot/blob/master/ArduCopter/Copter.h#L251> |
+|         | *   7 = bit mask of internal state (The meaning of individual bits can be found in the def'n of the   |
+|         |     `ap structure <https://github.com/ardupilot/ardupilot/blob/master/ArduCopter/Copter.h#L296>`__    |
 |         |                                                                                                       |
 |         | *   9 = simple mode's initial heading in centi-degrees                                                |
 +---------+-------------------------------------------------------------------------------------------------------+
@@ -307,51 +445,314 @@ or unsigned 32bit integers):**
 
 SubSystem and Error codes listed below
 
-+------------+----------------------------------------------------------------------------------------------------+
-| Error      | DESCRIPTION                                                                                        |
-+------------+----------------------------------------------------------------------------------------------------+
-| 1:Main     | (never used)                                                                                       |
-+------------+----------------------------------------------------------------------------------------------------+
-| 2:Radio    | ECode 1: “Late Frame” which means the APM’s onboard ppm encoder did not provide an                 |
-|            | update for at least 2 seconds                                                                      |
-+------------+----------------------------------------------------------------------------------------------------+
-| 3:Compass  | ECode 1: the compass failed to initialise (likely a hardware issue)                                |
-|            | ECode 2: failure while trying to read a single value from the compass (probably a hardware issue)  |
-|            | ECode 0: above errors resolve                                                                      |
-+------------+----------------------------------------------------------------------------------------------------+
-| 4:Optical  | Ecode 1: failed to initialise (likely a hardware issue)                                            |
-| flow       |                                                                                                    |
-+------------+----------------------------------------------------------------------------------------------------+
-| 5:Throttle | ECode 1: throttle dropped below FS_THR_VALUE meaning likely loss of contact between RX/TX          |
-| failsafe   | ECode 0: above error resolve meaning RX/TX contact likely restored                                 |
-+------------+----------------------------------------------------------------------------------------------------+
-| 6:Battery  | ECode 1: battery voltage dropped below LOW_VOLT or total capacity used exceeded BATT_CAPACITY      |
-| failsafe   |                                                                                                    |
-+------------+----------------------------------------------------------------------------------------------------+
-| 7: GPS     | ECode 1: GPS lock lost for at least 5 seconds                                                      |
-| failsafe   | ECode 0: GPS lock restored                                                                         |
-+------------+----------------------------------------------------------------------------------------------------+
-| 8: GCS     | ECode 1: updates from ground station joystick lost for at least 5 seconds                          |
-| failsafe   | ECode 0: updates from ground station restored                                                      |
-+------------+----------------------------------------------------------------------------------------------------+
-| 9: Fence   | ECode 1: altitude fence breached                                                                   |
-|            | ECode 2: circular fence breached                                                                   |
-|            | ECode 3: both altitude and circular fences breached                                                |
-|            | ECode 0: vehicle is back within the fences                                                         |
-+------------+----------------------------------------------------------------------------------------------------+
-| 10: Flight | ECode 0 ~ 17: the vehicle was unable to enter the desired flight mode:                             |
-| Mode       | 0=Stabilize, 1=Acro, 2=AltHold, 3=Auto, 4=Guided, 5=Loiter, 6=RTL, 7=Circle, 8=Position, 9=Land,   |
-|            | 10=OF_Loiter, 11=Drift, 13=Sport, 14=Flip, 15=AutoTune, 16=PosHold, 17=Brake                       |
-+------------+----------------------------------------------------------------------------------------------------+
-| 11: GPS    | ECode 2: GPS Glitch                                                                                |
-|            | ECode 0: GPS Glitch cleared                                                                        |
-+------------+----------------------------------------------------------------------------------------------------+
-| 12: Crash  | ECode 1: Crash detected                                                                            |
-| Check      |                                                                                                    |
-+------------+----------------------------------------------------------------------------------------------------+
+.. raw:: html
+
+   <table border="1" class="docutils">
+   <tbody>
+   <tr>
+   <th>Subsys</th>
+   <th>ECode and Description</th>
+   </tr>
+   <tr>
+   <td>2 = Radio</td>
+   <td>
+
+- 0 = Errors Resolved
+- 2 = Late Frame : no updates received from receiver for two seconds
+
+.. raw:: html
+
+   </td>
+   </tr>
+   <tr>
+   <td>3 = Compass</td>
+   <td>
+
+- 0 = Errors Resolved
+- 1 = Failed to initialise (probably a hardware issue)
+- 4 = Unhealthy : failed to read from the sensor
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>5 = Radio Failsafe</td>
+   <td>
+
+- 0 = Failsafe Resolved
+- 1 = Failsafe Triggered
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>6 = Battery Failsafe</td>
+   <td>
+
+- 0 = Failsafe Resolved
+- 1 = Failsafe Triggered
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>8 = GCS Failsafe</td>
+   <td>
+
+- 0 = Failsafe Resolved
+- 1 = Failsafe Triggered
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>9 = Fence Failsafe</td>
+   <td>
+
+- 0 = Failsafe Resolved
+- 1 = Altitude fence breach, Failsafe Triggered
+- 2 = Circular fence breach, Failsafe Triggered
+- 3 = Both Alt and Circular fence breached, Failsafe Triggered
+- 4 = Polygon fence breached, Failsafe Triggered
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>10 = Flight mode Change failure</td>
+   <td>
+
+Vehicle was unable to enter the desired flight mode normally because of a bad position estimate
+
+See `flight mode numbers here <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/mode.h#L77>`__
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>11 = GPS</td>
+   <td>
+
+- 0 = Glitch cleared
+- 2 = GPS Glitch occurred
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>12 = Crash Check</td>
+   <td>
+
+- 1 = Crash into ground detected.  Normally vehicle is disarmed soon after
+- 2 = Loss of control detected.  Normally parachute is released soon after
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>13 = Flip mode</td>
+   <td>2 = Flip abandoned (not armed, pilot input or timeout)</td>
+   </tr>
+   <tr>
+   <td>15 = Parachute</td>
+   <td>
+
+- 2 = Not Deployed, vehicle too low
+- 3 = Not Deployed, vehicle landed
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>16 = EKF Check</td>
+   <td>
+
+- 0 = Variance cleared (position estimate OK)
+- 2 = Bad Variance (position estimate bad)
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>17 = EKF Failsafe</td>
+   <td>
+
+- 0 = Failsafe Resolved
+- 1 = Failsafe Triggered
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>18 = Barometer</td>
+   <td>
+
+- 0 = Errors Resolved
+- 4 = Unhealthy : failed to read from the sensor
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>19 = CPU Load Watchdog</td>
+   <td>
+
+- 0 = Failsafe Resolved
+- 1 = Failsafe Triggered (normally vehicle disarms)
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>20 = ADSB Failsafe</td>
+   <td>
+
+- 0 = Failsafe Resolved
+- 1 = No action just report to Pilot
+- 2 = Vehicle avoids by climbing or descending
+- 3 = Vehicle avoids by moving horizontally
+- 4 = Vehicle avoids by moving perpendicular to other vehicle
+- 5 = RTL invoked
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>21 = Terrain Data</td>
+   <td>2 = missing terrain data</td>
+   </tr>
+
+   <tr>
+   <td>22 = Navigation</td>
+   <td>
+
+- 2 = Failed to set destination
+- 3 = RTL restarted
+- 4 = Circle initialisation failed
+- 5 = Destination outside fence
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>23 = Terrain Failsafe</td>
+   <td>
+
+- 0 = Failsafe Resolved
+- 1 = Failsafe Triggered (normally vehicle RTLs)
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>24 = EKF Primary changed</td>
+   <td>
+
+- 0 = 1st EKF has become primary
+- 1 = 2nd EKF has become primary
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>25 = Thrust Loss Check</td>
+   <td>
+
+- 0 = Thrust Restored
+- 1 = Thrust Loss Detected (altitude may be prioritised over yaw control)
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>26 = Sensor Failsafe (Sub)</td>
+   <td>
+
+- 0 = Sensor Failsafe Cleared
+- 1 = Sensor Failsafe Triggered
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>27 = Leak Failsafe (Sub)</td>
+   <td>
+
+- 0 = Leak Failsafe Cleared
+- 1 = Leak Detector Failsafe Triggered
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>28 = Pilot Input Timeout Failsafe (Sub only)</td>
+   <td>
+
+- 0 = Pilot Input Failsafe Cleared
+- 1 = Pilot Input Failsafe Triggered
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   <tr>
+   <td>29 = Vibration Failsafe</td>
+   <td>
+
+- 0 = Excessive Vibration Compensation De-activated
+- 1 = Excessive Vibration Compenstaion Activated
+
+.. raw:: html
+
+   </td>
+   </tr>
+
+   </tbody>
+   </table>
 
 **EV: (an event number)**. The full list of possible events can be found
-in `defines.h <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/defines.h#L291>`__
+in `AP_Logger.h <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Logger/AP_Logger.h#L94>`__
 but the most common are:
 
 +------------+----------------------------------------------------------------------------------------------------+
@@ -363,14 +764,12 @@ but the most common are:
 +------------+----------------------------------------------------------------------------------------------------+
 | 15         | Auto Armed (pilot has raised throttle above zero and autopilot is free to take control of throttle)|
 +------------+----------------------------------------------------------------------------------------------------+
-| 16         | TakeOff                                                                                            |
-+------------+----------------------------------------------------------------------------------------------------+
 | 18         | Land Complete                                                                                      |
 +------------+----------------------------------------------------------------------------------------------------+
 | 25         | Set Home (home location coordinates have been capture)                                             |
 +------------+----------------------------------------------------------------------------------------------------+
-
-
+| 28         | Not Landed (aka Takeoff complete)                                                                  |
++------------+----------------------------------------------------------------------------------------------------+
 
 
 **GPA: (Global Position Accuracy)**
@@ -379,7 +778,7 @@ but the most common are:
 | FIELD      | DESCRIPTION                                                                                        |
 +------------+----------------------------------------------------------------------------------------------------+
 | VDop       | Vertical dilution of precision, a unitless measure of precision                                    |
-|            | https://en.wikipedia.org/wiki/dilution_of_precision                                                |
+|            | https://en.wikipedia.org/wiki/Dilution_of_precision                                                |
 +------------+----------------------------------------------------------------------------------------------------+
 | HAcc       | Horizontal Accuracy as reported by the GPS module, in meters                                       |
 +------------+----------------------------------------------------------------------------------------------------+
@@ -411,15 +810,15 @@ but the most common are:
 | NSats      | The number of satellites current being used                                                        |
 +------------+----------------------------------------------------------------------------------------------------+
 | HDop       | A measure of gps precision (1.5 is good, >2.0 is not so good)                                      |
-|            | https://en.wikipedia.org/wiki/dilution_of_precision                                                |
+|            | https://en.wikipedia.org/wiki/Dilution_of_precision                                                |
 +------------+----------------------------------------------------------------------------------------------------+
-| Lat        | Lattitude according to the GPS                                                                     |
+| Lat        | Latitude according to the GPS                                                                      |
 +------------+----------------------------------------------------------------------------------------------------+
 | Lng        | Longitude according to the GPS                                                                     |
 +------------+----------------------------------------------------------------------------------------------------+
 | RelAlt     | Accelerometer + Baro altitude in meters                                                            |
 +------------+----------------------------------------------------------------------------------------------------+
-| Alt        | GPS reported altitude (not used by the flight controller)                                          |
+| Alt        | GPS reported altitude (not used by the autopilot)                                                  |
 +------------+----------------------------------------------------------------------------------------------------+
 | SPD        | Horizontal ground speed in m/s                                                                     |
 +------------+----------------------------------------------------------------------------------------------------+
@@ -431,21 +830,24 @@ but the most common are:
 +------------------+----------------------------------------------------------------------------------------------+
 | FIELD            | DESCRIPTION                                                                                  |
 +------------------+----------------------------------------------------------------------------------------------+
-| GyrX, GyrY, GyrZ | The raw gyro rotation rates in degrees/second                                                |
+| GyrX, GyrY, GyrZ | The raw gyro rotation rates in radians/second                                                |
 +------------------+----------------------------------------------------------------------------------------------+
 | AccX, AccY, AccZ | The raw accelerometer values in m/s/s                                                        |
 +------------------+----------------------------------------------------------------------------------------------+
 
 **Mode (flight mode):**
 
-+------------+----------------------------------------------------------------------------------------------------+
-| FIELD      | DESCRIPTION                                                                                        |
-+------------+----------------------------------------------------------------------------------------------------+
-| Mode       | The flight mode displayed as a string (i.e. STABILIZE, LOITER, etc)                                |
-+------------+----------------------------------------------------------------------------------------------------+
-| ThrCrs     | Throttle cruise (from 0 ~ 1000) which is the autopilot's best guess as to what throttle            |
-|            | is required to maintain a stable hover                                                             |
-+------------+----------------------------------------------------------------------------------------------------+
++------------+-------------------------------------------------------------------------------------------------------+
+| FIELD      | DESCRIPTION                                                                                           |
++------------+-------------------------------------------------------------------------------------------------------+
+| Mode       | The flight mode displayed as a string (i.e. STABILIZE, LOITER, etc)                                   |
++------------+-------------------------------------------------------------------------------------------------------+
+| ThrCrs     | Throttle cruise (from 0 ~ 1000) which is the autopilot's best guess as to what throttle               |
+|            | is required to maintain a stable hover                                                                |
++------------+-------------------------------------------------------------------------------------------------------+
+| Rsn        | Reason for mode change (TX command, failsafe, etc) . The meaning of code values can be found in       |
+|            | `ModeReason <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Vehicle/ModeReason.h>`__ |
++------------+-------------------------------------------------------------------------------------------------------+
 
 **NTUN (navigation information):**
 
@@ -482,45 +884,37 @@ but the most common are:
 +------------+----------------------------------------------------------------------------------------------------+
 | FIELD      | DESCRIPTION                                                                                        |
 +------------+----------------------------------------------------------------------------------------------------+
-| RenCnt     | DCM renormalization count - a high number may indicate problems in DCM (extremely rare)            |
-+------------+----------------------------------------------------------------------------------------------------+
-| RenBlw     | DCM renormalization blow-up count - how many times DCM had to completely rebuild the DCM matrix    |
-|            | since the last PM. Normally innocuous but a number that constantly grows may be an indication      |
-|            | that DCM is having troubles calculating the attitude (extremely rare)                              |
-+------------+----------------------------------------------------------------------------------------------------+
-| FixCnt     | The number of GPS fixes received since the last PM message was received                            |
-|            | (it's hard to imagine how this would be useful)                                                    |
-+------------+----------------------------------------------------------------------------------------------------+
-| NLon       | Number of long running main loops                                                                  |
-|            | (i.e. loops that take more than 5% longer than the 10ms they should)                               |
-+------------+----------------------------------------------------------------------------------------------------+
+| NLon       | Number of long running main loops (i.e. loops that take more than 20% longer                       |
+[site wiki="copter,plane,rover,sub"]|            | than they should according to :ref:`SCHED_LOOP_RATE<SCHED_LOOP_RATE>` - ex. 3ms for 400Hz rate)    |
+[/site][site wiki="dev,planner"]|            | than they should according to :ref:`SCHED_LOOP_RATE<copter:SCHED_LOOP_RATE>` - ex. 3ms for         |
+|            | 400Hz rate)                                                                                        |
+[/site]+------------+----------------------------------------------------------------------------------------------------+
 | NLoop      | The total number of loops since the last PM message was displayed. This allows you to calculate    |
 |            | the percentage of slow running loops (which should never be higher than 15%). Note that the        |
-|            | value will depend on the autopilot clock speed.                                                    |
+|            | value will depend on the autopilot clock speed                                                     |
 +------------+----------------------------------------------------------------------------------------------------+
-| MaxT       | The maximum time that any loop took since the last PM message. This should be close to 10,000 but  |
-|            | will be up to 6,000,000 during the interval where the motors are armed                             |
+| MaxT       | The maximum time that any loop took since the last PM message. This shouldn't exceed 120% of       |
+|            | scheduler loop period, but will be much higher during the interval where the motors are armed      |
 +------------+----------------------------------------------------------------------------------------------------+
-| PMT        | A number that increments each time a heart beat is received from the ground station                |
+| Mem        | Available memory, in bytes                                                                         |
 +------------+----------------------------------------------------------------------------------------------------+
-| I2CErr     | The number of I2C errors since the last PM message. Any I2C errors may indicate a problem on the   |
-|            | I2C bus which may in turn slow down the main loop and cause performance problems.                  |
+| Load       | Percentage (times 10) of the scheduler loop period when CPU is used                                |
 +------------+----------------------------------------------------------------------------------------------------+
 
 
 **RCOUT (pwm output to individual RC outputs):**
 
-RC1, RC2, etc : pwm command sent from flight controller to the
+RC1, RC2, etc : pwm command sent from autopilot to the
 esc/motor/RC output
 
 Viewing KMZ FILES
 =================
 
-When you download the dataflash log files from the flight controller it will
+When you download the dataflash log files from the autopilot it will
 automatically create a KMZ file (file with extension .kmz). This file
 can be opened with Google Earth (just double click the file) to view
 your flight in Google Earth. Please see the instructions on the
-:ref:`Telemetry Logs Page <common-mission-planner-telemetry-logs_creating_3d_images_of_the_flight_path>`
+:ref:`Telemetry Logs Page <planner:mission-planner-telemetry-logs-creating-3d-images-of-the-flight-path>`
 for additional details.
 
 Video tutorials

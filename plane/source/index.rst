@@ -1,22 +1,24 @@
 .. _home:
 
-==========
-Plane Home
-==========
+===============
+ArduPilot Plane
+===============
 
-.. tip::
+..  raw:: html
+    
+    <p style="text-align:center;color:red;"><strong>
+    Success with Plane requires that the 'First Time Setup' and 'First Flight and Tuning' sections of this documentation be read and followed!</strong></p>
+    <br></br>
 
-   Keep up with the latest ArduPilot related blogs on `ArduPilot.org! <http://ardupilot.org/>`__
 
 .. image:: /images/home_plane.jpg
     :target: _images/home_plane.jpg
 
---------------
 
-The free Plane firmware running on a compatible controller board gives
+The open source Plane firmware running on a compatible controller board gives
 any fixed-wing aircraft full autonomous capability. VTOL fixed-wing aircraft that 
 hover and cruise in different configurations 
-are also included under the arduplane firmware.
+are also included under the Plane firmware.
 
 Plane provides advanced functions such as support for hundreds of
 three-dimensional waypoints, automatic take-off and landing as well as
@@ -32,11 +34,15 @@ research use.
 
     This is the platform that won the prestigious 
     `Outback Challenge UAV competition <http://uavchallenge.org>`__ 
-    in `2012 <http://diydrones.com/profiles/blogs/canberrauav-outback-challenge-2012-debrief>`__,
-    `2014 <http://diydrones.com/profiles/blogs/canberrauav-outback-challenge-2014-debrief>`__
-    and `2016 <http://discuss.ardupilot.org/t/canberrauav-outback-challenge-2016-debrief>`__ as well as the \
+    in `2012 <https://diydrones.com/profiles/blogs/canberrauav-outback-challenge-2012-debrief>`__,
+    `2014 <https://diydrones.com/profiles/blogs/canberrauav-outback-challenge-2014-debrief>`__
+    and `2016 <https://discuss.ardupilot.org/t/canberrauav-outback-challenge-2016-debrief/12162>`__ as well as the \
     `2014 Sparkfun Autonomous Vehicle Competition <https://avc.sparkfun.com/2014/scores#Aerial:Fixed>`__.
 
+
+.. tip::
+
+    Keep up with the latest ArduPilot related blogs on `ArduPilot.org! <https://ardupilot.org/>`__
 
 --------------
 
@@ -44,7 +50,7 @@ System components
 ~~~~~~~~~~~~~~~~~
 
 -  :ref:`Autopilot <common-autopilots>` loaded with the latest
-   version of `Plane firmware <http://firmware.ardupilot.org/>`__
+   version of `Plane firmware <https://firmware.ardupilot.org/>`__
 -  :ref:`Ground Control Station <common-choosing-a-ground-station>`
    with software that gives you an easy point-and-click setup/configuration, along
    with a full-featured interface.
@@ -81,8 +87,14 @@ provide the same level of precise camera positioning.
 
 For longer missions and more payload, a fixed-wing is your best
 choice. But for keeping a camera in one place or moving slowly, consider 
-switching to a copter instead. The same APM autopilot can control that 
+switching to a copter instead. The same autopilot can control that 
 equally well by simply loading the :ref:`Copter <copter:home>` code.
+
+
+.. tip::
+
+    For a simplified chinese 简体中文 version abstract of this wiki please check `ArduPilot.org partner CUAV! <http://doc.cuav.net/tutorial/plane/>`__
+
 
 
 --------------
@@ -93,26 +105,22 @@ Announcements
 Monitor https://discuss.ardupilot.org/c/arduplane for plane-related announcements.
 
 
-Full Table of Contents
-----------------------
 
 .. toctree::
    :maxdepth: 4
-   
-    Introduction <docs/introduction>
+   :hidden:
+
+    Introduction to Plane <docs/plane-introduction>
+    Choosing an Autopilot <docs/common-autopilots>
+    Ground Control Stations <docs/common-GCS>
     First Time Setup <docs/arduplane-setup>
-    First Flight <docs/first-flight-landing-page>
-    Flight Features <docs/flight-features>
-    Advanced Configuration <docs/common-advanced-configuration>
-    QuadPlane Support <docs/quadplane-support>
+    First Flight and Tuning <docs/first-flight-landing-page>
+    QuadPlane Setup and Operation <docs/quadplane-support>
     Mission Planning <docs/common-mission-planning>
-    Logs <docs/common-logs>
-    Optional Hardware <docs/common-optional-hardware>
-    AutoPilot Hardware <docs/common-autopilots>
-    Use-Cases and Applications <docs/common-use-cases-and-applications>
-    Antenna Tracking <docs/common-antenna-tracking>
-    Simulation <docs/common-simulation>
-    Appendix <docs/common-appendix>
-    Fixed Wing FAQ <docs/fixed-wing-faq>
-    Full Table of Contents <docs/common-table-of-contents>
+    If A Problem Arises <docs/common-when-problems-arise> 
+    Advanced Configuration <docs/common-advanced-configuration>
+    Peripheral Hardware <docs/common-optional-hardware>
+    Additional Information <docs/additional-information>
+    User Alerts <docs/common-user-alerts>
+
 

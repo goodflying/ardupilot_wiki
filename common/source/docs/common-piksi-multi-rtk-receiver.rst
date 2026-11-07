@@ -4,14 +4,10 @@
 Swift Navigation's Piksi Multi RTK GPS Receiver
 ===============================================
 
-This article provides a brief overview of Piksi Multi multi-band multi-constellation RTK GPS receiver, available from `Swift Navigation <http://swiftnav.com/>`__.
+This article provides a brief overview of Piksi Multi multi-band multi-constellation RTK GPS receiver, available from `Swift Navigation <https://www.swiftnav.com/>`__.
 
 .. image:: ../../../images/PiksiMulti.jpg
-	:target: ../_images/PiksiMulti.jpg
-
-.. note::
-
-     Piksi Multi RTK GPS is supported in Copter-3.5 (and higher), Plane 3.8.0 (and higher) and Rover 3.1 (and higher)
+    :target: ../_images/PiksiMulti.jpg
 
 .. note::
 
@@ -20,7 +16,7 @@ This article provides a brief overview of Piksi Multi multi-band multi-constella
 What is Piksi Multi?
 ====================
 
-Piksi Multi the first affordable multi-band multi-constellation RTK GPS unit. Not only does it provide centimeter-accurate positioning similar to other RTK GPS units, it additionally provides RTK lock times on the order of seconds. In comparison, single-frequency RTK GPS receivers require several minutes to aquire or reaquire an RTK FIX.
+Piksi Multi the first affordable multi-band multi-constellation RTK GPS unit. Not only does it provide centimeter-accurate positioning similar to other RTK GPS units, it additionally provides RTK lock times on the order of seconds. In comparison, single-frequency RTK GPS receivers require several minutes to acquire or reacquire an RTK FIX.
 
 What is RTK GPS and why does multi-frequency matter?
 ====================================================
@@ -32,4 +28,4 @@ However, RTK GPS can only calculate centimeter-accurate positions once an intege
 ArduPilot Integration
 =====================
 
-See the `ArduPilot Integration Guide for Piksi Multi <https://support.swiftnav.com/customer/portal/articles/2803651-piksi-multi-ardupilot-integration-guide>`__ supplied by Swift Navigation.
+See the `ArduPilot Integration Guide for Piksi Multi <https://support.swiftnav.com/support/solutions/articles/44001850784-piksi-multi-ardupilot-integration-guide>`__ supplied by Swift Navigation.

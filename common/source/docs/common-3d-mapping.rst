@@ -15,22 +15,16 @@ be used to create 3d maps.
 
 The image above is
 `Sylvain <http://www.diydrones.com/profile/Sylvain793>`__'s `"the fallen
-blockhouse" <http://www.diydrones.com/profiles/blogs/the-fallen-blockhouse-t3-entry>`__ and `the winner <http://www.diydrones.com/profiles/blogs/announcing-the-winner-of-the-13th-t3-competition>`__\ of
+blockhouse" <https://www.diydrones.com/profiles/blogs/the-fallen-blockhouse-t3-entry>`__ and `the winner <https://www.diydrones.com/profiles/blogs/announcing-the-winner-of-the-13th-t3-competition>`__\ of
 the Feb 2014 T3 competition.
 
 Equipment you will need
 =======================
 
-:ref:`Plane <plane:home>` or
+`Plane <https://ardupilot.org/plane/index.html>`_ or
 :ref:`Multicopter <copter:home>`
 
-A digital still camera:
-
-`Canon cameras capable of CHDK <http://chdk.wikia.com/wiki/For_Developers>`__ including the S100,
-S110, Elph 110 HS and SX230HS
-
-Other camera types including Canon ELPH 520 HS (not CHDK capable) with
-some method of triggering the camera shutter
+A digital still camera  with some method of triggering the camera shutter
 
 GoPro cameras are not recommended because of their fish-eye lenses
 
@@ -60,8 +54,8 @@ overlap in pictures from adjacent tracks.
 
 The camera shutter needs to be triggered throughout the mission (i.e
 every 2 to 5 seconds or at regular distance intervals).  Many cameras
-include a feature to take pictures at regular time intervals.  `Canon cameras loaded with CHDK can run a script <http://chdk.wikia.com/wiki/User_Written_Scripts>`__ that does
-this.  Alternatively :ref:`Copter/Plane/Rover can trigger a Canon CHDK camera at timed or distance based intervals <common-chdk-camera-control-tutorial>`.
+include a feature to take pictures at regular time intervals. If not, then a
+camera shutter release method must be implemented via a relay control, see :ref:`common-camera-shutter-with-servo` for example.
 
 A mission to accomplish this would include some or all of these
 commands:
@@ -75,25 +69,19 @@ column.  Adding "1" to the "Delay" columns will cause the copter to
 momentarily stop at each waypoint.
 
 **DO_DIGICAM_CONTROL** will cause the camera shutter to be pushed once
-immediately if the APM/Pixhawk have been connected using CHDK or a
+immediately if the autopilot has been connected using a
 servo.  This command takes no arguments and like other "do" commands it
 executes immediately after the preceding waypoint command begins.
 
 **DO_TRIGG_DISTANCE** is the same as do-digicam-control (above) except
 the camera shutter will trigger every X meters.  Where X can be defined
-in the first column labelled "Dist (m)".  Note: in AC3.1.2 there is no
-mission command to stop the command from running so the shutter will be
-triggered continuously until the vehicle is switched out of AUTO mode.
+in the first column labelled "Dist (m)".
 
 **RETURN_TO_LAUNCH** should be the last command in the mission so the
 vehicles returns home.
 
 **DO_SET_ROI** can be used to point the nose of the vehicle and gimbal
-at a specific point on the map.  Note: in AC3.1.2, as the vehicle passes
-a waypoint it will point to the next waypoint, this means that in order
-to point at a single point throughout the mission, the do-set-roi
-command must appear over and over again after each waypoint.  In AC3.2
-this behaviour has been modified so that this is not necessary.
+at a specific point on the map.
 
 .. image:: ../../../images/3dMapping_MPFlightPlanExample.jpg
     :target: ../_images/3dMapping_MPFlightPlanExample.jpg
@@ -102,7 +90,7 @@ Recommended Desktop 3d mapping software
 =======================================
 
 MicMac based toolchain together with
-(`ImageJ/Fiji <http://fiji.sc/>`__, `QGIS <http://qgis.org/en/site/>`__,
+(`ImageJ/Fiji <http://fiji.sc/>`__, `QGIS <https://qgis.org/en/site/>`__,
 `SAGA GIS <https://sourceforge.net/projects/saga-gis/>`__): open source
 and free!
 
@@ -114,7 +102,7 @@ orthopotos, etc
 
 `Pix4d <https://www.pix4d.com/>`__ : 6500 euros or 260 euros per month
 
-`OpenDroneMap <http://opendronemap.github.io/odm/>`__ : open source and
+`OpenDroneMap <https://opendronemap.org/>`__ : open source and
 free! (`user intro video <https://www.youtube.com/watch?v=e2qp3o8caPs>`__)
 
 All of these software packages work in generally the same way in that
@@ -149,14 +137,13 @@ raw images.
 Additional resources and Examples
 =================================
 
--  `T3 season 2 - "the model" blog post <http://www.diydrones.com/profiles/blogs/t3-season-2-the-model>`__
-   and `winner announcement <http://www.diydrones.com/profiles/blogs/announcing-the-winner-of-the-13th-t3-competition>`__
--  `Sylvain's "fallen blockhouse" T3 entry blog post <http://diydrones.com/profiles/blogs/the-fallen-blockhouse-t3-entry>`__
--  `Thorsten's "resconstruction of largest hallstatt tumulus grave" T3 entry blog post <http://diydrones.com/profiles/blogs/3d-reconstruction-of-largest-hallstatt-tumulus-grave-in-central>`__
--  `Stephen Gienow's "Octocopter scan of UMBC" T3 entry blog post <http://diydrones.com/profiles/blogs/apm-octocopter-build-and-mission>`__
--  `Krasiczyn Castle 3D model, Poland <http://diydrones.com/profiles/blogs/krasiczyn-castle-3d-model-poland>`__
+-  `T3 season 2 - "the model" blog post <https://www.diydrones.com/profiles/blogs/t3-season-2-the-model>`__
+   and `winner announcement <https://www.diydrones.com/profiles/blogs/announcing-the-winner-of-the-13th-t3-competition>`__
+-  `Sylvain's "fallen blockhouse" T3 entry blog post <https://diydrones.com/profiles/blogs/the-fallen-blockhouse-t3-entry>`__
+-  `Thorsten's "resconstruction of largest hallstatt tumulus grave" T3 entry blog post <https://diydrones.com/profiles/blogs/3d-reconstruction-of-largest-hallstatt-tumulus-grave-in-central>`__
+-  `Stephen Gienow's "Octocopter scan of UMBC" T3 entry blog post <https://diydrones.com/profiles/blogs/apm-octocopter-build-and-mission>`__
+-  `Krasiczyn Castle 3D model, Poland <https://diydrones.com/profiles/blogs/krasiczyn-castle-3d-model-poland>`__
 -  `MyDrone's "Buisante Chapel" T3 entry <http://prebut.free.fr/>`__
 -  `Creating Maps from Drone Imagery - 3DRobotics and Aero drone <https://www.mapbox.com/blog/processing-drone-imagery/>`__
 -  `Ecosynth wiki - a suite of tools used to map vegetation in 3d using
    off-the-shelf digital cameras and open-source computer vision software <http://wiki.ecosynth.org/index.php?title=Main_Page>`__ 
-- :ref:`Triggering non-CHDK cameras from Pixhawk <common-pixhawk-auto-camera-trigger-without-chdk>`

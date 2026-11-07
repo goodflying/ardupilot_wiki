@@ -32,8 +32,8 @@ libraries and their function.
    a library to more convert pwm input/output from APM_RC into internal
    units such as angles
 -  `AP_HAL <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL>`__,
-   `AP_HAL_AVR <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_AVR>`__,
-   `AP_HAL_PX4 <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_PX4>`__
+   `AP_HAL_ChibiOS <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_ChibiOS>`__,
+   `AP_HAL_Linux <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_HAL_Linux>`__
    - libraries to implement the "Hardware abstraction layer" which
    presents an identical interface to the high level code so that it can
    more easily be ported to different boards.
@@ -60,5 +60,4 @@ libraries and their function.
    camera mount control library, camera shutter control libraries
 -  `AP_Mission <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Mission>`__
    - stores/retrieves mission commands from eeprom
--  `AP_Buffer <https://github.com/ArduPilot/ardupilot/tree/master/libraries/AP_Buffer>`__ -
-   a simple FIFO buffer for use with inertial navigation
+

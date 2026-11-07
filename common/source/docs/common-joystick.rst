@@ -4,10 +4,9 @@
 Joystick/Gamepad
 ================
 
-This article explains how you can control your vehicle with a Joystick or Gamepad using the Mission Planner which sends "RC Override" messages to the vehicle.
+This article explains how you can control your vehicle with a Joystick or Gamepad using the Mission Planner which sends "RC Channel Override" messages to the vehicle.
 
-Other GCSs may also support "RC overrides" but they are not covered in
-this article.
+Other GCSs including QGC also support "RC Channel Overrides" but they are not covered in this article.
 
 .. figure:: ../../../images/joystick_LogitechF310.jpg
    :target: ../_images/joystick_LogitechF310.jpg
@@ -17,31 +16,37 @@ this article.
 .. tip::
 
    Even if flying with a joystick, you should keep a regular
-   transmitter/receiver connected and ready for use as a backup.  In future
-   versions of ArduPilot, after more failsafe testing has been completed this recommendation may change.
+   transmitter/receiver connected and ready for use as a backup
 
 What you will need
 ==================
 
 You will need the following equipment:
 
--  USB joystick or Gamepad such as the `Logitech F310 <http://gaming.logitech.com/en-us/product/f310-gamepad>`__
+-  USB joystick or Gamepad such as the `Logitech F310 <https://www.logitechg.com/en-us/products/gamepads/f310-gamepad.html>`__
    (shown above).
 -  A :ref:`telemetry connection <common-telemetry-landingpage>`
    between your ground station and vehicle.
 -  A laptop computer running *Mission Planner*.
 
+Calibration
+===========
+
+First you must calibrate the joystick using the Windows joystick/game controller wizard.
+
+.. image:: ../../../images/joystick.jpg
+
 Setup with the Mission Planner
 ==============================
 
--  Connect your USB joystick/gamepad to the laptop computer
+-  Connect your USB joystick/gamepad to the PC
 -  Open the *Mission Planner Flight Data* screen. On the **Actions** tab
    push the **Joystick** button
 
    .. image:: ../../../images/joystick_MPSetup.png
        :target: ../_images/joystick_MPSetup.png
    
--  Ensure the Logitech joystick appears in the drop-down
+-  Ensure the joystick appears in the drop-down
 -  The **Enable** button, once pushed, will tell the mission planner to
    start sending commands to the vehicle so for the initial setup do not
    push it.
@@ -58,34 +63,37 @@ Setup with the Mission Planner
 
 -  Repeat for *Pitch*, *Throttle* and *Rudder* and push the **Save** button
 -  You will likely want to set-up other buttons for *Arm* and *Disarm*
--  Instead of setting up a stick or button for ch5 (the flight mode
-   channel), it is better to set individual buttons to initiate a flight
-   mode by selecting **Change Mode** and then push the **Settings**
-   button and select the flight mode from the drop-down (see pic above)
--  When done, push the **Save** button
--  In the **CONFIG/TUNING \| Full Parameter List**, check that the
-   :ref:`SYSID_MYGCS <SYSID_MYGCS>`
-   parameter matches the system ID of your GCS. This parameter limits
-   which GCS can send override signals to the vehicle.
+-  The flight mode channel (e.g. RC5 or RC8) and :ref:`auxiliary function channels <common-auxiliary-functions>`
+   should not be controlled from the joystick especially if a regular RC receiver is also connected.  Instead it is better to configure buttons to set the flight
+   mode by selecting **Change Mode** and then push the **Settings** button and select the flight mode from the drop-down (see pic above).  Details on why this is important are documented in `issue #32862 <https://github.com/ArduPilot/ardupilot/issues/32862>`__.
+-  When done, push the **Save** button. This records the min and max calibrations and records the neutral positions of the joystick for the trim value. Mission Planner will then scale the joystick signal to the RC channel's ``RCx_MIN/MAX/TRIM`` parameters in the autopilot when sending RC override commands by the Joystick.
 
-   .. tip::
+Autopilot Setup
+===============
 
-      For Mission Planner the default GCS system ID is 255. The
-         default system ID for APM Mission Planner 2 is 252 (but the GCS will
-         automatically set its ID to match *SYSID_MYGCS* for RC Override
-         commands). 
+These parameters configure how the RC inputs are consumed by the autopilot:
+
+- :ref:`MAV_GCS_SYSID <MAV_GCS_SYSID>` should match the GCS's mavlink system ID.  By default Mission Planner and QGC use 255, APM Planner 2 is 252.  This parameter limits which GCS can send override signals to the vehicle.
+
+   .. image:: ../../../images/joystick-mp-gcs-sysid.png
+       :target: ../_images/joystick-mp-gcs-sysid.png
+       :width: 400px
+
+- :ref:`RC_OVERRIDE_TIME <RC_OVERRIDE_TIME>`: Timeout in seconds after which RC overrides will no longer be used, and regular RC input will resume. Default is 3 seconds. 0 will disable RC overrides, -1 will never timeout, and continue using overrides until they are disabled.  If no regular RC is present on the vehicle this essentially defines the :ref:`RC failsafe timeout <copter:radio-failsafe>`.
+- :ref:`RC_OPTIONS <RC_OPTIONS>` bit 1 (value 2) allow ignoring RC overrides completely
+- :ref:`RC Auxiliary Function <common-auxiliary-functions>` 46 (RC Override Enable) allows an RC input to enable/disable RC overrides.  This may be useful to allow the pilot to easily switch between using a regular RC transmitter and joystick
 
 .. note::
 
    If you get an error **PreArm: RC not calibrated** (following
-   calibration) you will additionally need to manually change ``RC1_MIN``
-   to 1101 and ``RC1_MAX`` to 1901 (and then repeat for RC2\_, RC3\_ and
+   calibration) you will additionally need to manually change  :ref:`RC1_MIN <RC1_MIN>`
+   to 1101 and :ref:`RC1_MAX <RC1_MAX>` to 1901 (and then repeat for RC2\_, RC3\_ and
    RC4\_ max/min parameters).
 
    This error is caused because *Mission Planner* maps the Joystick exactly
-   to the 1100 - 1900 range, but the pre-arm checks assume that if the
-   values are not at least 1 pwm off the century value, that calibration
-   has not been done.
+   to the RC min and max range, but the pre-arm checks assume that if the
+   values are not at least 1 PWM us off the default value, that calibration
+   has not been done. If you have RC calibrated your transmitter/receiver system already, this will not be necessary. **DO NOT RC CALIBRATE THE JOYSTICK**, it is not the same control mechanism as is used for RC systems. It uses MAVLink override messages.
 
 Testing the controls before flying
 ==================================
@@ -97,7 +105,7 @@ To check the above controls move in the correct direction:
 
 -  Click the **Enable** button on the Joystick setup screen to enable
    sending messages to the vehicle
--  Connect your flight controller to the computer with a USB cable
+-  Connect your autopilot to the computer with a USB cable
 -  Push the Mission Planner's **Connect** button
 -  Go to the **Initial Setup \| Mandatory Hardware \| Radio
    Calibration** screen and ensure the green bars all move in the
@@ -107,7 +115,7 @@ To check the above controls move in the correct direction:
    Joystick setup screen.
 
 Next test you are able to arm, disarm and switch into the various flight
-modes (not need to connect the battery)
+modes (no need to connect the battery)
 
 Testing the failsafes
 =====================
@@ -120,8 +128,8 @@ no failover to regular transmitter):
 
 #. Turn regular transmitter off
 #. Connect with the mission planner, push Joystick window's **Enable**
-   button and ensure RC overrides are being sent to the vehicle (use
-   Radio Calibration screen) or Flight Data's status screen.
+   button and ensure RC overrides are being sent to the vehicle. (use
+   Radio Calibration screen or Flight Data's status screen)
 #. Arm vehicle, switch to Stabilize or Loiter mode and raise the throttle
 #. Ensure the motors are spinning by checking the Flight Data screen's
    "ch1out" ~ "ch4out"
@@ -148,7 +156,7 @@ no failover to regular transmitter):
    by checking "ch3in" is very high (around 1900 usually)
 #. On the Joystick screen push the **Disable** button and check the
    "ch3in" has dropped to a mid value (around 1500)
-#. The vehicle should remain in it's current flight mode (Stabilize) but
+#. The vehicle should remain in its current flight mode (Stabilize) but
    controls have been returned to the transmitter.  The pilot's inputs
    should be reflected in the "ch1in" ~ "ch8in" values.  Switch the
    vehicle to AltHold mode by moving the flight mode switch.
@@ -160,7 +168,7 @@ was "Disabled" or disconnected from the PC.  You can test this by
 repeating the test above but instead of pushing the **Disable** button
 on the Joystick screen, disconnect the radio.  In order to see the
 status of the vehicle you will need to connect two Mission Planner's
-separately (only possible on Pixhawk).  The Mission Planner with the
+separately.  The Mission Planner with the
 Joystick should be connected through telemetry and the 2nd Mission
 Planner should be connected through a USB connection.
 

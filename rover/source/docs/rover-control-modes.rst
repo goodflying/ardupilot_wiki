@@ -18,12 +18,15 @@ The full list of modes in alphabetical order is:
 
     Acro <acro-mode>
     Auto <auto-mode>
+    Circle<circle-mode>
+    Dock <dock-mode>
+    Follow <follow-mode>
     Guided <guided-mode>
     Hold <hold-mode>
-    Learning (deprecated) <learning-mode>
     Loiter (for boats) <loiter-mode>
     Manual <manual-mode>
     RTL <rtl-mode>
+    Simple <simple-mode>
     Steering <steering-mode>
     Smart RTL <smartrtl-mode>
     

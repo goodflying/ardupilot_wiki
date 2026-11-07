@@ -42,6 +42,18 @@ There are 3 possible ways:
 ::
 
     gdb [gdb options] --args path-to-SITL-firmware(generally in build/sitl/bin) [SITL options]
+    
+Example: The following launches the default Copter SITL:
+
+::
+
+    gdb --args $HOME/ardupilot/build/sitl/bin/arducopter -S -I0 --home -35.363261,149.165230,584,353 --model + --speedup 1 --defaults $HOME/ardupilot/Tools/autotest/default_params/copter.parm
+    
+You can also attach MAVProxy if required
+
+::
+
+    mavproxy.py --master tcp:127.0.0.1:5760 --sitl 127.0.0.1:5501 --out 127.0.0.1:14550 --out 127.0.0.1:14551 --console --map
 
 - run gdb with SITL launch script ``sim_vehicle.py`` : simply add ``-D -G`` to build and launch SITL with debug symbols and in gdb directly :
 
@@ -49,9 +61,12 @@ There are 3 possible ways:
 
     sim_vehicle.py -v ArduCopter -f quad --console --map -D -G
 
-The SITL launch script also get some other feature already provided like launch gdb stopped, put some breakpoints, etc.
+here is a video of its use:
 
-- attach to already running SITL process. You can get the SITL process id with ``pidof [vehicle type : arducopter, arduplane, ardurover]``.
+.. youtube:: 8fIndjwc_-Y
+
+
+- you can also attach to an already running SITL process. You can get the SITL process id with ``pidof [vehicle type : arducopter, arduplane, ardurover]``.
 
 ::
 
@@ -59,7 +74,8 @@ The SITL launch script also get some other feature already provided like launch 
 
 When gdb is launched you should be able to use it to debug ArduPilot like any other program. If you don't know how to
 use gdb from commandline, please look on the net for some tutorial, a simple one can be found `here <http://www.unknownroad.com/rtfm/gdbtut/gdbtoc.html>`__.
-Don't forget that you can crash you drone on SITL safely !
+Don't forget that you can crash your drone on SITL safely !
+
 
 With IDE
 ========
@@ -78,51 +94,6 @@ In this case, do one of the following:
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
 
 - To disable this restriction permanently, open the ``/etc/sysctl.d/10-ptrace.conf`` file for editing and change the line kernel.yama.ptrace_scope = 1 to kernel.yama.ptrace_scope = 0. To apply the changes immediately, enter the above command. Alternatively, run ``sudo service procps restart`` or simply restart your system.
-
-VS CODE
--------
-
-`VS Code website <https://code.visualstudio.com/>`__
-
-
-Open ArduPilot directory.
-Go in debug menu and then Add a configuration, it should open a launch.json file for debugging configuration.
-You should have a big ``Add a configuration`` button.
-
-.. image:: ../images/VSCode-config1.png
-    :target: ../_images/VSCode-config1.png
-
-Click and select ``C/C++ : (gdb) Attach`` option.
-
-.. image:: ../images/VSCode-config2.png
-    :target: ../_images/VSCode-config2.png
-
-Fill the "program" line with
-
-::
-
-    "program": "${workspaceFolder}/build/sitl/bin/arducopter",
-
-.. image:: ../images/VSCode-config3.png
-    :target: ../_images/VSCode-config3.png
-
-Or the other vehicle you want.
-
-Launch SITL with launch script ``sim_vehicle.py`` : simply add ``-D`` to build and launch SITL with debug symbols :
-
-::
-
-    sim_vehicle.py -v ArduCopter -f quad --console --map -D
-
-And now start debugging with VSCode, it will ask you for a process name : type ``arducopter`` or the other vehicle name you want to debug.
-
-.. image:: ../images/VSCode-attach1.png
-    :target: ../_images/VSCode-attach1.png
-
-Now you can put breakpoint in the code and start debugging !
-
-.. image:: ../images/VSCode-debug.png
-    :target: ../_images/VSCode-debug.png
 
 CLION
 -----

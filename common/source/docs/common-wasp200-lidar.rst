@@ -4,43 +4,51 @@
 Attollo Engineering Wasp200 Lidar
 =================================
 
-The `Wasp200 <http://www.attolloengineering.com/wasp-200-lrf.html>`__ has a range of up to 250m and an update rate from 56hz to 10kHz.  More specifications can be found `here <http://www.attolloengineering.com/uploads/5/7/5/1/57512457/xm000001-01_user_manual_wasp-200_lrf.pdf>`__.
+The `Wasp200 <https://www.attolloengineering.com/wasp-200-lrf.html>`__ has a range of up to 200m and an update rate up to 56hz.  More specifications can be found `here <https://attolloengineering.com/wp-content/uploads/2021/05/XM000002-007-User-Manual-WASP-200-LRF-Class-1.pdf>`__.
 
 .. image:: ../../../images/wasp200-lidar.png
 
-.. note::
-
-   Support for this sensor is available in Plane-3.9 (and higher), Copter-3.6 (and higher) and Rover-3.4 (and higher)
 
 Where to Buy
-------------
+============
 
-- The `Attollo Engineering online store <http://www.attolloengineering.com/store/p14/WASP-LRF_200_Rangefinder.html>`__ sells the lidar directly
+- The `Attollo Engineering online store <https://attolloengineering.com/store/>`__ sells the lidar directly
 
-Connecting to the Flight Controller
------------------------------------
-
+Connecting to the Autopilot
+===========================
 For a serial connection you can use any spare Serial/UART port.  The diagram below shows how to connect to SERIAL4.
 
 .. image:: ../../../images/wasp200-pixhawk.jpg
 
-If the SERIAL4 port on a Pixhawk is being used then the following parameters should be set:
+If the SERIAL4 port on a Pixhawk is being used then the following parameters should be set for the first rangefinder:
 
 -  :ref:`SERIAL4_PROTOCOL <SERIAL4_PROTOCOL>` = 9 (Lidar)
--  :ref:`RNGFND_TYPE <RNGFND_TYPE>` = 18 (Wasp200)
--  :ref:`RNGFND_MIN_CM <RNGFND_MIN_CM>` = 200
--  :ref:`RNGFND_MAX_CM <RNGFND_MAX_CM>` = 20000.  *This is the distance in centimeters that the rangefinder can reliably read.*
--  :ref:`RNGFND_GNDCLEAR <RNGFND_GNDCLEAR>` = 10 *or more accurately the distance in centimetres from the range finder to the ground when the vehicle is landed.  This value depends on how you have mounted the rangefinder.*
+-  :ref:`RNGFND1_TYPE <RNGFND1_TYPE>` = 18 (Wasp200)
+-  :ref:`RNGFND1_MIN <RNGFND1_MIN>` = 2
+-  :ref:`RNGFND1_MAX <RNGFND1_MAX>` = 200.  *This is the distance in meters that the rangefinder can reliably read.*
+-  :ref:`RNGFND1_GNDCLR <RNGFND1_GNDCLR>` = 0.1 *or more accurately the distance in metres from the range finder to the ground when the vehicle is landed.  This value depends on how you have mounted the rangefinder.*
 
-If instead the Telem2 port was used then the serial parameters listed above should instead be:
+If instead the SERIAL 2 port (sometimes labeled Telem2) is used then the serial parameters listed above should instead be:
 
 -  :ref:`SERIAL2_PROTOCOL <SERIAL2_PROTOCOL>` = 9
+
+Advanced parameters
+-------------------
+
+The following parameters do not normally need adjustment:
+
+-  :ref:`RNGFND1_WSP_AVG<RNGFND1_WSP_AVG>`
+-  :ref:`RNGFND1_WSP_BAUD<RNGFND1_WSP_BAUD>`
+-  :ref:`RNGFND1_WSP_FRQ<RNGFND1_WSP_FRQ>`
+-  :ref:`RNGFND1_WSP_MAVG<RNGFND1_WSP_MAVG>`
+-  :ref:`RNGFND1_WSP_MEDF<RNGFND1_WSP_MEDF>`
+-  :ref:`RNGFND1_WSP_THR<RNGFND1_WSP_THR>`
 
 Testing the sensor
 ==================
 
 Distances read by the sensor can be seen in the Mission Planner's Flight
-Data screen's Status tab. Look closely for "sonarrange".
+Data screen's Status tab. Look closely for "rangefinder1".
 
 .. image:: ../../../images/mp_rangefinder_lidarlite_testing.jpg
     :target: ../_images/mp_rangefinder_lidarlite_testing.jpg

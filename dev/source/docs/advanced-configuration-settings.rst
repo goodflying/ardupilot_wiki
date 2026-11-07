@@ -1,8 +1,8 @@
 .. _advanced-configuration-settings:
 
-===============================
-Advanced Configuration Settings
-===============================
+=========================================
+Archived: Advanced Configuration Settings
+=========================================
 
 Almost all user-modifiable settings in APM can be configured in your
 ground station via MAVLink. However, if for any reason you want to
@@ -20,7 +20,7 @@ be recognized by Arduino; \ ``//`` means "comment".
 If you have a APM1280 board and are finding the code is too big to
 compile and load with Arduino, you will need to turn off some
 memory-hogging features. A guide to doing that
-is \ `here <http://diydrones.com/profiles/blogs/getting-the-most-out-of-your>`__.
+is \ `here <https://diydrones.com/profiles/blogs/getting-the-most-out-of-your>`__.
 
 Avoid changing too many options at once; test the effect of each change
 as you go.
@@ -385,7 +385,7 @@ copy was taken.
     // GCS is in use then this can mean a loss of communication with the GCS.  Such a failsafe will be 
     // classified as either short (greater than 1.5 seconds but less than 20) or long (greater than 20).
     // Also, if GCS_HEARTBEAT_FAILSAFE is enabled and a heartbeat signal from the GCS has not been received
-    // in the preceeding 20 seconds then this will also trigger a "long" failsafe.
+    // in the preceding 20 seconds then this will also trigger a "long" failsafe.
     //
     // The SHORT_FAILSAFE_ACTION and LONG_FAILSAFE_ACTION settings determines what APM will do when
     // a failsafe mode is entered while flying in AUTO or LOITER mode.  This is important in order to avoid
@@ -575,7 +575,7 @@ copy was taken.
     // THROTTLE_MAX                             OPTIONAL
     //
     // The maximum throttle setting the autopilot will apply.  The default is 75%.
-    // Reduce this value if your aicraft is overpowered, or has complex flight
+    // Reduce this value if your aircraft is overpowered, or has complex flight
     // characteristics at high throttle settings.
     //
     //#define THROTTLE_MIN                  0 // percent
@@ -971,5 +971,5 @@ copy was taken.
     Extended Kalman Filter Tuning <extended-kalman-filter>
     EKF2 Estimation System <ekf2-estimation-system>
     How to sign a Pixhawk with your Certificate of Authenticity <how-to-use-the-auth-command-to-sign-a-pixhawk-board-with-your-certificate-of-authenticity>
-    Forcing Pixhawk px4io flash <pixhawk-force-px4io-flash>
+    Forcing IO processor flash <pixhawk-force-px4io-flash>
     Troubleshooting Pixhawk Boot <troubleshooting-pixhawkpx4-boot>

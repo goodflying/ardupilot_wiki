@@ -29,7 +29,7 @@ values needed).
    to get your aircraft flying before doing further tuning.
 
    If AUTOTUNE doesn't work with your plane, a fully manual approach is
-   described in the :ref:`Roll, Pitch and Yaw Controller Tuning Guide <roll-pitch-controller-tuning>`.
+   described in the :ref:`Manual Roll, Pitch and Yaw Controller Tuning Guide <new-roll-and-pitch-tuning>`.
 
 After tuning the Roll, Pitch (and optionally yaw) you should tune the
 height controller using the :ref:`TECS tuning guide <tecs-total-energy-control-system-for-speed-height-tuning-guide>`
@@ -38,37 +38,6 @@ and the horizontal navigation using the \ :ref:`L1 controller tuning guide <navi
 Information on how to tune other aspects of Plane are linked from the
 :ref:`Tuning landing page. <common-tuning>`
 
-Mission Planner configuration screens
-=====================================
-
-The *Mission Planner* provides access to all configuration and tuning
-parameters through the CONFIG/TUNING section. The column on the left
-links to the full parameter set. The screen on the right lists some (but
-not all) of the more commonly modified parameters. You can use either
-side to make the same parameter change. Parameter updates are sent to
-the connected board as soon as you press "write params", many affect the
-current flight (if any) immediately, and are written to permanent storage so they
-survive power cycling.
-
-.. figure:: ../images/missPlannTuningTECS.png
-   :target: ../_images/missPlannTuningTECS.png
-
-   Mission Planner: CONFIG/TUNINGPlane Pids Screen
-
-The starting point for Plane tuning is via the Plane PIDs screen shown
-above. This is where you can tune the Servo Roll and Servo Pitch PID
-gains to enable flight in FBW-A mode, and also enable tuning of the L1
-Control for more accurate horizontal positioning.
-
-You can also load and save configuration files (to your PC) from the
-*Advanced Parameters* screen. Configuration files are versioned - an
-older parameter file found by Plane is ignored if the parameter version
-number is not current.
-
-You will note that several of these parameters are PID (Proportional,
-Integral, Differential) settings which are explained in the next
-section.
-
 PID gain values
 ===============
 
@@ -76,7 +45,7 @@ The control of roll or pitch angle is adjusted using a
 `Proportional-Integral-Derivative (PID) Controller <https://en.wikipedia.org/wiki/PID_controller>`__.
 
 The final control applied to the plane's control surface, is a
-combination of the effects of three gain values:
+combination of the effects of four gain values:
 
 -  *Proportional gain (P)* is the simplest form of control, it is the
    "present" error. Autopilot wants 10 degrees of pitch, has 5 degrees,
@@ -94,14 +63,18 @@ combination of the effects of three gain values:
    gain is that it increases the amount of noise driving the servo and
    if turned up too high will cause rapid pitch or roll oscillation
    that can in some cases damage the aircraft.
+-  *FeedForward gain (FF)* is perhaps the most important since it directly drives
+   the control surfaces from the demanded rate input from the autopilot, much as the
+   pilot does in manual mode. The P,I, and D rate error-based contributions add to this
+   to correct any trim,CG, or external disturbance impacts.
 
-Tuning P, PI or PID values can improve how quickly an observed error
+Tuning FF, P, PI or PID values can improve how quickly an observed error
 between desired attitude (pitch, speed, bearing, whatever) and actual
-attitude can be cancelled out, without undue oscillation.
+attitude can be canceled out, without undue oscillation.
 
 .. tip::
 
-   A simple configuration can just specify a P term (I and D is zero
-   and ``INT_MAX`` is not used when I is zero).
+   A simple configuration can use just the FF and P terms, with I = FF and D = 0.
 
-Refer to the :ref:`Roll, Pitch and Yaw controller tuning guide <roll-pitch-controller-tuning>` for more information
+
+Refer to :ref:`Manual Roll, Pitch and Yaw Controller Tuning Guide <new-roll-and-pitch-tuning>` for more information.

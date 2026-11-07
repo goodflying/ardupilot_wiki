@@ -1,15 +1,15 @@
 .. _mission-planner-terminal:
 
-========================
-Mission Planner Terminal
-========================
+==================================
+Archived: Mission Planner Terminal
+==================================
 
 .. warning::
 
    The CLI is being phased out on all platforms. The features were
    massively cut down with AC3.1.5 and then it was removed for the APM2
    completely anyway with AC3.2. All CLI functions are now available via
-   regular MAVlink commands in the GCSs. This article has been moved to the
+   regular MAVLink commands in the GCSs. This article has been moved to the
    dev wiki and may be considered deprecated.
 
 The Terminal tab is visible on the top icon row when "Advanced View" is
@@ -42,11 +42,11 @@ function of each:
     Caution, previous connection will be lost.
 -  Connect PX4:  Reboot the PX4 in CLI mode and enable this screen.
     Caution, previous connection will be lost.
--  Show Settings: This simply lists all the the parameters in your auto
+-  Show Settings: This simply lists all the parameters in your auto
    pilot.  Better to use the Configuration Tuning section of Mission
    Planner
 -  Setup Radio: Goes to the setup section, radio and allows you to set
-   up the radio.  Better to use the Confiuration Tuning section of
+   up the radio.  Better to use the Configuration Tuning section of
    Mission Planner but sometimes this is useful.
 -  Tests: Goes to the tests section of CLI and lists the options. You
    can type any of the options, press Enter to run the test.

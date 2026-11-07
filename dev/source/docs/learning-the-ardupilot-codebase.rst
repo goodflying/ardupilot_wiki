@@ -30,28 +30,34 @@ Tutorial steps
     UARTs and the Console <learning-ardupilot-uarts-and-the-console>
     RC Input and Output <learning-ardupilot-rc-input-output>
     Storage and EEPROM management <learning-ardupilot-storage-and-eeprom-management>
+    Filesystems <filesystems>
     EKF <ekf>
     Copter - Vehicle Code introduction <apmcopter-code-overview>
     Copter - Attitude Control <apmcopter-programming-attitude-control-2>
     Copter - Adding Parameters <code-overview-adding-a-new-parameter>
-    Copter - Adding a new flight mode (ver 3.6 and higher) <apmcopter-adding-a-new-flight-mode>
-    Copter - Adding a new flight mode (ver 3.5 and lower) <apmcopter-adding-a-new-flight-mode-35>
+    Copter - Adding a new flight mode <apmcopter-adding-a-new-flight-mode>
     Copter - Scheduling your new code to run intermittently <code-overview-scheduling-your-new-code-to-run-intermittently>
+    Copter - Motors Library <code-overview-copter-motors-library>
+    Copter - PosControl and Navigation <code-overview-copter-poscontrol-and-navigation>
     Copter - Object Avoidance <code-overview-object-avoidance>
+    Copter - Adding Custom Attitude Controller <copter-adding-custom-controller>
     Rover - Adding a new drive mode <rover-adding-a-new-drive-mode>
-    Rover - L1 navigation controller <rover-L1>
+    Rover - waypoint navigation <rover-L1>
     Plane - Architecture overview <plane-architecture>
+    Plane - Adding a new flight mode <plane-adding-a-new-flight-mode>
+    Plane - Navigation and Altitude Control <plane-navigation-overview>
+    Plane - Adding Custom Controllers <plane-adding-custom-controller>
     Adding a new Log message <code-overview-adding-a-new-log-message>
     Adding a new MAVLink message <code-overview-adding-a-new-mavlink-message>
     Adding a new MAVLink Gimbal <code-overview-adding-support-for-a-new-mavlink-gimbal>
 
 .. note::
 
-   There are currently 4 vehicles in ArduPilot (Copter, Plane, Rover, Antenna Tracker) and while there are a lot of common elements between different vehicle types, they are each different. For now we only have a detailed description of the code structure for the Copter code.
+   There are currently five vehicles in ArduPilot (Copter, Plane, Rover, Sub, and Antenna Tracker) and while there are a lot of common elements between different vehicle types, they are each different. For now we only have a detailed description of the code structure for the Copter code.
 
 Other Tutorials
 ---------------
 
 Although not strictly part of ArduPilot this tutorial may also be useful
 
-- `DroneKit <http://python.dronekit.io/>`__
+- `DroneKit <https://dronekit.io>`__

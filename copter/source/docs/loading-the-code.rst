@@ -1,24 +1,28 @@
 .. _loading-the-code:
 
+**ARCHIVED**
+
 =============================================
 Traditional Helicopter – Loading the Firmware
 =============================================
 
-It is recommended to load the firmware in your Pixhawk and calibrate the
+It is recommended to load the firmware in your autopilot and calibrate the
 accelerometer before installing it in the frame. This is not absolutely
 necessary, however, some helicopters are large and heavy. It is hard to place it
 in all the orientations necessary for accel calibration, and is much easier to
 do on the bench before installation. For desktop PC's the following ground
-station software applications can be used to load firmware:
+station software applications can be used to load firmware, if ArduPilot firmware is already existing:
 
 1. `Mission Planner (Windows only)
-<http://ardupilot.org/planner/>`_
+<https://ardupilot.org/planner/>`_
 
 2. `APM Planner2 (Windows, Mac or Linux)
-<http://ardupilot.org/planner2/>`_
+<https://ardupilot.org/planner2/>`_
 
 3. `QGroundControl (Windows, Mac or Linux)
 <http://qgroundcontrol.com/>`_
+
+For autopilots loaded with non-ArduPilot firmware, follow the instructions on :ref:`this page <common-loading-firmware-onto-chibios-only-boards>`
 
 Be sure to select the current stable version for Traditional Helicopters and
 follow the instructions in your ground station.

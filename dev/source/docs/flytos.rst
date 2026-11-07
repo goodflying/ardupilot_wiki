@@ -94,7 +94,7 @@ FlytOS comes bundled with Vision-based Object-Tracking and Following module. To 
 Deep Learning with Nvidia
 -------------------------
 
-Using FlytOS on Nvidia-TX1/Nvidia-TX2 opens up possible integration of deep learning applications with drone. To begin with, you could install *caffe*, a popular deep learning framework by follwing our `deep learning tutorial <https://goo.gl/HwNMuY>`__. We also have a sample `object classification and tracking <https://github.com/flytbase/flytos_tx1>`__ example using caffe. `Read more <https://goo.gl/ZReoJ7>`__.
+Using FlytOS on Nvidia-TX1/Nvidia-TX2 opens up possible integration of deep learning applications with drone. To begin with, you could install *caffe*, a popular deep learning framework by following our `deep learning tutorial <https://goo.gl/HwNMuY>`__. We also have a sample `object classification and tracking <https://github.com/flytbase/flytos_tx1>`__ example using caffe. `Read more <https://goo.gl/ZReoJ7>`__.
 
 .. youtube:: wSFYOw4VIYY
         :width: 100%
@@ -122,7 +122,7 @@ Important Links
 * `FlytAPI Reference <http://api.flytbase.com>`__
 * `Sample Applications <https://github.com/flytbase/flytsamples>`__
 * `Discussion Forum <http://forums.flytbase.com>`__
-* `Gitter Channel <https://gitter.im/FlytBASE/FlytOS>`__
+* `ArduPilot Discord Chat <https://ardupilot.org/discord>`__
 * `Facebook Community <https://goo.gl/MWlexy>`__
 * `Youtube Channel <https://goo.gl/DzfW1V>`__
 

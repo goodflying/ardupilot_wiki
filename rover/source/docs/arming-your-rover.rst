@@ -12,25 +12,29 @@ Before the rover's motors will move it must be armed.  Arming is required for tw
 How to Arm
 ==========
 
-Before arming you should normally wait for the LED on the flight controller to become flashing blue
+Before arming you should normally wait for the LED on the autopilot to become flashing blue
 (if you only intend to use :ref:`Manual <manual-mode>`) or flashing green (for all other modes).
 If the LEDs never become blue or green please see the "Pre-Arm Checks" section below.
 
 There are three ways to arm the vehicle:
 
 -  **From the transmitter sticks**.  Ensure the vehicle is in :ref:`Hold <hold-mode>`, :ref:`Manual <manual-mode>`, :ref:`Acro <acro-mode>` or :ref:`Steering <steering-mode>` mode, then center the throttle stick and hold the steering stick fully to the right for 2 seconds
--  **From a transmitter switch**.  Raise the auxiliary switch to the high position (see :ref:`how to configure aux functions here <rover-auxiliary-functions>`)
+-  **From a transmitter switch**.  If setup, you can use one of the **RCx_OPTION switches** that includes the arm function. See switch option "153", "154, or "160.
 -  **From the Ground Station**.  Press the arm/disarm button on your ground station.  If using the Mission Planner this can be found on the Flight Data screen's action tab on the bottom left
 
 .. image:: ../../../images/armingButtonMissPlan.jpg
 
 If the vehicle fails to arm, please see the "Pre-Arm Checks" section below.
 
+.. note:: Rover cannot be armed in RTL or SMARTRTL modes. In addition AUTO, GUIDED, LOITER, RTL, SMARTRTL, FOLLOW, and DOCK modes cannot be armed via an :ref:`common-auxiliary-functions` RC switch.
+
+.. warning:: Rover will allow arming in some modes without a good GPS location being obtained before arming. If you want any of the modes such as RTL, LOITER, etc. to work properly, you should enable the "Need location" pre-arm check by setting the :ref:`ARMING_NEED_LOC<ARMING_NEED_LOC>` parameter to "1" to be sure you have position information available.
+
 How to Disarm
 =============
 
 -  **From the transmitter sticks**.  Ensure the vehicle is in :ref:`Hold <hold-mode>`, :ref:`Manual <manual-mode>`, :ref:`Acro <acro-mode>` or :ref:`Steering <steering-mode>` mode, then hold the steering stick fully left for 2 seconds
--  **From a transmitter switch**.  Lower the auxiliary switch to the low position (see :ref:`how to configure aux functions here <rover-auxiliary-functions>`)
+-  **From a transmitter switch**.  If setup, you can use one of the ``RCx_OPTION`` switches that includes the disarm function. See switch option "81", "153, or "154".
 -  **From the Ground Station**.  Press the arm/disarm button on your ground station.  If using the Mission Planner this can be found on the Flight Data screen's action tab on the bottom left
 
 .. note::
@@ -45,19 +49,18 @@ Rover includes a suite of safety checks which prevent the vehicle from arming
 if any of a fairly large number of issues are discovered including missed
 calibration, configuration or bad sensor data.  These checks help prevent sudden
 motor startups and drive-aways but they can also be disabled by setting the
-:ref:`ARMING_CHECK <ARMING_CHECK>` parameter if necessary.
+:ref:`ARMING_SKIPCHK <ARMING_SKIPCHK>` parameter if necessary.
 
-The reason for the failure can be seen by connecting the flight controller to
+The reason for the failure can be seen by connecting the autopilot to
 a ground station (using telemetry or a USB cable), after attempting to arm
 the reason should be displayed on the HUD in red letters.
 
-A more complete list of failures can be found on the `Copter wiki <http://ardupilot.org/copter/docs/prearm_safety_check.html>`__
-but some common of the Rover specific checks are listed below:
+A more complete list of failures can be found on the :ref:`Pre-Arm Safety Checks<common-prearm-safety-checks>` but some common of the Rover specific checks are listed below:
 
 -  Safety switch. The safety switch must be set to the off
    state before arming is allowed. This is either done by pressing the
    safety switch for 2 seconds until it stops flashing, or you can
-   disable the use of the safety switch by setting :ref:`BRD_SAFETY_ENABLE <BRD_SAFETY_ENABLE>` to 0.
+   disable the use of the safety switch by setting :ref:`BRD_SAFETY_DEFLT <BRD_SAFETY_DEFLT>` to 0.
 -  Inertial Sensor Checks. The accelerometers and gyroscopes must all be
    healthy and all be calibrated. If you have more than one accel or
    gyro then they need to be consistent with each other.
@@ -76,11 +79,11 @@ but some common of the Rover specific checks are listed below:
 -  RC Control checks. The RC input must have be calibrated and not in failsafe (i.e. transmitter switched on).
 
 The pre-arm checks can be partially or completely disabled by setting the
-:ref:`ARMING_CHECK <ARMING_CHECK>` parameter.  The default of 1 means all checks are
-enabled.  If set to 0 all checks are disabled.  Ground Stations including the
-mission planner also allow disabling individual checks.
+:ref:`ARMING_SKIPCHK <ARMING_SKIPCHK>` parameter.  The default of 0 means all checks are
+enabled.  In extremely unusual circumstances, setting the parameter to -1 can be used to skip all current and future pre-arm checks (though mandatory checks still remain).
 
-In general the cause of a failure should be addressed and the :ref:`ARMING_CHECK <ARMING_CHECK>` parameter should be reset back to 1. 
+In general the cause of a failure should be addressed and the :ref:`ARMING_SKIPCHK <ARMING_SKIPCHK>` parameter should be reset back to 0. 
+
 
 .. note::
 
@@ -97,6 +100,8 @@ The vehicle will effectively be armed immediately at startup but please note tha
 modes requiring GPS (all modes except :ref:`Hold <hold-mode>` and :ref:`Manual <manual-mode>`)
 will not operate until after a good GPS lock (or more accurately a good EKF position estimate) is achieved.
 
+.. note:: setting the :ref:`ARMING_REQUIRE <ARMING_REQUIRE>` parameter to zero is NOT recommended. If you desire to automatically arm. set it to "3" to arm automatically once pre-arm checks are satisfied the first time after booting.
+
 LED and Buzzer
 ==============
 
@@ -112,6 +117,8 @@ The LED and buzzer provide visual and audio clues as to the arming state:
 
 A full list of buzzer sounds can be found on the :ref:`sounds page <common-sounds-pixhawkpx4>`.
 
+Unless the :ref:`ARMING_OPTIONS<ARMING_OPTIONS>` bit 2 is set, text messages will be sent to the GCS to indicate when arming or disarming has occurred.
+
 PWM Output Behaviour when Disarmed
 ==================================
 
@@ -122,5 +129,5 @@ The PWM value output to the servos and motors while the vehicle is disarmed can 
 -  if :ref:`MOT_SAFE_DISARM <MOT_SAFE_DISARM>` is 1 no PWM pulses will be sent while disarmed.
    Note that some ESCs beep to complain that they are powered on without a control signal
 
-Note that if the flight controller is a Pixhawk and a safety switch is enabled,
+Note that if the autopilot has a safety switch which is enabled,
 no PWM output will be sent until the safety switch is put in the ON position.

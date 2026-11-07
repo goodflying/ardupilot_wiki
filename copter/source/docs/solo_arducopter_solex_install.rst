@@ -4,7 +4,7 @@
 3DR Solo - Initial ArduCopter Install Using Solex
 =================================================
 
-These are detailed instructions for the installation of ArduCopter 3.5.0 and higher on the 3DR Solo using the Solex app for Android. **Your solo should be in safe working order before you start**. It should not be malfunctioning or unreliable before you even begin. It must be up to date with the latest 3DR firmware. You cannot do this with a straight out of the box Solo. You must go through the full pre-flight update first on a new Solo.  Once your Solo is up to date and working well, you're ready to begin this process.
+These are detailed instructions for the installation of ArduCopter on the 3DR Solo using the Solex app for Android. **Your solo should be in safe working order before you start**. It should not be malfunctioning or unreliable before you even begin. It must be up to date with the latest 3DR firmware. You cannot do this with a straight out of the box Solo. You must go through the full pre-flight update first on a new Solo.  Once your Solo is up to date and working well, you're ready to begin this process.
 
 .. note:: If you need help troubleshooting a problem during with this process or have questions, the `Solo Beta Test Facebook group <https://www.facebook.com/groups/617648671719759/>`_ is the best place to go.
 
@@ -19,7 +19,7 @@ These are detailed instructions for the installation of ArduCopter 3.5.0 and hig
 
  .. image:: ../images/solo_solex_packages.jpg
     
-**2) Update python files:** Before doing anything else, you must load the new python files onto the Solo's IMX companion computer. Connect to the Solo with Solex. In the Solex Firmware Updates menu select the ``IMX Python Files.zip`` package. Read the notice and select *install*. All the files will be copied to the Solo in all the right places. When prompted, power cycle the Solo. The files are compiled on reboot. It is critical that this step take places **before** you install the Pixhawk 2.1 Green Cube in your solo!
+**2) Update python files:** Before doing anything else, you must load the new python files onto the Solo's IMX companion computer. Connect to the Solo with Solex. In the Solex Firmware Updates menu select the ``IMX Python Files.zip`` package. Read the notice and select *install*. All the files will be copied to the Solo in all the right places. When prompted, power cycle the Solo. The files are compiled on reboot. It is critical that this step take places **before** you install the Pixhawk 2.1 (CubePilot CubeGreen/CubeBlack) in your solo!
 
 **3) Remove the battery tray:** Remove the battery and pop off the GPS cover.  Then unscrew all the small black screws around the battery tray. The battery tray can now be lifted up.  Carefully unplug the GPS from the carrier board.  Set the battery tray aside.
 

@@ -1,13 +1,17 @@
 .. _how-the-team-works-development-fund:
 
-================
-Development Fund
-================
+=================
+Funding Committee
+=================
 
-ArduPilot collects funds through donations from individuals and Partners and are held within SPI.
-Some of these funds go to pay for fixed costs including servers (i.e. build servers, wiki servers, etc) and are billed directly to ArduPilot's account within SPI.
+ArduPilot collects funds through donations from :ref:`individuals <common-donation>` and `Partners <https://ardupilot.org/about/Partners>`__ and these are held within SPI and the ArduPilot Foundation.
+Some of these funds go to pay for fixed costs including servers (i.e. build servers, wiki servers, etc) and are billed directly to ArduPilot's account within SPI. Other project expenses and support engineer compensation is paid from the ArduPilot Foundation account.
 
-This page attempts to outline how any remaining funds are managed.
+The rules governing the Fundinng committee are setforth here: `Funding Committee Rules <https://docs.google.com/document/d/1l6M5fxjoLEv4TQYzvZhbcBYsUlxJOXSIEfELrACp6f8/edit?usp=sharing>`__.
+
+Each month SPI publishes an in-month and year-to-date financial report on the Treasurer `page <https://spi-inc.org/treasurer/>`__.  Annual Reports, containing a high level summary, are published `here <https://spi-inc.org/corporate/annual-reports/>`__
+
+This page attempts to outline how ArduPilot Project funds are managed.
 
 Submitting Proposals
 --------------------
@@ -26,10 +30,16 @@ Proposals should be no more than 2 pages and include:
 
 All proposal submissions are considered public information, and may be disclosed to whatever audience is relevant at the time, such as developer or partner meetings and group calls, and may be published on the website or forums.
 
+After posting the proposal, ping the Funding Committee in the dev-team-funding channel on Discord with a link to the proposal.
+
 Evaluating Proposals
 --------------------
 
-The ArduPilot funding committee is made up of three elected members from the team.  Elections are held each year in November.
+The ArduPilot funding committee is made up of three elected members from the team with elections held each December.  The currently elected members are:
+
+- Andrew Tridgell
+- James Pattison
+- Andy Piper
 
 This committee reviews the `Proposal category <https://discuss.ardupilot.org/c/proposals>`__ regularly and evaluates proposals based on both the benefit to ArduPilot and likelihood of success.
 The approve/reject decision is made by a simple majority vote (i.e. 2 of 3 must approve).
@@ -44,7 +54,12 @@ Additional guidance:
 - we should keep red-tape to a minimum. There is no point in there being 10 hours of admin for a $200 request. Small proposals should be encouraged which are just a few paragraphs, and the person should get their money quickly and with a minimum of fuss.
 - all proposals should receive and accepted or rejected response within a reasonable amount of time.
 
-Making Payments
----------------
+Getting Paid
+------------
 
-Payments are made via PayPal by ArduPilot's SPI liason (the ArduPilot team member who has been elected to be the main point of contact with SPI).
+Payments from ArduPilot are made via PayPal:
+
+- Email the receipts to funding@ardupilot.org, with a clear subject title linking it back to the original funding proposal. In the case of multiple receipts, collate them into a single email.
+- Send a request for funds to ardupilot.devel@gmail.com. The request description must have a clear reference back to the original funding proposal
+- Again ping the Funding Committee in the dev-team-funding channel on Discord to ask if they can check the PayPal account and push the "send funds" button
+

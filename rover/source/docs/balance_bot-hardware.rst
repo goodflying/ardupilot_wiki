@@ -1,42 +1,44 @@
 .. _balance_bot-hardware: 
 
-==============
-Hardware Setup
-==============
+================
+Hardware Options
+================
 
-.. tip:: Look up the rover hardware :ref:`assembly<rover-assembly-instructions>` page for more detailed information and instructions.
+This page lists the hardware required for an autonomous Balance Bot
 
-Required Parts
---------------
-Take a look at the rover :ref:`introduction<gettit>` page for the full list of hardware. This list contains only the additional balance-bot specific/testing specific requirements. A full list of parts with instructions for assembly will be put up as the project progresses.
+Frame
+=====
 
-.. warning:: We are ourselves, only experimenting with the hardware right now. Do not consider this list as complete or final. 
+Any readily available or custom made frame suitable for Balance Bots can be used. Ensure that there is sufficient space to hold all the components.
 
+For a suitable starter example, check out :ref:`Yahboom Balance Bot<reference-frames-yahboom-balancebot>`.
 
-#. Balance Bot Chassis(http://nevonexpress.com/Self-Balancing-Robot-Chassis-Body-Diy.php or any similar one)
-#. Brushed DC motor with encoder(We use 12V, 200rpm)
-#. Motor driver/ Brushed ESC
-#. Telemetry radio (Will save you a lot of headache)
+Autopilot
+=========
 
-Motors and Wheels
------------------
-The balancing depends on very fine adjustments of the wheel. So any backlash between the motor and wheels would lead to poor balancing performance. This is bad:
+The autopilot needs at least two PWM outputs for controlling the two motors and four :ref:`GPIO pins<common-gpios>` to connect to two :ref:`wheel encoders <wheel-encoder>`.  Some autopilots without an IOMCU will not have enough GPIOs to support wheel encoders.
 
-.. youtube:: 4Lkcze44W3E
-    :width: 100%
+Motors and Wheel Encoders
+=========================
 
+The recommended solution is to use brushed motors with built-in quadrature :ref:`wheel encoders <wheel-encoder>` but other motors may be used if external encoders are attached to the motor shafts.  Note that only quadrature encoders with two output pins are supported.  :ref:`Wheel encoders <wheel-encoder>` allow faster and more precise control of each wheel which greatly improves the vehicle's balance.
 
-Weight Distribution
--------------------
-For good balancing, the center of gravity of the vehicle must be reasonably high compared to the wheel axis. Think of trying to balance a stick with a lump of clay on you palm. Similar reasoning here. This is done to increase the inertia. If the center of gravity was near the wheel axis, the inertia would be low and balancing would become incredibly difficult! 
+Stepper Motors and motors that use UART/I2C interface are not currently supported.
 
-To achieve this, we placed the battery at the top. How high depends on the power of your motors. If it too high, then the motors would have trouble balancing the vehicle. In our case, the total height was less than 30cm.
+Gear backlash is a problem with many geared dc motors and this can negatively affect stability. It is recommended to use motors that are specified to be zero-backlash or have very little backlash.
 
+ESCs/Motor Drivers
+==================
 
+A list of verified ESCs/motor drivers can be fouind on the :ref:`brushed motors<common-brushed-motors>` page.
 
+GPS + Compass
+=============
 
+A GPS+Compass module is recommended if the balance bot will be used outdoors in autonomous modes (e.g. Auto, Guided, RTL).  A compass is required so the vehicle can estimate its heading.  For more details on supported GPS hardware, refer to the :ref:`GPS/Compass page<common-positioning-landing-page>`.
 
+Telemetry Radio(optional)
+=========================
 
-
-
+Telemetry radios are very useful for tuning and debugging. For more information on supported hardware options refer :ref:`telemetry<common-telemetry-landingpage>` page.
 

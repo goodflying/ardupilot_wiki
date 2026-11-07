@@ -1,28 +1,91 @@
 .. _common-radio-control-calibration:
 
-============================================
-Radio Control Calibration in Mission Planner
-============================================
+=========================
+Radio Control Calibration
+=========================
 
-This article shows how to perform radio control calibration using
-*Mission Planner*.
+This article shows how to perform radio control calibration using Mission Planner
 
 Overview
 ========
 
-RC transmitters are used to control vehicle movement and orientation.
-Copter and Plane minimally control throttle, pitch, roll and yaw, while
-on Rover we just control throttle and roll. Each of these control
-signals are mapped to transmitter stick/switch(s) and in turn to
-autopilot channels from the connected receiver.
+RC transmitters allow the pilot to set the flight mode, control the vehicle's movement and orientation and also turn on/off auxiliary functions (i.e. raising and lowering landing gear, etc).
 
-Calibrating each of the transmitter controls/channels is a
-straightforward process - simply move each of the enabled
-sticks/switches through their full range and record the maximum and
-minimum positions.
+RC Calibration involves capturing each RC input channel's minimum, maximum and "trim" values so that ArduPilot can correctly interpret the input.
 
-Transmitter configuration
--------------------------
+Check the Transmitter's Setup
+-----------------------------
+
+- Ensure the battery is disconnected (this is important because it is possible to accidentally arm the vehicle during the RC calibration process)
+- Ensure the RC receiver is connected to the autopilot
+- Turn on your RC transmitter and if it has "trim tabs" ensure they are in the middle
+- Connect the autopilot to the PC using a USB cable
+- On the Mission Planner press the "Connect" button and open Mission Planner's **INITIAL SETUP \| Mandatory Hardware \| Radio Calibration** screen
+- Some green bars should appear showing the ArduPilot is receiving input from the Transmitter/Receiver. If no bars appear check the receiver's LED:
+
+   -  No lights may indicate that it is incorrectly wired to the autopilot.  Look for connectors that may have been inserted upside down
+   -  A Red or flashing LED may indicate that your RC transmitter/receiver need be bound.  See the manual that came with your RC equipment for instructions
+
+.. figure:: ../../../images/mp_radio_calibration.png
+   :target: ../_images/mp_radio_calibration.png
+
+- Check the channel mapping in the transmitter (ie. check which inputs channels are controlled by the transmitter's sticks, switches and knobs) by moving the sticks, knobs and switches and observing which (if any) green bars move.  If this is the first time the transmitter is being used with ArduPilot it is likely that the transmitter's channel mapping will need to be changed and normally this is done on the transmitter itself using its built-in configuration menu
+
+  - Determine if your transmitter is Mode1 or Mode2 (see below)
+  - Roll stick should control channel 1
+  - Pitch stick should control channel 2
+  - Throttle stick should control channel 3
+  - Yaw stick should control channel 4
+  - A 3 or 6 position switch (to control the flight mode) should be setup to control Channel 5 (default,if using Copter) or Channel 8 (default, if using Rover or Plane).  This channel can be moved by setting the [site wiki="copter,plane,blimp"]:ref:`FLTMODE_CH <FLTMODE_CH>`\ [/site][site wiki="planner"]:ref:`FLTMODE_CH <copter:FLTMODE_CH>`\ [/site][site wiki="rover"]:ref:`FLTMODE_CH <copter:FLTMODE_CH>`\ [/site] parameter in Plane or Copter, or [site wiki="rover"]:ref:`MODE_CH<MODE_CH>`\ [/site][site wiki="blimp"]:ref:`MODE_CH<rover:MODE_CH>`\ [/site][site wiki="copter,plane,planner"]:ref:`MODE_CH<rover:MODE_CH>`\ [/site] in Rover.
+  - On Copter, a tuning knob should control Channel 6
+  - On Copter and Rover, any remaining two or three position switches can be setup to control auxiliary functions by mapping them to channels 7 to 12
+- Note that for reversing motor controls on Plane and Rover, the throttle range is range is normally divided into two parts:
+  - Reverse throttle control: From ``RCx_TRIM`` (typically 1500us) to ``RCx_MIN``, where x is usually "3" for normal RC throttle input channel. This corresponds to motor outputs from ``SERVOx_TRIM`` to ``SERVOx_MIN``, where "x" is the output controlling the motor, and assumes the ``SERVOx_REVERSE`` bit is not set.
+  - Forward throttle control: From ``RCx_TRIM`` (typically 1500us) to ``RCx_MAX``, where x is usually "3" for normal RC throttle input channel. This corresponds to motor outputs from ``SERVOx_TRIM`` to ``SERVOx_MAX``, where "x" is the output controlling the motor, and assumes the ``SERVOx_REVERSE`` bit is not set. Using a spring-loaded stick may be most convenient, as it naturally returns to the neutral (stopped) position at ``RCx_TRIM``.
+
+  .. note:: For Plane, it is possible to use an AUX RC switch to provide easie reverse thrust control using the entire throttle stick range on non-sprung throttle sticks. Also, many set up a switch controlled mix in their RC transmitter to map throttle low stick position to output ``RCx_TRIM`` after calibration and either output RC as the stick is raised for reverse or forward operation depending on the TX switch position, giving full throttle stick range to forward or reverse operation.
+
+- Move the transmitter's roll, pitch, throttle, and yaw sticks and ensure the green bars move in the correct direction:
+
+  - For roll, throttle and yaw channels, the green bars should move in the same direction as the transmitter's physical sticks.
+  - For pitch, the green bar should move in the **opposite** direction to the transmitter's physical stick. **This is not the default for many transmitters.**
+  - If one of the green bars moves in the incorrect direction, reverse the channel in the transmitter itself so that logging and outputs etc. are consistent. You may instead reverse the channel in ArduPilot by checking the "Reversed" checkbox (if shown), or directly changing the ``RCx_REVERSED`` parameter (where "x" is the input channel from 1 to 4).
+
+.. figure:: ../../../images/mp_radio_calibration.png
+   :target: ../_images/mp_radio_calibration.png
+
+Calibration
+-----------
+
+- Open Mission Planner's **INITIAL SETUP \| Mandatory Hardware \| Radio Calibration** screen
+- Click on the green "Calibrate Radio" button on the bottom right
+- Press "OK" when prompted to check the radio control equipment is on, battery is not connected, and propellers are not attached
+
+   .. figure:: ../../../images/mp_calibrate_radio.jpg
+      :target: ../_images/mp_calibrate_radio.jpg
+
+- Move the transmitter's control sticks, knobs and switches to their limits.  Red lines will appear across the calibration bars to show minimum and maximum values seen so far
+
+   .. figure:: ../../../images/mp_radio_calibration_click_when_done.jpg
+      :target: ../_images/mp_radio_calibration_click_when_done.jpg
+
+- Select **Click when Done**
+[site wiki="plane,copter,planner"]
+- A window will appear with the prompt, "Ensure all your sticks are centered and throttle is down and click ok to continue".  Move the throttle to zero and press "OK".
+[/site]
+[site wiki="rover,sub"]
+- A window will appear with the prompt, "Ensure all your sticks are centered and throttle is down and click ok to continue".  **Move the throttle to the center** and press "OK".
+[/site]
+
+- Mission Planner will show a summary of the calibration data. Normal values are around 1100 for minimums and 1900 for maximums.
+
+   .. figure:: ../../../images/radi-calib-results.png
+      :target: ../_images/radi-calib-results.png
+
+- If when testing your throttle stick you notice that the motor turns in a single direction, check in the full parameters list that ``RCx_TRIM`` for the throttle channel is set to the motor controller's neutral value (usually about 1500 us). This should be detected and set automatically during calibration if you followed the procedure without forgetting to **center** your throttle in the last calibration step instead of the normal **low** position.
+
+Mode1 and Mode2 Transmitters
+----------------------------
 
 There are two main transmitter configurations:
 
@@ -34,15 +97,16 @@ There are two main transmitter configurations:
 .. figure:: ../../../images/radio_setup_mode_1.png
    :target: ../_images/radio_setup_mode_1.png
 
-   Transmitter(Mode 1): Recommended Channels
+There are two alternative configurations:
 
-.. figure:: ../../../images/rc_transmitter_mode2_setup.png
-   :target: ../_images/rc_transmitter_mode2_setup.png
+-  *Mode 3*: left stick controls pitch and roll, the right stick will
+   control throttle and yaw.
+-  *Mode 4*: left stick controls throttle and roll; the right stick will
+   control pitch and yaw.
 
-   Transmitter(Mode 2): Recommended Channels
+Mode 3 is the opposite of Mode 2 and Mode 4 is the opposite of Mode 1, giving complete right handed/left handed user options.
 
-[site wiki="rover"]Rover users may prefer to control both throttle and
-roll from the same stick.[/site]
+[site wiki="rover"]Rover users may prefer to control both throttle and roll from the same stick.[/site]
 
 Channel mappings
 ----------------
@@ -56,8 +120,8 @@ Copter default channel mappings are:
 -  **Channel 3**: Throttle
 -  **Channel 4**: Yaw
 -  **Channel 5**: Flight modes
--  **Channel 6**: (Optional) Inflight tuning or camera mount (mapped to
-   transmitter tuning knob)
+-  **Channel 6**: (Optional) Inflight tuning or camera mount (mapped to transmitter tuning knob)
+-  **Channel 7 to 12**: (Optional) Auxiliary function switches
 
 [/site]
 
@@ -69,153 +133,52 @@ Plane default channel mappings are:
 -  **Channel 2**: Pitch
 -  **Channel 3**: Throttle
 -  **Channel 4**: Yaw
--  **Channel 8** (default): Flight modes. Mode selection can be mapped
-   to any unused parameter with the ``MODE_CH`` parameter.
+-  **Channel 8** (default): Flight modes. Mode selection can be mapped to any RC channel using the :ref:`FLTMODE_CH <FLTMODE_CH>` parameter
 
+Unused channels can be mapped to control additional peripherals.
 [/site]
 
 [site wiki="rover"]
 
 Rover default channel mappings are:
 
--  **Channel 1**: Steer
+-  **Channel 1**: Steering
 -  **Channel 3**: Throttle
--  **Channel 8** (default): Flight modes. Mode selection can be mapped
-   to any unused parameter with the ``MODE_CH`` parameter.
+-  **Channel 8** (default): Flight modes. Mode selection can be mapped to any RC channel using the :ref:`MODE_CH <MODE_CH>` parameter
+-  **Channel 7 to 12**: (Optional) Auxiliary function switches
+
+Spring Centered Throttle Stick versus Free Moving
+-------------------------------------------------
+
+Rover's throttle channel is assumed to be normally centered, with forward commanding forward movement, and backward, reverse movement. Most RC systems for cars and boats have this spring centered throttle arrangement. However, most aircraft RC systems have a free moving throttle stick. Use of this arrangement presents a challenge to maintain the stick precisely centered for zero motion.
+
+If the transmitter is capable of programming multiple throttle curves controlled by a switch, then it is easy to have one switch position (for FORWARD) have a throttle curve that starts at 1500uS (50%, or mid-range of the channel) at low stick and increases linearly to maximum output (+100% or ~2000us), and in the other position (for REVERSE) that again starts at mid range at low stick, but linearly decreases pulse width to the channel minimum value (-100% or ~1000us), representing full reverse throttle. Zero motion position of the stick is fully down in either case, making it much easier to use.
 
 [/site]
 
-Unused channels can be mapped to control additional peripherals.
+[site wiki="sub"]
 
-.. note::
+Sub default channel mappings are:
 
-   -  The default channel mappings can be changed using the instructions in
-      :ref:`RCMAP Input Channel Mapping <common-rcmap>`.
-   -  Once you've calibrated the flight mode you can use the instructions
-      in :ref:`RC Transmitter Flight Mode Configuration <common-rc-transmitter-flight-mode-configuration>` to
-      specify which vehicle modes are enabled by each switch position.
+-  **Channel 1**: Pitch
+-  **Channel 2**: Roll
+-  **Channel 3**: Throttle (vertical)
+-  **Channel 4**: Yaw
+-  **Channel 5**: Forward
+-  **Channel 6**: Lateral
+-  **Channel 7**: Camera mount gimbal yaw
+-  **Channel 8**: Camera mount gimbal pitch
 
-Preconditions
-=============
+There is no default flight mode channel.
+[/site]
 
-Safety first
-------------
+Further Reading
+---------------
 
-For safety reasons you should disconnect the battery and/or remove
-propellers before preforming radio calibration.
+- Roll, pitch, throttle and yaw channel mappings can be changed using [site wiki="copter,plane,rover,sub,planner"]:ref:`RCMAP Input Channel Mapping <common-rcmap>` [/site][site wiki="blimp"]:ref:`RCMAP Input Channel Mapping <copter:common-rcmap>` [/site]
+- Flight mode switch setup to specify which vehicle modes are enabled by each switch position can be found on the :ref:`RC Transmitter Flight Mode Configuration <common-rc-transmitter-flight-mode-configuration>` page
+[site wiki="rover"]
+- Rover steering and reversing behaviour setup are described on the :ref:`Steering Input Type and Reversing Behaviour <rover-steering-input-type-and-reversing-behaviour>` page
+[/site]
 
-Centre trims
-------------
-
-Centre trims in manual RC mode before preforming RC calibration. If
-trims are not centred you may need to do the RC calibration again after
-you have used the vehicle (this is easy to do at the field).
-
-.. note::
-
-   Trims are centred when a moving vehicle does not change
-   direction/speed/orientation when travelling hands-off with all
-   controls/sticks in neutral positions. If there is any deviation in
-   direction, speed or orientation, adjust the associated servo to
-   compensate. 
-
-Connect autopilot and turn on receiver
---------------------------------------
-
-Connect the autopilot via USB and turn on your RC transmitter. Verify
-that the transmitter is bound to the receiver (the receiver displays a
-solid green light) and that it is set to use the correct model for your
-vehicle.
-
-Open Mission Planner's **INITIAL SETUP \| Mandatory Hardware \| Radio
-Calibration** screen. If your RC receiver (Rx) and transmitter (Tx) are
-bound, you should see the green bars move when you move the transmitter
-sticks.
-
-.. figure:: ../../../images/mp_radio_calibration.png
-   :target: ../_images/mp_radio_calibration.png
-
-   MissionPlanner: Radio Calibration Screen (Copter)
-
-.. figure:: ../../../images/mp_radio_calibration_plane.jpg
-   :target: ../_images/mp_radio_calibration_plane.jpg
-
-   Mission Planner: Radio Calibration Screen(Plane)
-
-.. tip::
-
-   If the bars are not moving then check what LED lights the receiver
-   is displaying:
-
-   -  no lights - may indicate that it is incorrectly wired to the
-      autopilot (look for connectors that may have been inserted upside
-      down).
-   -  red or a flashing green light - may indicate that your RC
-      transmitter/receiver need be bound (see the manual that came with
-      your RC equipment for instructions).
-   -  a solid green light - recheck the autopilot is connected to the
-      *Mission Planner* and if the bars are still not moving, try clicking
-      on the **Calibrate Radio** button.
-
-Calibration steps
-=================
-
-#. Open Mission Planner's **INITIAL SETUP \| Mandatory Hardware \| Radio
-   Calibration** screen.
-#. Click on the green **Calibrate Radio** button in the lower right of
-   the window.
-
-   Mission Planner will display a prompt to check radio control
-   equipment is on, battery is not connected, and propellers are not
-   attached. Select **OK**.
-
-   .. figure:: ../../../images/mp_calibrate_radio.jpg
-      :target: ../_images/mp_calibrate_radio.jpg
-
-      Mission Planner: Select Calibrate Radio and OK to begin calibrating.
-
-#. Move the control sticks and toggle switches on your transmitter to
-   their limits of travel and observe the results on the radio
-   calibration bars. Red lines will appear across the calibration bars
-   to indicate maximum and minimum values:
-
-   .. figure:: ../../../images/mp_radio_calibration_click_when_done.jpg
-      :target: ../_images/mp_radio_calibration_click_when_done.jpg
-
-      Mission Planner: Input range marked with red lines
-
-   .. tip::
-
-      The green bars should move in the **same direction** as the
-         transmitter sticks (except for Pitch where the bars move opposite to
-         stick movements - low values are forward, high values are back).  If
-         the green bars move in the wrong direction, reverse them using your
-         RC transmitter's channel-reverse function (see your RC gear's manual
-         for guidance).
-
-   You should also calibrate the channel you have selected for
-   controlling vehicle mode, and any other channels you have connected
-   to the autopilot.
-
-   [site wiki="rover"]Servos should move in the same direction when
-   under autopilot control as they do in MANUAL mode. If not, select the
-   **Reverse** checkbox for the associated channel. [/site]
-
-   [site wiki="plane"]This screen is also where you set up elevon mode
-   and servo reversal. For more information see :ref:`Normal/Elevon/VTail Mode & Reversing Servos <plane:reversing-servos-and-setting-normalelevon-mode>`.[/site]
-
-#. Select **Click when Done** when all required channels are set at the
-   minimum and maximum positions.
-
-   Mission Planner will show a summary of the calibration data. Normal
-   values are around 1100 for minimums and 1900 for maximums.
-
-   .. figure:: ../../../images/radi-calib-results.png
-      :target: ../_images/radi-calib-results.png
-
-      Mission Planner: Radio Calibration Results
-
-#. Turn off your transmitter and disconnect the battery if it was
-   connected.
-
-[copywiki destination="copter,plane,rover,planner"]
+[copywiki destination="copter,plane,rover,planner,blimp,sub"]

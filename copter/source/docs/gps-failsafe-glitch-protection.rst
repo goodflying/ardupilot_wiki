@@ -1,8 +1,8 @@
 .. _gps-failsafe-glitch-protection:
 
-==================================
-GPS Failsafe and Glitch Protection
-==================================
+============================================
+Archived: GPS Failsafe and Glitch Protection
+============================================
 
 This article describes the glitch protection mechanisms used to trigger
 GPS Failsafe.
@@ -20,7 +20,7 @@ A *GPS failsafe* event will occur if GPS 3D
 lock or the position "Glitches" for at least 5 seconds while Copter is
 in a mode that requires the GPS (RTL, Auto, Loiter, Circle, Position,
 Guided or Drift).  The GPS failsafe response can be set to Land or
-switch to AltHold mode (in AC3.1 and higher) so that you can retake
+switch to AltHold mode so that you can retake
 manual control.
 
 Without GPS updates, the inertial sensors allow approximately 10 seconds
@@ -30,14 +30,10 @@ at all.  At this point if you still have RC radio control it is
 recommended to take back control using Stabilize, Acro or AltHold as
 soon as possible.
 
-This article describes two forms of GPS glitch logic. The first is used
-by the default navigation algorithm for AC3.1 and 3.2. The second (EKF)
-can be used in AC3.2, and is mandatory in AC3.3 and later.
-
 Glitch Protection - Default
 ===========================
 
-AC3.1 and AC3.2 include GPS glitch protection which can help alert the
+GPS glitch protection is provided which can help alert the
 pilot to a bad GPS position, trigger a failsafe and reduce the incidents
 of fly-aways.  Glitches are detected by comparing the each new position
 update received from the GPS with a position projected out from the
@@ -57,16 +53,12 @@ The new position is accepted as "good" if:
 During a glitch, "Bad Position" will be written on the ground station's
 HUD
 
+
 Glitch Protection - EKF
 =======================
 
-AC3.2 introduced a new form of glitch protection, the :ref:`ArduPilot Extended Kalman Filter (EKF) <common-apm-navigation-extended-kalman-filter-overview>`.
+:ref:`ArduPilot Extended Kalman Filter (EKF) <common-apm-navigation-extended-kalman-filter-overview>`)provided glitch protection.
 
-.. note::
-
-   AC3.3 Enables EKF by default, and it cannot be turned off. On
-   AC3.2 EKF is turned off by default - but you can enable it to run on the
-   faster boards (using 32 bit micros) by setting ``AHRS_EKF_USE = 1``.
 
 Glitch protection using the EKF works as follows:
 

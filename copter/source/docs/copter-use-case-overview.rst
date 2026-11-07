@@ -27,7 +27,7 @@ available using autopilot :ref:`flight/control modes <flight-modes>`:
    you to run complex missions that you can define using a :ref:`ground control station <common-choosing-a-ground-station>`.
 -  A companion computer on the vehicle can communicate with/control
    Copter (for example, using
-   `DroneKit-Python <http://python.dronekit.io/>`__) and perform
+   `DroneKit-Python <https://github.com/dronekit/dronekit-python/>`__) and perform
    computationally intensive low-latency tasks like computer-vision.
 
 This stability and precision, and the flexibility in terms of manual and
@@ -57,9 +57,8 @@ vehicle) provided by brushless camera gimbals. Copter supports
 camera-friendly flight modes like :ref:`Follow Me <ac2_followme>` and allows you to
 control/maintain the camera target at a specific region of interest.
 
-Advanced systems like `3DR Solo <https://3dr.com/solo-drone/>`__
-implement even more advanced vehicle/camera control ("smart shots")
-using `DroneKit-Python <http://python.dronekit.io/>`__ running on a
+Advanced systems like `3DR Solo implement even more advanced vehicle/camera control ("smart shots")
+using `DroneKit-Python <https://dronekit.io/>`__ running on a
 Companion Computer.
 
 First Person View (FPV)
@@ -153,7 +152,7 @@ to plans.
 
 Copter is also useful for sample collection in difficult to reach or
 hazardous areas (this requires that the vehicle is fitted with a small
-probe or other sample device). The `Modcopter Sample Collection System <http://permalink.lanl.gov/object/tr?what=info:lanl-repo/lareport/LA-UR-13-23300>`__
+probe or other sample device). The `Modcopter Sample Collection System <https://permalink.lanl.gov/object/tr?what=info:lanl-repo/lareport/LA-UR-13-23300>`__
 is an excellent government-backed student project for accessing a
 variety of samples.
 

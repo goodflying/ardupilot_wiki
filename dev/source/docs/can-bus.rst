@@ -1,15 +1,15 @@
 .. _can-bus:
 
-===========================
-CAN bus and UAVCAN protocol
-===========================
+====================================
+CAN bus and UAVCAN/DroneCAN protocol
+====================================
 
-Support for CAN bus messaging in Ardupilot relies on two parts:
+Support for CAN bus messaging in ArduPilot relies on two parts:
 
 - Hardware CAN bus support that is done with HAL drivers
-- UAVCAN protocol which is responsible for handling all high level work
+- UAVCAN/DroneCAN protocol which is responsible for handling all high level work
 
-CAN bus support in Ardupilot
+CAN bus support in ArduPilot
 ============================
 
 The base for hardware CAN bus support is located in AP_HAL library and
@@ -25,14 +25,16 @@ consist of two classes:
   
 As a guide for implementing CAN bus support for new hardware, following :ref:`roadmap <can-bus-driver-roadmap>` can be used.
 
-UAVCAN protocol
-===============
+UAVCAN/DroneCAN protocol
+========================
 
-The support for UAVCAN protocl is based on AP_UAVCAN class that is wrapping interaction
-with Libuavcan and provides access points for other libraries present in Ardupilot. It is
+The support for UAVCAN protocol is based on AP_UAVCAN class that is wrapping interaction
+with Libuavcan and provides access points for other libraries present in ArduPilot. It is
 responsible for sending the messages over CAN bus with UAVCAN protocol, receiving the messages,
 translation of messages to form that is acceptable to other libraries and provide cyclic
 update of Libuavcan.
+
+.. note:: UAVCAN has evolved into DroneCAN. The terms are sometimes used interchangeably, but ArduPilot uses the DroneCAN specification now, while UAVCAN is evolving separately.
 
 The AP_UAVCAN class supports following messages:
 
@@ -62,7 +64,7 @@ The following initialization is based on Pixhawk hardware and is provided as exa
 
 .. image:: ../images/can_init.png
 
-Depending on type of board and underlaying hardware, other actions may need to be taken
+Depending on type of board and underlying hardware, other actions may need to be taken
 for creation of CAN driver and UAVCAN interface class.
 
 .. toctree::

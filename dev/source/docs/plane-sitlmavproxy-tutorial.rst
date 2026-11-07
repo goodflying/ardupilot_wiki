@@ -6,7 +6,7 @@ Plane SITL/MAVProxy Tutorial
 
 This tutorial provides a basic walk-through of how to use
 :ref:`SITL <sitl-simulator-software-in-the-loop>` and
-`MAVProxy <http://ardupilot.github.io/MAVProxy/>`__ for *Plane* testing.
+:ref:`MAVProxy<mavproxy:home>` for *Plane* testing.
 
 Overview
 ========
@@ -23,7 +23,7 @@ The tutorial is complementary to the topic :ref:`Using SITL for ArduPilot Testin
    -  We use *MAVProxy* here, but you can :ref:`attach another ground station to SITL <using-sitl-for-ardupilot-testing_connecting_otheradditional_ground_stations>`
       if you prefer (similar instructions can be used in any GCS).
    -  This tutorial is for Plane - see
-      :ref:`Copter <copter-sitl-mavproxy-tutorial>` and Rover for similar
+      :ref:`Copter <copter-sitl-mavproxy-tutorial>` and :ref:`Rover <rover-sitlmavproxy-tutorial>` for similar
       tutorials on the other vehicles.
 
 Preconditions
@@ -38,34 +38,40 @@ using the ``--map`` and ``--console`` options:
     cd ~/ardupilot/ArduPlane
     sim_vehicle.py --map --console
 
+.. note::
+
+   If you wish to start the simulation at a different map location or use a different frame type
+   (-f option for quadplane,firefly,etc.) than a standard aileron/elevator/rudder/throttle plane, see
+   :ref:`SITL Advance Testing <using-sitl-for-ardupilot-testing>`. A complete list of startup
+   options for the simulator can be found using the --help option:
+
+::
+
+    sim_vehicle.py --help
+
+
 The *MAVProxy Command Prompt*, *Console* and *Map* should be arranged
 conveniently so you can observe the status and send commands at the same
 time.
 
-.. image:: ../images/mavproxy_sitl_console_and_map.jpg
-    :target: ../_images/mavproxy_sitl_console_and_map.jpg
+.. image:: ../images/mavproxy_sitl_console_and_map_plane.jpg
+    :target: ../_images/mavproxy_sitl_console_and_map_plane.jpg
 
 Taking off
 ==========
 
-To take off with Plane you should use a mission (AUTO mode) that
+To take off with Plane you can use a mission (AUTO mode) that
 contains the
 :ref:`MAV_CMD_NAV_TAKEOFF <plane:mav_cmd_nav_takeoff>`
-command. Once you are airborne you can switch to other other :ref:`flight modes <plane:flight-modes>`.
+command, or use the TAKEOFF mode. If it's a quadplane, you can also takeoff in a VTOL mode such as QLOITER, QHOVER, or QSTABILIZE, by raising the throttle above mid-stick (using normal defaults, RC 3 1600 command for example). Once you are airborne you can switch to other :ref:`flight modes <plane:flight-modes>` (be sure your throttle is set at an appropriate value for that mode).
 
-.. note::
-
-   At time of writing, Plane only supports automated takeoff in
-   ``AUTO`` mode as part of a mission. If you want to change to ``GUIDED``
-   mode (or any other mode) then you first have to take off using a
-   mission.
 
 First load the **CMAC-circuit.txt** test mission using the ``wp load``
 command as shown below (this mission contains the takeoff command):
 
 ::
 
-    wp load ..\Tools\autotest\CMAC-circuit.txt
+    wp load ../Tools/autotest/Generic_Missions/CMAC-circuit.txt
     wp list
 
 Once the mission is loaded you can take off by arming the throttle and
@@ -121,7 +127,7 @@ You can list all *enabled* checks using the command ``arm list``:
 
 You can enable and disable checks using ``arm check n`` and
 ``arm uncheck n`` respectively, where n is the name of the check. Use
-``n`` value of of ``all`` to enables/disable all checks.
+``n`` value of ``all`` to enables/disable all checks.
 
 Flying a mission
 ================
@@ -135,12 +141,12 @@ skip to the second waypoint using ``wp set n``, and *loop* the mission:
 
 ::
 
-    wp load ..\Tools\autotest\CMAC-circuit.txt
+    wp load ..\Tools\autotest\Generic_Missions\CMAC-circuit.txt
     mode auto
     wp set 2
     wp loop
 
-The `MAVProxy Waypoints documentation <http://ardupilot.github.io/MAVProxy/html/uav_configuration/waypoints.html>`__
+The :ref:`MAVProxy Waypoints documentation <mavproxy:mavproxy-waypoints>`
 lists the full set of available commands (or you can get them using
 auto-completion by typing "wp" on the command line).
 
@@ -149,8 +155,8 @@ the map:
 
 #. Right-click on the map and then select **Mission \| Draw**.
 
-   .. figure:: ../images/MAVProxyCopter_Mission_Draw.jpg
-      :target: ../_images/MAVProxyCopter_Mission_Draw.jpg
+   .. figure:: ../images/MAVProxyPlane_Mission_Draw.jpg
+      :target: ../_images/MAVProxyPlane_Mission_Draw.jpg
 
       MAVProxy: Draw Mission Menu
 
@@ -209,8 +215,8 @@ First change the mode:
 The easiest way to set a target point is to right-click on the map where
 you want to go, select **Fly to**, and then enter the target altitude.
 
-.. figure:: ../images/MAVProxyCopter_flyto.jpg
-   :target: ../_images/MAVProxyCopter_flyto.jpg
+.. figure:: ../images/MAVProxyPlane_flyto.jpg
+   :target: ../_images/MAVProxyPlane_flyto.jpg
 
    MAVProxy: Fly toLocation
 
@@ -237,7 +243,7 @@ movement of the vehicle (and move it to a safe location if control is
 lost). Plane allows you to specify an arbitrarily shaped region on the
 map for the fence, and an upper and lower altitude. If the fence is
 breached, Plane will fly to the centre of the fence and circle (or a
-rally poin)t. :ref:`Geo-Fencing in Plane <plane:geofencing>`
+rally point). :ref:`Geo-Fencing in Plane <plane:geofencing>`
 describes the fence in more detail.
 
 The fence behaviour is set using the :ref:`Plane Fence Parameters <plane:FENCE_ACTION>`.

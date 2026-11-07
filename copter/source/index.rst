@@ -1,16 +1,18 @@
 .. _home:
 
-===========
-Copter Home
-===========
-
-.. tip::
-
-    Keep up with the latest ArduPilot related blogs on `ArduPilot.org! <http://ardupilot.org/>`__
-
+================
+ArduPilot Copter
+================
+   
+..  raw:: html
+    
+    <p style="text-align:center;color:red;"><strong>
+    Success with Copter requires that the 'First Time Setup' and 'First Flight and Tuning' sections of this documentation be read and followed!</strong></p>
+    <br></br>
 
 .. image:: /images/home_copter.jpg
     :target: _images/home_copter.jpg
+
 
 ..  raw:: html
 
@@ -63,7 +65,11 @@ Copter Home
     </td>
     </tr>
     </table>
+    <br></br>
 
+.. tip::
+
+    Keep up with the latest ArduPilot related blogs on `ArduPilot.org! <https://ardupilot.org/>`__
 
 --------------
 
@@ -73,7 +79,7 @@ System components
 
 -  A Pixhawk or :ref:`other autopilot <common-autopilots>` 
    loaded with the latest version of
-   the `Copter firmware <http://firmware.ardupilot.org/>`__.
+   the `Copter firmware <https://firmware.ardupilot.org/>`__.
 -  :ref:`Mission Planner software <planner:home>` -- gives
    you an easy point-and-click setup/configuration, and a full-featured
    ground control interface.
@@ -142,7 +148,7 @@ Rotor Craft types
 
 Because of its open design, Copter also supports more unusual frame
 types including the :ref:`Single and Coax-Copters <singlecopter-and-coaxcopter>`.  Put this together
-with :ref:`Plane <plane:home>`,
+with `Plane <https://ardupilot.org/plane/index.html>`__,
 :ref:`Rover <rover:home>` and :ref:`Antenna Tracker <antennatracker:home>` and you have a system
 of robotic vehicles that can be controlled through very similar
 interfaces to accomplish a wide variety of tasks.
@@ -156,36 +162,35 @@ interfaces to accomplish a wide variety of tasks.
 Getting more info
 ~~~~~~~~~~~~~~~~~
 
--  Continue to the :ref:`Introduction section of this wiki. <introduction>`
--  Use the `ArduPilot Discuss Server Forums <http://discuss.ardupilot.com/c/arducopter>`__
+-  Continue to the :ref:`Introduction section of this wiki <introduction>`.
+-  Use the `ArduPilot Discuss Server Forums <https://discuss.ardupilot.org/c/arducopter>`__
    to ask support questions and advice.
--  To get involved with the development of the software platform, visit the `ArduPilot development guide <http://ardupilot.org/dev/index.html>`__.
+-  To get involved with the development of the software platform, visit the `ArduPilot development guide <https://ardupilot.org/dev/index.html>`__.
+
+
+.. tip::
+
+    For a simplified chinese 简体中文 version abstract of this wiki please check `ArduPilot.org partner CUAV! <http://doc.cuav.net/tutorial/copter/>`__
+
 
 
 
 .. toctree::
    :hidden:
    
-   Introducing Copter <docs/introduction>
-   First Time Setup <docs/initial-setup>
-   First Flight <docs/flying-arducopter>
-   Advanced Configuration <docs/common-advanced-configuration>
-   Mission Planning <docs/common-mission-planning>
-   Logs <docs/common-logs>
-   Optional Hardware <docs/common-optional-hardware>
-   Traditional Helicopters <docs/traditional-helicopters>
-   Tricopter <docs/tricopter>
-   SingleCopter and CoaxCopter <docs/singlecopter-and-coaxcopter>
-   HeliQuads <docs/heliquads>
-   SkyRocket <docs/skyrocket>
-   Solo <docs/solo_arducopter_upgrade>
-   AutoPilot Hardware Options <docs/common-autopilots>
-   Use-Cases and Applications <docs/common-use-cases-and-applications>
-   Antenna Tracking <docs/common-antenna-tracking>
-   Simulation <docs/common-simulation>
-   Appendix <docs/common-appendix>
-   Full Table of Contents <docs/common-table-of-contents>
 
+   Introduction to Copter <docs/copter-introduction>
+   Choosing an Autopilot <docs/common-autopilots>
+   Ground Control Stations <docs/common-GCS>
+   First Time Setup <docs/initial-setup>
+   First Flight and Tuning <docs/flying-arducopter>
+   Traditional Helicopters <docs/traditional-helicopters>
+   Mission Planning <docs/common-mission-planning>
+   If A Problem Arises <docs/common-when-problems-arise>
+   Advanced Configuration <docs/common-advanced-configuration>
+   Peripheral Hardware <docs/common-optional-hardware>
+   Additional Information <docs/additional-information>
+   User Alerts <docs/common-user-alerts>
 
 
 .. |TOP_COL_LEFT| replace:: This is the full-featured, :ref:`open-source <dev:license-gplv3>` 

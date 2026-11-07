@@ -6,11 +6,11 @@ Choosing a MultiCopter Frame
 
 One of the first steps in using Copter is to decide on the frame.  Shown
 below are three options from
-`3DRobotics <http://store.3drobotics.com/>`__ but there are hundreds of
+`3DR <https://www.3dr.com/>`__ but there are hundreds of
 other choices.  This page will hopefully give some guidance on the
 choices available.
 
-ArduPilot is capable of controlling :ref:`many different vehicles <common-all-vehicle-types>`.
+ArduPilot is capable of controlling :ref:`many different vehicles <ardupilot:common-all-vehicle-types>`.
 
 .. image:: ../images/ChoseAFrame_Image.jpg
     :target: ../_images/ChoseAFrame_Image.jpg

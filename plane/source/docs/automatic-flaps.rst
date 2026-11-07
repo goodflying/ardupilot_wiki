@@ -4,8 +4,13 @@
 Automatic Flaps
 ===============
 
-Plane can control flaps in autonomous modes based on an airspeed
-schedule. Simply put you can specify two speeds and two flap settings.
+Plane can automatically control flaps in both manual throttle and autonomous modes based on an airspeed
+schedule and/or during autotakeoffs and landings. Simply put you can specify two speeds and two flap settings.
+
+Two modes of operation are available depending on whether bit 15 of the :ref:`FLIGHT_OPTIONS<FLIGHT_OPTIONS>` bit is set:
+
+:ref:`FLIGHT_OPTIONS<FLIGHT_OPTIONS>` bit "15" clear
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 If your target speed (not your actual speed) is above the specified
 speeds then your flaps are set to the default (trim) position. If your
 target speed is lowered below the first flap speed, then flaps are
@@ -17,29 +22,40 @@ The target speed can be commanded by changing the value of cruise_speed
 in the parameter interface, by using the Do_Set_Speed command in a
 mission, or by the throttle stick position in FBW-B.
 
-Flaps can be configured on any channel (in older versions flaps could only be configured on channel 5, 6, 7 or 8 with 8 not available for manual control).
+:ref:`FLIGHT_OPTIONS<FLIGHT_OPTIONS>` bit 15 set
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- In manual throttle modes actual airspeed (or estimate) is used for flaps activation
+- In auto-throttle modes the minimum of target airspeed and actual airspeed is used
+
+This allows for auto flaps in manual throttle modes, and when speed drops in an un-commanded fashion in auto-throttle modes. This needs to be used with caution and carefully tested on an aircraft as it could result in an oscillation, as adding flaps can change the airspeed.
+
+Flaps can be configured on any channel.
 
 Software configuration
 ~~~~~~~~~~~~~~~~~~~~~~
 
 The first step in setting up flaps is to set the parameter for the
 channel function for the channel you are using for flaps to a value of
-3. For example, if you have flaps on channel 5 then set SERVO5_FUNCTION to
+3. For example, if you have flaps on channel 5 then set :ref:`SERVO5_FUNCTION<SERVO5_FUNCTION>` to
 3.
 
 Next set the parameters for your two flap speeds and flap values. These
-parameters are FLAP_1\_PERCNT, FLAP_1\_SPEED, FLAP_2\_PERCNT,
-FLAP_2\_SPEED.
+parameters are :ref:`FLAP_1_PERCNT<FLAP_1_PERCNT>`, :ref:`FLAP_2_PERCNT<FLAP_2_PERCNT>`, :ref:`FLAP_1_SPEED<FLAP_1_SPEED>`, :ref:`FLAP_2_SPEED<FLAP_2_SPEED>`
 
 Redo your radio calibration. Be sure to set the flap switch to the zero
 flap position before finishing the radio calibration so that zero flaps
 is stored as the trim (default) position.
 
-That is basically all the setup required for flaps. If you find that
+That is basically all the setup required for speed/manual controlled flaps. If you find that
 your flaps are moving backwards from what you expect, change the
 reversing parameter for your flap channel, for example
-SERVO5_REVERSED. Set it to 1 to reverse the flaps, set to 0 for normal
+:ref:`SERVO5_REVERSED<SERVO5_REVERSED>`. Set it to 1 to reverse the flaps, set to 0 for normal
 operation.
+
+In addition, you can independently have flap positions for automatic takeoffs and/:or landings using:
+
+- :ref:`LAND_FLAP_PERCNT<LAND_FLAP_PERCNT>`
+- :ref:`TKOFF_FLAP_PCNT<TKOFF_FLAP_PCNT>`
 
 Using flaps
 ~~~~~~~~~~~
@@ -61,4 +77,4 @@ target speed is changed into one of the flap speed ranges.
 Using Flaperons
 ===============
 
-You can also setup flaperons. Please see the separate :ref:`flaperon guide <guide-flaperons>` for details.
+You can also setup flaperons. Please see the separate :ref:`flaperon guide <flaperons-on-plane>` for details.

@@ -1,8 +1,14 @@
 .. _building-px4-with-make:
 
-=========================================
-Building for Pixhawk on Windows with Make
-=========================================
+===================================================
+Archived: Building for Pixhawk on Windows with Make
+===================================================
+
+.. warning::
+
+   **ARCHIVED ARTICLE**
+
+   ArduPilot no longer supports make.
 
 This article shows how to build ArduPilot for The Cube, Pixhawk, PixRacer on Windows with *Make*.  These instructions assume you have already :ref:`setup the build environment <building-setup-windows>`
 
@@ -79,7 +85,7 @@ The firmware will be created in the **ArduCopter** directory with the
    
 .. note::
 
-   You can ignore any mesages regarding PX4Firmware and PX4Nuttx hashes. Those are useful labels for developers but optional and sometimes the build system can't find them on your system. As long as it says "Firmware is in.." followed by a .px4 file then you have a successful build which you can safely load onto your aircraft.
+   You can ignore any messages regarding PX4Firmware and PX4Nuttx hashes. Those are useful labels for developers but optional and sometimes the build system can't find them on your system. As long as it says "Firmware is in.." followed by a .px4 file then you have a successful build which you can safely load onto your aircraft.
    
 Hints for speeding up compile time
 ==================================

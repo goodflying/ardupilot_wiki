@@ -10,7 +10,7 @@ This page describes generic waypoint setup for all types of vehicles.
 .. note::
 
    Rover users: For a simpler Rover specific guide to setting up
-   waypoints please see :ref:`Learning a Mission <rover:learning-a-mission>`.
+   waypoints please see :ref:`Learning a Mission <common-learning-a-mission>`.
 [/site]
 
 .. _common-planning-a-mission-with-waypoints-and-events_setting_the_home_position:
@@ -18,16 +18,10 @@ This page describes generic waypoint setup for all types of vehicles.
 Setting the Home Position
 =========================
 
-For **Copter** the home position is set as the location where the copter
-was armed. This means if you execute an RTL in Copter, it will return to
-the location where it was armed, so arm your copter in the location you
-want it to return to.
-
-For **Plane** the home position is the location of the plane where the
-GPS was locked. This means if you execute an RTL in Plane, it will
-return to the location where it first acquired the GPS lock, so only
-power up your plane in the location you intend it to return to when
-performing an RTL.
+For **Copter**, **Plane** and **Rover** the home position is set as the location where the vehicle
+was armed. This means if you execute an RTL, it will return to
+the location where it was armed, so arm your vehicle in the location you
+want it to return to, or use a rally point to setup an alternative return point.
 
 Video: Produce and save a Multi-waypoint Mission
 ================================================
@@ -48,8 +42,7 @@ In the screenshot below, a Copter mission starts with an auto takeoff to
 20 meters altitude; then goes to WP 2 rising to 100 meters altitude on
 the way, then waits 10 seconds; then the craft will proceed to WP 3
 (descending to 50 meters altitude on the way), then returns to launch.
-Since the default altitude is 100 meters, the return to launch will be
-at 100 meters.  After reaching the launch position, the craft will land.
+After reaching the launch position, the craft will land.
 The mission assumes that the launch position is set at the home
 position.
 
@@ -67,11 +60,7 @@ Lon can be entered by clicking on the map. Altitude is relative to your
 launch altitude/home position, so if you set 100m, for example, it will
 fly 100m above you.
 
-**Default Alt** is the default altitude when entering new waypoints.
-It's also the altitude RTL (return to launch) mode will fly at if you
-have **Hold Default ALT** checked; if you don't have that checked, your
-aircraft will try to maintain the altitude it was at when you switched
-on RTL.
+**Default Alt** is the default altitude when entering new waypoints.[site wiki="copter,plane,planner"] See :ref:`common-understanding-altitude` for altitude definitions.[/site]
 
 **Verify height** means that the Mission Planner will use Google Earth
 topology data to adjust your desired altitude at each waypoint to
@@ -103,7 +92,7 @@ Tips
    and a little one inside of that, the little one will not be excluded
    from the big one
    (see `this <http://wiki.openstreetmap.org/wiki/Relation:multipolygon>`__ for
-   more). Also, in the case of any polygon that partialy doubles backs
+   more). Also, in the case of any polygon that partially doubles backs
    on itself (like the letter U), the open area in the center will be
    included as part of the flyover.
 -  Setting your home location to the current location is easy, just
@@ -113,6 +102,9 @@ Tips
    one end and selecting Measure Distance. Then right-click on the other
    end and select **Measure Distance** again. A dialog box will open
    with the distance between the two points.
+-  The altitude change between waypoints is normally a linear ramp of target altitude as the
+   vehicle progresses unless the altitude starts below 25m above home to prevent slow climbs potentially 
+   close to home. This value can be controlled with the [site wiki="plane"]:ref:`CLIMB_SLOPE_HGT<CLIMB_SLOPE_HGT>`\ [/site][site wiki="planner"]:ref:`CLIMB_SLOPE_HGT<plane:CLIMB_SLOPE_HGT>`\ [/site][site wiki="copter,rover,sub"]:ref:`CLIMB_SLOPE_HGT<plane:CLIMB_SLOPE_HGT>`\ [/site] parameter.
 
 Auto grid
 =========
@@ -167,6 +159,44 @@ the corresponding *Mission Planner* column headings.
 There is also a Copter-specific :ref:`Copter Mission Command List <copter:mission-command-list>`.
 [/site]
 
+End of Mission
+==============
+
+When the mission list is completed, Copter will loiter at the last waypoint indefinitely until a mode change or disarm (as when landing), Rover will hold, but Plane will RTL unless the last mission item is unlimited loiter or turns, or a landing.
+
+Mission Reset
+=============
+
+On Copter and Rover, the mission is reset to the beginning of the mission list every disarm. On Plane, it is reset similarly, except in AUTO mode which does not reset on disarm and leaves the "mission pointer" on the last mission item to be performed. For all vehicles, any landing mission item, when the landing is completed, will not advance to the next mission item. The [site wiki="copter,plane,rover,sub"]:ref:`MIS_OPTIONS<MIS_OPTIONS>`\ [/site][site wiki="planner"]:ref:`MIS_OPTIONS<copter:MIS_OPTIONS>`\ [/site] parameter, bit 2, can be set to continue onward in the mission list after landing.
+
+One can set an ``RCx_OPTION`` switch function ("24") to reset the mission item pointer to the beginning of the mission list at any time.
+
+Also, the mission can be set to reset upon any entry into AUTO mode with the [site wiki="copter,plane,rover,sub"]:ref:`MIS_RESTART<MIS_RESTART>`\ [/site][site wiki="planner"]:ref:`MIS_RESTART<copter:MIS_RESTART>`\ [/site] parameter. Default (0) is to resume the mission when re-entering AUTO mode.
+
+[site wiki="copter,plane,rover,sub"]:ref:`MIS_OPTIONS<MIS_OPTIONS>` [/site][site wiki="planner"]:ref:`MIS_OPTIONS<copter:MIS_OPTIONS>` [/site]
+======================================
+
+The [site wiki="copter,plane,rover,sub"]:ref:`MIS_OPTIONS<MIS_OPTIONS>`\ [/site][site wiki="planner"]:ref:`MIS_OPTIONS<copter:MIS_OPTIONS>`\ [/site] parameter bits can be set to modify how missions function:
+
+=============================================   ================================
+[site wiki="copter,plane,rover,sub"]:ref:`MIS_OPTIONS<MIS_OPTIONS>` bit             Option
+[/site][site wiki="planner"]:ref:`MIS_OPTIONS<copter:MIS_OPTIONS>` bit      Option
+[/site]=============================================   ================================
+0                                               Clears the loaded mission on boot. Must be loaded after each boot.
+1 (Plane only)                                  Use distance to land calculation on battery failsafe. See :ref:`common-do-land-start`
+2                                               Continue after landing. Advances mission item pointer to next mission item after landing complete. If no item exists, RTL.
+=============================================   ================================
+
+Mission Re-Wind
+===============
+
+The behavior of returning to a mission sequence when interrupted by a mode change is described in the :ref:`common-mission-rewind` section.
+
+Mission Size
+============
+
+The number of mission items which can be stored in the autopilot is limited to approximately 650 waypoints. If you need to have longer missions, then you can set the [site wiki="copter,plane,rover,sub"]:ref:`BRD_SD_MISSION<BRD_SD_MISSION>`\ [/site][site wiki="planner"]:ref:`BRD_SD_MISSION<copter:BRD_SD_MISSION>`\ [/site] parameter to create a file on the SD Card to store more. This can be set up to a maximum of 64 (kB) which would allow a total of over 4,000 waypoints in a mission.
+
 How to prefetch a stored Mission Map
 ====================================
 
@@ -179,4 +209,4 @@ Occasionally You will see some really big Numbers
 ..  youtube:: J5ClTnggZKk
     :width: 100%
 
-[copywiki destination="copter,plane,rover,planner"]
+[copywiki destination="copter,plane,rover,sub,planner"]

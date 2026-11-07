@@ -39,7 +39,7 @@ just what base airframe type is being used:
 -  different users have different optional sensors, which changes what
    configuration options are needed. For example, some users install an
    airspeed sensor or an external compass.
--  new APM firmware releases frequently change the defaults for some
+-  new Ardupilot firmware releases frequently change the defaults for some
    critical parameters to avoid problems found by users. If you load a
    config file from a user of an older firmware then that will revert
    those changes
@@ -55,13 +55,13 @@ configuration file to find the key tuning parameter they used, and
 manually put those values into your APM as a starting point for tuning.
 The key parameters you should look for are:
 
--  :ref:`RLL2SRV_P <RLL2SRV_P>`
--  :ref:`PTCH2SRV_P <PTCH2SRV_P>`
+-  ``RLL2SRV_P``
+-  ``PTCH2SRV_P``
 -  :ref:`NAVL1_PERIOD <NAVL1_PERIOD>`
 
 Setting those to an approximately correct value will give you a
 reasonable starting point for tuning your airframe. After that you
-should follow the :ref:`tuning guide <roll-pitch-controller-tuning>`.
+should follow the :ref:`tuning guide <new-roll-and-pitch-tuning>`.
 
 Also note that the Plane parameters default to zero 'I' values. The
 reason for this is that you need to tune the P value first, then tune
@@ -73,8 +73,8 @@ described in the tuning guide. That will allow APM to cope better with
 wind. For example, once the P values are setup correctly then setting
 the following will help with most aircraft:
 
--  RLL2SRV_I: 0.05
--  PTCH2SRV_I: 0.05
+-  ``RLL2SRV_I`` : 0.05
+-  ``PTCH2SRV_I`` : 0.05
 
 HobbyKing Bixler v1 or v2
 =========================
@@ -92,14 +92,14 @@ Bixler v2 has a slightly bigger wing and sturdier fuselage.
 Key parameters
 --------------
 
--  RLL2SRV_P: 0.9
--  PTCH2SRV_P: 1.0
--  NAVL1_PERIOD: 18
+-  ``RLL2SRV_P`` : 0.9
+-  ``PTCH2SRV_P`` : 1.0
+-  :ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: 18
 
 Bixler Tips
 -----------
 
-See `this posting <http://diydrones.com/profiles/blogs/mounting-an-apm-on-a-bixler2-upside-down-using-ahrs-orientation>`__
+See `this posting <https://diydrones.com/profiles/blogs/mounting-an-apm-on-a-bixler2-upside-down-using-ahrs-orientation>`__
 for how to fit an APM to a Bixler2. Also see :ref:`High Quality Bixler 1.1 Build (APM2.x) <a-high-quality-bixler-1-1-build>`.
 
 #. Heavy Bixler's fly much faster and are prone to tip stalling if
@@ -144,9 +144,9 @@ The skywalker has relatively small ailerons for the size of the
 aircraft, so you will probably need quite high gains. The following
 parameters will be a good starting point for most users:
 
--  RLL2SRV_P: 1.8
--  PTCH2SRV_P: 1.5
--  NAVL1_PERIOD: 20
+-  ``RLL2SRV_P`` : 1.8
+-  ``PTCH2SRV_P`` : 1.5
+-  :ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: 20
 
 HobbyKing Skyfun
 ================
@@ -181,12 +181,12 @@ plane it would be better to get a bixler2, which is a similar size and
 cost, but flies a lot better.
 
 If you do want to fly an easystar then you will need to set a
-KFF_RDDRMIX, along with the other key parameters. For example:
+:ref:`KFF_RDDRMIX<KFF_RDDRMIX>`, along with the other key parameters. For example:
 
--  RLL2SRV_P: 0.55
--  PTCH2SRV_P: 0.6
--  KFF_RDDRMIX: 0.5
--  NAVL1_PERIOD: 20
+-  ``RLL2SRV_P`` : 0.55
+-  ``PTCH2SRV_P`` : 0.6
+-  :ref:`KFF_RDDRMIX<KFF_RDDRMIX>`: 0.5
+-  :ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: 20
 
 Borojet Maja
 ============
@@ -200,9 +200,9 @@ Available \ `here <http://bormatec.com/index.php/prod-engl-men/blog-2-columns>`_
 
 The following parameters should be a good starting point:
 
--  RLL2SRV_P: 1.4
--  PTCH2SRV_P: 1.3
--  NAVL1_PERIOD: 16
+-  ``RLL2SRV_P`` : 1.4
+-  ``PTCH2SRV_P`` : 1.3
+-  :ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: 16
 
 TELINK Toro900 flying wing
 ==========================
@@ -212,9 +212,9 @@ TELINK Toro900 flying wing
 
 The following values should be a good starting point:
 
--  RLL2SRV_P: 1.2
--  PTCH2SRV_P: 2
--  NAVL1_PERIOD: 18
+-  ``RLL2SRV_P`` : 1.2
+-  ``PTCH2SRV_P`` : 2
+-  :ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: 18
 
 SkyWalker X8
 ============
@@ -225,9 +225,9 @@ SkyWalker X8
 The X8 varies a lot in how people set it up, but you usually need
 parameters around this range:
 
--  RLL2SRV_P: 0.8
--  PTCH2SRV_P: 0.5
--  NAVL1_PERIOD: 19
+-  ``RLL2SRV_P`` : 0.8
+-  ``PTCH2SRV_P`` : 0.5
+-  :ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: 19
 
 Phoenix Tiger60
 ===============
@@ -256,12 +256,12 @@ The HotDog is a fun sports plane that flies like it is "on rails". The
 one in the picture has an OS25 Nitro engine. It flies well with the
 following parameters:
 
--  RLL2SRV_P: 0.35
--  PTCH2SRV_P: 0.6
--  NAVL1_PERIOD: 14
--  THR_PASS_STAB: 1
--  THR_SUPP_MAN: 1
--  THR_SLEWRATE: 30
+-  ``RLL2SRV_P`` : 0.35
+-  ``PTCH2SRV_P`` : 0.6
+-  :ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: 14
+-  THR_PASS_STAB:  1
+-  :ref:`THR_SUPP_MAN<THR_SUPP_MAN>`: 1
+-  :ref:`THR_SLEWRATE<THR_SLEWRATE>`: 30
 
 Boomerang 60
 ============
@@ -273,12 +273,12 @@ The Boomerang is a classic high wing trainer aircraft, and like the
 Tiger60 has relatively small control surfaces. The following parameters
 will be a good starting point:
 
--  RLL2SRV_P: 1.1
--  PTCH2SRV_P: 1.2
--  NAVL1_PERIOD: 20
--  THR_PASS_STAB: 1
--  THR_SUPP_MAN: 1
--  THR_SLEWRATE: 30
+-  ``RLL2SRV_P`` : 1.1
+-  ``PTCH2SRV_P`` : 1.2
+-  :ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: 20
+-  :ref:`THR_PASS_STAB<THR_PASS_STAB>`: 1
+-  :ref:`THR_SUPP_MAN<THR_SUPP_MAN>`: 1
+-  :ref:`THR_SLEWRATE<THR_SLEWRATE>`: 30
 
 Mugin
 =====
@@ -291,12 +291,12 @@ runway for landing!
 
 The following parameters should be a good starting point:
 
--  RLL2SRV_P: 1.0
--  PTCH2SRV_P: 1.3
--  NAVL1_PERIOD: 19
--  THR_PASS_STAB: 1
--  THR_SUPP_MAN: 1
--  THR_SLEWRATE: 30
+-  ``RLL2SRV_P`` : 1.0
+-  ``PTCH2SRV_P`` : 1.3
+-  :ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: 19
+-  :ref:`THR_PASS_STAB<THR_PASS_STAB>`: 1
+-  :ref:`THR_SUPP_MAN<THR_SUPP_MAN>`: 1
+-  :ref:`THR_SLEWRATE<THR_SLEWRATE>`: 30
 
 PA Addiction
 ============
@@ -309,10 +309,10 @@ slowly, but can do extremely rapid rolls and loops due to its huge
 control surfaces. The APM flies it fine with the right parameters. The
 following parameters will be a good start:
 
--  RLL2SRV_P: 0.35
--  PTCH2SRV_P: 0.6
--  PTCH2SRV_D: 0.04
--  NAVL1_PERIOD: 13
+-  ``RLL2SRV_P`` : 0.35
+-  ``PTCH2SRV_P`` : 0.6
+-  ``PTCH2SRV_D`` : 0.04
+-  :ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: 13
 
 RipMax AcroWot
 ==============
@@ -323,10 +323,10 @@ RipMax AcroWot
 The AcroWot is an intermediate nitro sports plane, and a lot of fun to
 fly! With an OS55AX motor it flies well with the following parameters:
 
--  RLL2SRV_P 1.0
--  PTCH2SRV_P: 0.9
--  NAVL1_PERIOD: 13
--  TRIM_THROTTLE: 35
+-  ``RLL2SRV_P`` : 1.0
+-  ``PTCH2SRV_P`` : 0.9
+-  :ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: 13
+-  :ref:`TRIM_THROTTLE<TRIM_THROTTLE>`: 35
 
 TechPod
 =======
@@ -339,11 +339,11 @@ distance photography.
 
 It flies well with the following parameters:
 
--  RLL2SRV_P: 1.5
--  PTCH2SRV_P: 1.5
--  NAVL1_PERIOD: 17
--  ARSPD_FBW_MIN: 9
--  ARSPD_FBW_MAX: 20
--  TRIM_AIRSPEED_CM: 1200
+-  ``RLL2SRV_P`` : 1.5
+-  ``PTCH2SRV_P`` : 1.5
+-  :ref:`NAVL1_PERIOD<NAVL1_PERIOD>`: 17
+-  :ref:`AIRSPEED_MIN<AIRSPEED_MIN>`: 9
+-  :ref:`AIRSPEED_MAX<AIRSPEED_MAX>`: 20
+-  :ref:`AIRSPEED_CRUISE<AIRSPEED_CRUISE>`: 1200
 
-For a more complete guide `see this review <http://diydrones.com/profiles/blogs/tuning-the-techpod>`__.
+For a more complete guide `see this review <https://diydrones.com/profiles/blogs/tuning-the-techpod>`__.

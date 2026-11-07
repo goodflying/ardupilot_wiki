@@ -23,7 +23,7 @@ The most important step to setting up the plane is having the correct inputs,
 outputs, and reversals. Inputs are covered on the :ref:`RC input setup page <rc-throw-trim>`. 
 After the RC inputs are configured, configure the outputs.
 
-.. warning:: Make sure the AHRS_ORIENT is set correctly for the autopilot. If it is incorrect, 
+.. warning:: Make sure the :ref:`AHRS_ORIENTATION<AHRS_ORIENTATION>` is set correctly for the autopilot. If it is incorrect, 
              this setup will fail, and the plane may crash upon entry into any stabilize mode.
              
 Servo cables can be connected to any output of the autopilot,
@@ -62,8 +62,8 @@ should move its control surfaces to level itself.
 
    <table border="1" class="docutils">
    <tr><th>Movement</th><th>Action</th></tr>
-   <tr><td>Roll Plane Right</td><td>Left aileron moves up and right aileron moves down</td><tr>
-   <tr><td>Roll Plane Left</td><td>Left aileron moves down and right aileron moves up</td><tr>
+   <tr><td>Roll Plane Right</td><td>Left aileron moves up and right aileron moves down</td></tr>
+   <tr><td>Roll Plane Left</td><td>Left aileron moves down and right aileron moves up</td></tr>
    <tr><td>Pitch plane up</td><td>Both tail surfaces move down</td></tr>
    <tr><td>Pitch plane down</td><td>Both tail surfaces move up</td></tr>
    <tr><td>Roll Plane Right</td><td>Both tail surfaces move left</td></tr>
@@ -81,14 +81,14 @@ at a time to avoid confusion.
 
    <table border="1" class="docutils">
    <tr><th>Control Surface Response</th><th>Corrective Action</th></tr>
-   <tr><td>Correct for 1 movement (pitch or roll), but not the other</td><td>Change the function (from 79 to 80; or 80 to 79)</td><tr>
-   <tr><td>Incorrect for both movements (pitch and roll)</td><td>Change the reversal of that channel</td><tr>
+   <tr><td>Correct for 1 movement (pitch or roll), but not the other</td><td>Change the function (from 79 to 80; or 80 to 79)</td></tr>
+   <tr><td>Incorrect for both movements (pitch and roll)</td><td>Change the reversal of that channel</td></tr>
    </table>
 
-.. note:: KFF_RDDRMIX mut not be set to 0 for rudder setup. If the 
+.. note:: :ref:`KFF_RDDRMIX<KFF_RDDRMIX>` must not be set to 0 for rudder setup. If the 
           plane actually needs 0, then reset it after this setup.
 
-          KFF_RDDRMIX should cause the tail surfaces point in the 
+          :ref:`KFF_RDDRMIX<KFF_RDDRMIX>` should cause the tail surfaces point in the 
           direction of the raised aileron.
 
 
@@ -101,12 +101,12 @@ Keep the plane level in FBWA mode and command the following inputs:
          
    <table border="1" class="docutils">
    <tr><th>Input</th><th>Action</th></tr>
-   <tr><td>Roll Right</td><td>Right aileron moves up and left aileron moves down</td><tr>
-   <tr><td>Roll Left</td><td>Left aileron moves up and right aileron moves down</td><tr>
-   <tr><td>Pitch up</td><td>Both tail surfaces moveup</td><tr>
-   <tr><td>Pitch down</td><td>Both tail surfaces move down</td><tr>
-   <tr><td>Yaw right</td><td>Both tail surfaces move right</td><tr>
-   <tr><td>Yaw left</td><td>Both tail surfaces move left</td><tr>
+   <tr><td>Roll Right</td><td>Right aileron moves up and left aileron moves down</td></tr>
+   <tr><td>Roll Left</td><td>Left aileron moves up and right aileron moves down</td></tr>
+   <tr><td>Pitch up</td><td>Both tail surfaces moveup</td></tr>
+   <tr><td>Pitch down</td><td>Both tail surfaces move down</td></tr>
+   <tr><td>Yaw right</td><td>Both tail surfaces move right</td></tr>
+   <tr><td>Yaw left</td><td>Both tail surfaces move left</td></tr>
    </table>
 
 Double check MANUAL mode for the inputs as well. If everything is setup correctly, 
@@ -145,7 +145,7 @@ when servos stall).
 To adjust the throw, change the SERVOn_MIN and SERVOn_MAX values. The
 defaults are 1100 to 1900. On many aircraft, more throw may be desired.
 Changing throws to 1000 to 2000 or beyond is normal. Make sure that 
-the servos are still moving when nearing the extrememe values.
+the servos are still moving when nearing the extreme values.
 
 .. tip:: To get to maximum throw on V-Tail control surfaces, command pitch and yaw 
          at the same time in MANUAL mode.
@@ -153,15 +153,15 @@ the servos are still moving when nearing the extrememe values.
 Mixing Gain
 ===========
 
-The MIXING_GAIN parameter is critical for vtail aircraft. It is the
+The :ref:`MIXING_GAIN<MIXING_GAIN>` parameter is critical for vtail aircraft. It is the
 gain used in mixing between yaw and pitch output and the vtail
-movement. For example, if MIXING_GAIN is 0.5, then the following outputs
+movement. For example, if :ref:`MIXING_GAIN<MIXING_GAIN>` is 0.5, then the following outputs
 are used:
 
 - LEFT_VTAIL = (yaw+pitch)*0.5
-- RIGHT_VTAIL = (yaw-pitch)*0.5
+- RIGHT_VTAIL = (-yaw+pitch)*0.5
 
-Adjusting the MIXING_GAIN controls the percentabe of throws from pitch vs yaw.
+Adjusting the :ref:`MIXING_GAIN<MIXING_GAIN>` controls the percentage of throws from pitch vs yaw.
 
 Final Setup
 ===========
@@ -169,5 +169,5 @@ Final Setup
 After completing the V-Tail guide, move onto the final setup of
 the aircraft.
 
-- :ref:`ESC Calibration <guide-esc-calibration>`
+- :ref:`ESC Calibration <common-esc-calibration>`
 - :ref:`Center of Gravity <guide-center-of-gravity>`

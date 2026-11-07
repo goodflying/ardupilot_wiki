@@ -127,6 +127,8 @@ characters.
 You're done!  The new parameter can be access from the main code (not
 the libraries) as g.my_new_parameter.
 
+.. note:: ArduPilot vehicle's global parameter classes are crowded. To avoid exceeding the maximum number of parameters in a vehicle's Parameter class, another class for global parameters (named 'ParametersG2') has been introduced. Adding parameters to this class is similar to adding parameters in libraries. The parameters added to this class can similarly be accessed from within the vehicle's main code.
+
 Adding a parameter to a library
 ===============================
 
@@ -135,7 +137,7 @@ use the `AP_Compass <https://github.com/ArduPilot/ardupilot/tree/master/librarie
 library as an example.
 
 **Step #1:** Add the new class variable to the top level .h file (i.e.
-`Compass.h <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Compass/AP_Compass.h>`__). 
+`Compass.h <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Compass/AP_Compass.h>`__).
 Possible types include AP_Int8, AP_Int16, AP_Float, AP_Int32 and
 AP_Vector3f.  Also add the default value you'd like for the parameter
 (we will use this in step #2)
@@ -224,17 +226,17 @@ then it would have been accessible to the main code as well as
 opposed to an existing class like AP_Compass), it should be added to
 the main vehicle's var_info table in the
 `Parameters.cpp <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Parameters.cpp>`__
-file (it's order in the var_info table is not important).  Below in red
+file (its order in the var_info table is not important).  Below in red
 where the Compass class appears.
 
 ::
 
     const AP_Param::Info var_info[] = {
-        // @Param: SYSID_SW_MREV
+        // @Param: FORMAT_VERSION
         // @DisplayName: Eeprom format version number
         // @Description: This value is incremented when changes are made to the eeprom format
         // @User: Advanced
-        GSCALAR(format_version, "SYSID_SW_MREV",   0),
+        GSCALAR(format_version, "FORMAT_VERSION",   0),
     <snip>
 
         // @Group: COMPASS_
@@ -248,6 +250,58 @@ where the Compass class appears.
 
         AP_VAREND
     };
- 
+
 **Step #5:**
 If the class is a completely new addition to the code, also add k_param_my_new_lib to the enum in `Parameters.h <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Parameters.h>`__, where my_new_lib is the first argument to the GOBJECT declaration in `Parameters.cpp <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Parameters.cpp>`__. Read the comments above the enum to understand where to place the new value, as order is important here.
+
+
+Changing the type of a parameter
+================================
+
+From time to time parameters need to be altered or renamed. ArduPilot has capabilities that allow this to be managed from release to release so that upgrades always preserve user configured parameters. Parameters are keyed off slots in the eeprom, so if the occupied slot does not change then the parameter does not change - regardless of its name. If however the type needs to change then the parameter needs to be moved to a new slot and the existing slot be reserved to prevent unexpected configuration. In order for the configuration to be preserved it needs to be copied and converted from the old slot to the new slot.
+
+**Step #1:** Change the index of the existing parameter to an unused index and add a comment to the effect that the old slot is reserved.
+
+**Step #2:** In order to figure out the keys for conversion:
+
+    * Set the AP_PARAM_KEY_DUMP definition to "1" `here in AP_Param.h <https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_Param/AP_Param.h#L36>`__
+
+    * Start the old code in SITL and all the parameter names and their magic numbers will be displayed
+
+    * Copy-paste from Copter's Parameters.cpp file's `existing parameter conversion tables like the ones done for the attitude controller gains <https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/Parameters.cpp#L1247>`__.
+
+Parameter Conversion Expiration
+===============================
+
+Parameter conversions are necessary to ensure continuity for users as they upgrade to newer versions of ArduPilot.  However, the conversion process does utilise some resources on boot and does add to the flash cost of the code. 
+Therefore we don't keep the conversion code forever more. To make it easier to find and remove the conversions, please add the following as a comment above any parameter conversion that you add:
+
+::
+
+    // PARAMETER_CONVERSION - Added: Aug-2021
+
+Please use the date format shown above to avoid ambiguity.  Please also keep the date on the same line as the key word "PARAMETER_CONVERSION" so that the date can be seen in the return, when grep-ing/searching the code.  When adding to an already existing AP_Param::ConversionInfo table, please add the conversions as a new block with the conversion comment above the new block.  For example:
+
+.. code-block:: cpp
+
+    const AP_Param::ConversionInfo q_conversion_table[] = {
+        // PARAMETER_CONVERSION - Added: Jan-2018
+        { Parameters::k_param_quadplane, 4044, AP_PARAM_FLOAT, "Q_P_POSZ_P" },     //  Q_PZ_P
+        { Parameters::k_param_quadplane, 4045, AP_PARAM_FLOAT, "Q_P_POSXY_P"},     //  Q_PXY_P
+        { Parameters::k_param_quadplane, 4046, AP_PARAM_FLOAT, "Q_P_VELXY_P"},     //  Q_VXY_P
+        { Parameters::k_param_quadplane, 78,   AP_PARAM_FLOAT, "Q_P_VELXY_I"},     //  Q_VXY_I
+        { Parameters::k_param_quadplane, 142,  AP_PARAM_FLOAT, "Q_P_VELXY_IMAX"},  //  Q_VXY_IMAX
+
+        // PARAMETER_CONVERSION - Added: Aug-2021
+        { Parameters::k_param_quadplane, 206,  AP_PARAM_FLOAT, "Q_P_VELXY_FLTE"},  //  Q_VXY_FILT_HZ
+
+        // PARAMETER_CONVERSION - Added: Jan-2018
+        { Parameters::k_param_quadplane, 4047, AP_PARAM_FLOAT, "Q_P_VELZ_P"},      //  Q_VZ_P
+        { Parameters::k_param_quadplane, 4048, AP_PARAM_FLOAT, "Q_P_ACCZ_P"},      //  Q_AZ_P
+        { Parameters::k_param_quadplane, 80,   AP_PARAM_FLOAT, "Q_P_ACCZ_I"},      //  Q_AZ_I
+        { Parameters::k_param_quadplane, 144,  AP_PARAM_FLOAT, "Q_P_ACCZ_D"},      //  Q_AZ_D
+        { Parameters::k_param_quadplane, 336,  AP_PARAM_FLOAT, "Q_P_ACCZ_IMAX"},   //  Q_AZ_IMAX
+
+        // PARAMETER_CONVERSION - Added: Jun-2019
+        { Parameters::k_param_quadplane, 400,  AP_PARAM_FLOAT, "Q_P_ACCZ_FLTD"},   //  Q_AZ_FILT
+

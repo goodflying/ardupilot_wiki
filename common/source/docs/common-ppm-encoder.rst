@@ -4,6 +4,8 @@
 PPM Encoder
 ===========
 
+.. warning:: **Archived**
+
 The PPM encoder allows to encode up to 8 PWM (pulse width modulated)
 signals into one PPM (pulse position modulation) signal.
 
@@ -64,7 +66,7 @@ Failsafe output values:
 Setup Manual
 ============
 
-The `PPM Encoder Manual <http://download.ardupilot.org/downloads/wiki/pdf_guides/PPM-Encoder-V3-Manual.pdf>`__
+The `PPM Encoder Manual <https://download.ardupilot.org/downloads/wiki/pdf_guides/PPM-Encoder-V3-Manual.pdf>`__
 shows how to solder and wire the PPM Encoder and explains the different
 failsafe modes.
 
@@ -86,16 +88,17 @@ them.
 ArduPPM is the official name for the newer generation firmwares. It has
 been designed from scratch with reliability as a top priority. The
 official release of the encoder firmware is in the Downloads section as
-ArduPPM_Vx.x.xx_ATMega328p.hex. The official source code is in the Git
-repository:
-https://github.com/ArduPilot/ardupilot/tree/master/Tools/ArduPPM. The
-standalone PPM Encoder needs the ATMega328p version.
+ArduPPM_Vx.x.xx_ATMega328p.hex. The source code (removed from the
+current ArduPilot repo since this hardware is obsolete) is archived in
+the Git repository at the `Copter-3.6 tag
+<https://github.com/ArduPilot/ardupilot/tree/Copter-3.6/Tools/ArduPPM>`__.
+The standalone PPM Encoder needs the ATMega328p version.
 
 Compiled binaries can be downloaded from our download site:
 
-- `ArduCopter PPM Encoder v2.3.16 Standalone <http://ardupilot.org/plane/docs/common-downloads_advanced_user_tools.html#arduppm-v2-3-16-atmega328p-firmware-for-apm1-x-copter-and-standalone-ppm-encoder>`__
+- `ArduCopter PPM Encoder v2.3.16 Standalone <https://ardupilot.org/plane/docs/common-downloads_advanced_user_tools.html#arduppm-v2-3-16-atmega328p-firmware-for-apm1-x-copter-and-standalone-ppm-encoder>`__
 
-- `ArduPlane PPM Encoder v2.3.16 Standalone <http://ardupilot.org/plane/docs/common-downloads_advanced_user_tools.html#arduppm-v2-3-16-atmega328p-firmware-for-apm1-x-plane-and-standalone-ppm-encoder>`__
+- `ArduPlane PPM Encoder v2.3.16 Standalone <https://ardupilot.org/plane/docs/common-downloads_advanced_user_tools.html#arduppm-v2-3-16-atmega328p-firmware-for-apm1-x-plane-and-standalone-ppm-encoder>`__
 
 
 
@@ -117,7 +120,7 @@ Following fuse settings should be used when programming with AVR Studio:
 
 - LOW: 0xFF
 - High: 0xDA
-- Ext: 0xFD
+- Ext: 0x07
 
 
 Re-Programming instructions for Windows

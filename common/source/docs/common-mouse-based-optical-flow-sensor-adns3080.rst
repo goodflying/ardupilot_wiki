@@ -1,10 +1,12 @@
 .. _common-mouse-based-optical-flow-sensor-adns3080:
 
-==========================================
-Mouse-based Optical Flow Sensor (ADNS3080)
-==========================================
+===================================================
+ARCHIVED:Mouse-based Optical Flow Sensor (ADNS3080)
+===================================================
 
-[copywiki destination="copter,plane"]
+.. note:: This page is archived and the device is no longer supported in ArduPilot software
+
+[copywiki destination="copter,plane,rover"]
 
 Copter-3.2.1 on APM2.x boards included limited support for the mouse sensor based `Optical Flow sensor <http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2047675.m570.l1313.TR0.TRC0.H0.Xoptical+flow.TRS0&_nkw=optical+flow&_sacat=0>`__ using the OF_Loiter flight mode.
 
@@ -57,7 +59,7 @@ Testing the sensor
 
 -  Upload the test sketch to the APM:
 
-   -  If using an APM2, you can `download the hex file from here <http://download.ardupilot.org/downloads/wiki/advanced_user_tools/AP_OpticalFlow_test.hex>`__
+   -  If using an APM2, you can `download the hex file from here <https://download.ardupilot.org/downloads/wiki/advanced_user_tools/AP_OpticalFlow_test.hex>`__
       and then upload to your APM2 using the Mission Planner's **INITIAL SETUP \| Install Firmware \| Load custom firmware** link
    -  If using an APM1 you must open the
       `AP_OpticalFlow_test.pde <https://raw.githubusercontent.com/diydrones/ardupilot/860f4b260552297253a28b83a7f108302b84b97e/libraries/AP_OpticalFlow/examples/AP_OpticalFlow_test/AP_OpticalFlow_test.pde>`__\ sketch in the arduino IDE, compile and upload to your APM1
@@ -99,7 +101,7 @@ In order to check that you have the lens properly focused you can capture an ima
 Note 1: After capturing images, you will need to reset the sensor (i.e.
 plug/unplug it) to restore it to the normal motion capture mode.
 
-Note 2: you should see the the AP_OpticalFlow_ADNS3080's menu and any
+Note 2: you should see the AP_OpticalFlow_ADNS3080's menu and any
 errors appear in the Python Shell.
 
 How it works
@@ -163,8 +165,10 @@ Known issues
 Acknowledgements:
 =================
 
-#. `Marko Klein Berkenbusch's <http://diydrones.com/profile/MarkoKleineBerkenbusch>`__
+#. `Marko Klein Berkenbusch's <https://diydrones.com/profiles/profile/show?id=MarkoKleineBerkenbusch&>`__
    position hold with mouse sensor
 
 #. research paper re `optical flow for position hold <http://www.araa.asn.au/acra/acra2007/papers/paper181final.pdf>`__
-#. research paper re `optical flow for object avoidance <http://www.mecatronica.eesc.usp.br/wiki/upload/0/0a/2006_Thesis_Remote_Terrain_Navigation_for_Unmanned_Air_Vehicles.pdf>`__
+#. research paper re `optical flow for object avoidance <https://www.scribd.com/document/241321239/2006-Thesis-Remote-Terrain-Navigation-for-Unmanned-Air-Vehicles>`__
+
+[copywiki destination="plane,copter,rover"]

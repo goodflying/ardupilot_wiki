@@ -11,11 +11,10 @@ These pages are less about the software directly and more about the procedures a
     :maxdepth: 1
 
     Communication Channels (aka Contact Us) <common-contact-us>
-    Copter Release Procedures <release-procedures>
-    Development Fund <how-the-team-works-development-fund>
+    Release Procedures <release-procedures>
     Developer Code of Conduct <developer-code-of-conduct>
+    Funding Committee <how-the-team-works-development-fund>
     Job Openings <job-openings>
-    Roadmap <roadmap>
     Top Contributors <common-team>
     Voting <how-the-team-works-voting>
-    Weekly meetings on Mumble Server <ardupilot-mumble-server>
+    Weekly meetings on Discord <ardupilot-discord-server>

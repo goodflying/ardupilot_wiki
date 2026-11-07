@@ -8,4 +8,7 @@ ROS with SITL in Gazebo
 
     Work in progress
 
-We are keen to improve ArduPilot's support of ROS so if you find issues (such as commands that do not seem to be supported), please report them in the `ArduPilot issues list <https://github.com/ArduPilot/ardupilot/issues>`__ with a title that includes "ROS" and we will attempt to resolve them as quickly as possible.
+Instructions for using :ref:`Gazebo with ArduPilot are here <sitl-with-gazebo>`.
+
+..  youtube:: orMXVby-tSI
+    :width: 100%

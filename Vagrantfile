@@ -1,36 +1,39 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure(2) do |config|
-  config.vm.box = "ubuntu/xenial64"
+# vagrant up jammy
+# vagrant ssh jammy
 
-	config.vm.provision "shell", inline: <<-SHELL
-                set -e
-                set -x
+# # on machine:
+# cd build_wiki/ardupilot_wiki/
+# ./update.sh
+# rsync -aPH --delete /var/sites/wiki/web/ /vagrant/web
 
-		apt-get -y update
-                apt-get install -y unzip git imagemagick mercurial python-pip
+# on desktop:
+# firefox web/copter/index.html
+# rm -rf web
 
-		easy_install -U pip
-        
-                # Install sphinx from ArduPilot repository
-                pip install git+https://github.com/ArduPilot/sphinx_rtd_theme.git -UI
-                pip install sphinx==1.3.6
-        
-                #from https://bitbucket.org/birkenfeld/sphinx-contrib/overview
-                #would like to get from pip but there is no version on pypi
-		hg clone https://bitbucket.org/birkenfeld/sphinx-contrib
-		pushd ./sphinx-contrib/youtube/
-		python setup.py build
-		python setup.py install
-		popd
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
 
-                # and a vimeo plugin:
-		hg clone https://bitbucket.org/jdouglass/sphinxcontrib.vimeo
-		pushd sphinxcontrib.vimeo
-		python setup.py build
-		python setup.py install
-		popd
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-	SHELL
+  # default to jammy for building the Wiki:
+  config.vm.box = "ubuntu/jammy"
+
+  # https://releases.ubuntu.com
+  # https://ubuntu.com/about/release-cycle
+  # https://en.wikipedia.org/wiki/Ubuntu_version_history#Table_of_versions
+
+  # 22.04 LTS Standard Support EOL May 2027
+  config.vm.define "jammy", autostart: true do |jammy|
+    jammy.vm.box = "ubuntu/jammy64"
+    jammy.vm.provider "virtualbox" do |vb|
+        vb.name = "ArduPilot_wiki (jammy)"
+    end
+    jammy.vm.provision "shell", path: "./scripts/initvagrant.sh"
+    jammy.vm.provider "virtualbox" do |vb|
+        vb.customize ["modifyvm", :id, "--memory", "20480"]
+    end
+  end
 end

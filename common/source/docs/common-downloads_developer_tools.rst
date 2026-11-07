@@ -4,13 +4,13 @@
 DOWNLOADS: Developer Tools
 ==========================
 
-The developer tools `can be downloaded from here <http://download.ardupilot.org/downloads/wiki/developer_tools/>`__.
+The developer tools `can be downloaded from here <https://download.ardupilot.org/downloads/wiki/developer_tools/>`__.
 
 .. note::
 
     Not all of these tools are "up to date". For example, vehicle binaries and 
     GCS software should be downloaded from their respective locations in the 
-    `firmware server <http://firmware.ardupilot.org/>`__.
+    `firmware server <https://firmware.ardupilot.org/>`__.
 
 The rest of the article provides an overview of some of the files and the tool licensing.
 
@@ -20,10 +20,10 @@ Tools
 Odroid Ubuntu 14.04 hostapd
 ---------------------------
 
-* `hostapd_OdroidU3_Ubuntu1404.zip <http://download.ardupilot.org/downloads/wiki/developer_tools/hostapd_OdroidU3_Ubuntu1404.zip>`__
+* `hostapd_OdroidU3_Ubuntu1404.zip <https://download.ardupilot.org/downloads/wiki/developer_tools/hostapd_OdroidU3_Ubuntu1404.zip>`__
 
-VERSION	dev
-DATE POSTED	January 20, 2015
+VERSION dev
+DATE POSTED January 20, 2015
 
 This replaces the hostapd distributed with the Odroid U3 board’s Ubuntu 14.04. This newer version resolves issues creating a wifi access point.
 
@@ -32,10 +32,10 @@ This replaces the hostapd distributed with the Odroid U3 board’s Ubuntu 14.04.
 Arduino code to test an airspeed sensor
 ---------------------------------------
 
-* `Airspeed_test.zip <http://download.ardupilot.org/downloads/wiki/developer_tools/Airspeed_test.zip>`__
-* `Airspeed_test1.zip <http://download.ardupilot.org/downloads/wiki/developer_tools/Airspeed_test1.zip>`__
+* `Airspeed_test.zip <https://download.ardupilot.org/downloads/wiki/developer_tools/Airspeed_test.zip>`__
+* `Airspeed_test1.zip <https://download.ardupilot.org/downloads/wiki/developer_tools/Airspeed_test1.zip>`__
 
-DATE POSTED	April 25, 2013
+DATE POSTED April 25, 2013
 
 Arduino code to test an airspeed sensor
 
@@ -43,18 +43,18 @@ Arduino code to test an airspeed sensor
 Arduino 1.0.3 with modifications required for ArduPilot (Mac OS X)
 ------------------------------------------------------------------
 
-* `‘ArduPilot-Arduino-1.0.3-Mac.zip <http://firmware.ardupilot.org/downloads/wiki/developer_tools/ArduPilot-Arduino-1.0.3-Mac.zip>`__
+* `‘ArduPilot-Arduino-1.0.3-Mac.zip <https://download.ardupilot.org/downloads/wiki/developer_tools/ArduPilot-Arduino-1.0.3-Mac.zip>`__
 
-DATE POSTED	May 1, 2013
+DATE POSTED May 1, 2013
 
 
 ArduPilot-Arduino-1.0.3-windows.zip
 -----------------------------------
 
-* `ArduPilot-Arduino-1.0.3-windows.zip <http://download.ardupilot.org/downloads/wiki/developer_tools/ArduPilot-Arduino-1.0.3-windows.zip>`__
+* `ArduPilot-Arduino-1.0.3-windows.zip <https://download.ardupilot.org/downloads/wiki/developer_tools/ArduPilot-Arduino-1.0.3-windows.zip>`__
 
-VERSION	1.0.3
-DATE POSTED	May 1, 2013
+VERSION 1.0.3
+DATE POSTED May 1, 2013
 
 Arduino 1.0.3 with modifications required for ArduPilot
 
@@ -63,18 +63,18 @@ Arduino 1.0.3 with modifications required for ArduPilot
 CrossTrack demo (flash version)
 -------------------------------
 
-* `CrossTrack.swf <http://download.ardupilot.org/downloads/wiki/developer_tools/CrossTrack.swf>`__
+* `CrossTrack.swf <https://download.ardupilot.org/downloads/wiki/developer_tools/CrossTrack.swf>`__
 
-DATE POSTED	April 29, 2013
+DATE POSTED April 29, 2013
 
 
 
 Data dump of three attitude solutions
 -------------------------------------
 
-* `AttitudesThree.zip <http://download.ardupilot.org/downloads/wiki/developer_tools/AttitudesThree.zip>`__
+* `AttitudesThree.zip <https://download.ardupilot.org/downloads/wiki/developer_tools/AttitudesThree.zip>`__
 
-DATE POSTED	April 29, 2013
+DATE POSTED April 29, 2013
 
 Data dump of 3 attitude solutions running in parallel. Includes README file.
 
@@ -87,9 +87,9 @@ Data dump of 3 attitude solutions running in parallel. Includes README file.
 Declination Lookup - Test EMM
 -----------------------------
 
-* `DeclinationLookup_CompressedEMM-1.zip <http://download.ardupilot.org/downloads/wiki/developer_tools/DeclinationLookup_CompressedEMM-1.zip>`__
+* `DeclinationLookup_CompressedEMM-1.zip <https://download.ardupilot.org/downloads/wiki/developer_tools/DeclinationLookup_CompressedEMM-1.zip>`__
 
-DATE POSTED	April 29, 2013
+DATE POSTED April 29, 2013
 
 This is a small zip file that contains 1 executable that is meant to be executed via the command line. When you run it you will see a menu with 4 options. 
 The only option that will work is the declination lookup option. It is using the exact same lookup method as the AP_Declination library 
@@ -99,26 +99,26 @@ I wrote except that the lookup tables were generated using the EMM (Enhanced) in
 mavproxybeta1.msi
 -----------------
 
-* `mavproxybeta1.msi <http://download.ardupilot.org/downloads/wiki/developer_tools/mavproxybeta1.msi>`__
+* `mavproxybeta1.msi <https://download.ardupilot.org/downloads/wiki/developer_tools/mavproxybeta1.msi>`__
 
-DATE POSTED	May 1, 2013
+DATE POSTED May 1, 2013
 
 
 
 mavproxyBetaNoNeworkTest.msi
 ----------------------------
 
-* `mavproxyBetaNoNeworkTest.msi <http://download.ardupilot.org/downloads/wiki/developer_tools/mavproxyBetaNoNeworkTest.msi>`__
+* `mavproxyBetaNoNeworkTest.msi <https://download.ardupilot.org/downloads/wiki/developer_tools/mavproxyBetaNoNeworkTest.msi>`__
 
-DATE POSTED	May 1, 2013
+DATE POSTED May 1, 2013
 
 
 Serial port test program
 ------------------------
 
-* `MultiSerialMega.zip <http://download.ardupilot.org/downloads/wiki/developer_tools/MultiSerialMega.zip>`__
+* `MultiSerialMega.zip <https://download.ardupilot.org/downloads/wiki/developer_tools/MultiSerialMega.zip>`__
 
-DATE POSTED	April 29, 2013
+DATE POSTED April 29, 2013
 
 A little program that shows that Port 0 (USB) and Port 3 (Xbee) are working
 
@@ -158,4 +158,4 @@ Since we want you to have a great experience, please make sure that you do all o
 
 
 
-[copywiki destination="copter,plane,rover,planner,planner2,antennatracker,dev,ardupilot"]
+[copywiki destination="copter,plane,rover,sub,blimp,planner,planner2,antennatracker,dev,mavproxy,ardupilot"]

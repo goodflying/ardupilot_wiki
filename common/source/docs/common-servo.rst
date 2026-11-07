@@ -4,58 +4,34 @@
 Servo
 =====
 
-This article explains how to connect Servos to flight controller, and how to control them from the transmitter or ground station (i.e. Mission Planner).
-
-Overview
-========
-
 Copter, Plane and Rover can control servos for any purpose, including:
 triggering a camera shutter, releasing a parachute or dropping a tennis
 ball.  These servo(s) can be controlled either directly by the pilot via
 a switch on the transmitter, through commands sent from the ground
 station or as part of a mission.
 
-Either
-`analog <http://www.amazon.com/Hitec-31055S-HS-55-Economy-Universal/dp/B0006O3WNW>`__
-or `digital servos <http://www.amazon.com/Hitec-RCD-35076S-HS-A5076HB-Digital/dp/B003RXHMNK>`__
-may be used.
+Either analog or digital servos may be used such as provided by ArduPilot partner `Hitec <https://hitecrcd.com/products/servos>`__ or other vendors.
 
-Connecting the servo to a Pixhawk
-=================================
+Connecting the servo to an AutoPilot
+====================================
 
 .. image:: ../../../images/Servo_Pixhawk.jpg
     :target: ../_images/Servo_Pixhawk.jpg
 
 -  If using Copter Connect the servo to AUX OUT 1, 2, 3 or 4.  MAIN OUT
    1 ~ 8 should be avoided because these update at 400hz.
--  If using Plane or Rover where all pins update at 50hz, any unused
+-  If using Plane or Rover where all PWM outputs update at :ref:`SERVO_RATE<SERVO_RATE>`, which defaults to 50hz, any unused
    MAIN OUT or AUX OUT 1 ~ 4 may be used.
 -  AUX OUT 5 and 6 cannot be used by default because they are setup as
    :ref:`Relays <common-relay>`.  These pins can changed to Servo
-   outputs by setting the BRD_PWM_COUNT parameter to 6 and setting
-   RELAY_PIN and RELAY_PIN2 to -1.
--  The Pixhawk flight controller cannot provide power to the servos so
+   outputs by setting the ``BRD_PWM_COUNT`` parameter to 6 and setting
+   :ref:`RELAY1_PIN<RELAY1_PIN>` and :ref:`RELAY2_PIN<RELAY2_PIN>` to -1.
+-  The Pixhawk autopilot cannot provide power to the servos so
    an external BEC or ESC that can provide 5V should be used.
 
-Connecting the servo to an APM2.x
-=================================
+.. note:: To set a PWM/SERVO/MOTOR output to be a GPIO, set its ``SERVOx_FUNCTION`` parameter to "-1". If set to "0", it remains a PWM output, unassigned to a function, and outputs that output's trim value when board safety is not active. If the servo function is being "mirrored" to a remote device, as in the case of a DroneCAN or KDECAN ESC, then in order to change the autopilot board's corresponding output pin to be a GPIO, but allow the ``SERVOx_FUNCTION`` to still be assigned to the remote device, the :ref:`SERVO_GPIO_MASK<SERVO_GPIO_MASK>` parameter can be used to assign the board pin to be a GPIO without affecting the ``SERVOx_FUNCTION`` assignment for the remote device.
 
-.. image:: ../../../images/OptionalHardware_Servo.jpg
-    :target: ../_images/OptionalHardware_Servo.jpg
-
--  On Copter connect the servo's signal wire to either A10 or A11 on the
-   left side of the APM
--  On Plane the servos may also be connected to any available channel
-   RC1 ~ RC8 on the back of the APM.
--  Connect the power and ground wires to the rear power rail (if the JP1
-   jumper is removed) or to an external BEC (if the JP1 jumper is left
-   in place).  It is absolutely critical that the servos power and
-   ground wires not be connected to the + and - pins on A10 or A11
-   because the servos will then be sharing their power source with the
-   main CPU.  Movements of the servo will cause ripples in the power
-   supply to the CPU and could cause brown-outs. For the same reason the
-   rear power rail should not be used if the JP1 jumper is left in
-   place.
+.. note:: when using digital servos they can provide faster and more precise control if a higher update rate for the PWM outputs is used by setting the :ref:`SERVO_RATE<SERVO_RATE>`  to a higher value such as 100Hz, 333Hz or even 400Hz, depending on the capabilities of the servos being used. This value affects **all** PWM outputs, other than motor control outputs, so only do this if all of the servos on the vehicle are digital servos that support this higher rate.
 
 Controlling the servo as a camera shutter
 =========================================
@@ -67,7 +43,7 @@ advantage of this set-up is:
 -  the servo can be triggered from the ch7 or ch8 auxiliary switch on
    Copter
 -  if you wish the servo to move to one position, delay for a moment
-   then return to it's original position this can all be accomplished
+   then return to its original position this can all be accomplished
    with a single mission command
 -  the location and attitude of the copter will be recorded to the
    dataflash each time the servo is triggered
@@ -86,7 +62,7 @@ Controlling the servo as a servo
 The traditional way to control a servo only works as part of a mission
 (i.e. AUTO mode).  Follow these instructions:
 
--  Connect to your flight controller from the ground station
+-  Connect to your autopilot from the ground station
 -  On the Config/Tuning > Full Parameter List page, ensure that the SERVOx_FUNCTION (or RCx_FUNCTION) is set to zero for the servo (i.e. :ref:`SERVO9_FUNCTION <SERVO9_FUNCTION>` = 0 if the servo is connected a Pixhawks AUX OUT2).
 -  Press the Write Params button
 
@@ -114,3 +90,4 @@ correctly.
 
 .. image:: ../../../images/Servo_TestingWithMP.jpg
     :target: ../_images/Servo_TestingWithMP.jpg
+    :width: 450px

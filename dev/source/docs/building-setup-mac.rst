@@ -10,7 +10,14 @@ This article shows how to manually setup a minimal build environment on MacOS (v
     :width: 100%
 
 
-There is a pre-built script at /ardupilot/Tools/scripts/install-prereqs-mac.sh that will install these pre-requisites.
+There is a `pre-built script  <https://github.com/ArduPilot/ardupilot/blob/master/Tools/environment_install/install-prereqs-mac.sh>`__ that will install these pre-requisites.
+
+How to use it, cd to your ardupilot directory, and execute:
+
+::
+
+    sh ./Tools/environment_install/install-prereqs-mac.sh
+
 
 Setup steps
 -----------
@@ -31,10 +38,8 @@ Setup steps
 
    ::
 
-       brew tap ardupilot/homebrew-px4
        brew update
-       brew install genromfs
-       brew install gcc-arm-none-eabi
+       brew install gcc-arm-none-eabi genromfs python3
 
 #. Install the latest version of awk using brew (make sure
    **/usr/local/bin** takes precedence in your path):
@@ -43,16 +48,36 @@ Setup steps
 
        brew install gawk
 
-#. Install *pip* and *pyserial* using the following commands:
+#. Install *empy* and *pyserial* using the following commands:
 
    ::
 
-       sudo easy_install pip
-       sudo pip install pyserial future empy
+       python3 -m pip install empy pyserial
+       
+   ::
+   
+       ** Starting with MacOS Mojave (10.14.x) you might want to install the SDK headers
+       
+       open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
 
-#. Follow the `MAVProxy's install instructions <https://ardupilot.github.io/MAVProxy/html/getting_started/download_and_installation.html#mac>`__ if you plan to use the simulator.
+
+#. Follow the :ref:`MAVProxy documentation <mavproxy:mavproxy-downloadinstallmac>` if you plan to use the simulator.
 
 Now you should be able to build with waf as described in `BUILD.md <https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md>`__.
+
+Additional Steps for macOS mojave
+---------------------------------
+Due to some changes binutils installed via brew have stopped working for macOS mojave leading to crashing builds. So if installed, remove via following command:
+
+::
+
+    brew uninstall binutils
+
+Also you will need to install the c++ include headers to /usr/include to do that. Run the following in commandline and follow the installation routine:
+
+::
+
+    open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
 
 Cleaning
 --------

@@ -28,7 +28,7 @@ Mounting the flight controller board
 .. image:: ../images/AntennaTracker_Mounting.jpg
     :target: ../_images/AntennaTracker_Mounting.jpg
 
-The flight controller board (i.e. Pixhawk, APM2, etc) should be mounted
+The flight controller board should be mounted
 on the moving part of the antenna tracker.
 
 If possible align the front of the flight controller so that it points
@@ -74,6 +74,6 @@ this. :ref:`See the configuration page for more details <configuration_setting_t
 should be taken to ensure the compass is not close to any metal objects.
 
 If using a stand-alone GPS (i.e. not an integrated GPS+compass) the GPS
-should be positioned so that it's antenna has a clear view of the sky.
-It's heading is not important. Some care should be taken to ensure the
+should be positioned so that its antenna has a clear view of the sky.
+Its heading is not important. Some care should be taken to ensure the
 cable connected to the flight controller cannot become tangled.

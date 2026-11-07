@@ -20,7 +20,7 @@ motionless on the ground until the :ref:`LEDs <common-leds-pixhawk>` stop flashi
 Disengage the safety switch (if present)
 ========================================
 
-If the flight controller has a :ref:`safety switch <common-safety-switch-pixhawk>` connected, it must be disengaged before the vehicle can be :ref:`armed <arming-your-plane>`.
+If the autopilot has a :ref:`safety switch <common-safety-switch-pixhawk>` connected, it must be disengaged before the vehicle can be :ref:`armed <arming-your-plane>`.
 
 -  **Safety Switch LED Indications:**
 
@@ -29,7 +29,7 @@ If the flight controller has a :ref:`safety switch <common-safety-switch-pixhawk
    -  Slow Blinking indicates: Safe condition. Safety can be disengaged
       by depressing Safety Button for 5 seconds.
    -  LED Continuously on indicates: Safety has been disengaged. The
-      flight controller may be armed with Throttle down and to the
+      autopilot may be armed with Throttle down and to the
       right.
    -  When the LED is continuously on indicating Safety Disengaged it
       may be toggled back to a Safety engaged condition by depressing
@@ -47,6 +47,8 @@ Calibrate and check the Airspeed sensor (if present)
 
 If the vehicle has an :ref:`airspeed sensor <airspeed>` then the :ref:`pre-flight checks described here <calibrating-an-airspeed-sensor>` should be performed before each flight.
 
+.. warning:: Be sure that the pitot ports are lightly covered during boot and/or forced pre-flight calibrations to prevent wind from causing a mis-calibration. And be sure to remove that cover before flight!
+
 .. image:: ../images/preflight.jpg
     :target: ../_images/preflight.jpg
     :width: 250px
@@ -54,7 +56,7 @@ If the vehicle has an :ref:`airspeed sensor <airspeed>` then the :ref:`pre-fligh
 Wait for GPS lock
 =================
 
-You should wait for GPS lock before flying which is normally indicated by the flight controller's :ref:`LEDs <common-leds-pixhawk>` becoming green.
+You should wait for GPS lock before flying which is normally indicated by the autopilot's :ref:`LEDs <common-leds-pixhawk>` becoming green.
 If you do not wait for GPS lock the barometric altimeter calibration will be incorrect and :ref:`RTL <rtl-mode>`, :ref:`Loiter <loiter-mode>`, :ref:`Auto <auto-mode>` and any other GPS dependent modes will not work properly.
 
 For Plane the home position is initially established at the time the
@@ -62,7 +64,7 @@ plane acquires its GPS lock. It is then continuously updated as long as
 the autopilot is disarmed.
 
 This means that if you execute an RTL, your plane will return to the
-location at which it was armed. If the plane you arm is not a good return
+location at which it was armed. If the place you arm is not a good return
 point then please setup a :ref:`rally point <common-rally-points>` instead. A rally point will be
 used in preference to the home location for RTL.
 
@@ -70,7 +72,7 @@ Check servo movements
 =====================
 
 **BEFORE EVERY FLIGHT**: before take off, hold the aircraft in your
-hands and switch to :ref:`FBWA <fbwa-mode>` mode, then pitch and tilt the plane it to
+hands and switch to :ref:`FBWA <fbwa-mode>` mode, then pitch and tilt the plane to
 confirm that the control surfaces move the correct way to return it to
 level flight. (The ailerons and elevators will move; the rudder only
 coordinates turns with the ailerons in flight, so it won't move much on
@@ -116,7 +118,7 @@ at a fixed altitude (which can be set with the \ :ref:`Mission Planner <planner:
 If it does not return crisply and circle overhead in a near-perfect
 circle, you need to tune the autopilot a bit for your particular
 airframe. This can usually be done by adjusting the Roll parameters, as
-described :ref:`here <roll-pitch-controller-tuning>`.
+described :ref:`here <new-roll-and-pitch-tuning>`.
 
 Once all this has checked out, you can program waypoint missions and
 test them in Auto mode.
@@ -124,33 +126,22 @@ test them in Auto mode.
 Level Adjustment
 ================
 
-You may find after flying your plane in FBWA that it has a tendency to
-turn in one direction and/or gains or loses height on a mid throttle
-setting with the transmitter sticks centred. If this happens, perform
-the following:
+You may find after flying your plane in FBWA at the desired cruise throttle setting, that it does not hold level attitude with the transmitter sticks centered. If this happens, perform the following:
 
 1) With your autopilot powered on the ground and connected to your
 mission planner, select FBWA on your transmitter, select the FLIGHT DATA
 tuning window and plot the nav_roll and nav_pitch data. With your
-transmitter sticks centred, these should both be zero as shown in this
+transmitter sticks centered, these should both be zero as shown in this
 screenshot. If they are not, you need to repeat your RC calibration or
 adjust your transmitter trims and repeat the FBWA flight test
 
 .. image:: ../images/CheckFBWADemands.jpg
     :target: ../_images/CheckFBWADemands.jpg
 
-If they are zero, then you need to adjust the ``AHRS_TRIM_X`` (roll) and
-``AHRS_TRIM_Y`` (pitch) for the difference in angle between the
-autopilot board and your planes attitude when flying straight and level.
-You can change these by going to **CONFIG/TUNING \| Full Parameter
-List** and adjusting the parameters as shown in the screenshot below.
+If they are zero, then you need to adjust the level trim for the difference in angle between the
+autopilot board and your planes attitude when flying straight and level, as explained below.
 
-.. image:: ../images/AdjustRollPitchTrims.png
-    :target: ../_images/AdjustRollPitchTrims.png
+For roll errors (ie heading keeps changing with sticks neutral), use the "LEVEL" accelerometer calibrate button in Mission Planner with the wings level using a spirit level and the nose to tail fuselage line of the aircraft also level. Unless the plane is warped this will assure that the wings are level in flight. If the aircraft still rotates in heading with sticks neutral, then you will need to trim the rudder, if equipped, also in flight.
 
-.. warning::
+If the plane is not generally holding altitude in FBWA at the desired cruise throttle position (ie speed), then you can adjust the cruising pitch attitude using the :ref:`PTCH_TRIM_DEG<PTCH_TRIM_DEG>` parameter. Most planes required this to be a few degrees positive for best cruise trim in FBWA. This parameter is in centi-degrees, so 3 degs is 300 for its value.
 
-   These parameters are in radians (every 0.01 is about 0.6 of a
-   degree) so adjust in increments of 0.01 initially. If the plane turns to
-   the left, AHRS_TRIM_X should be increased. If the plane loses height
-   with mid throttle, AHRS_TRIM_Y should be increased.

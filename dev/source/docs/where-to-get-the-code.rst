@@ -23,7 +23,7 @@ For developers who wish to **download** and **build** the latest code:
 - "clone" the project to download "master" to your local computer
 - :ref:`build/compile the firmware <building-the-code>` using waf or make
 
-Note that the latest firmware is built automatically and can be directly downloaded from `firmware.ardupilot.org <http://firmware.ardupilot.org>`__. 
+Note that the latest firmware is built automatically and can be directly downloaded from `firmware.ardupilot.org <https://firmware.ardupilot.org>`__. 
 
 For developers who wish to **download**, **compile**, **edit** and then **contribute** code
 back to ArduPilot, the following steps should be followed:
@@ -47,8 +47,8 @@ the project: clone, branch, commit, push.
 If you want to know more about git there are many great resources
 online. Here are just a few you may find useful:
 
--  `Try Git <http://try.github.io/levels/1/challenges/1>`__:
-   browser-based interactive tutorial for learning git
+-  `Coddy Git course <https://coddy.tech/landing/git>`__:
+   browser-based interactive course for learning git
 -  `Git Ready <http://gitready.com/>`__: tutorials of varying difficulty
    levels
 -  `Git SCM Book <http://git-scm.com/book/en/Getting-Started>`__:

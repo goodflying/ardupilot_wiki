@@ -1,0 +1,59 @@
+.. _common-rangefinder-setup:
+
+===========================
+RangeFinders Setup Overview
+===========================
+
+There are many different kinds of rangefinders: Lidar (using laser or infra-red light to measure distance), Sonar (using ultrasonic sound), and Radar (using microwave RF). Some are analog, producing  pulses whose timing represent the distance to an object, others are digital sending data streams over serial to UARTs, or I2C, or even via DroneCAN.
+
+:ref:`RangeFinders (Sonar or Lidar) <common-rangefinder-landingpage>` can be used for [site wiki="copter,plane,rover"]:ref:`Object Avoidance <common-object-avoidance-landing-page>`\ [/site][site wiki="sub"]Object Avoidance[/site] as well as altitude sensors for precision landing in Plane and Copter.
+
+..  youtube:: y2Kk6nIily0
+    :width: 100%
+
+[site wiki="copter,plane,rover"]
+.. warning::
+   :ref:`common-object-avoidance-landing-page` features are new and should be used with caution.
+[/site]
+   
+
+Up to 10 Rangefinders can be used in the system (1 thru A). [site wiki="copter,plane,rover"]:ref:`Object Avoidance <common-object-avoidance-landing-page>`\ [/site][site wiki="sub"]Object Avoidance[/site] can use a single 360 degree Lidar, or up to 9 unidirectional rangefinders: 8 arranged in a circle covering 45 degree wide segments, plus an upward facing rangefinder. And a downward facing rangefinder used for low altitude height above ground measurements.
+
+Connecting and Configuring the Rangefinder
+==========================================
+
+- Follow the instructions for each type of rangefinder described in its linked page on :ref:`common-rangefinder-landingpage`.
+- Set the RNGFNDx_ORIENT parameters (i.e. :ref:`RNGFND1_ORIENT <RNGFND1_ORIENT>`, :ref:`RNGFND2_ORIENT <RNGFND2_ORIENT>`, etc.) to specify the direction each range finder is pointing in. 
+
+.. note:: Note that if the type of rangefinder is set or changed, a reboot will be required.
+
+
+[site wiki="copter,rover"]
+  - Set the parameter ``PRXx_TYPE`` = 4 for each horizontal rangefinder(s) to use them as Proximity Sensors (For obstacle avoidance).
+  - For Copter and Rover, up to 8 rangefinders may placed around the vehicle to provide 360 degree coverage, or a single 360 degree Lidar. But only one forward facing rangefinder is required for :ref:`Object Avoidance <common-object-avoidance-landing-page>`.
+  - If a rangefinder is oriented facing up, then it will be used in the :ref:`common-simple-object-avoidance` operation as an upwards sensing proximity sensor in Copter LOITER, ALTHOLD, and POSHOLD modes.
+[/site]
+[site wiki="plane,copter"]
+  - If a rangefinder is oriented facing down, it will  be used to for height above ground measurements when within its range for increased landing precision in Copter, and in Plane autotakeoffs/autolandings, and QuadPlane VTOL operations depending on which bits in the [/site][site wiki="plane"]:ref:`RNGFND_LANDING<RNGFND_LANDING>`\ [/site][site wiki="copter"]:ref:`RNGFND_LANDING<plane:RNGFND_LANDING>`\ [/site][site wiki="plane,copter"] parameter are set. In Copter, when landing and within 10m of the ground according to the range finder, the vehicle will slow its descent to the [/site][site wiki="copter"]:ref:`LAND_SPD_MS<LAND_SPD_MS>`\ [/site][site wiki="plane"]:ref:`LAND_SPD_MS<copter:LAND_SPD_MS>`\ [/site][site wiki="plane,copter"] (which defaults to 50cm/s).[/site][site wiki="plane"] In Plane, see the "using a rangefinder" section of :ref:`automatic-landing`.[/site][site wiki="plane,copter"]
+
+  - If using a rangefinder for altitude measurements, be sure to read this page:
+
+.. toctree::
+    :maxdepth: 1
+
+    Understanding Altitude in ArduPilot <common-understanding-altitude>
+
+
+.. note:: Only downward facing rangefinders are supported in Plane currently.
+[/site]
+
+[site wiki="copter,plane,rover"]
+References
+==========
+
+- Object Avoidance wiki page is :ref:`here <common-object-avoidance-landing-page>`
+[/site]
+[site wiki="copter,rover"]
+- More details of the algorithms used in :ref:`common-simple-object-avoidance` are on the :ref:`developer wiki's object avoidance page <dev:code-overview-object-avoidance>`
+[/site]
+

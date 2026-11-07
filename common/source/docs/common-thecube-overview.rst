@@ -1,8 +1,8 @@
 .. _common-thecube-overview:
 
-=================
-The Cube Overview
-=================
+==============
+The Cube Black
+==============
 
 .. image:: ../../../images/thecube/connect-to-com-port.jpg
     :target: ../_images/connect-to-com-port.jpg
@@ -11,12 +11,12 @@ The Cube Overview
 System Features
 ===============
 
-The Cube flight controller is a further evolution of the Pixhawk flight controller. It is designed for commercial systems and manufacturers who wish to fully integrate a flight controller into their system. On top of the existing features of Pixhawk, it has the following enhancements:
+The Cube Black autopilot is a further evolution of the Pixhawk autopilot. It is designed for commercial systems and manufacturers who wish to fully integrate an autopilot into their system. On top of the existing features of Pixhawk, it has the following enhancements:
 
 -  3 sets of IMU sensors for extra redundancy
 -  2 sets of IMU are vibration-isolated mechanically, reducing the effect of frame vibration to state estimation
 -  IMUs are temperature-controlled by onboard heating resistors, allowing optimum working temperature of IMUs
--  The entire flight management unit(FMU) and inertial management unit(IMU) are housed in a reatively small form factor (a cube). All inputs and outputs go through a 80-pin DF17 connector, allowing a plug-in solution for manufacturers of commercial systems. Manufacturers can design their own carrier boards to suite their specific needs.
+-  The entire flight management unit(FMU) and inertial management unit(IMU) are housed in a relatively small form factor (a cube). All inputs and outputs go through a 80-pin DF17 connector, allowing a plug-in solution for manufacturers of commercial systems. Manufacturers can design their own carrier boards to suite their specific needs.
 
 Specifications
 ==============
@@ -57,14 +57,16 @@ Specifications
    -  Safety switch / LED
    -  Optional carrier board for Intel Edison
 
+.. note:: DShot on the 8 IO (MAIN) outputs requires :ref:`BRD_IO_DSHOT<BRD_IO_DSHOT>` to be set to 1, followed by a reboot, which loads the DShot firmware onto the IO controller. Doing so disables PPM, iBus, SUMD, SRXL and ST24 input on the IO controller's RC input pin. SBUS and FPort on that pin, and DSM receivers on the DSM port, continue to work.
+
 
 
 The Cube connector pin assignments
 ==================================
 This section details the pin assignments of the standard carrier board of The Cube. There are other types of carrier boards available, please refer to the manufacturer pages for pinouts of specific carrier board.
 
-.. image:: ../../../images/thecube/pixhawk2-pinout.jpg
-    :target: ../_images/pixhawk2-pinout.jpg
+.. image:: ../../../images/thecube/pixhawk2-pinout.png
+    :target: ../_images/pixhawk2-pinout.png
     :width: 240px
 
 **TELEM1, TELEM2 ports**
@@ -159,7 +161,7 @@ This section details the pin assignments of the standard carrier board of The Cu
    <td>GND</td>
    </tr>
    <tr>
-   <td> (blk)</td>
+   <td>8 (blk)</td>
    <td>GND</td>
    <td>GND</td>
    </tr>
@@ -318,7 +320,7 @@ This section details the pin assignments of the standard carrier board of The Cu
    </table>
 
 
-**POWER1&2**
+**POWER1**
 
 .. raw:: html
 
@@ -342,17 +344,63 @@ This section details the pin assignments of the standard carrier board of The Cu
    <tr>
    <td>3 (blk)</td>
    <td>CURRENT</td>
-   <td>up to +3.3V</td>
+   <td>up to +3.3V,pin 3</td>
    </tr>
    <tr>
    <td>4 (blk)</td>
    <td>VOLTAGE</td>
-   <td>up to +3.3V</td>
+   <td>up to +3.3V,pin 2</td>
    </tr>
+   <tr>
    <td>5 (blk)</td>
    <td>GND</td>
    <td>GND</td>
    </tr>
+   <tr>
+   <td>6 (blk)</td>
+   <td>GND</td>
+   <td>GND</td>
+   </tr>
+   </tbody>
+   </table>
+
+**POWER2**
+
+.. raw:: html
+
+   <table border="1" class="docutils">
+   <tbody>
+   <tr>
+   <th>Pin</th>
+   <th>Signal</th>
+   <th>Volt</th>
+   </tr>
+   <tr>
+   <td>1 (red)</td>
+   <td>VCC</td>
+   <td>+5V</td>
+   </tr>
+   <tr>
+   <td>2 (red)</td>
+   <td>VCC</td>
+   <td>+5V</td>
+   </tr>
+   <tr>
+   <td>3 (blk)</td>
+   <td>CURRENT</td>
+   <td>up to +3.3V,pin 14</td>
+   </tr>
+   <tr>
+   <td>4 (blk)</td>
+   <td>VOLTAGE</td>
+   <td>up to +3.3V,pin 13</td>
+   </tr>
+   <tr>
+   <td>5 (blk)</td>
+   <td>GND</td>
+   <td>GND</td>
+   </tr>
+   <tr>
    <td>6 (blk)</td>
    <td>GND</td>
    <td>GND</td>
@@ -406,25 +454,38 @@ This section details the pin assignments of the standard carrier board of The Cu
    </tbody>
    </table>
 
+**RSSI Input**
+
+Analog/PWM RSSI Input is pin 103
 
 
+CubePilot Ecosystem
+===================
 
-Where to Buy
-============
+.. image:: ../../../images/Cubepilot_ecosystem.jpg
+    :target: ../_images/Cubepilot_ecosystem.jpg
 
-Official retailers are listed `here  <http://www.proficnc.com/stores>`__.
-
-Quick Start
-===========
-
-Use the :ref:`Pixhawk Wiring QuickStart <common-pixhawk-wiring-and-quick-start>` as a guide. The Cube update coming soon
 
 More Information
 ================
 
-see  `www.proficnc.com  <http://www.proficnc.com>`__
+For more information and instructions on setting up and using the CubePilot system see  `CubePilot Docs  <https://docs.cubepilot.org/user-guides/>`__
 
-The reference design files of the standard carrier board are available in `github  <https://github.com/proficnc/pixhawk2.1>`__, this serve as a starting point for designers to design their own system based on The Cube flight controller.
+For technical help and support on the CubePilot system see  `CubePilot Forum  <https://discuss.cubepilot.org/>`__
+
+Company information on CubePilot can be found at  `www.cubepilot.com  <https://www.cubepilot.com>`__
+
+
+Carrier Board Design
+====================
+
+The reference design files of the standard carrier board are available in `github  <https://github.com/proficnc/The-Cube>`__, or `here <https://github.com/ArduPilot/Schematics/tree/master/ProfiCNC>`__ ,this serve as a starting point for designers to design their own system based on The Cube autopilot.
+
+Where to Buy
+============
+
+Official retailers are listed `here  <https://www.cubepilot.org/#/reseller/list>`__.
+
 
 More Images
 ===========
@@ -432,3 +493,5 @@ More Images
 .. image:: ../../../images/thecube/pixhawk2-overhead.jpg
     :target: ../_images/pixhawk2-overhead.jpg
     :width: 360px
+
+[copywiki destination="plane,copter,rover,blimp,sub"]

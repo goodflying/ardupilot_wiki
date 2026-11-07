@@ -1,8 +1,14 @@
 .. _building-for-qualcomm-snapdragon-flight-kit:
 
-===========================================
-Building for Qualcomm Snapdragon Flight Kit
-===========================================
+=====================================================
+Archived: Building for Qualcomm Snapdragon Flight Kit
+=====================================================
+
+.. warning::
+
+   **ARCHIVED ARTICLE**
+
+   ArduPilot no longer supports Qualcomm Snapdragon Flight Kit.
 
 This article shows how to build ArduPilot for 
 :ref:`Qualcomm® Snapdragon Flight™ Kit (Developer’s Edition) <copter:common-qualcomm-snapdragon-flight-kit>`
@@ -114,7 +120,7 @@ dhcp-range=192.168.**2**.10,192.168.**2**.20,infinite
 
 Line 39 of /etc/network/interfaces.d/.qca6234.cfg.softap as shown below.
 
-`` address 192.168.2.1``
+``address 192.168.2.1``
 
 You should be able to use a terminal program such as Putty to ssh to the
 board at the IP address shown above (i.e. 192.168.2.1) using
@@ -257,9 +263,8 @@ First clone the source:
 
 ::
 
-    git clone https://github.com/ArduPilot/ardupilot.git
+    git clone --recurse-submodules https://github.com/ArduPilot/ardupilot.git
     cd ardupilot
-    git submodule update --init --recursive
 
 Get additional tools/libraries
 ------------------------------

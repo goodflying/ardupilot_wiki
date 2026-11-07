@@ -1,14 +1,14 @@
 .. _common-pixhackV5-overview:
 
 ============================
-Pixhack V5 Overview
+CUAV v5 Overview
 ============================
 
 .. image:: ../../../images/pixhackv5/v5-autopilot.jpg
     :target: ../_images/v5-autopilot.jpg
     :width: 360px
 
-The CUAV Pixhack v5 is an advanced autopilot designed and made by CUAV.
+The CUAV v5 is an advanced autopilot designed and made by CUAV.
 The board is based on the FMUv5 open hardware design, with further attribution `here <https://github.com/cuav/hardware/blob/master/PixHack_v5/README.md>`__.
 It is intended primarily for academic and commercial users.
 
@@ -33,25 +33,28 @@ Specifications
    -  Operating power: 4.3~5.4V
    -  USB Input: 4.75~5.25V
    -  High-power servo rail, up to 36V
-      (servo rail does not power the flight controller)
+      (servo rail does not power the autopilot)
    -  Dual voltage and current monitor inputs
-   -  Pixhack V5 can be triple redundant if power is provided
+   -  CUAV v5 can be triple redundant if power is provided
       to both battery monitor inputs and the USB port
 
 -  **Interfaces**
 
-   -  6 IOMCU PWM servo outputs
-   -  8 FMU PWM outputs (D-Shot capable)
+   -  8 IOMCU PWM servo outputs
+   -  6 FMU PWM outputs (D-Shot capable)
    -  3 dedicated PWM/Capture inputs on FMU
    -  S.Bus servo output
-   -  R/C inputs for CPPM, DSM and S.Bus
+   -  R/C inputs for CPPM and S.Bus
    -  Analogue / PWM RSSI input
    -  5x general purpose serial ports
    -  4x I2C ports
    -  4x SPI buses enabled
    -  2x CAN Bus ports
-   
-   **Other**
+
+.. note:: DShot on the 8 IOMCU outputs requires :ref:`BRD_IO_DSHOT<BRD_IO_DSHOT>` to be set to 1, followed by a reboot, which loads the DShot firmware onto the IO controller. Doing so disables PPM, iBus, SUMD, SRXL and ST24 input on the IO controller's RC input pin. SBUS and FPort on that pin, and DSM receivers on the DSM port, continue to work.
+
+-  **Other**
+
   -  Weight: 90g
   -  Dimensions: 44mm x 84mm x 12mm
   -  Operating temperature: -20 ~ 80°c（Measured value）
@@ -66,15 +69,15 @@ Official retailers are listed `here  <https://leixun.aliexpress.com/>`__.
 Quick Start
 ===========
 
-Use the :ref:`Pixhawk Wiring QuickStart <common-pixhawk-wiring-and-quick-start>` as a general guide.
+Use the [site wiki="plane,copter,rover,sub"]:ref:`Pixhawk Wiring QuickStart <common-pixhawk-wiring-and-quick-start>`\ [/site][site wiki="blimp"]:ref:`Pixhawk Wiring QuickStart <copter:common-pixhawk-wiring-and-quick-start>`\ [/site] as a general guide.
 
-.. image:: ../../../images/pixhackv5/pixhack-v5-connectors.jpg
-    :target: ../_images/pixhack-v5-connectors.jpg
+.. image:: ../../../images/pixhackv5/v5-pinouts_release.jpg
+    :target: ../_images/v5-pinouts_release.jpg
 
 More Information
 ================
 
-see more documentation `here <http://doc.cuav.net/flight-controller/pixhack-v5/en/>`__
+see more documentation `here <http://doc.cuav.net/flight-controller/v5-autopilot/en/>`__
 
 More Images
 ===========
@@ -82,3 +85,5 @@ More Images
 .. image:: ../../../images/pixhackv5/pixhackv5_2.jpg
     :target: ../_images/pixhackv5_2.jpg
     :width: 360px
+
+[copywiki destination="plane,copter,rover,blimp,sub"]

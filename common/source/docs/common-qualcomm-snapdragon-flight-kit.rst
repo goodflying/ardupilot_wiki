@@ -1,8 +1,8 @@
 .. _common-qualcomm-snapdragon-flight-kit:
 
-==============================
-Qualcomm Snapdragon Flight Kit
-==============================
+========================================
+Archived: Qualcomm Snapdragon Flight Kit
+========================================
 
 The Snapdragon Flight platform is a high performance CPU autopilot with a two onboard cameras.
 
@@ -11,7 +11,7 @@ The Snapdragon Flight platform is a high performance CPU autopilot with a two on
 
 .. warning::
 
-   Numerous developers have reported this board is difficult to get working perhaps because of a lack of documentation or issues with underlying software on the board.  If you are looking for a high performance Linux flight controller, you may wish to consider the :ref:`Intel Aero <common-intel-aero-overview>`, :ref:`Navio2 <common-navio2-overview>` or :ref:`Erle Brain <common-erle-brain-linux-autopilot>` instead.
+   Numerous developers have reported this board is difficult to get working perhaps because of a lack of documentation or issues with underlying software on the board. If you are looking for a high performance Linux autopilot, you may wish to consider the :ref:`Navio2 <common-navio2-overview>` instead.
 
 Overview
 ========
@@ -126,7 +126,7 @@ compatible serial GPS can be used.
 WiFi
 ----
 
-WLAN0, WLAN1 (+BT 4.0): U.FL connector: `Taoglas adhesive antenna (DigiKey) <http://www.digikey.com/product-detail/en/FXP840.07.0055B/931-1222-ND/3877414>`__
+WLAN0, WLAN1 (+BT 4.0): U.FL connector: `Taoglas adhesive antenna (DigiKey) <https://www.digikey.com/product-detail/en/FXP840.07.0055B/931-1222-ND/3877414>`__
 
 J9 / GPS
 --------
@@ -357,7 +357,7 @@ board.
 
 .. note::
 
-   `Qualcomm/Intrinsyc have released a ESC <https://shop.intrinsyc.com/collections/dragonboard-accessories/products/qualcomm-electronic-speed-control-board>`__ for use with this board but it has not been tested for use with ArduPilot.
+   `Qualcomm/Intrinsyc have released a ESC <https://shop.intrinsyc.com/products/qualcomm-electronic-speed-control-board>`__ for use with this board but it has not been tested for use with ArduPilot.
 
 Logging
 =======
@@ -375,12 +375,12 @@ Record and display live video
 =============================
 
 Recording and viewing live video from either of the two cameras is
-possible using the qcamvid application on the flight controller.
+possible using the qcamvid application on the autopilot.
 
--  Connect the ground station computer to the flight controller's wifi
+-  Connect the ground station computer to the autopilot's wifi
    network (normally appears as *Atlanticus_XXXX*)
 -  Use an ssh program such as
-   `Putty <http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html>`__
+   `Putty <https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html>`__
    to login into the board
 -  Type the following to record 10 minutes of video from the front
    camera to /root/video.h264 (other options can be seen by typing

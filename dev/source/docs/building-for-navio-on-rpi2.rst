@@ -1,8 +1,14 @@
 .. _building-for-navio-on-rpi2:
 
-===========================
-Building for NAVIO+ on RPi2
-===========================
+=====================================
+Archived: Building for NAVIO+ on RPi2
+=====================================
+
+.. warning::
+
+   **ARCHIVED ARTICLE**
+
+   ArduPilot no longer supports NAVIO+ on Rpi2.
 
 Overview
 ========
@@ -27,9 +33,8 @@ Clone the source:
 
 ::
 
-    git clone https://github.com/diydrones/ardupilot.git
+    git clone --recurse-submodules https://github.com/diydrones/ardupilot.git
     cd ardupilot
-    git submodule update --init
 
 .. note::
 

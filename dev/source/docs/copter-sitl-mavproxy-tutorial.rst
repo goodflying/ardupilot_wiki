@@ -6,7 +6,7 @@ Copter SITL/MAVProxy Tutorial
 
 This tutorial provides a basic walk-through of how to use
 :ref:`SITL <sitl-simulator-software-in-the-loop>` and
-`MAVProxy <http://ardupilot.github.io/MAVProxy/>`__ for *Copter* testing.
+:ref:`MAVProxy documentation <mavproxy:home>` for *Copter* testing.
 
 Overview
 ========
@@ -23,7 +23,7 @@ The tutorial is complementary to the topic :ref:`Using SITL for ArduPilot Testin
    -  We use *MAVProxy* here, but you can :ref:`attach another ground station to SITL <using-sitl-for-ardupilot-testing_connecting_otheradditional_ground_stations>`
       if you prefer (similar instructions can be used in any GCS).
    -  This tutorial is for Copter - see
-      :ref:`Plane <plane-sitlmavproxy-tutorial>` and Rover for similar
+      :ref:`Plane <plane-sitlmavproxy-tutorial>` and :ref:`Rover <rover-sitlmavproxy-tutorial>` for similar
       tutorials on the other vehicles.
 
 Preconditions
@@ -36,7 +36,19 @@ using the ``--map`` and ``--console`` options:
 ::
 
     cd ~/ardupilot/ArduCopter
-    sim_vehicle.py --map --console
+    ../Tools/autotest/sim_vehicle.py --map --console
+
+.. note::
+
+   If you wish to start the simulation at a different map location or use a different frame type
+   (-f option for hexa,tri,octa,heli,etc.) than a standard + layout quadcopter, see
+   :ref:`SITL Advance Testing <using-sitl-for-ardupilot-testing>`. A complete list of startup
+   options for the simulator can be found using the --help option:
+
+::
+
+    sim_vehicle.py --help
+
 
 The *MAVProxy Command Prompt*, *Console* and *Map* should be arranged
 conveniently so you can observe the status and send commands at the same
@@ -50,15 +62,13 @@ Taking off
 
 This section explains how to take off in ``GUIDED`` mode. The main steps
 are to change to ``GUIDED`` mode, arm the throttle, and then call the
-``takeoff`` command. Takeoff must start within 15 seconds of arming, or
-the motors will disarm!
+``takeoff`` command. Takeoff must start within 10 seconds of arming (the
+default :ref:`DISARM_DELAY <copter:DISARM_DELAY>`) otherwise the motors will disarm!
 
 .. note::
 
-   At time of writing, Copter only supports takeoff in guided mode;
-   if you want to fly a mission you first have to take off and then switch
-   to ``AUTO`` mode. From AC3.3 it will be possible to take off in AUTO
-   mode too.
+   Copter by default only supports takeoff in ``GUIDED`` mode.
+   if you want to take off in ``AUTO`` mode, you need to set :ref:`AUTO_OPTIONS <copter:AUTO_OPTIONS>` parameter to 3.
 
 Enter the following commands in the *MAVProxy Command Prompt*.
 
@@ -79,6 +89,9 @@ During takeoff you can watch the altitude increase on the console in the
 
 Developers may find it useful to **graph** the takeoff by first entering
 the ``gtakeoff`` command.
+
+For the command to work, you need to set up the alias, the easiest way is to set up the :ref:`MAVProxy startup script <mavproxy:mavproxy-mavinit>`
+and ensure that the ``graph`` module is loaded.
 
 .. figure:: ../images/MAVProxyGraphCopter_gtakeoff_40.png
    :target: ../_images/MAVProxyGraphCopter_gtakeoff_40.png
@@ -112,17 +125,14 @@ You can list all *enabled* checks using the command ``arm list``:
 
 You can enable and disable checks using ``arm check n`` and
 ``arm uncheck n`` respectively, where n is the name of the check. Use
-``n`` value of of ``all`` to enables/disable all checks.
+``n`` value of ``all`` to enables/disable all checks.
 
 Changing flight mode - circle and land
 ======================================
 
 The command below shows how to put Copter into
 :ref:`CIRCLE <copter:circle-mode>`
-mode with a
-:ref:`CIRCLE_RADIUS <copter:CIRCLE_RADIUS>`
-of 2000cm. This will fly the Copter in a circle at a constant altitude,
-with the front pointed towards the centre of the circle.
+mode with a :ref:`CIRCLE_RADIUS_M <copter:CIRCLE_RADIUS_M>` of 20m. This will fly the Copter in a circle at a constant altitude, with the front pointed towards the centre of the circle.
 
 ::
 
@@ -131,7 +141,7 @@ with the front pointed towards the centre of the circle.
 
 .. note::
 
-   If you set the ``CIRCLE_RADIUS`` to zero the vehicle will rotate
+   If you set the :ref:`CIRCLE_RADIUS_M <copter:CIRCLE_RADIUS_M>` to zero the vehicle will rotate
    in place.
 
 Copter supports a :ref:`number of other flight modes <copter:flight-modes>`,
@@ -177,8 +187,8 @@ In addition to ``takeoff``, you can send the following commands in
 
 ::
 
-    yaw ANGLE ANGULAR_SPEED MODE  (MODE is 0 for "absolute" or 1 for "relative")
-    speed SPEED_VALUE
+    setyaw ANGLE ANGULAR_SPEED MODE  (MODE is 0 for "absolute" or 1 for "relative")
+    setspeed SPEED_VALUE
     velocity x y z   (m/s)
 
 .. note::
@@ -187,7 +197,7 @@ In addition to ``takeoff``, you can send the following commands in
    :ref:`MAV_CMD_NAV_TAKEOFF <copter:mav_cmd_nav_takeoff>`,
    :ref:`MAV_CMD_DO_CHANGE_SPEED <copter:mav_cmd_do_change_speed>`,
    :ref:`MAV_CMD_CONDITION_YAW <copter:mav_cmd_condition_yaw>`,
-   `SET_POSITION_TARGET_LOCAL_NED <http://mavlink.org/messages/common#SET_POSITION_TARGET_LOCAL_NED>`__.
+   `SET_POSITION_TARGET_LOCAL_NED <https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_LOCAL_NED>`__.
 
    At time of writing, the other :ref:`Copter Commands <copter-commands-in-guided-mode>`
    are not supported (`MAVProxy #150 <https://github.com/ArduPilot/MAVProxy/issues/150>`__)
@@ -204,12 +214,12 @@ skip to the second waypoint, and *loop* the mission:
 
 ::
 
-    wp load ..\Tools\autotest\CMAC-circuit.txt
+    wp load ..\Tools\autotest\Generic_Missions\CMAC-circuit.txt
     mode auto
     wp set 2
     wp loop
 
-The `MAVProxy Waypoints documentation <http://ardupilot.github.io/MAVProxy/html/uav_configuration/waypoints.html>`__
+The :ref:`MAVProxy Waypoints documentation <mavproxy:mavproxy-waypoints>`
 lists the full set of available commands (or you can get them using
 auto-completion by typing "wp" on the command line).
 
@@ -246,11 +256,11 @@ Setting a GeoFence
 
 A GeoFence is is a virtual barrier that Copter uses to constrain the
 movement of the vehicle. Copter uses a simple "tin can border" as
-described in :ref:`Simple GeoFence <copter:ac2_simple_geofence>`.
+described in :ref:`Simple GeoFence <common-ac2_simple_geofence>`.
 When the radius or maximum altitude is breached, Copter returns to the
 launch point and/or lands.
 
-The fence is enabled (and its type selected) using the :ref:`Copter Fence Parameters <copter:parameters_FENCE_>`.
+The fence is enabled (and its type selected) using the ``FENCE_`` parameters.
 You can list the fence parameters with ``param show``:
 
 ::
@@ -263,13 +273,13 @@ You can list the fence parameters with ``param show``:
     FENCE_RADIUS     150.000000
     FENCE_TYPE       3.000000
 
-The fence has an altitude boundary of 100 metres (``FENCE_ALT_MAX``) and
-is bound by a circle of radius ``FENCE_RADIUS`` around the home
-location. The ``FENCE_TYPE=3`` means that both the radius and altitude
+The fence has an altitude boundary of 100 metres (:ref:`FENCE_ALT_MAX <copter:FENCE_ALT_MAX>`) and
+is bound by a circle of radius :ref:`FENCE_RADIUS<copter:FENCE_RADIUS>` around the home
+location. The :ref:`FENCE_TYPE <copter:FENCE_TYPE>` = "3" means that both the radius and altitude
 are used (you can change the type to other numbers have an altitude-only
 or circle only fence - or none at all).
-
-The fence is initially disabled (``FENCE_ENABLE=0``). To turn it on we
+FENCE_ENABLE
+The fence is initially disabled (:ref:`FENCE_ENABLE <copter:FENCE_ENABLE>` = 0). To turn it on we
 set the value to one:
 
 ::
@@ -288,5 +298,12 @@ and simulation using ``param show *``, and to set any parameter using:
 ``param set PARAM_NAME VALUE``. In addition to affecting the vehicle
 itself some parameters simulate the performance/failure of specific
 hardware components and the environment (for example, the wind). These
-can be listed using: `:ref:`param show sim*``. The topic `Using SITL for ArduPilot Testing <using-sitl-for-ardupilot-testing>` explains more about how
+can be listed using: ``param show sim*``. The topic :ref:`Using SITL for ArduPilot Testing <using-sitl-for-ardupilot-testing>` explains more about how
 you can test using SITL.
+
+Customizing Launch Location and Parameters in SITL
+==================================================
+You can start SITL at a specific GPS location using the ``-l`` option during launch.  
+See "Setting vehicle start location" in :ref:`using-sitl-for-ardupilot-testing`.
+
+If you wish to use a specific set of default parameters, rather than manually changing them in the simulation with ``param set`` commands, you can load them at simulation startup from a file. See :ref:`SITL_simulation_parameters` section "Loading a parameter set".

@@ -1,8 +1,8 @@
 .. _common-pxfmini-wiring-quick-start:
 
-==========================
-PXFmini Wiring Quick Start
-==========================
+==========================================
+Archived Topic: PXFmini Wiring Quick Start
+==========================================
 
 .. note::
 
@@ -13,7 +13,7 @@ PXFmini Wiring Quick Start
     :target: ../_images/jst.jpg
 
 This article provides high level information about how to power
-:ref:`PXFmini` and connect its most important peripherals.
+:ref:`PXFmini<common-pxfmini>` and connect its most important peripherals.
 
 
 .. _common-pxfmini-wiring-quick-start_pxfmini_wiring_chart:
@@ -26,7 +26,7 @@ PXFmini Wiring Chart
 
 [site wiki="copter"]
 Copter users should also see the 
-`official setup documentation <http://erlerobotics.com/docs/Robots/Erle-Copter/index.html>`__.
+`official setup documentation <http://docs.erlerobotics.com/erle_robots/erle_copter>`__.
 [/site]
 
 Power PXFmini
@@ -68,7 +68,7 @@ PXFmini is compatible with PPM remote control (RC) receivers. For
 traditional single-wire-per-channel (PWM) receivers a PPM encoder can be
 used to convert the receiver outputs to PPM-SUM.
 
-For more information see :ref:`Compatible RC Transmitter and Receiver Systems (Erle-Brain 2) <common-compatible-rc-transmitter-and-receiver-systems-erle-brain-2>`. The PXFmini is compatible with the tecnology used in Erle-Brain 2.
+For more information see :ref:`Compatible RC Transmitter and Receiver Systems (Erle-Brain 2) <common-compatible-rc-transmitter-and-receiver-systems-erle-brain-2>`. The PXFmini is compatible with the technology used in Erle-Brain 2.
 
 .. figure:: ../../../images/FRSkyTaranis.jpg
    :target: ../_images/FRSkyTaranis.jpg
@@ -78,7 +78,7 @@ For more information see :ref:`Compatible RC Transmitter and Receiver Systems (E
 GPS+Compass
 ===========
 
-The `uBlox GPS + Compass Module <hhttps://erlerobotics.com/blog/product/gpscompass-ublox-neo-m8n-gps-with-compass-kit/>`__
+The `uBlox GPS + Compass Module <https://erlerobotics.com/blog/product/gpscompass-ublox-neo-m8n-gps-with-compass-kit/>`__
 is the recommended GPS for PXFmini. The GPS port is connected with
 the six-position DF13 cable, and the Compass port is connected to the
 I2C port with the four-position JST-GH cable, as shown in the next image:
@@ -147,7 +147,7 @@ WiFi dongle
 
 Use a (regular or high gain) WiFi dongle to create a hotspot that can,
 for example, be used for sending telemetry data and commands to a Ground
-Station.  If you use the `images <http://erlerobotics.com/docs/Artificial_Brains_and_Autopilots/Operating_System_images/Debian.html>`__ provided 
+Station.  If you use the `images <http://docs.erlerobotics.com/brains/os_images>`__ provided 
 by Erle Robotics, they automatically generate a WiFi hotspot.
 
 
@@ -183,7 +183,7 @@ More information in `official documentation <http://erlerobotics.com/docs/Artifi
 Related information
 ===================
 
-`Erle Robotics official documentation <http://erlerobotics.com/docs/Intro.html>`__ includes
+`Erle Robotics official documentation <http://docs.erlerobotics.com/>`__ includes
 additional information about how to use PXFmini.
 
 

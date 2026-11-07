@@ -1,7 +1,7 @@
 .. _making-a-mavlink-wifi-bridge-using-the-raspberry-pi:
 
 ===================================================
-Making a Mavlink WiFi bridge using the Raspberry Pi
+Making a MAVLink WiFi bridge using the Raspberry Pi
 ===================================================
 
 .. note::
@@ -67,13 +67,13 @@ You now have the Raspberry Pi ready to setup MavProxy and to set it up
 as an access point so you can use it to create a local WiFi network. To
 avoid having to continue using a keyboard and monitor it is convenient
 to connect to the RPi using an SSH client. You can follow the steps on
-the page :ref:`Connecting to RPi with an SSH/Telnet client <raspberry-pi-via-mavlink_connecting_to_rpi_with_an_sshtelnet_client>`
+the page `Connecting to RPi with an SSH/Telnet client <https://www.raspberrypi.org/documentation/remote-access/ssh/>`__
 in order to achieve this.
 
 Setting up the Raspberry Pi as an access point
 ==============================================
 
-Now we need to setup the the software that will allow the RPi to act as
+Now we need to setup the software that will allow the RPi to act as
 an access point. For the following steps make sure you have access to
 the internet from Raspberry Pi, this is needed in order to download the
 software packages. The easiest way to achieve this is to connect the RPi
@@ -424,7 +424,7 @@ Update hostapd
 If you are not using the built in WiFi on a Raspberry Pi 3 then the hostapd
 version installed by apt-get does not fully support the WiFi dongle we are using
 so we need to update it to a later version. Lets get the new version of hostapd 
-by typing the follwing command: (only if NOT using the built in Wifi)
+by typing the following command: (only if NOT using the built in Wifi)
 
 ::
 
@@ -461,7 +461,7 @@ You should now see the following output if everything runs well:
     pi@MavStation ~ $ sudo service isc-dhcp-server start
     [ ok ] Starting ISC DHCP server: dhcpd.
 
-Now in order to set the services up so they run everytime the RPi boots,
+Now in order to set the services up so they run every time the RPi boots,
 type the following:
 
 ::
@@ -521,12 +521,12 @@ Installing and configuring MavProxy
 
 With the RPi now working as an access point, we now need to configure it
 to connect to a drone. To accomplish this we will install
-`MavProxy <http://ardupilot.github.io/MAVProxy/html/index.html>`__, a
+:ref:`MAVProxy <mavproxy:home>`, a
 minimalist but full featured ground control station.
 
 .. tip::
 
-   The official instructions to `install MAVProxy on Linux are here <http://ardupilot.github.io/MAVProxy/html/getting_started/download_and_installation.html#linux>`__.
+   The official instructions to install MAVProxy on Linux are :ref:`here <mavproxy:mavproxy-downloadinstalllinux>`.
 
 First install some other modules that are needed. Type the following
 commands:
@@ -603,7 +603,7 @@ Testing the MavProxy Connection
 Now we are ready to test the communication. To do this follow the
 instructions on the section `"Testing the
 Connection" <raspberry-pi-via-mavlink/#Testing_the_connection>`__ in the
-Raspberry Pi via Mavlink page.
+Raspberry Pi via MAVLink page.
 
 
 .. _making-a-mavlink-wifi-bridge-using-the-raspberry-pi_configuring_mavproxy_to_always_run_and_listen_to_incoming_connections:
@@ -618,7 +618,7 @@ server. In order to set it up we will use a script and modify it to work
 with the RPi.
 
 #. Download the `mavgateway file <https://raw.githubusercontent.com/dronekit/dronekit-python/3222b2cdb71b8b4c5b924ee28fc5d3529be00e67/scripts/mavgateway>`__
-   (from Github) and then copy it over to to the RPi.
+   (from Github) and then copy it over to the RPi.
 #. We now have to edit the file and change some aspects of it to make it
    compatible. Lets edit the file:
 
@@ -727,7 +727,7 @@ SD Card Image file
 
 If you don't want to configure your own RPi, you can download this image
 file and restore it to an SD Card to use it on your own RPi from this
-`link <http://firmware.ardupilot.org/Tools/MavStation/>`__.
+`link <https://firmware.ardupilot.org/Tools/MavStation/>`__.
 
 To restore **this image** to an SD Card you will need an SD Card with at
 least 16GB of space, just follow the same steps described in the section

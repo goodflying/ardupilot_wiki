@@ -41,9 +41,9 @@ Setting up X-Plane
 
    To use an FrSky Taranis as an X-Plane joystick:
 
-   a)	Switch on the Taranis, connect it to your PC with a mini USB cable, and move its On-Off switch to Off. The Taranis will stay on without using its battery -- it is now getting power from the PC. 
+   a)   Switch on the Taranis, connect it to your PC with a mini USB cable, and move its On-Off switch to Off. The Taranis will stay on without using its battery -- it is now getting power from the PC. 
 
-   b)	Calibrate it (this needs to be done only the first time you use it as your joystick). You can do so in Windows (on Windows 10: *Start menu -> Settings -> Devices -> Printers and Scanners -> Devices and Printers*) or in X-Plane (start X-Plane, hover near the top of the X-Plane window, and in the toolbar at that appears at the top of the window go to *Settings -> Joystick & Equipment*). For more info on joystick calibration in X-Plane, please refer to the `Setup of X-Plane 10 <http://ardupilot.org/dev/docs/sitl-with-xplane.html#setup-of-x-plane-10>`_. 
+   b)   Calibrate it (this needs to be done only the first time you use it as your joystick). You can do so in Windows (on Windows 10: *Start menu -> Settings -> Devices -> Printers and Scanners -> Devices and Printers*) or in X-Plane (start X-Plane, hover near the top of the X-Plane window, and in the toolbar at that appears at the top of the window go to *Settings -> Joystick & Equipment*). For more info on joystick calibration in X-Plane, please refer to the `Setup of X-Plane 10 <https://ardupilot.org/dev/docs/sitl-with-xplane.html#setup-of-x-plane-10>`_. 
    
    .. note::   
       This setup allows you to control throttle, yaw, pitch, and roll. Other commands, such as switching modes, will have to be issued via Mission Planner or some other means.
@@ -54,11 +54,11 @@ Setting up X-Plane
 
    By default, X-Plane has no models of RC sailplanes' size (~5-meter wingspan), weight (a few kilos), or flying characteristics. However, generous folks have created and published some:
 
-      -	`Vee-gull 005 <http://www.scipie.com/rc/vee-gull/vee-gull_005.zip>`_
-      -	`Houston Hawk <http://wkleinsasser.net/download/Houston_Hawk_Xplane.zip>`_ 
-      -	`Viking 74 <http://wkleinsasser.net/download/Viking_74.zip>`_
-      -	`Vivace 100 <http://wkleinsasser.net/download/Vivace_100_Xplane.zip>`_
-      -	`Vivace 126 <http://wkleinsasser.net/download/Vivace_126_Xplane.zip>`_
+      - `Vee-gull 005 <http://www.scipie.com/rc/vee-gull/vee-gull_005.zip>`_
+      - `Houston Hawk <http://wkleinsasser.net/download/Houston_Hawk_Xplane.zip>`_ 
+      - `Viking 74 <http://wkleinsasser.net/download/Viking_74.zip>`_
+      - `Vivace 100 <http://wkleinsasser.net/download/Vivace_100_Xplane.zip>`_
+      - `Vivace 126 <http://wkleinsasser.net/download/Vivace_126_Xplane.zip>`_
 
    To install them, create a folder *RC Sailplanes* under *%XPlane-install-dir%\\Aircraft* and extract the .acf files from these archives there. `Extra info on sailplane model installation is here <http://wkleinsasser.net/download/x-plane_glider_model_directions.pdf>`_.
 
@@ -95,19 +95,19 @@ Setting up X-Plane
 Setting up ArduPlane SITL
 =========================
 
-#. **Install** `Mission Planner <http://firmware.ardupilot.org/Tools/MissionPlanner/MissionPlanner-latest.msi>`_. 
+#. **Install** `Mission Planner <https://firmware.ardupilot.org/Tools/MissionPlanner/MissionPlanner-latest.msi>`_. 
 
-   Mission Planner is the ground control station we will use to monitor the simulation, control the virtual aircraft's flight modes, load flight routes/missions, etc. More info on it is available `here <http://ardupilot.org/planner/docs/mission-planner-overview.html>`_. 
-
-   |br|
-
-#. **Install and configure Cygwin.**
-
-   The process is described in `a section of the Setting Up SITL on Windows wiki <http://ardupilot.org/dev/docs/sitl-native-on-windows.html#install-cygwin>`_. For the purposes of the soaring SITL, you don’t need to perform the steps in the *Set up directories/paths in Cygwin* and *Install Required Python Packages* sections of that wiki, but doing them won’t hurt.
+   Mission Planner is the ground control station we will use to monitor the simulation, control the virtual aircraft's flight modes, load flight routes/missions, etc. More info on it is available `here <https://ardupilot.org/planner/docs/mission-planner-overview.html>`_. 
 
    |br|
 
-#.	**Get ArduPilot and build ArduPlane for SITL.**
+#. **Optional: Install and configure Cygwin.**
+
+   The process is described in `a section of the Setting Up SITL on Windows wiki <https://ardupilot.org/dev/docs/sitl-native-on-windows.html#install-cygwin>`_. For the purposes of the soaring SITL, you don’t need to perform the steps in the *Set up directories/paths in Cygwin* and *Install Required Python Packages* sections of that wiki, but doing them won’t hurt.
+
+   |br|
+
+#.  **Optional: Get ArduPilot and build ArduPlane for SITL.**
 
     a) Open a Cygwin terminal (or reopen it if you have one already open). 
 
@@ -117,9 +117,8 @@ Setting up ArduPlane SITL
     
        ::
 
-           git clone git://github.com/ArduPilot/ardupilot.git
+           git clone --recurse-submodules git://github.com/ArduPilot/ardupilot.git
            cd ardupilot
-           git submodule update --init --recursive
 
     c) Delete the contents of *ArduPilot\\Logs* directory and, assuming you are in the *ArduPilot* directory in Cygwin, run
      
@@ -143,12 +142,14 @@ Running soaring SITL with X-Plane
    ::
     
        build/sitl/bin/arduplane --model xplane
+   
+   Or by launching SITL from MissionPlanner's Simulation screen.
 
    |br|
    
 #. **Launch X-Plane, choose an RC sailplane, and choose the environmental conditions.**
 
-   Recall that in step 3 of `Setting up X-Plane <http://ardupilot.org/dev/docs/soaring-sitl-with-xplane.html#setting-up-x-plane>`_, you put your RC sailplane models into *%XPlane-install-dir%\\Aircraft\\RC Sailplanes*, so look for them there. 
+   Recall that in step 3 of `Setting up X-Plane <https://ardupilot.org/dev/docs/soaring-sitl-with-xplane.html#setting-up-x-plane>`_, you put your RC sailplane models into *%XPlane-install-dir%\\Aircraft\\RC Sailplanes*, so look for them there. 
     
    .. tip::
       Start with the Vee-gull 005. It has a motor, making it easier to fly long missions.
@@ -173,7 +174,7 @@ Running soaring SITL with X-Plane
 
    |br|
    
-#. **Set** `ArduPilot's parameters <http://ardupilot.org/copter/docs/parameters.html>`_ **for the chosen RC sailplane.**
+#. **Set** `ArduPilot's parameters <https://ardupilot.org/copter/docs/parameters.html>`_ **for the chosen RC sailplane.**
 
    *This step needs to be done only the first time you run SITL after (re-)building ArduPlane.*
    
@@ -187,7 +188,7 @@ Running soaring SITL with X-Plane
    When you load and set parameters from a file for the first time after (re-)building ArduPlane, Mission Planner may display a message such as "Parameter refresh required --- press F5", and the simulation may even crash -- you will see "ERROR: Floating point exception - aborting" in the Cygwin window where you started the simulation. This is not unusual. Just restart the simulation by running ``build/sitl/bin/arduplane --model xplane`` in Cygwin, reconnect to it by pressing *Connect* in Mission Planner, and repeat the above process for loading parameters from a file. This time everything will work smoothly.
  
    .. warning::
-      ArduPilot's parameters largely determine how an aircraft behaves, and setting them correctly is very important. This is especially true for :ref:`soaring-specific <soaring>` parameters. Failure to choose appropriate values for them can cause a sailplane to miss all thermals or repeatedly try to catch a thermal where there is none. Refer to `the instructions for calculating these parameters <http://ardupilot.org/plane/docs/soaring.html#tune-the-tecs>`_ for your sailplane model.    
+      ArduPilot's parameters largely determine how an aircraft behaves, and setting them correctly is very important. This is especially true for :ref:`soaring-specific <soaring>` parameters. Failure to choose appropriate values for them can cause a sailplane to miss all thermals or repeatedly try to catch a thermal where there is none. Refer to `the instructions for calculating these parameters <https://ardupilot.org/plane/docs/soaring.html#tune-the-tecs>`_ for your sailplane model.    
   
    
    If everything has worked correctly so far, you should see the Cygwin window where you launched SITL start getting filled with notifications of the kind ``Data rate: 19.9 FPS  Frame rate:466.9 FPS``, like so: 
@@ -204,7 +205,7 @@ Running soaring SITL with X-Plane
    .. figure:: ../images/X-Plane_weather_menu.jpg
       :target: ../_images/X-Plane_weather_menu.jpg
    
-   To enable thermals, set *thermal coverage* to something higher than 0 and possibly change *thermal climb-rate*. It should be higher than you sailplane's `SOAR_VSPEED <http://ardupilot.org/plane/docs/soaring.html#set-up-the-soaring-parameters>`_ parameter. To make the mission a bit more challenging, you can also set wind speed, gust, shear, and turbulence above 0, but don't overdo it --- setting turbulence higher than 1 will make an RC sailplane-sized aircraft very difficult to control.
+   To enable thermals, set *thermal coverage* to something higher than 0 and possibly change *thermal climb-rate*. It should be higher than you sailplane's `SOAR_VSPEED <https://ardupilot.org/plane/docs/soaring.html#set-up-the-soaring-parameters>`_ parameter. To make the mission a bit more challenging, you can also set wind speed, gust, shear, and turbulence above 0, but don't overdo it --- setting turbulence higher than 1 will make an RC sailplane-sized aircraft very difficult to control.
 
    The settings in the screenshot below are an example. The only changes from the defaults are in the thermal settings and low-altitude wind layer: 
    

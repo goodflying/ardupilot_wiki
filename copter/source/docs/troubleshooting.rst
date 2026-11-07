@@ -1,8 +1,8 @@
 .. _troubleshooting:
 
-===============
-Troubleshooting
-===============
+=========================
+Archived: Troubleshooting
+=========================
 
 .. warning::
 
@@ -41,8 +41,8 @@ This can be due to a number of mistakes:
    plugging in a USB cable first, to boot the board, and then plug in
    your LiPo after it's already up, or just ensure that the four-wire
    cable from your APM board to your power distribution board is
-   disconnected during regular startup. See
-   details \ `here <http://diydrones.com/profiles/blogs/apm2-esc-startup-problem-and-workaround>`__.
+   disconnected during regular startup. 
+   See details `here <https://diydrones.com/profiles/blogs/apm2-esc-startup-problem-and-workaround>`__.
 #. It's possible you've changed your throttle trim settings since you
    did your initial radio calibration. Trim the throttle down a few
    notches and try arming again.
@@ -54,8 +54,7 @@ This can be due to a number of mistakes:
    LiPo must be plugged in to power the RC gear.
 #. If you've checked the previous things, it may be that you need to
    recalibrate your ESCs. Do it the manual way
-   (:ref:`here <esc-calibration>` to be
-   sure).
+   (:ref:`here <esc-calibration>` to be sure).
 
 My APM 2 is locking up
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -135,8 +134,8 @@ The possible solutions are:
 
 --------------
 
-My copter motors spin but the copter wont take off (or motors may not spin at all)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+My copter motors spin but the copter won't take off (or motors may not spin at all)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 While there are a few different reasons for copters to be perceived as
 underpowered, this condition applies to motors that simply aren't
@@ -192,7 +191,7 @@ Check the following:
 #. Check your cables! The signal wire should be at the top, and ground
    at the bottom.
 #. Finally, if all else fails, try to narrow down the problem. First,
-   check that the the receiver is working right by plugging a servo into
+   check that the receiver is working right by plugging a servo into
    the output you're testing and making sure that it's outputting a good
    signal. Then plug one known-good RC channel into the APM input
    channels, from 1-7, one at a time and see if any are read. If some
@@ -251,7 +250,7 @@ My Copter Moves In a Direction even though the Stick is Centered
    #. If they are not recalibrate the radio.
    #. The HS1 Trim value must match the Live stick centered Roll value
       and the HS2 Trim value must match the live stick centered Pitch
-      value or the Flight Controller will think your stick is not
+      value or the autopilot will think your stick is not
       centered when it is.
 
 #. Make sure the CG (center of gravity) of the copter is dead center.
@@ -325,11 +324,6 @@ between your battery and the motor and test the difference between a
 good motor and the bad one. If you are seeing higher draw in the bad
 one, replace or fix it.
 
-If you are using a Futaba tx/rx with more than 8 channels and purchased
-your APM before early 2013 you should upgrade your PPM encoder following
-the
-instructions \ :ref:`here <common-ppm-encoder-apm2x-atmega32u2>`.
-Below is a video pre-upgrade (i.e. twitches) and post (no twitches).
 
 Another possible cause is the THR_MIN parameter's default of 130 is too
 low for your motors or ESCs. The THR_MIN parameter controls the minimum
@@ -351,7 +345,7 @@ have not followed the warnings and disconnected the four-wire signal
 cable, they may vibrate rapidly when you reset your board. This is a
 rare problem that can crop up with certain ESC types that don't handle
 out-of-range signals well (it's a problem with the Arduino bootloader
-during bootup, so there's not much we can do about it). But it can
+during boot-up, so there's not much we can do about it). But it can
 always be avoided by following the advice of this warning, which is
 liberally sprinkled throughout the manual!
 
@@ -437,8 +431,8 @@ Copter ESCs keep beeping
    plugging in a USB cable first, to boot the board, and then plug in
    your LiPo after it's already up, or just ensure that the four-wire
    cable from your APM board to your power distribution board is
-   disconnected during regular startup. See
-   details \ `here <http://diydrones.com/profiles/blogs/apm2-esc-startup-problem-and-workaround>`__.
+   disconnected during regular startup. 
+   See details `here <https://diydrones.com/profiles/blogs/apm2-esc-startup-problem-and-workaround>`__.
 
 I'm using a MediaTek GPS, and although the module's blue lock LED goes solid, APM is not showing a lock or I'm getting "No GPS" on the Mission Planner display
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -478,10 +472,10 @@ have a bad cable or an older MediaTek module that needs to have its
 firmware updated.
 
 If you have a uBlox module and APM is not showing lock, you may not have
-ordered the module preprogammed for ArduPilot from the DIY Drones store
-(you had to select that option). In that case, program it yourself with
-the
-instructions \ `here <http://diydrones.com/profiles/blogs/tutorial-programming-your>`__.
+ordered the module preprogrammed for ArduPilot from the DIY Drones store
+(you had to select that option). 
+In that case, program it yourself with
+the instructions `here <https://diydrones.com/profiles/blogs/tutorial-programming-your>`__.
 
 I want to load the code in Arduino, but I'm having trouble
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -489,12 +483,10 @@ I want to load the code in Arduino, but I'm having trouble
 First, ensure you've downloaded the latest AC2 code and are using the
 latest Arduino (at least 022).
 
-If you're getting compile errors, that means that you haven't told
-Arduino where your libraries are properly.
+If you're getting compile errors, that means that you haven't told Arduino where your libraries are properly.
 
 If you're getting avrdude sync error message in the Arduino status bar),
-go through \ *all* of the
-tips \ `here <http://diydrones.com/profiles/blogs/arduino-debugging-tips>`__.
+go through *all* of the tips `here <https://diydrones.com/profiles/blogs/arduino-debugging-tips>`__.
 
 My Copter just won't rise/lift off
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -523,20 +515,19 @@ expected, check your PID settings and you can try to upload firmware
 again.
 
 Firmware upload might be successful but due internal timing issues some
-of the code is not written properly and this can cause unstabiliness on
+of the code is not written properly and this can cause unstableness on
 your Copter.
 
 I've got a tricopter and I'm having trouble with the yaw
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Please see the
-tips \ `here <http://diydrones.com/profiles/blogs/tricopter-based-on-arducopter-yaw-issues-and-solutions>`__.
+Please see the tips `here <https://diydrones.com/profiles/blogs/tricopter-based-on-arducopter-yaw-issues-and-solutions>`__.
 
 The Mission Planner's HUD display moves around even though my copter is motionless
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As of 2.9 we've enabled a feature that uses GPS velocities/accelerations
-to compensate for centifugal forces. It should not cause you any issues
+to compensate for centrifugal forces. It should not cause you any issues
 in flight but you can disable it by setting the AHRS_GPS_GAIN to 0
 through the Mission Planner's Advanced Parameters List if it makes you
 uncomfortable. \ `Here is a video <https://www.youtube.com/watch?v=SXppOmZ3Rpg&feature=player_detailpage>`__ demonstrating
@@ -561,17 +552,17 @@ values to become very noisy and throw off the altitude estimates. The
 solution is to reduce sources of vibration from your frame (bent prop
 adapters and motor shafts, replace EPP props with APC) and remove hard
 connections between the frame and APM by using vibration dampening
-products such as \ `DuBro foam <https://dubro.com/products/r-c-protective-foam-rubber>`__.
+products such as \ `DuBro foam <https://www.dubro.com/products/r-c-protective-foam-rubber>`__.
 
 As of version 2.9 of Copter, inertial navigation is used to maintain
 altitude and in 2.9.2 horizontal position as well so vibration truly
 needs to be minimized. A small pad (1/2 to 1") of Kyosho Zeal tape under
-each corner of the Flight Control board should get vibration low enough.
+each corner of the autopilot should get vibration low enough.
 
 Or you can use a standoff with an extending screw 1/10" outboard of each
-corner of the flight control board and suspend it with four 1/16"
+corner of the autopilot and suspend it with four 1/16"
 O-rings of appropriate diameter such that when folded over through the
-flight control board they just hold the board without movement, but also
+autopilot they just hold the board without movement, but also
 not in much tension.
 
 When a flight log is checked in RAW mode, X,Y and Z hovering ACCELs
@@ -580,8 +571,7 @@ either of the above techniques can get them down to the plus to minus 1
 range if they are just right.
 
 You can graph your Z-axis vibrations by enabling the "RAW" message type
-in
-the \ :ref:`dataflash <common-downloading-and-analyzing-data-logs-in-mission-planner>`,
+in the :ref:`dataflash <common-downloading-and-analyzing-data-logs-in-mission-planner>`,
 then take a short flight in Stabilize mode and finally download the logs
 and graph them with the mission planner. Below is an example of an
 extremely badly vibrating copter (top) and a nearly perfectly smooth
@@ -591,9 +581,7 @@ than -5 to -15 or alt hold will not function correctly.
 .. image:: ../images/BadVibrations1.png
     :target: ../_images/BadVibrations1.png
 
-There is a good
-discussion \ `here <http://diydrones.com/forum/topics/vibration-isolation-and-dampening-of-apm-px4-for-version-2-9>`__ re
-vibration dampening.
+There is a good discussion `here <https://diydrones.com/forum/topics/vibration-isolation-and-dampening-of-apm-px4-for-version-2-9>`__ re vibration dampening.
 
 My copter slowly rises or descends when I enable Alt-Hold or Loiter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

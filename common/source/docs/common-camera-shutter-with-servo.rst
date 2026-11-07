@@ -1,202 +1,67 @@
 .. _common-camera-shutter-with-servo:
 
-===============================================
-Camera Shutter Configuration in Mission Planner
-===============================================
+============================
+Camera Shutter Configuration
+============================
 
-This article explains how to configure Mission Planner to trigger the
-camera shutter with a servo or relay.
+ArduPilot allows you to configure a :ref:`servo output<common-servo>` or :ref:`relay<common-relay>` to control a camera trigger from :ref:`an RC transmitter, a ground station or during a mission <common-camera-controls>`.
 
-Overview
-========
+This article explains in general what connections and settings are required but in most cases the autopilot's servo output or relay voltage will be converted into a format understood by the particular camera used and the setup details will depend upon what hardware is used (infrared, cable, etc).  These two pages may provide more details
 
-ArduPilot allows you to configure a particular port (servo or relay) as
-the camera trigger, which will then be activated when 
-:ref:`camera commands are specified in missions <common-camera-control-and-auto-missions-in-mission-planner>`.
+- :ref:`DIY article for a Pixhawk using a relay based trigger<common-pixhawk-camera-trigger-setup>`
 
-This article explains what settings you need to configure for both
-servos and relays, and covers both Pixhawk and APM.
+Servo control connection and configuration
+==========================================
 
-.. note::
+Connect one of the autopilot's PWM output (aka servo outputs) to the camera or the camera control cable that accepts PWM input.
+As mentioned on the :ref:`servos wiki page <common-servo>` there are some autopilot specific limitations on which PWM outputs may be used:
 
-   The servo or relay port signal must be converted into a format
-   (infrared, cable or whatever) understood by your particular camera. The
-   configuration settings will depend on the hardware that is used to
-   perform this conversion. Some useful hardware configurations and
-   settings are linked from the section 
-   :ref:`Setting values for different cameras <common-camera-shutter-with-servo_setting_values_for_different_cameras>`. 
+- For autopilots with IOMCU (e.g. label outputs as MAIN OUT and AUX OUT), it is easiest to use AUX OUT 1 to 6.
+- For autopilots without an IOMCU any output may be used
 
-Shutter configuration with Pixhawk
-==================================
+Configure the autopilot by setting these parameters:
 
-Pixhawk has 6 AUX Ports (AUX1-AUX6, referred to as RC9-RC14 in *Mission
-Planner*) that can be configured as :ref:`servos <common-servo>`,
-:ref:`relays <common-relay>`, or 
-:ref:`digital inputs or outputs <common-pixhawk-overview_pixhawk_digital_outputs_and_inputs_virtual_pins_50-55>`.
-The image and configuration below is for the Pixhawk with RC10/AUX2
-connected to camera control hardware and configured as either a servo or relay.
+- Set `SERVOx_FUNCTION` = 10 (CameraTrigger) where "x" is the PWM output connected to the camera
+- Set :ref:`CAM1_TYPE<CAM1_TYPE>` = 1 (Servo) and reboot the autopilot
+- Set :ref:`CAM1_SERVO_ON<CAM1_SERVO_ON>` to the pwm value to output to trigger taking a picture (e.g. 1300)
+- Set :ref:`CAM1_SERVO_OFF<CAM1_SERVO_OFF>` to the pwm value to output when *not* taking a picture (e.g. 1100)
+- Set :ref:`CAM1_DURATION<CAM1_DURATION>` to the time (in seconds) that the pwm value should remain high (e.g 0.1)
 
-.. figure:: ../../../images/Pixhawkdetailview.jpg
-   :target: ../_images/Pixhawkdetailview.jpg
-
-   Pixhawk Detail View highlighting AUXPorts
-
-.. tip::
-
-   From Plane 3.5.0 (at time of writing not in current Copter
-   3.3/Rover 3.5 releases) you can monitor and log *exactly* when the was
-   camera triggered. For more information see the 
-   :ref:`Enhanced camera trigger logging <common-camera-shutter-with-servo_enhanced_camera_trigger_logging>` 
-   section below.
-
-First set the camera trigger output type using the ``CAM_TRIGG_TYPE``
-setting:
-
--  Open *Mission Planner* and then click on **CONFIG/TUNING \| Full
-   Parameters List**.
--  Set :ref:`CAM_TRIGG_TYPE` to 0 for a servo (output PWM signal) or 1 for a 
-   :ref:`relay <common-relay>` (Note: although ArduPilot supports
-   multiple relay channels only the first relay can be used as a camera
-   trigger). The image below shows the camera trigger set as a servo.
-
-   .. figure:: ../../../images/cam_trigg_dist1.jpg
-      :target: ../_images/cam_trigg_dist1.jpg
-
-      Mission Planner: Configuring Camera Trigger Output Type
-
-The actual port used for the shutter is set and configured in the
-*Camera Gimbal Configuration Screen*:
-
--  Open **Initial setup \| Optional Hardware \| Camera Gimbal**. The
-   shutter settings are shown in the section at the bottom.
-
-   .. figure:: ../../../images/missionplannercameragimbalscreen.jpg
-      :target: ../_images/missionplannercameragimbalscreen.jpg
-
-      Mission Planner: Camera Gimbal Configuration Screen
-
--  The *Shutter* drop-down list is used to set the connected camera
-   trigger port. Here we have selected RC10, which corresponds to AUX2
-   on the Pixhawk.
--  The Shutter *Duration* setting specifies how long the servo/relay
-   will be held in the *Pushed* state when the shutter is activated, in
-   tenths of a second. Above the value is 10, so the pushed state is
-   held for one second.
--  **For Servos only (settings ignored for relay outputs):**
-
-   -  The Shutter *Pushed* and *Not Pushed* settings hold PWM signal
-      values that will be sent when the servo is in those states.
-   -  The *Servo Limits* setting specifies the range of PWM signal
-      values within which the servo will not bind.
-
-      
-.. _common-camera-shutter-with-servo_enhanced_camera_trigger_logging:
-
-Enhanced camera trigger logging
-===============================
-
-.. note::
-
-   This functionality was first introduced in Plane 3.5.0. At time of
-   writing it is not yet present in Copter 3.3/Rover 3.5 releases).
-
-ArduPilot logs TRIG messages when it *triggers* the camera. You can
-additionally set up ArduPilot to log CAM messages when the camera has
-actually fired, by monitoring a 
-:ref:`digital input pin <common-pixhawk-overview_pixhawk_digital_outputs_and_inputs_virtual_pins_50-55>`
-that has been connected to the camera hot shoe. This more accurately
-logs the exact time that pictures are recorded.
-
-You will need to configure one of the AUX pins as a digital
-output/input, and connect it to the camera flash hotshoe (a universal
-camera hot shoe is required). The pin should be held for at least 2
-milliseconds for reliable trigger detection.
-
-The main steps are:
-
-#. Open *Mission Planner* and then click on **CONFIG/TUNING \| Full
-   Parameters List**
-#. Set at least two of the AUX pins as digital output/inputs using the
-   BRD_PWM_COUNT parameter, as described in 
-   :ref:`digital outputs <common-pixhawk-overview_pixhawk_digital_outputs_and_inputs_virtual_pins_50-55>`.
-#. Set :ref:`CAM_FEEDBACK_PIN <CAM_FEEDBACK_PIN>`
-   to the pin number connected to the hotshoe.
-#. Set :ref:`CAM_FEEDBACK_POL <CAM_FEEDBACK_POL>`
-   to indicate whether the feedback pin (hotshoe voltage) goes high or
-   low when the picture is taken.
-
-Shutter configuration with APM 2.x
-==================================
-
-APM2.x has dedicated servo and relay ports, so unlike for Pixhawk, there
-is no need to separately specify the trigger type (``CAM_TRIGG_TYPE``).
-Pins **A10** or **A11** are used for servos (*Mission Planner* refers to
-these as RC10 and RC11, respectively). Pin **A9** is used for relays on
-APM2.x (*Mission Planner* refers to this as *Relay* in the shutter
-selection drop-down.)
-
-.. figure:: ../../../images/apm2_analog_pins2.jpg
-   :target: ../_images/apm2_analog_pins2.jpg
-   
-   APM Analog Pins
-
-All configuration is done in the *Camera Gimbal Configuration Screen*.
-The configuration settings are exactly the same as for Pixhawk, except
-that you need to select **Relay** in *Shutter* drop-down list for a
-relay shutter trigger.
-
-Manually trigger the camera shutter
-===================================
+Relay control connection and configuration
+==========================================
 
 .. warning::
+    :ref:`This function is a GPIO and has limited current capabilities.<gpio-warning>`
 
-   This feature is currently only supported on Copter.
+Connect one of the autopilot's GPIO pins to the camera or the camera control cable that accepts high/low voltage input.  As mentioned on the :ref:`relay wiki page<common-relay>` the autopilot's servo/motor outputs can normally be used but, in addition, some autopilots have dedicated pins purely for use as relays/GPIOs.
 
-You can configure the CH7 switch as a manual trigger for the camera
-shutter and use it to capture images during normal (non auto) flight.
+Configure the autopilot by setting these parameters:
 
-.. tip::
+- If using 4.5 (or earlier) only the 1st relay can be used so set ``RELAY_PIN`` to the GPIO pin used
+- If using 4.6 (or higher) any relay can be used.  Below are settings if the first relay is used.
 
-   This is also useful for manually testing if the shutter is being
-   activated correctly.
+  - Set :ref:`RELAY1_FUNCTION<RELAY1_FUNCTION>` = 4 (Camera) 
+  - Set :ref:`RELAY1_PIN<RELAY1_PIN>` to the GPIO pin used
 
--  Open *Mission Planner* and then click on **CONFIG/TUNING \| Full
-   Parameters List**
--  Set the value of ``CH7_OPT`` to 9
+- Set ``SERVOx_FUNCTION`` = -1 (GPIO) where "x" is the servo output channel used.  This is not required in the rare case where an autopilot's dedicated GPIO pins are used.
+- Set :ref:`CAM1_DURATION<CAM1_DURATION>` to the time (in seconds) that the relay is held high
+- Set :ref:`CAM1_RELAY_ON<CAM1_RELAY_ON>` = 0 to swap the relay voltage.  E.g. GPIO output would now be normally high by default, and then low to trigger the camera shutter
 
-   .. figure:: ../../../images/cam_trigg_dist1.jpg
-      :target: ../_images/cam_trigg_dist1.jpg
+.. _common-camera-shutter-with-servo_enhanced_camera_trigger_logging:
 
-      Mission Planner: Set CH7 as Manual Trigger
+Camera shutter feedback logging
+===============================
 
+ArduPilot logs TRIG messages when it *triggers* the camera.  If the camera provides a GPIO output (e.g. camera flash hotshoe) then this can be used to also log CAM messages at the exact moment that pictures are taken.
 
-.. _common-camera-shutter-with-servo_setting_values_for_different_cameras:
+Connect the camera's GPIO output  to one of the autopilot's :ref:`GPIO pins <common-gpios>` (e.g. AUX OUT).  As mentioned above there are restrictions on which pins may be used.
 
-Setting values for different cameras
-====================================
+Set the following parameters:
+ 
+- Set `SERVOx_FUNCTION` = -1 (GPIO) where "x" is the servo output channel used.  This is not required in the rare case where the autopilot's dedicated GPIO pins are useds
+- Set :ref:`CAM1_FEEDBAK_PIN<CAM1_FEEDBAK_PIN>` to the pin number connected to the hotshoe
+- Set :ref:`CAM1_FEEDBAK_POL<CAM1_FEEDBAK_POL>` = 0 if the hotshoe voltage goes low when a picture is taken or 1 if the voltage goes high
 
-The actual values needed for servo/relay settings depends on what
-hardware is used to send the shutter signal to the camera. The following
-topics describe the hardware setup and configuration settings for a
-number of specific cameras/camera types:
+See :ref:`digital input pin <common-pixhawk-overview_pixhawk_digital_outputs_and_inputs_virtual_pins_50-55>` for more details.
 
--  `Camera Shutter Tutorial using
-   Stratosnapper <common-pixhawk-auto-camera-trigger-without-chdk>`__ -
-   shows how to connect to a camera with an IR interface. The
-   Stratosnapper can also be used to connect to cameras using other
-   cables and protocols
--  :ref:`Camera Shutter with Relay and CHDK on APM <common-apm-to-chdk-camera-link-tutorial>` - shows how to set
-   up a relay port to send a signal to a Canon camera running CHDK (on
-   APM2.x)
-
-If these aren't suitable for your hardware configuration, we recommend
-you check your hardware manual for information about servo/relay inputs
-that are accepted.
-
-.. note::
-
-   The :ref:`CHDK Camera Control Tutorial <common-chdk-camera-control-tutorial>` is not a good
-   example of integrating with the camera shutter, because it does not use
-   the standard shutter configuration explained in this article. This is
-   however a good example of how you can access other features of a Canon
-   camera using CHDK (for example, the zoom).
+Consider using the `Seagulls SYNC2 Shoe Horn Adapter <https://www.seagulluav.com/product/seagull-sync2/>`__

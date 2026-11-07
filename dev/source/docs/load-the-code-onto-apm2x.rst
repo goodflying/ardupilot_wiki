@@ -1,15 +1,15 @@
 .. _load-the-code-onto-apm2x:
 
-============================
-Loading the code onto APM2.x
-============================
+======================================
+Archived: Loading the code onto APM2.x
+======================================
 
 What you'll need:
 =================
 
 -  mini USB cable (for APM1) or micro USB cable (for APM2)
 -  modified version of the Arduino IDE
-   for \ `windows <http://firmware.ardupilot.org/Tools/Arduino/>`__ or `macintosh <http://firmware.ardupilot.org/Tools/Arduino/>`__
+   for \ `windows <https://firmware.ardupilot.org/Tools/Arduino/>`__ or `macintosh <https://firmware.ardupilot.org/Tools/Arduino/>`__
 
 Setting up the software drivers
 ===============================
@@ -31,7 +31,7 @@ Windows, you should download and install the appropriate driver for your
 Operating System
 from \ `here <http://www.ftdichip.com/Drivers/VCP.htm>`__. Once you've
 done so, reboot your PC and plug in the cable again. It should be
-recognized and show up in your Windows Device Manger (which you can find
+recognized and show up in your Windows Device Manager (which you can find
 in the Windows Control Panel) as shown below (your COM port will
 probably be a different number; it's assigned by Windows based on how
 many other devices you've connected). That's the COM port you'll use in

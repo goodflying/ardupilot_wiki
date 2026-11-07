@@ -19,13 +19,31 @@ If you have an airspeed sensor installed then it is critical that you do
 pre-flight checks to ensure that it is working correctly, and ensure
 that it is correctly zeroed.
 
-After you start up APM on your aircraft you should wait at least 1
+During initialization, the firmware checks if you have enabled an airspeed sensor and that it is healthy, otherwise a warning will be given, but arming will still be allowed, so checking the ground station messages is important.
+
+The :ref:`ARSPD_OFFSET<ARSPD_OFFSET>` (and ``ARSPD2_OFFSET`` if a second sensor is enabled)  offset is measured and set at boot-up or if manually commanded from the ground station.
+
+.. warning:: It is very important to cover the pitot tube during power up, or when you wait and then re-calibrate. An inaccurate static calibration can result in the airspeed being reported too high, causing auto-throttle controlled modes to use very low throttle and potentially cause a crash.
+
+If the offset has changed a lot since the last boot-up, a warning will be issued. This is often an indication that you forget to cover the pitot during boot or manual calibration. The sensitivity of this warning is set by :ref:`ARSPD_OFF_PCNT<ARSPD_OFF_PCNT>` which applies to both sensors.
+
+:ref:`ARSPD_SKIP_CAL<ARSPD_SKIP_CAL>` and :ref:`ARSPD2_SKIP_CAL<ARSPD2_SKIP_CAL>` allows you to skip airspeed offset calibration on startup, instead using the offset from the last calibration or requiring a manual calibration. This may be desirable if the offset variance between flights for your sensor is low and you want to avoid having to cover the pitot tube on each boot.
+
+After you start up the autopilot on your aircraft its recommended that you wait at least 1
 minute for your electronics to warm up, preferably longer, and then do a
-pre-flight calibration of your airspeed sensor. Your ground station
-software should have a menu for doing this, usually called "Preflight
+pre-flight manual calibration of your airspeed sensor. This is important if your sensor temperature does not match the ambient, but may be skipped if its close to ambient temperature.
+
+Manual Offset Calibration
+=========================
+Your ground station software should have a menu for doing this, usually called "Preflight
 Calibration". You need to loosely cover your airspeed sensor to stop
 wind from affecting the result, then press the button. The calibration
 will take a couple of seconds.
+
+.. tip:: A short piece of foam slipped over the end of the pitot tube is the easiest way to
+   cover it. Foam blocks the wind without sealing the tube, and leaves both hands free to
+   press the calibrate button. Cupping both hands around the tube also works, but makes it
+   awkward to reach the button at the same time.
 
 .. image:: ../images/preflight.jpg
     :target: ../_images/preflight.jpg
@@ -33,74 +51,74 @@ will take a couple of seconds.
 Choosing that action will re-calibrate both your ground barometric
 pressure and your airspeed sensor.
 
+.. note:: setting :ref:`ARSPD_SKIP_CAL<ARSPD_SKIP_CAL>` or :ref:`ARSPD2_SKIP_CAL<ARSPD2_SKIP_CAL>` to "2", will force you to manually recalibrate the offset in order to arm each boot. This is to remind users who need to allow the sensor to settle to ambient temperature before each calibration at boot.
+
 Next you should check that your airspeed sensor is working correctly
 before takeoff. To do that you should blow into the airspeed sensor and
 make sure that the "AS" airspeed sensor value in your HUD rises as you
-blow into it.
+blow into it. In *Mission Planner*, airspeed can also be displayed on the
+Flight Data screen's **Quick** tab, which is easier to watch than the HUD
+while you have your face at the pitot tube. Blowing into the tube should
+take the reading to 6 m/s or more; if it barely moves, suspect a blocked,
+leaking or disconnected tube.
 
-Calibrating the airspeed sensor
-===============================
+.. warning:: An airspeed of exactly 0.0 that sits there on the ground and never deviates is a
+   sign of a problem, not of a well-zeroed sensor. A working sensor shows small fluctuations
+   from air movement and sensor noise, so a permanently perfect zero usually means the sensor
+   is not being read at all.
+
+Calibrating the airspeed sensor gain
+====================================
 
 The :ref:`ARSPD_RATIO <ARSPD_RATIO>` parameter
 determines how ArduPilot maps the differential pressure from your airspeed
 sensor into an airspeed value. The default value is around 2.0, and
-should give good results for most people. The correct value does depend
+should give good results for most people using analog sensors. The correct value does depend
 on you having your airspeed sensor well placed on your aircraft, and
 some users may find they need to calibrate their airspeed sensor by
 changing :ref:`ARSPD_RATIO <ARSPD_RATIO>`.
 You will find an "Airspeed ratio" setting in the configuration page of
-the APM in your ground station.
+the autopilot in your ground station.
 
 Adjusting
-:ref:`ARSPD_RATIO <ARSPD_RATIO>` can be done automatically using the automatic calibration feature available
-from release 2.76 onwards, or manually. The procedures for both methods
+:ref:`ARSPD_RATIO <ARSPD_RATIO>` can be done automatically using the automatic calibration feature, or manually. The procedures for both methods
 are presented below.
 
 Automatic calibration
-=====================
+---------------------
 
-1. Ensure you have Plane 2.76 or later loaded
-2. Go to Mission Planner => CONFIG/TUNING => Full Parameter List, change ARSPD_AUTOCAL to 1 and click 'Write Params' to send the value to the flight controller.
-3. Take-off and fly a repeated circuit or circular loiter for 5 minutes. This can be done in any mode, but if the autopilot is already tuned
+1. Go to Mission Planner => CONFIG/TUNING => Full Parameter List, change :ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` to 1 and click 'Write Params' to send the value to the autopilot.
+2. Take-off and fly a repeated circuit or circular loiter for 5 minutes. This can be done in any mode, but if the autopilot is already tuned
    sufficiently well, this can be achieved by leaving it in loiter or RTL
-   for 5 minutes. The change in ARSPD_RATIO value can be checked in-flight
+   for 5 minutes. The change in :ref:`ARSPD_RATIO <ARSPD_RATIO>` value can be checked in-flight
    by going to Mission Planner => CONFIG/TUNING => Full Parameter List, and
    clicking 'Refresh Params'. Note that when the calibration is active, an
-   updated ARSPD_RATIO value is only saved in the APM's non-volatile
+   updated :ref:`ARSPD_RATIO <ARSPD_RATIO>` value is only saved in the autopilot's non-volatile
    memory every two minutes, and only if the value has changed by more than
    5% from the last saved value.
-4. Land,  go to Mission Planner => CONFIG/TUNING => Full Parameter List
-   and change ARSPD_AUTOCAL back to 0 to prevent further changes.
-5. In Mission Planner => CONFIG/TUNING => Full Parameter List, click
-   'Refresh Params' and check the value of ARSPD_RATIO. Normally it will
+3. Land,  go to Mission Planner => CONFIG/TUNING => Full Parameter List
+   and change :ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` back to 0 to prevent further changes.
+4. In Mission Planner => CONFIG/TUNING => Full Parameter List, click
+   'Refresh Params' and check the value of :ref:`ARSPD_RATIO <ARSPD_RATIO>`. Normally it will
    be in the range between 1.5 and 3.0. If it is outside this range and you
    have checked for leaks, then if practical, you should consider
    relocating the pitot tube to reduce the aerodynamic interference from
    adjacent fuselage, wings, etc.
 
-Note: The calculation automatically compensates for the effects of
-altitude on air density.
+.. note:: The calculation automatically compensates for the effects of altitude on air density.
 
-Note: It is recommend that you disable ARSPD_AUTOCAL after calibration
-is complete. Some users have reported leaving ARSPD_AUTOCAL on all the
-time. While this may work it may lead to significant variation is
-calibration if wind speed varies over a flight.
+.. note:: If you do not anticipate that the wind speed will vary rapidly or dramatically during flights, and you are not flying over terrain that would cause bad wind speed estimates (ie alongside steep hills or canyons), you may leave :ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` enabled. But since the ratio should not vary once calibrated, doing a calibration flight and then disabling is highly recommended.
 
-Note: For those users chasing increased accuracy, between steps 2) and
-3), the value of GND_TEMP can be set to the current air temperature at
-the take-off location. By default the calibration algorithm uses the
-board temperature at power on as an approximation to the ambient air
-temperature, but due to solar and electrical heating, this nearly always
-reads high. This step may be worthwhile if operating in extreme
-temperature conditions.
+.. warning:: Do not leave :ref:`ARSPD_AUTOCAL<ARSPD_AUTOCAL>` enabled for long stretches of level flight. The calibration requires regular turns to get a good estimate. If flown for long distances without a turn then a very poor airspeed ratio can develop, resulting in very incorrect airspeed reporting, even to the point of causing a crash in some extreme cases.
 
-Note2: You do not have to have ARSPD_USE enabled to do automatic
-airspeed calibration. You do have to have ARSPD_ENABLE=1, but you can
-set ARSPD_USE=0 if you would prefer not to use the sensor until it is
-calibrated.
+.. warning:: If you change or replace the pitot tube, reset :ref:`ARSPD_RATIO <ARSPD_RATIO>` (Default = 2.0) and recalibrate the sensor.
+
+.. note:: For those users chasing increased accuracy, between steps 2) and 3), the value of :ref:`BARO_GND_TEMP<BARO_GND_TEMP>`  can be set to the current air temperature at the take-off location. By default the calibration algorithm uses the board temperature at power on as an approximation to the ambient air temperature, but due to solar and electrical heating, this nearly always reads high. This step may be worthwhile if operating in extreme temperature conditions.
+
+.. note:: You do not have to have :ref:`ARSPD_USE<ARSPD_USE>` enabled to do automatic airspeed calibration. You can set :ref:`ARSPD_USE<ARSPD_USE>` = 0 if you would prefer not to use the sensor until it is calibrated.
 
 Manual calibration
-==================
+------------------
 
 To determine the right airspeed ratio manually you should do a test
 flight in FBWA mode, with the following procedure:
@@ -136,12 +154,12 @@ formula:
 
 ::
 
-    NEW_RATIO = OLD_RATIO*((AVERAGE_AIRSPEED + AIRSPEED_INCREASE)/AVERAGE_AIRSPEED)2
+    NEW_RATIO = OLD_RATIO*((AVERAGE_AIRSPEED + AIRSPEED_INCREASE)/AVERAGE_AIRSPEED)²
 
 where:
 
--  OLD_RATIO = the old value of ARSPD_RATIO
--  NEW_RATIO = the new value of ARSPD_RATIO
+-  OLD_RATIO = the old value of :ref:`ARSPD_RATIO <ARSPD_RATIO>`
+-  NEW_RATIO = the new value of :ref:`ARSPD_RATIO <ARSPD_RATIO>`
 -  AVERAGE_AIRSPEED = the average airspeed you got during the test
 -  AIRSPEED_INCREASE = the amount you want to increase the average
    airspeed by
@@ -152,9 +170,9 @@ we can calculate the new ratio as:
 
 ::
 
-    NEW_RATIO = 2.0 * ((36.5 + 2) / 36.5)2 = 2.23
+    NEW_RATIO = 2.0 * ((36.5 + 2) / 36.5)² = 2.23
 
-After adjusting the ARSPD_RATIO do another flight and check that the
+After adjusting the :ref:`ARSPD_RATIO <ARSPD_RATIO>` do another flight and check that the
 airspeed is now well calibrated. Don't forget the pre-flight checks!
 
 Note about higher altitudes

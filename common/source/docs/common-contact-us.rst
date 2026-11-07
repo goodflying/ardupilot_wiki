@@ -9,7 +9,7 @@ It is possible to directly communicate with members of the ArduPilot community, 
 Support
 =======
 
-- User support requests should be posted to the `Discuss Forums <http://discuss.ardupilot.org>`__ (staffed by volunteers)
+- User support requests should be posted to the `Discuss Forums <https://discuss.ardupilot.org/>`__ (staffed by volunteers)
 - Flight code enhancement requests and known bugs should be added to the `ArduPilot Issues list <https://github.com/ArduPilot/ardupilot/issues>`__
 - Ground Station enhancement requests and bug reports should be added to the relevant issues list:
     - `Mission Planner Issues list <https://github.com/ArduPilot/MissionPlanner/issues>`__
@@ -21,28 +21,16 @@ Support
 Development
 ===========
 
-- `Mon/Tue Weekly Meetings on Mumble <http://ardupilot.org/dev/docs/ardupilot-mumble-server.html>`__
-- `ArduPilot Gitter (live chat) <https://gitter.im/ArduPilot/ardupilot>`__ the starting place to discuss ArduPilot development (not for support questions)
-- `ArduPilot Gitter General Chat <https://gitter.im/ArduPilot/GeneralChat>`__ for discussions not always directly related to ArduPilot development
-- `ArduPilot Gitter Mission Planner Chat <https://gitter.im/ArduPilot/MissionPlanner>`__ for discussion related to Mission Planner development
-- `ArduPilot Gitter APSync and Companion Computer chat <https://gitter.im/ArduPilot/companion>`__ for chat on companion computer development
-- `ArduPilot Gitter APM Planner 2.0 chat <https://gitter.im/ArduPilot/apm_planner>`__ for discussion related to APM Planner 2.0
-- `ArduPilot Gitter CANBUS protocol chat <https://gitter.im/ArduPilot/CANBUS>`__
-- `ArduPilot Gitter Google-Summer-Of-Code chat <https://gitter.im/ArduPilot/GSoC>`__ for potential students and mentors
-- `ArduPilot Gitter Hardware <https://gitter.im/ArduPilot/Hardware>`__
-- `ArduPilot Gitter MAVProxy chat <https://gitter.im/ArduPilot/MAVProxy>`__ discussion related to the MAVProxy ground station
-- `ArduPilot Gitter MQTT protocol chat <https://gitter.im/ArduPilot/MQTT>`__
-- `ArduPilot Gitter pymavlink chat <https://gitter.im/ArduPilot/pymavlink>`__
-- `ArduPilot Gitter Research chat <https://gitter.im/ArduPilot/Research>`__ discussion of academic and industry research using ArduPilot
-- `ArduPilot Gitter Vision Projects <https://gitter.im/ArduPilot/VisionProjects>`__ for ROS, OpenCV and other image processing related development
-- `ArduPilot Gitter Wiki chat <https://gitter.im/ArduPilot/ardupilot_wiki>`__ for discussion of wiki enhancements
+- `Weekly Developer Meeting on Discord <https://ardupilot.org/dev/docs/ardupilot-discord-server.html>`__ (Mon 11pm Greenwich Mean Time, GMT)
+- `Weekly EU Developer Meeting on Discord <https://ardupilot.org/dev/docs/ardupilot-discord-server.html>`__ (Wed 7am Greenwich Mean Time, GMT)
+- `ArduPilot Discord (live chat) <https://ardupilot.org/discord>`__ live chat for ArduPilot developers (not for support questions)
 
 Facebook
 ========
 
 - `ArduPilot Facebook group <https://www.facebook.com/groups/ArduPilot.org>`__
-- `The Cube Facebook group <https://www.facebook.com/groups/pixhawk2>`__
 - `ArduPilot Japan Facebook group <https://www.facebook.com/groups/1661960827376400>`__
+- `ArduPilot French Facebook group <https://www.facebook.com/groups/ardupilot/>`__
 
 YouTube
 =======
@@ -51,10 +39,9 @@ YouTube
 - `Randy's YouTube channel <https://www.youtube.com/user/rmackay9/videos>`__
 - `Tridge's YouTube channel <https://www.youtube.com/user/AndrewTridgell/videos>`__
 
-DroneKit
+[copywiki destination="copter,plane,rover,sub,blimp,planner,planner2,antennatracker,dev,ardupilot,mavproxy"]
+
+Calendar
 ========
 
-- `DroneKit for Android Gitter chat <https://gitter.im/dronekit/dronekit-android>`__
-- `DroneKit for Python Gitter chat <https://gitter.im/dronekit/dronekit-python>`__
-
-[copywiki destination="ardupilot,copter,plane,rover,planner,planner2,antennatracker,dev"]
+ArduPilot has a `calendar of events <https://calendar.google.com/calendar/embed?src=rgdbom27tb1vlo62kjjnmt8va4%40group.calendar.google.com>`__

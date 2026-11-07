@@ -38,7 +38,7 @@ Hardware changes to reduce magnetic interference on the compass
 #. Twist the wires between the PDB, ESC and battery and use grounded
    shielding where possible.
 #. Replace the PDB and ESCs with a 4-in-1 ESC because they tend to
-   poroduce less interference probably because their wires are shorter
+   produce less interference probably because their wires are shorter
    and closer together and they also have an aluminum plate on top which
    may help reduce the interference.
 #. Add aluminum shielding (even gutter tape) around the wires from the
@@ -123,7 +123,7 @@ Natural and Artificial Magnetic Anomalies Warning
 .. note::
 
    The following information has not been objectively tested to
-   determine it's impact on a vehicle's compass accuracy in flight.
+   determine its impact on a vehicle's compass accuracy in flight.
 
 #. Many things can distort the earth's magnetic field in the area you
    are flying:
@@ -154,6 +154,17 @@ Natural and Artificial Magnetic Anomalies Warning
       building with concrete & steel.
    -  30 ft (10 m) minimum: Large truck, metal building, heavy
       machinery.
+
+
+GPS for yaw
+===========
+
+ArduPilot supports the use of GPS heading information to reduce malfunctions caused by changes in the magnetic field in certain environments.
+
+- `Configure GPS for yaw <https://ardupilot.org/copter/docs/common-gps-for-yaw.html>`__
+
+.. youtube:: Kh_6TynYqEI
+    :width: 100%
 
 .. |image3| image:: http://hyperphysics.phy-astr.gsu.edu/%E2%80%8Chbase/magnetic/imgmag/loopa3.gif
     :target: ../_images/loopa3.gif

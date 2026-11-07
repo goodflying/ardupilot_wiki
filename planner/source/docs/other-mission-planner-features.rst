@@ -14,14 +14,15 @@ the menu:
    by checking a box at the bottom of the Mission Planner help screen.
 -  Shortcut Keys:
 
-   -  F12 - disconnect or connect from/to USB or Telemetry
+   -  F12 or CTL-T - disconnect or connect from/to USB or Telemetry
    -  F5 - Refresh parameters
    -  F2 - change to Flight Data tab
    -  F3 - change to Flight Planner tab
    -  F4 - change to Configuration tab
    -  F5 - Refresh parameter list
-   -  CTL-G Nmea Output
+   -  CTL-G NMEA Output
    -  CTL-W Wizard config interface
+   -  CTL-P Plugin enable and disable
 
 -  You can display video from your aircraft on the Mission Planner's HUD
    if you are digitizing it with the same laptop (with a video capture
@@ -43,10 +44,6 @@ the menu:
 -  Mission Planner can give you audio speech alerts for events that you
    choose, such as hitting waypoints or low battery. Just go to
    **Configuration \| Planner \| Speech \| Enable Speech**
--  Mission Planner source code can be downloaded and compiled (built) by
-   those with programming skills in C# and who are familiar with
-   Microsoft Visual Studio - see :ref:`Building Mission Planner with Visual Studio <dev:buildin-mission-planner>`
-   (Dev Wiki).
 -  Mission Planner can be scripted - see :ref:`Using Python Scripts in Mission Planner <using-python-scripts-in-mission-planner>`
    (planner wiki)
 
@@ -55,6 +52,9 @@ the menu:
 .. toctree::
     :maxdepth: 1
 
-    Geotagging Images with Mission Planner <common-geotagging-images-with-mission-planner>
+    Telemetry Logs <mission-planner-telemetry-logs>
+    Images with Mission Planner <common-geotagging-images-with-mission-planner>
+    MAVLink2 Signing (security)<common-MAVLink2-signing>
     Using Python Scripts in Mission Planner <using-python-scripts-in-mission-planner>
     Swarming <swarming>
+    Advanced Tools <common-mp-tools>

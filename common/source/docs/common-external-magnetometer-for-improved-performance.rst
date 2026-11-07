@@ -18,7 +18,7 @@ Overview
 ========
 
 The 3DR external compass should only be used with the APM series of
-flight controllers, its 5 volt signal output is not compatible with Pixhawk which require 3.3 volts. 
+autopilots, its 5 volt signal output is not compatible with Pixhawk which require 3.3 volts. 
 For the Pixhawk use the :ref:`3DR combination GPS / Magnetometer module <common-installing-3dr-ublox-gps-compass-module>`.
 
 .. image:: ../../../images/Magnetometer1.jpg
@@ -37,39 +37,39 @@ For the Pixhawk use the :ref:`3DR combination GPS / Magnetometer module <common-
    wires together where possible.
 #. It is also important to keep the magnetometer distanced from magnetic
    metallic objects (use nylon or non magnetic stainless screws and
-   hardware in it's vicinity and use aluminum or nylon standoffs.).
+   hardware in its vicinity and use aluminum or nylon standoffs.).
 
 **Notes:**
 
 -  If the Magnetometer board is mounted in its forward facing direction
    (Drone logo on the tab facing forward and in the opposite direction
-   of the Y arrow) the (COMPASS_ORIENT) parameter will need to be set
+   of the Y arrow) the (:ref:`COMPASS_ORIENT<COMPASS_ORIENT>` ) parameter will need to be set
    to (Normal) or "0".
 
    -  If you have the Y arrow pointing to the front (Drone on tab
-      pointing to the back), set (COMPASS_ORIENT) to (Yaw 180).
+      pointing to the back), set (:ref:`COMPASS_ORIENT<COMPASS_ORIENT>` ) to (Yaw 180).
 
 -  You will need to set the Magnetometer Orientation Parameter
-   (COMPASS_ORIENT) in the Mission Planner Advanced Parameter List
+   (:ref:`COMPASS_ORIENT<COMPASS_ORIENT>` ) in the Mission Planner Advanced Parameter List
    correctly to accommodate the Magnetometer's orientation.
--  If the Flight controller board is used in an alternate orientation
-   (or upside down), the (COMPASS_ORIENT) parameter will need to also
-   be adjusted to accommodate the Flight controller boards orientation
-   as well as it's own. (They are additive).
+-  If the Autopilot board is used in an alternate orientation
+   (or upside down), the (:ref:`COMPASS_ORIENT<COMPASS_ORIENT>` ) parameter will need to also
+   be adjusted to accommodate the Autopilot boards orientation
+   as well as its own. (They are additive).
 -  It can be confusing, but all orientations in 45 degree increments and
    even upside down can be accommodated.
 
    #. This **Quick Setup Procedure** will always work and allow you to
       set up your compass even if you use a non-3DR magnetometer.
-   #. Set the (COMPASS_ORIENT) **Yaw** parameter so the direction your
+   #. Set the (:ref:`COMPASS_ORIENT<COMPASS_ORIENT>` ) **Yaw** parameter so the direction your
       airframe is currently pointing agrees with the **HUD** in Mission
       Planner.
    #. Now turn your air frame right or left and if the compass correctly
       follows the direction it is pointed you are done.
    #. If the compass turned in the opposite direction of your airframe
-      set (COMPASS_ORIENT) **Roll** to **180** (flips the compass
+      set (:ref:`COMPASS_ORIENT<COMPASS_ORIENT>` ) **Roll** to **180** (flips the compass
       over).
-   #. If you need to set **Roll** to **180** (COMPASS_ORIENT) will also
+   #. If you need to set **Roll** to **180** (:ref:`COMPASS_ORIENT<COMPASS_ORIENT>` ) will also
       need to include the **Yaw** from **B.** above **(Example: Yaw 180
       Roll 180)**.
 
@@ -119,8 +119,8 @@ and ESCs.**
 -  The GPS modules antenna must be on top.
 -  In the picture below, we've mounted the board “components up with
    pins forward”.
--  Flight controller board orientation and magnetometer orientation must
-   be used to calculate the COMPASS_ORIENT parameter.
+-  Autopilot board orientation and magnetometer orientation must
+   be used to calculate the :ref:`COMPASS_ORIENT<COMPASS_ORIENT>` parameter.
 
 .. image:: ../../../images/Quad_Top_View.jpg
     :target: ../_images/Quad_Top_View.jpg

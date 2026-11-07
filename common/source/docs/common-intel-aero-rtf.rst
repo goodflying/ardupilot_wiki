@@ -7,11 +7,11 @@ Intel Aero RTF
 .. image:: ../../../images/intel-aero-rtf.jpg
     :target: ../_images/intel-aero-rtf.jpg
 
-The `Intel Aero RTF vehicle <https://software.intel.com/en-us/aero/drone-dev-kit>`__ includes the :ref:`Intel Aero compute board <common-intel-aero-overview>`,
+The `Intel Aero RTF vehicle <https://software.intel.com/en-us/aero/drone-kit>`__ includes the :ref:`Intel Aero compute board <common-intel-aero-overview>`,
 `Vision Accessory Kit <https://software.intel.com/en-us/aero/vision-kit>`__ and a `Spektrum DXe transmitter <http://spektrumrc.com/Products/Default.aspx?ProdId=SPM1000>`__.
 
-Within the vehicle is an STM32F427V flight controller board which can run ArduPilot (replacing the pre-loaded non-ArduPilot software).
-In this way, the higher powered :ref:`Intel Aero compute board <common-intel-aero-overview>` is used as a `companion computer <http://ardupilot.org/dev/docs/companion-computers.html>`__.
+Within the vehicle is an STM32F427V autopilot board which can run ArduPilot (replacing the pre-loaded non-ArduPilot software).
+In this way, the higher powered :ref:`Intel Aero compute board <common-intel-aero-overview>` is used as a `companion computer <https://ardupilot.org/dev/docs/companion-computers.html>`__.
 
 ..  youtube:: DZm9S0lxiEg
     :width: 100%
@@ -21,7 +21,7 @@ Additional parts to buy
 
 Although "Ready-to-fly" some additional parts are required to complete the upgrade and fly with ArduPilot.
 
-- LiPo battery `3S <https://hobbyking.com/en_us/multistar-high-capacity-3s-5200mah-multi-rotor-lipo-pack.html>`__ or `4S <https://hobbyking.com/en_us/multistar-high-capacity-4s-5200mah-multi-rotor-lipo-pack.html>`__
+- LiPo battery `3S <https://hobbyking.com/en_us/multistar-high-capacity-3s-5200mah-multi-rotor-lipo-pack.html?___store=en_us>`__ or `4S <https://hobbyking.com/en_us/multistar-high-capacity-5200mah-4s-12c-multi-rotor-lipo-pack-w-xt60.html?___store=en_us>`__
 - 2GB (or larger) USB thumb drive (`like this one <https://www.amazon.com/SanDisk-Cruzer-Glide-Drive-SDCZ60-008G-B35/dp/B007YX9O94/ref=sr_1_4?ie=UTF8&qid=1492397331&sr=8-4>`__) is needed for updating to the last release of the Linux distro.
 - Micro USB OTG to USB cable (`like this one <https://www.amazon.com/Micro-USB-OTG-Go-Adapter/dp/B005GI2VMG>`__)
 - `Spektrum USB programming cable <https://www.spektrumrc.com/Products/Default.aspx?ProdID=SPMA3065>`__ (optional)
@@ -30,9 +30,9 @@ Upgrading the vehicle's software
 ================================
 
 The Aero RTF may not have the last BIOS and Linux operating system. The Linux distro on Aero needs to be updated to version 1.2
-in order for the flight controller to be flashed with ArduPilot.
+in order for the autopilot to be flashed with ArduPilot.
 
-`Official Setup Instuctions from Intel <https://github.com/intel-aero/meta-intel-aero/wiki/02-Initial-setup>`__ should be followed which will ask you to:
+`Official Setup Instructions from Intel <https://github.com/intel-aero/meta-intel-aero/wiki/02-Initial-setup>`__ should be followed which will ask you to:
 
 - Download the latest OS image (aka "intel-aero-image-intel-aero.iso") and Capsule/BIOS (aka "capsule-01.00.12-r0.core2_64.rpm") from the `Intel Download Center <https://downloadcenter.intel.com/download/26500/UAV-installation-files-for-Intel-Aero-Platform>`__
 - `Flash the BIOS to Aero compute board <https://github.com/intel-aero/meta-intel-aero/wiki/02-Initial-setup#flashing-the-bios>`__
@@ -41,9 +41,9 @@ in order for the flight controller to be flashed with ArduPilot.
 
 The final step is to copy the **arducopter.px4** firmware to the Aero compute board and then flash it to the flight board:
 
-- Download the latest aero-fc ArduPilot firmware from `firmware.ardupilot.org <http://firmware.ardupilot.org/Copter/latest/>`__ 
+- Download the latest aero-fc ArduPilot firmware from `firmware.ardupilot.org <https://firmware.ardupilot.org/Copter/latest/>`__ 
 - Copy the above firmware to the Aero compute board in much the same way the BIOS's .rpm file was copied
-- `Flash the flight controller board <https://github.com/intel-aero/meta-intel-aero/wiki/02-Initial-setup#flashing-the-flight-controller-rtf-only>`__ with the **ardupilot.px4** firmware
+- `Flash the autopilot board <https://github.com/intel-aero/meta-intel-aero/wiki/02-Initial-setup#flashing-the-flight-controller-rtf-only>`__ with the **ardupilot.px4** firmware
 
 If you are developing ArduPilot, you can flash directly from the command line after compiling. Refer to `Build instructions <https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md>`__ for more detailed instructions, but it's basically the following commands:
 
@@ -62,12 +62,12 @@ Connecting and configuring with a ground station
 .. image:: ../../../images/intel-aero-param-load.jpg
     :target: ../_images/intel-aero-param-load.jpg
 
-- regular :ref:`compass <common-compass-calibration-in-mission-planner>`, :ref:`Radio <common-radio-control-calibration>`, :ref:`accelerometer calibration <common-accelerometer-calibration>` is required (:ref:`ESC calibration <esc-calibration>` is not required)
+- regular :ref:`compass <common-compass-calibration-in-mission-planner>`, :ref:`Radio <common-radio-control-calibration>`, :ref:`accelerometer calibration <common-accelerometer-calibration>` is required ([site wiki="copter"]:ref:`ESC calibration <esc-calibration>`\ [/site][site wiki="plane,rover,sub"]:ref:`ESC calibration <common-esc-calibration>`\ [/site][site wiki="blimp"]ESC calibration[/site] is not required)
 
 Connecting the Transmitter
 ==========================
 
-The transmitter that comes with the RTF is an off the shelf DSM-X DXe and a SPM4648 receiver, which is of autobind mode. The transmitter should always be powered on before the receiver (which is normally powered together with the vehicle).  If powered on after the vehicle it won't connect.  To overcome this you can simply disconnect the cable from the receiver, or go through the binding process, which involves powering on the transmitter while holding the "BIND/PANIC/TRAINER" button pressed. More information about the binding and connectiong can be found on the `receiver documentation <https://www.horizonhobby.com/pdf/SPM4648-Manual-EN.pdf>`__.
+The transmitter that comes with the RTF is an off the shelf DSM-X DXe and a SPM4648 receiver, which is of autobind mode. The transmitter should always be powered on before the receiver (which is normally powered together with the vehicle).  If powered on after the vehicle it won't connect.  To overcome this you can simply disconnect the cable from the receiver, or go through the binding process, which involves powering on the transmitter while holding the "BIND/PANIC/TRAINER" button pressed. More information about the binding and connection can be found on the `receiver documentation <https://www.horizonhobby.com/pdf/SPM4648-Manual-EN.pdf>`__.
 
 Known Issues with the Transmitter
 =================================
@@ -91,3 +91,5 @@ More flight videos
 ==================
 ..  youtube:: 3lu9xq8Cm1E
     :width: 100%
+
+[copywiki destination="plane,copter,rover,blimp,sub"]

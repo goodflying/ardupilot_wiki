@@ -19,15 +19,13 @@ equipment when you are using 2.4 Ghz onboard video transmitters, or use
 
 **AGL**: Altitude above ground level
 
-**AHRS**: Altitude Heading Reference System. An IMU (see below) plus the
+**AHRS**: Attitude Heading Reference System. An IMU (see below) plus the
 code to interpret the output from its sensors to establish a plane's XYZ
 and heading orientation.
 
-**APM**: `ArduPilotMega <https://www.sparkfun.com/products/retired/9710>`__.
-
 **AMA**: Academy of Model Aeronautics. The main US model aircraft
 association. The AMA works closely with the Federal Aviation
-Administration (FAA) to establish\ `reasonable rules <http://www.modelaircraft.org/aboutama/gov.aspx>`__\ for the use
+Administration (FAA) to establish\ `reasonable rules <https://www.modelaircraft.org/aboutama/gov.aspx>`__\ for the use
 of amateur UAVs. Each AMA chapter and field may have slightly different
 policies, but it's possible to fly and test air frames and some
 technology on AMA fields without violating the association's (or
@@ -37,39 +35,37 @@ FAA/NAS) rules.
 hardware standard currently based on the Atmel Atmega168 microprocessor
 and necessary supporting hardware, and a software programming
 environment based on the C-like Processing language. Official site
-is \ `here <http://www.arduino.cc/en/>`__.
+is \ `here <http://www.arduino.cc>`__.
 
-**APM (AutoPilot Mega)**: Flight Controller providing capabilities for
+**APM (AutoPilot Mega)**: Autopilot providing capabilities for
 stabilized flight, position maintenance and automated mission (waypoint)
 path following.
 
-**ATC**: This could be the Atitude Control libray in Copter with params starting with "ATC\_" or it could mean Air Traffic Control. Usually located at an airport control tower but can also be an app or service such as \ `AirMap <http://www.airmap.com>`__ or \ `Altitude Angel <http://www.altitudeangel.com>`__.
+**ATC**: This could be the Atitude Control library in Copter with params starting with "ATC\_" or it could mean Air Traffic Control. Usually located at an airport control tower but can also be an app or service such as \ `AirMap <http://www.airmap.com>`__ or \ `Altitude Angel <http://www.altitudeangel.com>`__.
 
-**Copter**: Rotary-wing autopilot software variant of the ArduPilot
-project.
-
-**Plane**: Fixed-wing autopilot software variant of the ArduPilot
-project.
-
-**Rover**: Ground and water autopilot software variant of the ArduPilot
-project.
+**Autopilot**: A device that provides automatic vehicle control (stabilization, pilot commands via RC or GCS, etc.)
 
 **BEC**: Battery Elimination Circuit. A voltage regulator found in ESCs
 (see below) and as a stand-alone product. Designed to provide constant
 5v voltage for RC equipment, autopilots and other onboard electronics.
+
+**Blimp**: Floating aerial autopilot software variant of the ArduPilot
+project.
 
 **Bootloader**: Special software code stored in non-volatile memory in a
 microprocessor that can interface with a PC to download a user's
 program. Also see Firmware.
 
 **COA**: Certificate of Authorization. A FAA approval for a UAV flight.
-See
-the \ `faa.gov <http://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/systemops/aaim/organizations/uas/coa/>`__ web
-site for more details and the \ `DIY Drones Regulatory FAQ <http://www.diydrones.com/profiles/blogs/regulatory-faq>`__.
+See the \ `faa.gov <http://www.faa.gov/about/office_org/headquarters_offices/ato/service_units/systemops/aaim/organizations/uas/coa/>`__ web
+site for more details and the \ `DIY Drones Regulatory FAQ <https://www.diydrones.com/profiles/blogs/regulatory-faq>`__.
 
-**DCM**: Direction Cosine Matrix. A algorithm that is a less processing
+**Copter**: Rotary-wing autopilot software variant of the ArduPilot
+project.
+
+**DCM**: Discrete Cosine Matrix. A algorithm that is a less processing
 intensive equivalent of the Kalman Filter.
-See \ `this <http://diydrones.com/forum/topics/robust-estimator-of-the>`__ for
+See \ `this <https://diydrones.com/forum/topics/robust-estimator-of-the>`__ for
 more.
 
 **Eagle file**: The schematic and PCB design files (and related files
@@ -98,8 +94,8 @@ camera and wireless connection to the ground allow a pilot on the ground
 with video goggles to fly with a cockpit view.
 
 **FTDI**: A standard to convert USB to serial communications. Available
-as a chip for boards that have a USB connector, or in
-a \ `cable <http://store.jdrones.com/cable_ftdi_6pin_5v_p/cblftdi5v6p.htm>`__ to
+as a chip for boards that have a USB connector, or as
+an \ `adapter <https://www.amazon.com/ftdi-adapter/s?k=ftdi+adapter>`__ to
 connected to breakout pins. FTDI stands for Future Technology Devices
 International, which is the name of the company that makes the chips.
 
@@ -143,7 +139,7 @@ over short periods of time), while gyros drift over time. The data from
 both types of sensors must be combined in software to determine true
 aircraft attitude and movement to create an AHRS (see above). One
 technique for doing this is the Kalman filter (see below). Now
-superseded by Flight controllers which include CPU and sensors in one
+superseded by Autopilots which include CPU and sensors in one
 unit.
 
 **Inner loop/Outer loop**: Usually used to refer to the stabilization
@@ -171,7 +167,7 @@ more.
 
 **LOS**: Line of Sight. See VLOS below.
 
-**LiPo**: Lithium Polymer battery, aka LiPoly. Varients include Lithium
+**LiPo**: Lithium Polymer battery, aka LiPoly. Variants include Lithium
 Ion (Li-Ion) battery. This battery chemistry offers more power and
 lighter weight than NiMh and NiCad batteries.
 
@@ -191,16 +187,19 @@ $GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,\ **47**
 **Oilpan**: An arduino style shield meant to be paired with the
 ArduPilotMega. Contained the majority of the sensors (gyos,
 accelerometers, barometer, etc) that allow the ArduPilotMega to function
-as an autopilot, now superseded by subsequent Flight controllers that
+as an autopilot, now superseded by subsequent Autopilots that
 incorporate CPU and sensors in one board.
 
 **OSD**: On-screen display. A way to integrate data (often telemetry
 information) into the real-time video stream the aircraft is sending to
 the ground.
 
+**Plane**: Fixed-wing autopilot software variant of the ArduPilot
+project.
+
 **PCB**: Printed circuit board. In our use, a specialized board designed
 and "fabbed" for a dedicated purpose, as opposed to a breadboard or
-prototype board, which can be used and resused for many projects.
+prototype board, which can be used and reused for many projects.
 
 **PCM**: Pulse Code Modulation: The technique some modern RC
 transmitters/receivers communicate the RC channels information. It is
@@ -235,7 +234,10 @@ signal and only provide PWM signals for each channel.
 control to drive servos and speed controllers. There is one PWM signal
 for each channel. The width varies from 1000 to 2000 microseconds, depending on the RC manufacturer.
 
-**PX4FMU/PX4IO**: First version of Pixhawk-series flight controllers (FMUv1). Discontinued.
+**PX4FMU/PX4IO**: First version of Pixhawk-series autopilots (FMUv1). Discontinued.
+
+**Rover**: Ground and water autopilot software variant of the ArduPilot
+project.
 
 **RTL**: Return to Launch. Fly back to the "home" location where the aircraft took off.
 
@@ -248,6 +250,8 @@ Arduinio IDE for a single project.
 
 **SVN**: Short for the Subversion version-control repository used by the
 DIY Drones and other teams for source code.
+
+**Sub**: Underwater autopilot software variant of the ArduPilot project.
 
 **Telemetry System**: A two way radio system to allow flight data to be
 sent from your aircraft and also to allow control or adjustment
@@ -290,4 +294,4 @@ from \ `sparkfun <https://www.sparkfun.com/products/11812>`__.
 than Bluetooth but lower power consumption than WiFi.
 
 
-[copywiki destination="copter,plane,rover,planner,planner2,antennatracker,dev"]
+[copywiki destination="copter,plane,rover,sub,blimp,planner,planner2,antennatracker,dev,ardupilot,mavproxy"]
